@@ -81,7 +81,11 @@ void signInGoogle(BuildContext context){
           ),
           FlatButton(textColor: Color(0xFF005DDB),onPressed:(){changeRoute(context);}, child: Text('Resgister ?')),
           RaisedButton( color: Color(0xFF005DDB),onPressed: (){signIn(context);},child: Icon(Icons.arrow_forward_ios,color: Colors.white,)),
-          RaisedButton(onPressed: (){signInGoogle(context);},child: Row(children: [Icon(FontAwesomeIcons.google,color: Colors.blue,),Text('Sign in with Google')],))
+          RaisedButton(onPressed: (){signInGoogle(context);},child: Row(children: [Icon(FontAwesomeIcons.google,color: Colors.blue,),Text('Sign in with Google')],)),
+          RaisedButton(onPressed: (){
+            final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
+            provider.logout();
+          },child: Text('Logout!'),)
       ],),
       
     );

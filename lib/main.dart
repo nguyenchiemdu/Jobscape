@@ -10,6 +10,7 @@ import './widgets/LoginForm.dart';
 import './widgets/logged_in_widget.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  
   runApp(MyApp());
 }
 
