@@ -8,9 +8,8 @@ import 'package:learning_app/models/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import './widgets/LoginForm.dart';
 import './widgets/logged_in_widget.dart';
-void main() {
+void main()  {
   WidgetsFlutterBinding.ensureInitialized();
-  
   runApp(MyApp());
 }
 
@@ -62,7 +61,7 @@ class LoadingPage extends StatelessWidget {
   }
 }
 class MyHomePage extends StatelessWidget {
-  
+
   @override
   Widget build(BuildContext context) {
     
