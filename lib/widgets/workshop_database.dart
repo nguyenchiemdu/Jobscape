@@ -22,7 +22,7 @@ class DatabaseManager {
     try {
       await workshops.get().then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
-          workshopList.add(element.data);
+          workshopList.add(element.data());
         });
       });
       return workshopList;
