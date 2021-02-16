@@ -87,9 +87,13 @@ class RoutePage extends StatelessWidget {
     );
   }
 
-  Widget buildLoading() => Center(
-        child: Center(
-          child: CircularProgressIndicator(),
+  Widget buildLoading() => Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
         ),
       );
 }
