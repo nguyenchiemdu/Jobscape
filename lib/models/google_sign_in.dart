@@ -36,15 +36,14 @@ class GoogleSignInProvider extends ChangeNotifier {
 
     // Create a new credential
 
-    // Once signed in, return the UserCredential
-    // return
+  // Once signed in, return the UserCredential
+  // return 
+}
+void logout() async{
+  if (FirebaseAuth.instance.currentUser.providerData[0].providerId ==
+      'google.com') {
+    await googleSignIn.disconnect();
   }
-
-  void logout() async {
-    if (FirebaseAuth.instance.currentUser.providerData[0].providerId ==
-        'google.com') {
-      await googleSignIn.disconnect();
-    }
     FirebaseAuth.instance.signOut();
   }
 }

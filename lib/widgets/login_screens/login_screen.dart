@@ -174,14 +174,11 @@ class LoginForm extends StatelessWidget {
                     Container(
                         width: 312,
                         height: 48,
-                        decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: RaisedButton(
-                            onPressed: () {
-                              signIn(context);
-                            },
+                        child: RaisedButton(onPressed: (){signIn(context);},
                             color: Color(0xffffbf2f),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                             child: Text("Login",
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
