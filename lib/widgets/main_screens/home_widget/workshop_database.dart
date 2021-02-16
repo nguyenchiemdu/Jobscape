@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'workshop_card.dart';
 
 class DatabaseManager {
-
-  final CollectionReference workshops = FirebaseFirestore.instance.collection('workshops');
+  final CollectionReference workshops =
+      FirebaseFirestore.instance.collection('workshops');
 
   // Future<void> createWorkshop()
   // async {

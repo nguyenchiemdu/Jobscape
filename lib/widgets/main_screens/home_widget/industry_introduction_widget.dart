@@ -20,6 +20,5 @@ class IndustryIntro extends StatelessWidget {
       ),
     );
 
-
   }
 }

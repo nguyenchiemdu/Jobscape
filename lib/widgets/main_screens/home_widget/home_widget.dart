@@ -1,19 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:learning_app/models/google_sign_in.dart';
-import 'package:learning_app/widgets/Industry_introduction.dart';
-import 'package:learning_app/widgets/workshop.dart';
+import './workshop_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
-import 'learning_screens/main_learning_scr.dart';
-import 'welcoming.dart';
-import 'Industry_introduction.dart';
-import 'carouse_slider_card.dart';
 
-class LoggedInWidget extends StatelessWidget {
-  final user = FirebaseAuth.instance.currentUser;
+import './industry_introduction_widget.dart';
+import '../welcoming_widget.dart';
+import '../learning_widget/learning_widget.dart';
+
+class HomeWidget extends StatelessWidget {
   void changeRoute(BuildContext context) {
     Navigator.push(
       context,
@@ -23,7 +17,9 @@ class LoggedInWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
+        child: SafeArea(
+            child: Container(
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -59,12 +55,6 @@ class LoggedInWidget extends StatelessWidget {
             // SliderCard(),
             RaisedButton(
               onPressed: () {
-                changeRoute(context);
-              },
-              child: Text('Go to Learn Screen'),
-            ),
-            RaisedButton(
-              onPressed: () {
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.logout();
@@ -74,6 +64,6 @@ class LoggedInWidget extends StatelessWidget {
           ],
         ),
       ),
-    );
+    )));
   }
 }
