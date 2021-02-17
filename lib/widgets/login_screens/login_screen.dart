@@ -138,6 +138,7 @@ class LoginForm extends StatelessWidget {
                           ],
                         ),
                         child: TextField(
+                            obscureText: true,
                             controller: password,
                             decoration: InputDecoration(
                               prefixIcon: const Icon(

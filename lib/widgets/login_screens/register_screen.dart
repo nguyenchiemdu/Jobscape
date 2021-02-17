@@ -150,6 +150,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ) ],
                               ),
                               child: TextField(
+                                  obscureText: true,
                                   controller:  password,
                                   decoration: InputDecoration(
                                     prefixIcon: const Icon(
@@ -189,6 +190,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ) ],
                               ),
                               child: TextField(
+                                  obscureText: true,
                                   controller:  repeat_password,
                                   decoration: InputDecoration(
                                     prefixIcon: const Icon(
