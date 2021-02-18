@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'industry_card.dart';
 
 class SliderCard extends StatelessWidget {
-  SliderCard(this.listJobs);
+  SliderCard(this.listJobs,this.changeScreen);
 //   final List listJobs;
 //   _SliderCardState createState() => _SliderCardState(listJobs);
 // }
@@ -11,7 +11,7 @@ class SliderCard extends StatelessWidget {
 // class _SliderCardState extends State<SliderCard> {
 //   _SliderCardState(this.listJobs);
   final List listJobs;
-
+  final Function changeScreen;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,10 +21,8 @@ class SliderCard extends StatelessWidget {
                 itemCount: listJobs.length,
                 itemBuilder: (BuildContext context, int index, realIdx) =>
                     IndustryCard(
-                      listJobs[index]['img_src'],
-                      listJobs[index]['name'],
-                      listJobs[index]['job_opportunity'].toString(),
-                      listJobs[index]['salary'].toString(),
+                      listJobs[index],
+                      changeScreen,
                     ),
                 options: CarouselOptions(
                   height: 250,

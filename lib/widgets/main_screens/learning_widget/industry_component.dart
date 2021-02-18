@@ -4,16 +4,18 @@ import './industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class IndustryComponent extends StatefulWidget {
-  String fieldId;
-  IndustryComponent(this.fieldId);
+  final String fieldId;
+  final Function changeScreen;
+  IndustryComponent(this.fieldId,this.changeScreen);
   @override
   _IndustryComponentState createState() =>
-      _IndustryComponentState(this.fieldId);
+      _IndustryComponentState(this.fieldId,this.changeScreen);
 }
 
 class _IndustryComponentState extends State<IndustryComponent> {
   final String fieldId;
-  _IndustryComponentState(this.fieldId);
+  final Function changeScreen;
+  _IndustryComponentState(this.fieldId,this.changeScreen);
   dynamic industryField;
   final dbManager = DatabaseManager();
   @override
@@ -55,9 +57,10 @@ class _IndustryComponentState extends State<IndustryComponent> {
             Text(industryField['briefIntro']),
             Text(
                 "+XXX Job Vacancies (show demand)\n+XY Learning Journeys to explore\nStarting salary \$xxxx"),
-            SliderCard(industryField['list_jobs']),
+            SliderCard(industryField['list_jobs'],changeScreen),
           ],
         ),
+        
       );
     }
   }

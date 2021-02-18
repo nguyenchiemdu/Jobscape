@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 
 class IndustryCard extends StatelessWidget {
-  String image_source;
-  String name;
-  String job_opportunity;
-  String salary;
-
-  IndustryCard(this.image_source, this.name, this.job_opportunity, this.salary);
+  // String image_source;
+  // String name;
+  // String job_opportunity;
+  // String salary;
+  final Map jobData ;
+  final Function changeScreen;
+  IndustryCard(this.jobData,this.changeScreen);
 
   @override
   Widget build(BuildContext context) {
+    // print(jobData.toString());
     return Container(
         color: Colors.green,
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         // height: 100,
-        child: Column(
+        child: InkWell(
+          onTap: (){changeScreen('roadmap',jobData);},
+          child: Column(
           children: [
             Container(
               margin: EdgeInsets.all(5),
               child: Image.network(
-                image_source,
+                jobData['img_src'],
                 height: 130,
               ),
             ),
@@ -31,21 +35,21 @@ class IndustryCard extends StatelessWidget {
                       // width: ,
 
                       child: Text(
-                    name,
+                    jobData['name'],
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   )),
                   Text(
-                    'Job Opportunity: ' + job_opportunity,
+                    'Job Opportunity: ' + jobData['job_opportunity'].toString(),
                     style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
                   Text(
-                    'Salary: ' + salary + '\$',
+                    'Salary: ' + jobData['salary'].toString() + '\$',
                     style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
@@ -55,6 +59,7 @@ class IndustryCard extends StatelessWidget {
               )
             ]),
           ],
+        ),
         ));
   }
 }

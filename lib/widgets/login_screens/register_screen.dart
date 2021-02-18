@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'file:///C:/Users/longv/Desktop/Project/learning_app/lib/widgets/login_screens/confirm_email.dart';
+import 'confirm_email.dart';
 import 'login_screen.dart';
 
 class RegisterForm extends StatefulWidget {
