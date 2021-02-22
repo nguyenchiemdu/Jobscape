@@ -103,7 +103,7 @@ class HomeWidget extends StatelessWidget {
                 onTap: () {selectPage(1);},
                 child: Container(
                     width: double.infinity,
-                    height: 268,
+                    height: 275,
                     margin: EdgeInsets.only(left:24,right:24,top:30),
                     decoration: new BoxDecoration(
                       image: DecorationImage(

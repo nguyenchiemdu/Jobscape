@@ -8,7 +8,7 @@ import 'package:learning_app/models/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import './widgets/login_screens/login_screen.dart';
 import './widgets/main_screens/main_screen.dart';
-
+import 'package:learning_app/models/users_database.dart'; 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -58,6 +58,7 @@ class LoadingPage extends StatelessWidget {
     );
   }
 }
+final enrolled_course = UserDatabaseService().getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid.toString());
 
 class RoutePage extends StatelessWidget {
   @override
@@ -71,7 +72,7 @@ class RoutePage extends StatelessWidget {
           if (provider.isSigningIn) {
             return buildLoading();
           } else if (snapsot.hasData) {
-            return LoggedInWidget();
+            return enrolled_course == 0 ? LoggedInWidget(0) : LoggedInWidget(1);
           } else {
             return Container(
                 decoration: BoxDecoration(

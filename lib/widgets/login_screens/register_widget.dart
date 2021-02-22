@@ -5,7 +5,7 @@ import 'package:learning_app/models/google_sign_in.dart';
 import 'confirm_email.dart';
 import 'login_screen.dart';
 import 'package:provider/provider.dart';
-
+import 'package:learning_app/models/users_database.dart';
 class RegisterWidget extends StatefulWidget {
   @override
   _RegisterWidgetState createState() => _RegisterWidgetState();
@@ -40,7 +40,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           );
         }
       });
-    } on FirebaseAuthException catch (e) {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User user = auth.currentUser;
+      final uid = user.uid;
+      //Create a new documnet for the user with the uid
+      await UserDatabaseService(uid:uid).updateUserData("New user", 0, 0, 0);
+  } on FirebaseAuthException catch (e) {
       print('Failed with error code: ${e.code}');
       print(e.message);
     }

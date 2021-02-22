@@ -16,14 +16,14 @@ class LoginForm extends StatelessWidget {
     );
   }
 
-  void signIn(BuildContext context) async {
+  void signIn(BuildContext context,user,password) async {
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
               // email: user.text,
               // password: password.text
-              email: 'admin@gmail.com',
-              password: 'admin123');
+              email: user,
+              password: password);
       // Scaffold.of(context).showSnackBar(SnackBar(
       //   content: Text('Signed in!'),
       // ));
@@ -55,13 +55,13 @@ class LoginForm extends StatelessWidget {
               child: SafeArea(
                   child: Container(
                 // padding: EdgeInsets.only(left: 24),
-                margin: EdgeInsets.only(top: 276),
+                margin: EdgeInsets.only(top: 266),
                 width: double.infinity,
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.center ,
+                  crossAxisAlignment: CrossAxisAlignment.start ,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(right: 160),
+                      margin: EdgeInsets.only(left: 24),
                       child: Text("Hello, nice to meet you!",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
@@ -72,9 +72,8 @@ class LoginForm extends StatelessWidget {
                           )),
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 29),
-                      padding: EdgeInsets.only(top: 3, bottom: 22),
-                      child: Text("Sign in with ABCXYZ APP",
+                      margin: EdgeInsets.only(left:24,top:3,bottom:22),
+                      child: Text("Sign in with Jobscape",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff303030),
@@ -84,8 +83,8 @@ class LoginForm extends StatelessWidget {
                           )),
                     ),
                     Container(
-                        margin: EdgeInsets.only(bottom: 15),
-                        width: 312,
+                        margin: EdgeInsets.only(left:24,right:24,bottom: 15),
+                        width: double.infinity,
                         height: 53,
                         padding: EdgeInsets.only(left: 20),
                         decoration: new BoxDecoration(
@@ -123,7 +122,8 @@ class LoginForm extends StatelessWidget {
                               disabledBorder: InputBorder.none,
                             ))),
                     Container(
-                        width: 312,
+                        margin: EdgeInsets.only(left:24,right:24,bottom: 15),
+                        width: double.infinity,
                         height: 53,
                         padding: EdgeInsets.only(left: 20),
                         decoration: new BoxDecoration(
@@ -162,7 +162,8 @@ class LoginForm extends StatelessWidget {
                               disabledBorder: InputBorder.none,
                             ))),
                     Container(
-                      margin: EdgeInsets.only(top: 16, bottom: 18),
+                      margin: EdgeInsets.only(bottom: 18),
+                      alignment: Alignment.center,
                       child: Text("Forgot you password?",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
@@ -173,9 +174,10 @@ class LoginForm extends StatelessWidget {
                           )),
                     ),
                     Container(
-                        width: 312,
+                        width: double.infinity,
                         height: 48,
-                        child: RaisedButton(onPressed: (){signIn(context);},
+                        margin: EdgeInsets.only(left:24,right:24),
+                        child: RaisedButton(onPressed: (){signIn(context,user.text,password.text);},
                             color: Color(0xffffbf2f),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -262,31 +264,34 @@ class LoginForm extends StatelessWidget {
                         ],
                       ),
                     ),
-                    RichText(
-                        text: new TextSpan(children: [
-                      new TextSpan(
-                          text: "Don't have an account? ",
-                          style: TextStyle(
-                            fontFamily: 'SFProDisplay',
-                            color: Color(0xff000000),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w100,
-                            fontStyle: FontStyle.normal,
-                          )),
-                      new TextSpan(
-                          text: "Sign up",
-                          style: TextStyle(
-                            fontFamily: 'SFProDisplay',
-                            color: Color(0xff000000),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              changeRoute(context);
-                            }),
-                    ]))
+                    Container(
+                      alignment: Alignment.center,
+                      child: RichText(
+                          text: new TextSpan(children: [
+                        new TextSpan(
+                            text: "Don't have an account? ",
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff000000),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w100,
+                              fontStyle: FontStyle.normal,
+                            )),
+                        new TextSpan(
+                            text: "Sign up",
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff000000),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.normal,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                changeRoute(context);
+                              }),
+                      ])),
+                    )
                   ],
                 ),
               ))),
