@@ -20,10 +20,7 @@ class LoggedInWidget extends StatefulWidget {
 
 class _LoggedInWidgetState extends State<LoggedInWidget> {
   final user = FirebaseAuth.instance.currentUser;
-  final List<Widget> listWidget = [
-    HomeWidget(),
-    MainLearningScreen(),
-  ];
+  
   int selectIndex = 0;
   void _selectPage(int index) {
     if (index != selectIndex) {
@@ -32,6 +29,8 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
       });
     }
   }
+
+  List<Widget> listWidget ;
   // void changeRoute(BuildContext context) {
   //   Navigator.push(
   //     context,
@@ -41,6 +40,10 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
 
   @override
   Widget build(BuildContext context) {
+    listWidget = [
+    HomeWidget(_selectPage),
+    MainLearningScreen(),
+  ];
     return Scaffold(
       backgroundColor: Colors.white,
       body: listWidget[selectIndex],

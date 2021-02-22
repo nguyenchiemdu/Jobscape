@@ -9,14 +9,9 @@ import '../welcoming_widget.dart';
 import '../learning_widget/learning_widget.dart';
 
 class HomeWidget extends StatelessWidget {
-  void changeRoute(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MainLearningScreen()),
-    );
-  }
-
-  var tx = DateTime.now();
+  final Function selectPage;
+  HomeWidget(this.selectPage);
+  dynamic tx = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -105,7 +100,7 @@ class HomeWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {changeRoute(context);},
+                onTap: () {selectPage(1);},
                 child: Container(
                     width: double.infinity,
                     height: 268,
