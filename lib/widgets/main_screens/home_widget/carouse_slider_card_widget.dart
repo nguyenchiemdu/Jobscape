@@ -46,25 +46,30 @@ class _SliderCardState extends State<SliderCard> {
         child: Text('Loading'),
       );
     } else {
-      return Column(
-        children: [
-          Center(
-              child: CarouselSlider.builder(
-                  itemCount: workshopList.length,
-                  itemBuilder: (BuildContext context, int index, realIdx) =>
-                      WorkshopCard(
-                          workshopList[index]['image_source'],
-                          workshopList[index]['link'],
-                          workshopList[index]['title'],
-                          workshopList[index]['date'],
-                          workshopList[index]['speaker']),
-                  options: CarouselOptions(
-                    height: 120,
-                    enlargeCenterPage: true,
-                    viewportFraction: 0.7,
-                    scrollDirection: Axis.horizontal,
-                  ))),
-        ],
+      return Container(
+        width: double.infinity,
+        margin: EdgeInsets.only(left: 24,right: 24),
+        child: Center(
+            child: CarouselSlider.builder(
+                itemCount: workshopList.length,
+                itemBuilder: (BuildContext context, int index, realIdx) =>
+                    WorkshopCard(
+                        workshopList[index]['image_source'],
+                        workshopList[index]['for'],
+                        workshopList[index]['title'],
+                        workshopList[index]['date'],
+                        workshopList[index]['speaker']),
+                options: CarouselOptions(
+                  height: 185,
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 300),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: false,
+                  viewportFraction: 0.6,
+                  scrollDirection: Axis.horizontal,
+
+                ))),
       );
     }
     ;

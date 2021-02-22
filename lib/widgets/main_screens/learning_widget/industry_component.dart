@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './industry_slider_card.dart';
 import './industry_database.dart';
@@ -49,15 +50,175 @@ class _IndustryComponentState extends State<IndustryComponent> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              industryField['fieldName'],
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.left,
+            Container(
+              margin: EdgeInsets.only(left:24),
+              child:
+              Container(
+                margin: EdgeInsets.only(bottom: 8),
+                child: Text(industryField['fieldName'],
+                    style: TextStyle(
+                      fontFamily: 'SFProDisplay',
+                      color: Color(0xff000000),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.normal,
+
+
+                    )
+                ),
+              ),
             ),
-            Text(industryField['briefIntro']),
-            Text(
-                "+XXX Job Vacancies (show demand)\n+XY Learning Journeys to explore\nStarting salary \$xxxx"),
+            Container(
+            width: double.infinity,
+            height: 166,
+            margin: EdgeInsets.only(left: 24,right: 24),
+            decoration: new BoxDecoration(
+                color: Color(0xfffffaf0),
+                borderRadius: BorderRadius.circular(15)
+            ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 4, left: 12, right: 16),
+                    child: Text(industryField['briefIntro'],
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff000000),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
+                          fontStyle: FontStyle.italic,
+
+                        )
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 4, left: 12),
+                    child: RichText(
+                        text: new TextSpan(
+                            children: [
+
+                              new TextSpan(
+                                  text: "+333 ",
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xffffbf2f),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+
+
+                                  )
+                              ),
+                              new TextSpan(
+                                  text: "Job Vacancies ",
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xff000000),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300,
+                                    fontStyle: FontStyle.italic,
+
+
+                                  )
+                              ),
+                            ]
+                        )
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 12),
+                    child: RichText(
+                        text: new TextSpan(
+                            children: [
+
+                              new TextSpan(
+                                  text: "+69 ",
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xffffbf2f),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+
+
+                                  )
+                              ),
+                              new TextSpan(
+                                  text: "Learning Journeys to explore",
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xff000000),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300,
+                                    fontStyle: FontStyle.italic,
+
+
+                                  )
+                              ),
+                            ]
+                        )
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(right: 12, top: 12, bottom: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                            width: 24,
+                            height: 24,
+                            margin: EdgeInsets.only(left:5),
+                            child: Image.asset("assets/images/money_icon.png")),
+                        RichText(
+                            text: new TextSpan(
+                                children: [
+
+                                  new TextSpan(
+                                      text: "Starting salary  ",
+                                      style: TextStyle(
+                                        fontFamily: 'SFProDisplay',
+                                        color: Color(0xff000000),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w300,
+                                        fontStyle: FontStyle.italic,
+
+
+                                      )
+                                  ),
+                                  new TextSpan(
+                                      text: "\$400",
+                                      style: TextStyle(
+                                        fontFamily: 'SFProDisplay',
+                                        color: Color(0xffffbf2f),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+
+
+                                      )
+                                  ),
+                                ]
+                            )
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+
             SliderCard(industryField['list_jobs'],changeScreen),
+            new Container(
+                width: double.infinity,
+                height: 0,
+                margin: EdgeInsets.only(left: 24,right: 24, top: 24, bottom: 24),
+                decoration: new BoxDecoration(
+                    border: Border.all(color: Color(0xFFEEEEEE)),
+                )
+            )
           ],
         ),
         

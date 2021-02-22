@@ -31,17 +31,66 @@ class Workshop extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-            child: Text(
-              "Upcoming workshops",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            )),
+          margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:28),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Upcoming workshops",
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xff000000),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    fontStyle: FontStyle.normal,
+
+
+                  )
+              ),
+              Text("See all (3)",
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xffffbf2f),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+
+
+                  )
+              ),
+            ],
+          ),
+        ),
+        SliderCard(),
         Container(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-            child: Text(
-              "Today",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            )),
+          margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Recommended for you",
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xff000000),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    fontStyle: FontStyle.normal,
+
+
+                  )
+              ),
+              Text("See all (3)",
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xffffbf2f),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+
+
+                  )
+              ),
+            ],
+          ),
+        ),
         SliderCard(),
         // GridView.count(
         //   childAspectRatio:itemHeight/itemWidth,
@@ -63,33 +112,33 @@ class Workshop extends StatelessWidget {
         //     );
         //   } ),
         // ),
-        Container(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-            child: Text(
-              "Most popular workshops",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            )),
-        SliderCard(),
-        // GridView.count(
-        //   childAspectRatio:itemHeight/itemWidth,
-        //   shrinkWrap: true,
-        //   scrollDirection: Axis.vertical,
-        //   crossAxisCount: 2,
-        //   // crossAxisSpacing: 10,
-        //   // mainAxisSpacing: 10,
-        //   // padding: EdgeInsets.all(10),
-        //   children:
-        //   List.generate(workshops.length, (index) {
-        //     return Container(
-        //       child: WorkshopCard(
-        //           workshops[index]['image_source'],
-        //           workshops[index]['link'],
-        //           workshops[index]['title'],
-        //           workshops[index]['date'],
-        //           workshops[index]['speaker']),
-        //     );
-        //   } ),
-        // ),
+        // Container(
+        //     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+        //     child: Text(
+        //       "Most popular workshops",
+        //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        //     )),
+        // SliderCard(),
+        // // GridView.count(
+        // //   childAspectRatio:itemHeight/itemWidth,
+        // //   shrinkWrap: true,
+        // //   scrollDirection: Axis.vertical,
+        // //   crossAxisCount: 2,
+        // //   // crossAxisSpacing: 10,
+        // //   // mainAxisSpacing: 10,
+        // //   // padding: EdgeInsets.all(10),
+        // //   children:
+        // //   List.generate(workshops.length, (index) {
+        // //     return Container(
+        // //       child: WorkshopCard(
+        // //           workshops[index]['image_source'],
+        // //           workshops[index]['link'],
+        // //           workshops[index]['title'],
+        // //           workshops[index]['date'],
+        // //           workshops[index]['speaker']),
+        // //     );
+        // //   } ),
+        // // ),
       ],
     );
   }

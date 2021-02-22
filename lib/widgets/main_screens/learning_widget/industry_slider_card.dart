@@ -14,23 +14,29 @@ class SliderCard extends StatelessWidget {
   final Function changeScreen;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-            child: CarouselSlider.builder(
-                itemCount: listJobs.length,
-                itemBuilder: (BuildContext context, int index, realIdx) =>
-                    IndustryCard(
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(left: 24,right: 24),
+      child: Center(
+          child: CarouselSlider.builder(
+              itemCount: listJobs.length,
+              itemBuilder: (BuildContext context, int index, realIdx) =>
+                  Container(
+                    child: IndustryCard(
                       listJobs[index],
                       changeScreen,
                     ),
-                options: CarouselOptions(
-                  height: 250,
-                  enlargeCenterPage: true,
-                  viewportFraction: 0.7,
-                  scrollDirection: Axis.horizontal,
-                ))),
-      ],
+                  ),
+              options: CarouselOptions(
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 3),
+                autoPlayAnimationDuration: Duration(milliseconds: 300),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: false,
+                viewportFraction: 0.6,
+                height: 200,
+                scrollDirection: Axis.horizontal,
+              ))),
     );
   }
 }

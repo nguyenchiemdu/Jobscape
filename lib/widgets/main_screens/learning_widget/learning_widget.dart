@@ -34,20 +34,64 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
     }
     if (loadingScreen== 'main'){
       return SingleChildScrollView(
-      child: SafeArea(
+
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Welcoming(),
-              IndustryComponent('it',changeScreen),
-              IndustryComponent('it',changeScreen),
-              IndustryComponent('it',changeScreen),
-            ],
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/top_background.png"),
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.topCenter,
+            ),
+          ),
+          child: SafeArea(
+            child: Container(
+              margin: EdgeInsets.only(top: 88),
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    children: [
+                      Container(
+                        margin:EdgeInsets.only(left:24),
+                        width: 36,
+                        height: 36,
+                        decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  'https://bizweb.dktcdn.net/100/175/849/files/chup-anh-profile-doanh-nhan-chan-dung-nghe-nghiep-dep-o-ha-noi-12.jpg?v=1556771914677#.YCeLPA8sis8.link'),
+                              fit: BoxFit.fill,
+                            )),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 24),
+                        child: Text("Today is Monday, 15 Feb, 2021 ",
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff000000),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w300,
+                              fontStyle: FontStyle.normal,
+
+
+                            )
+                        ),
+                      )
+                    ],
+                  ),
+                  // Welcoming(),
+                  Container(
+                    margin: EdgeInsets.only(top: 22),
+                      child: IndustryComponent('it',changeScreen)),
+                  IndustryComponent('it',changeScreen),
+                  IndustryComponent('it',changeScreen),
+                ],
+              ),
+            ),
           ),
         ),
-      ),
     );
     }
   }

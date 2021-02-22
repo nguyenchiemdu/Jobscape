@@ -56,6 +56,14 @@ flutter:
     - assets/images/loginfacebook.png
     - assets/images/logingoogle.png
     - assets/images/nav_bar_learning_scr.png
+    - assets/images/top_background.png
+    - assets/images/job_icon.png
+    - assets/images/salary_icon.png
+    - assets/images/money_icon.png
+    - assets/images/good_for_icon.png
+    - assets/images/speaker_icon.png
+    - assets/images/date_icon.png
+    - assets/images/getjob.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
