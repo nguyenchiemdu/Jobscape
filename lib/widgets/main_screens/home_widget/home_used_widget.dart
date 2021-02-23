@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/models/google_sign_in.dart';
+import 'package:learning_app/widgets/main_screens/home_widget/advisor_widget.dart';
 import './workshop_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -106,6 +107,7 @@ class HomeUsedWidget extends StatelessWidget {
                       // SliderCard(),
                       // SliderCard(),
                       // SliderCard(),
+                      Advisor(),
                       RaisedButton(
                         onPressed: () {
                           final provider =

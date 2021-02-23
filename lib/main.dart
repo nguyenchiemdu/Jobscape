@@ -14,10 +14,33 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // Create the initialization Future outside of `build`:
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  // final FirebaseAuth auth = FirebaseAuth.instance;
+  @override
+  void initState() {
+    super.initState();
+    Firebase.initializeApp().whenComplete(() {
+      print("completed");
+      fetDatabaseList();
+    });
+  }
+  int enrolled_course;
+  fetDatabaseList() async {
+    dynamic resultant = await UserDatabaseService().getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid);
+    if (resultant == null) {
+      print("Unable to retrieve");
+    } else {
+      await setState(() {
+        enrolled_course = resultant;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -38,7 +61,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'SFProDisplay',
               ),
               title: 'Learning App',
-              home: RoutePage());
+              home: RoutePage(enrolled_course));
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
@@ -58,20 +81,26 @@ class LoadingPage extends StatelessWidget {
     );
   }
 }
-final enrolled_course = UserDatabaseService().getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid.toString());
+// Future<int> getEnrolledCourse() async {
+//
+//   return enrolled_course;
+// }
 
 class RoutePage extends StatelessWidget {
+  int enrolled_course;
+  RoutePage(this.enrolled_course);
   @override
-  Widget build(BuildContext context) {
+  Widget  build(BuildContext context)  {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
-      child: StreamBuilder(
+      child:  StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapsot) {
+        builder: (context, snapsot)  {
           final provider = Provider.of<GoogleSignInProvider>(context);
           if (provider.isSigningIn) {
             return buildLoading();
           } else if (snapsot.hasData) {
+
             return enrolled_course == 0 ? LoggedInWidget(0) : LoggedInWidget(1);
           } else {
             return Container(

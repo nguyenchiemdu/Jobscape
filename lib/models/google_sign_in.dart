@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:learning_app/models/users_database.dart';
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   bool _isSigningIn;
@@ -28,9 +28,16 @@ class GoogleSignInProvider extends ChangeNotifier {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      final authResult = await FirebaseAuth.instance.signInWithCredential(credential);
       isSigningIn = false;
+      final FirebaseAuth auth = await FirebaseAuth.instance;
+      final User user = auth.currentUser;
+      final uid = user.uid;
+      if (authResult.additionalUserInfo.isNewUser) {
+        UserDatabaseService(uid:uid).updateUserData("New User", 0,0, 0);
+      }
     }
+
 
     // Obtain the auth details from the request
 

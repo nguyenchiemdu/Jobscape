@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:learning_app/main.dart';
 import 'login_screen.dart';
+import 'package:learning_app/models/users_database.dart';
 class ConfirmEmail extends StatefulWidget {
   String user_gmail;
   ConfirmEmail(this.user_gmail);
@@ -129,11 +130,12 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
     ));
   }
   Future<void> checkEmailVerified() async {
+    final enrolled_course = await UserDatabaseService().getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid);
     user = auth.currentUser; 
     await user.reload();
     if (user.emailVerified) {
       timer.cancel();
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RoutePage()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RoutePage(enrolled_course)));
     }
     
   }
