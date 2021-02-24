@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import './industry_introduction_widget.dart';
 import '../welcoming_widget.dart';
 import '../learning_widget/learning_widget.dart';
+import 'ourteam_widget.dart';
 
 class HomeWidget extends StatelessWidget {
   final Function selectPage;
@@ -30,7 +31,7 @@ class HomeWidget extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top:110),
+                margin: EdgeInsets.only(top:66),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -260,6 +261,7 @@ class HomeWidget extends StatelessWidget {
               // IndustryIntro(),
               Workshop(),
               Advisor(),
+              OurTeam(),
               // SliderCard(),
               // SliderCard(),
               // SliderCard(),
