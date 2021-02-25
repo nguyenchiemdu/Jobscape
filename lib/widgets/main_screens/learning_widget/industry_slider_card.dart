@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'industry_card.dart';
 
 class SliderCard extends StatelessWidget {
-  SliderCard(this.listJobs,this.changeScreen);
+  SliderCard(this.listJobs);
 //   final List listJobs;
 //   _SliderCardState createState() => _SliderCardState(listJobs);
 // }
@@ -11,12 +11,11 @@ class SliderCard extends StatelessWidget {
 // class _SliderCardState extends State<SliderCard> {
 //   _SliderCardState(this.listJobs);
   final List listJobs;
-  final Function changeScreen;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(left: 24,right: 24),
+      margin: EdgeInsets.only(left: 24, right: 24),
       child: Center(
           child: CarouselSlider.builder(
               itemCount: listJobs.length,
@@ -24,7 +23,6 @@ class SliderCard extends StatelessWidget {
                   Container(
                     child: IndustryCard(
                       listJobs[index],
-                      changeScreen,
                     ),
                   ),
               options: CarouselOptions(

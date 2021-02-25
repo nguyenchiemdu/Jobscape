@@ -9,7 +9,7 @@ class UserDatabaseService {
   UserDatabaseService({this.uid});
 
   final CollectionReference users =
-  FirebaseFirestore.instance.collection('users');
+      FirebaseFirestore.instance.collection('users');
 
   Future updateUserData(String name, int completed_course, int enrolled_course,
       int reputation) async {
@@ -21,13 +21,14 @@ class UserDatabaseService {
     });
   }
 
-  Future<int> getUserEnrolledCourse(uid) async {
-
+  Future getUserEnrolledCourse(uid) async {
     try {
       int course;
-      var document = await FirebaseFirestore.instance.collection('users').doc(
-          uid).get().then((data) {
-        print(data.data()['enrolled_course'].runtimeType);
+      var document = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .get()
+          .then((data) {
         course = data.data()['enrolled_course'];
       });
       return course;

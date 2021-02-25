@@ -16,7 +16,7 @@ import './learning_widget/learning_widget.dart';
 import './home_widget/home_widget.dart';
 import 'package:learning_app/models/users_database.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import './question_widget/question_widget.dart';
 
 class LoggedInWidget extends StatefulWidget {
   final int sub;
@@ -38,11 +38,10 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
 
   _LoggedInWidgetState(this.sub);
   void _selectPage(int index) async {
-    final enrolled_course = await UserDatabaseService().getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid);
-    print("I love you babe");
-    print(await UserDatabaseService().getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid));
-    if (index != selectIndex){
-      if (enrolled_course == 0){
+    final enrolled_course = await UserDatabaseService()
+        .getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid);
+    if (index != selectIndex) {
+      if (enrolled_course == 0) {
         setState(() {
           selectIndex = index;
           sub = 0;
@@ -56,7 +55,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
     }
   }
 
-  var listWidget ;
+  var listWidget;
   // void changeRoute(BuildContext context) {
   //   Navigator.push(
   //     context,
@@ -67,12 +66,15 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
   @override
   Widget build(BuildContext context) {
     listWidget = [
-      [HomeWidget(_selectPage),HomeUsedWidget()],
-    MainLearningScreen(),
-  ];
+      [HomeWidget(_selectPage), HomeUsedWidget()],
+      MainLearningScreen(),
+      QuestionWidget()
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
-      body: selectIndex == 0 ? listWidget[selectIndex][sub] : listWidget[selectIndex],
+      body: selectIndex == 0
+          ? listWidget[selectIndex][sub]
+          : listWidget[selectIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         // backgroundColor: Theme.of(context).primaryColor,
@@ -103,6 +105,8 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                 ),
               ),
               label: ''),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.help_center_outlined), label: '')
         ],
       ),
     );

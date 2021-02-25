@@ -3,22 +3,24 @@ import 'package:flutter/material.dart';
 import './industry_slider_card.dart';
 import './industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import './road_map_widget.dart';
 
 class IndustryComponent extends StatefulWidget {
   final String fieldId;
   final Function changeScreen;
-  IndustryComponent(this.fieldId,this.changeScreen);
+  IndustryComponent(this.fieldId, this.changeScreen);
   @override
   _IndustryComponentState createState() =>
-      _IndustryComponentState(this.fieldId,this.changeScreen);
+      _IndustryComponentState(this.fieldId);
 }
 
 class _IndustryComponentState extends State<IndustryComponent> {
   final String fieldId;
-  final Function changeScreen;
-  _IndustryComponentState(this.fieldId,this.changeScreen);
+
+  _IndustryComponentState(this.fieldId);
   dynamic industryField;
   final dbManager = DatabaseManager();
+
   @override
   void initState() {
     super.initState();
@@ -51,9 +53,8 @@ class _IndustryComponentState extends State<IndustryComponent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left:24),
-              child:
-              Container(
+              margin: EdgeInsets.only(left: 24),
+              child: Container(
                 margin: EdgeInsets.only(bottom: 8),
                 child: Text(industryField['fieldName'],
                     style: TextStyle(
@@ -62,26 +63,22 @@ class _IndustryComponentState extends State<IndustryComponent> {
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.normal,
-
-
-                    )
-                ),
+                    )),
               ),
             ),
             Container(
-            width: double.infinity,
-            height: 166,
-            margin: EdgeInsets.only(left: 24,right: 24),
-            decoration: new BoxDecoration(
-                color: Color(0xfffffaf0),
-                borderRadius: BorderRadius.circular(15)
-            ),
+              width: double.infinity,
+              height: 176,
+              margin: EdgeInsets.only(left: 24, right: 24),
+              decoration: new BoxDecoration(
+                  color: Color(0xfffffaf0),
+                  borderRadius: BorderRadius.circular(15)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 4, left: 12, right: 16),
+                    margin: EdgeInsets.only(
+                        top: 10, bottom: 4, left: 12, right: 16),
                     child: Text(industryField['briefIntro'],
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
@@ -89,77 +86,55 @@ class _IndustryComponentState extends State<IndustryComponent> {
                           fontSize: 14,
                           fontWeight: FontWeight.w300,
                           fontStyle: FontStyle.italic,
-
-                        )
-                    ),
+                        )),
                   ),
                   Container(
                     margin: EdgeInsets.only(bottom: 4, left: 12),
                     child: RichText(
-                        text: new TextSpan(
-                            children: [
-
-                              new TextSpan(
-                                  text: "+333 ",
-                                  style: TextStyle(
-                                    fontFamily: 'SFProDisplay',
-                                    color: Color(0xffffbf2f),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    fontStyle: FontStyle.normal,
-
-
-                                  )
-                              ),
-                              new TextSpan(
-                                  text: "Job Vacancies ",
-                                  style: TextStyle(
-                                    fontFamily: 'SFProDisplay',
-                                    color: Color(0xff000000),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                    fontStyle: FontStyle.italic,
-
-
-                                  )
-                              ),
-                            ]
-                        )
-                    ),
+                        text: new TextSpan(children: [
+                      new TextSpan(
+                          text: "+333 ",
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xffffbf2f),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                          )),
+                      new TextSpan(
+                          text: "Job Vacancies ",
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xff000000),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                            fontStyle: FontStyle.italic,
+                          )),
+                    ])),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 12),
                     child: RichText(
-                        text: new TextSpan(
-                            children: [
-
-                              new TextSpan(
-                                  text: "+69 ",
-                                  style: TextStyle(
-                                    fontFamily: 'SFProDisplay',
-                                    color: Color(0xffffbf2f),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    fontStyle: FontStyle.normal,
-
-
-                                  )
-                              ),
-                              new TextSpan(
-                                  text: "Learning Journeys to explore",
-                                  style: TextStyle(
-                                    fontFamily: 'SFProDisplay',
-                                    color: Color(0xff000000),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                    fontStyle: FontStyle.italic,
-
-
-                                  )
-                              ),
-                            ]
-                        )
-                    ),
+                        text: new TextSpan(children: [
+                      new TextSpan(
+                          text: "+69 ",
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xffffbf2f),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                          )),
+                      new TextSpan(
+                          text: "Learning Journeys to explore",
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xff000000),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                            fontStyle: FontStyle.italic,
+                          )),
+                    ])),
                   ),
                   Container(
                     margin: EdgeInsets.only(right: 12, top: 12, bottom: 16),
@@ -170,58 +145,46 @@ class _IndustryComponentState extends State<IndustryComponent> {
                         Container(
                             width: 24,
                             height: 24,
-                            margin: EdgeInsets.only(left:5),
+                            margin: EdgeInsets.only(left: 5),
                             child: Image.asset("assets/images/money_icon.png")),
                         RichText(
-                            text: new TextSpan(
-                                children: [
-
-                                  new TextSpan(
-                                      text: "Starting salary  ",
-                                      style: TextStyle(
-                                        fontFamily: 'SFProDisplay',
-                                        color: Color(0xff000000),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w300,
-                                        fontStyle: FontStyle.italic,
-
-
-                                      )
-                                  ),
-                                  new TextSpan(
-                                      text: "\$400",
-                                      style: TextStyle(
-                                        fontFamily: 'SFProDisplay',
-                                        color: Color(0xffffbf2f),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FontStyle.normal,
-
-
-                                      )
-                                  ),
-                                ]
-                            )
-                        ),
+                            text: new TextSpan(children: [
+                          new TextSpan(
+                              text: "Starting salary  ",
+                              style: TextStyle(
+                                fontFamily: 'SFProDisplay',
+                                color: Color(0xff000000),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w300,
+                                fontStyle: FontStyle.italic,
+                              )),
+                          new TextSpan(
+                              text: "\$400",
+                              style: TextStyle(
+                                fontFamily: 'SFProDisplay',
+                                color: Color(0xffffbf2f),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                              )),
+                        ])),
                       ],
                     ),
                   )
                 ],
               ),
             ),
-
-            SliderCard(industryField['list_jobs'],changeScreen),
+            SliderCard(industryField['list_jobs']),
             new Container(
                 width: double.infinity,
                 height: 0,
-                margin: EdgeInsets.only(left: 24,right: 24, top: 24, bottom: 24),
+                margin:
+                    EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 24),
                 decoration: new BoxDecoration(
-                    border: Border.all(color: Color(0xFFEEEEEE)),
-                )
-            )
+                  border: Border.all(color: Color(0xFFEEEEEE)),
+                ))
           ],
         ),
-        
       );
     }
   }
