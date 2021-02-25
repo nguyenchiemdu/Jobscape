@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/google_sign_in.dart';
 
 import 'package:provider/provider.dart';
@@ -56,14 +57,17 @@ class _MyAppState extends State<MyApp> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(
-              theme: ThemeData(
-                primarySwatch: Colors.yellow,
-                accentColor: Colors.red,
-                fontFamily: 'SFProDisplay',
-              ),
-              title: 'Learning App',
-              home: RoutePage(enrolled_course));
+          return ScreenUtilInit(
+            designSize: Size(360,760),
+            builder: () => MaterialApp(
+                theme: ThemeData(
+                  primarySwatch: Colors.yellow,
+                  accentColor: Colors.red,
+                  fontFamily: 'SFProDisplay',
+                ),
+                title: 'Learning App',
+                home: RoutePage(enrolled_course)),
+          );
         }
 
         // Otherwise, show something whilst waiting for initialization to complete

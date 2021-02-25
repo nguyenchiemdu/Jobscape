@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WorkshopCard extends StatelessWidget {
   String image_source;
@@ -24,8 +26,8 @@ class WorkshopCard extends StatelessWidget {
                 spreadRadius: 0,
             ) ],
           ),
-        height: 185,
-        width: 192,
+        height: ScreenUtil().setHeight(185),
+        width: ScreenUtil().setWidth(192),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:
@@ -36,8 +38,8 @@ class WorkshopCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(image_source,
                     fit: BoxFit.fill,
-                    width: 182,
-                    height: 99),),
+                    width: ScreenUtil().setWidth(182),
+                    height: ScreenUtil().setHeight(105)),),
               ),
               Container(
                 margin: EdgeInsets.only(top: 8, left:12, right: 5, bottom: 4),
@@ -45,7 +47,7 @@ class WorkshopCard extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),
-                      fontSize: 14,
+                      fontSize: ScreenUtil().setSp(14),
                       fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.normal,
                     )
@@ -65,7 +67,7 @@ class WorkshopCard extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff000000),
-                            fontSize: 9,
+                            fontSize: ScreenUtil().setSp(9),
                             fontWeight: FontWeight.w300,
                             fontStyle: FontStyle.normal,
                           )
@@ -87,7 +89,7 @@ class WorkshopCard extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff000000),
-                          fontSize: 9,
+                          fontSize: ScreenUtil().setSp(9),
                           fontWeight: FontWeight.w300,
                           fontStyle: FontStyle.normal,
 
@@ -103,6 +105,7 @@ class WorkshopCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
+                      margin: EdgeInsets.only(right: 4),
                         width: 12,
                         height: 12,
                         child: Image.asset("assets/images/date_icon.png")),
@@ -110,7 +113,7 @@ class WorkshopCard extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff000000),
-                          fontSize: 9,
+                          fontSize: ScreenUtil().setSp(9),
                           fontWeight: FontWeight.w300,
                           fontStyle: FontStyle.normal,
 

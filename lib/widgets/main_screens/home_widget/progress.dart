@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Progress extends StatelessWidget {
 
@@ -11,8 +12,8 @@ class Progress extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(right:18),
-              width: 170,
-              height: 168,
+              width: ScreenUtil().setWidth(153),
+              height: ScreenUtil().setHeight(168),
               decoration: new BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight:Radius.circular(40),
@@ -22,7 +23,7 @@ class Progress extends StatelessWidget {
                 ),
                 border: Border.all(
                   color: Color(0xffffefcc),
-                  width: 3
+                  width: 1.5
                 ),
                 color: Color(0xffffffff),
                 boxShadow: [BoxShadow(
@@ -34,8 +35,8 @@ class Progress extends StatelessWidget {
               )
           ),
           Container(
-              width: 170,
-              height: 168,
+              width: ScreenUtil().setWidth(153),
+              height: ScreenUtil().setHeight(168),
               decoration: new BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight:Radius.circular(40),
@@ -45,7 +46,7 @@ class Progress extends StatelessWidget {
                 ),
                 border: Border.all(
                     color: Color(0xffffefcc),
-                    width: 3
+                    width: 1.5
                 ),
                 color: Color(0xffffffff),
                 boxShadow: [BoxShadow(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 List advisors = [
   {'avatar': "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/154820818/original/d11d5ab6b277593937ca5fbc8aacec31726e2f88/design-professional-avatar-minimalist.png",
@@ -32,8 +33,8 @@ class Advisor extends StatelessWidget {
       Column(
         children: [
           Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(left: 24,right: 24,top:30, bottom: 12),
+            width: ScreenUtil().setWidth(324),
+            margin: EdgeInsets.only(top:ScreenUtil().setHeight(30), bottom: ScreenUtil().setHeight(12)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -41,7 +42,7 @@ class Advisor extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),
-                      fontSize: 14,
+                      fontSize: ScreenUtil().setSp(14),
                       fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.normal,
 
@@ -52,7 +53,7 @@ class Advisor extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xffffbf2f),
-                      fontSize: 14,
+                      fontSize: ScreenUtil().setSp(14),
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
 
@@ -66,9 +67,8 @@ class Advisor extends StatelessWidget {
             //padding: EdgeInsets.only(left: 32,right: 32,top: 24),
             padding: EdgeInsets.only(top:20,right:10,left:10),
 
-            width: double.infinity,
-          margin: EdgeInsets.only(left:24,right: 24),
-          height: 258,
+            width: ScreenUtil().setHeight(324),
+            height: ScreenUtil().setHeight(250),
           decoration: new BoxDecoration(
               color: Color(0xffffffff),
               borderRadius: BorderRadius.circular(12),
@@ -94,8 +94,8 @@ class Advisor extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          width: 60,
-                          height: 60,
+                          width: ScreenUtil().setWidth(60),
+                          height: ScreenUtil().setHeight(60),
                           decoration: new BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
@@ -105,13 +105,13 @@ class Advisor extends StatelessWidget {
                               )),
                         ),
                         Container(
-                          width: 58,
+                          width: ScreenUtil().setWidth(58),
                           margin: EdgeInsets.only(top: 8),
                           child: Text(advisors[index]['name'],
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff000000),
-                                fontSize: 12,
+                                fontSize: ScreenUtil().setSp(12),
                                 fontWeight: FontWeight.w300,
                                 fontStyle: FontStyle.normal,
                               ),

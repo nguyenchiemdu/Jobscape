@@ -9,13 +9,16 @@ import './industry_introduction_widget.dart';
 import '../welcoming_widget.dart';
 import '../learning_widget/learning_widget.dart';
 import 'ourteam_widget.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'workshop_card_widget.dart';
 class HomeWidget extends StatelessWidget {
   final Function selectPage;
   HomeWidget(this.selectPage);
   dynamic tx = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    final curScaleFactor = MediaQuery.of(context).textScaleFactor;
+
     return SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
@@ -31,14 +34,14 @@ class HomeWidget extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top:66),
+                margin: EdgeInsets.only(top:ScreenUtil().setHeight(110)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       margin: EdgeInsets.only(left: 21,right:12),
-                      width: 48,
-                      height: 48,
+                      width: ScreenUtil().setWidth(48),
+                      height: ScreenUtil().setWidth(48),
                       decoration: new BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
@@ -48,10 +51,11 @@ class HomeWidget extends StatelessWidget {
                           )),
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: 306,
-                          margin: EdgeInsets.only(bottom: 4,right:24),
+                          width: ScreenUtil().setWidth(258),
+                          margin: EdgeInsets.only(bottom: 4),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -60,7 +64,7 @@ class HomeWidget extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
-                                      fontSize: 14,
+                                      fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
                                       fontWeight: FontWeight.w700,
                                       fontStyle: FontStyle.normal,
                                   )
@@ -71,7 +75,7 @@ class HomeWidget extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'SFProDisplay',
                                     color: Color(0xff000000),
-                                    fontSize: 12,
+                                    fontSize: ScreenUtil().setSp(12,allowFontScalingSelf: true),
                                     fontWeight: FontWeight.w300,
                                     fontStyle: FontStyle.normal,
 
@@ -82,13 +86,13 @@ class HomeWidget extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          width: 306,
-                          margin: EdgeInsets.only(bottom: 4,right:24),
+                          width: ScreenUtil().setWidth(258),
+                          margin: EdgeInsets.only(bottom: 4),
                           child: Text("\"Plant your garden and decorate your own soul, instead of waiting for someone to bring you flowers.\"",
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff000000),
-                                fontSize: 12,
+                                fontSize: ScreenUtil().setSp(12),
                                 fontWeight: FontWeight.w300,
                                 fontStyle: FontStyle.italic,
                               )
@@ -104,8 +108,10 @@ class HomeWidget extends StatelessWidget {
               InkWell(
                 onTap: () {selectPage(1);},
                 child: Container(
-                    width: double.infinity,
-                    height: 275,
+                    // width: MediaQuery.of(context).size.width*0.9,
+                    // height: MediaQuery.of(context).size.height*0.353,
+                    width: ScreenUtil().setWidth(324),
+                    height: ScreenUtil().setHeight(268),
                     margin: EdgeInsets.only(left:24,right:24,top:30),
                     decoration: new BoxDecoration(
                       image: DecorationImage(
@@ -131,21 +137,21 @@ class HomeWidget extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xff303030),
-                              fontSize: 24,
+                              fontSize: ScreenUtil().setSp(24,allowFontScalingSelf: true),
                               fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.normal,
                             )
                         ),
                       ),
                       Container(
-                        width: 150,
-                        height:93,
+                        width: ScreenUtil().setWidth(151),
+                        height:ScreenUtil().setHeight(93),
                         margin: EdgeInsets.only(top:6, left: 24),
                         child: Text("Explore free customized learning journeys for... Technology jobs recommended by 300+ professionals",
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xff303030),
-                              fontSize: 12,
+                              fontSize: ScreenUtil().setSp(12,allowFontScalingSelf: true),
                               fontWeight: FontWeight.w300,
                               fontStyle: FontStyle.normal,
 
@@ -262,6 +268,7 @@ class HomeWidget extends StatelessWidget {
               Workshop(),
               Advisor(),
               OurTeam(),
+
               // SliderCard(),
               // SliderCard(),
               // SliderCard(),
