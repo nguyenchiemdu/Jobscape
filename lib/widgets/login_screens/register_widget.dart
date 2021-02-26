@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/google_sign_in.dart';
 import 'confirm_email.dart';
 import 'login_screen.dart';
@@ -68,26 +69,27 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           child: SafeArea(
               child: Column(
                   children : [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.end ,
-                        children: [
-                          Text('English'),
-                          Icon(Icons.arrow_drop_down)
-                        ]
-                    ),
+                    // Row(
+                    //     mainAxisAlignment: MainAxisAlignment.end ,
+                    //     children: [
+                    //       Text('English'),
+                    //       Icon(Icons.arrow_drop_down)
+                    //     ]
+                    // ),
                     Container(
                       // padding: EdgeInsets.only(left: 20, right: 20),
-                      margin: EdgeInsets.only(top : 255, left: 40,right: 40),
+                      margin: EdgeInsets.only(top : ScreenUtil().setHeight(284),),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(right:160,bottom: 3),
+                            width: ScreenUtil().setWidth(312),
+                            margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(2),),
                             child: Text("Hello, nice to meet you!",
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff303030),
-                                  fontSize: 14,
+                                  fontSize: ScreenUtil().setSp(14),
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
 
@@ -96,12 +98,13 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(right: 222,bottom: 22),
+                            width: ScreenUtil().setWidth(312),
+                            margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(17),),
                             child: Text("Sign up",
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff303030),
-                                  fontSize: 24,
+                                  fontSize: ScreenUtil().setSp(24),
                                   fontWeight: FontWeight.w900,
                                   fontStyle: FontStyle.normal,
 
@@ -111,10 +114,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           ),
 
                           Container(
-                              margin: EdgeInsets.only(bottom:16),
-                              width: 312,
-                              height: 53,
-                              padding: EdgeInsets.only(left:20),
+                              margin: EdgeInsets.only(bottom:ScreenUtil().setHeight(15),),
+                              width: ScreenUtil().setWidth(312),
+                              height: ScreenUtil().setHeight(53),
+                              padding: EdgeInsets.only(left:ScreenUtil().setWidth(20),),
                               decoration: new BoxDecoration(
                                 color: Color(0xffffffff),
                                 borderRadius: BorderRadius.circular(10),
@@ -137,7 +140,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                     hintStyle: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff303030),
-                                      fontSize: 16,
+                                      fontSize: ScreenUtil().setSp(16),
                                       fontWeight: FontWeight.w400,
                                       fontStyle: FontStyle.normal,
                                     ),
@@ -150,10 +153,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                               )
                           ),
                           Container(
-                              width: 312,
-                              height: 53,
-                              margin: EdgeInsets.only(bottom:16),
-                              padding: EdgeInsets.only(left:20),
+                              width: ScreenUtil().setWidth(312),
+                              height: ScreenUtil().setHeight(53),
+                              margin: EdgeInsets.only(bottom:ScreenUtil().setHeight(15),),
+                              padding: EdgeInsets.only(left:ScreenUtil().setWidth(20),),
                               decoration: new BoxDecoration(
                                 color: Color(0xffffffff),
                                 borderRadius: BorderRadius.circular(10),
@@ -177,7 +180,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                     hintStyle: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff303030),
-                                      fontSize: 16,
+                                      fontSize: ScreenUtil().setSp(16),
                                       fontWeight: FontWeight.w400,
                                       fontStyle: FontStyle.normal,
                                     ),
@@ -190,10 +193,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                               )
                           ),
                           Container(
-                              width: 312,
-                              height: 53,
-                              margin: EdgeInsets.only(bottom:16),
-                              padding: EdgeInsets.only(left:20),
+                              width: ScreenUtil().setWidth(312),
+                              height: ScreenUtil().setHeight(53),
+                              margin: EdgeInsets.only(bottom:ScreenUtil().setHeight(15),),
+                              padding: EdgeInsets.only(left:ScreenUtil().setWidth(20),),
                               decoration: new BoxDecoration(
                                 color: Color(0xffffffff),
                                 borderRadius: BorderRadius.circular(10),
@@ -217,7 +220,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                     hintStyle: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff303030),
-                                      fontSize: 16,
+                                      fontSize: ScreenUtil().setSp(16),
                                       fontWeight: FontWeight.w400,
                                       fontStyle: FontStyle.normal,
                                     ),
@@ -229,72 +232,75 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                   )
                               )
                           ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10, bottom: 18),
-                            child: Row(
-                              children: [
-                                Container(
-                                  child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          _value = !_value;
-                                        });
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(right:10 ),
-                                        width: 16,
-                                        height: 16,
-                                        decoration: BoxDecoration(color: Color(0xffffbf2f),
-                                            borderRadius: BorderRadius.circular(4)),
+                          Center(
+                            child: Container(
+                              width: ScreenUtil().setWidth(312),
+                              margin: EdgeInsets.only(bottom:ScreenUtil().setHeight(18),),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    child: InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            _value = !_value;
+                                          });
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.only(right:10 ),
+                                          width: 16,
+                                          height: 16,
+                                          decoration: BoxDecoration(color: Color(0xffffbf2f),
+                                              borderRadius: BorderRadius.circular(4)),
 
-                                        child: _value
-                                            ? Icon(
-                                          Icons.check,
-                                          size: 15,
-                                          color: Colors.white,
+                                          child: _value
+                                              ? Icon(
+                                            Icons.check,
+                                            size: 15,
+                                            color: Colors.white,
+                                          )
+                                              : Icon(
+                                            Icons.check_box_outline_blank,
+                                            size: 15,
+                                            color: Color(0xffffbf2f),
+
+                                          ),
                                         )
-                                            : Icon(
-                                          Icons.check_box_outline_blank,
-                                          size: 15,
-                                          color: Color(0xffffbf2f),
+                                    ),
+                                  ),
+                                  RichText(
+                                      text: new TextSpan(
+                                          children: [
 
-                                        ),
+                                            new TextSpan(
+                                                text: "Agreed with ",
+                                                style: TextStyle(
+                                                  fontFamily: 'SFProDisplay',
+                                                  color: Color(0xff303030),
+                                                  fontSize: ScreenUtil().setSp(14),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontStyle: FontStyle.normal,
+
+
+                                                )
+                                            ),
+                                            new TextSpan(
+                                                text: "Term & Conditions",
+                                                style: TextStyle(
+                                                  fontFamily: 'SFProDisplay',
+                                                  color: Color(0xffffbf2f),
+                                                  fontSize: ScreenUtil().setSp(14),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontStyle: FontStyle.normal,
+                                                  decoration: TextDecoration.underline,
+
+
+                                                )
+                                            ),
+                                          ]
                                       )
                                   ),
-                                ),
-                                RichText(
-                                    text: new TextSpan(
-                                        children: [
-
-                                          new TextSpan(
-                                              text: "Agreed with ",
-                                              style: TextStyle(
-                                                fontFamily: 'SFProDisplay',
-                                                color: Color(0xff303030),
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400,
-                                                fontStyle: FontStyle.normal,
-
-
-                                              )
-                                          ),
-                                          new TextSpan(
-                                              text: "Term & Conditions",
-                                              style: TextStyle(
-                                                fontFamily: 'SFProDisplay',
-                                                color: Color(0xffffbf2f),
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400,
-                                                fontStyle: FontStyle.normal,
-                                                decoration: TextDecoration.underline,
-
-
-                                              )
-                                          ),
-                                        ]
-                                    )
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           // Text('Password'),
@@ -303,9 +309,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(right:16),
-                                  width: 104,
-                                  height: 50,
+                                  margin: EdgeInsets.only(right:ScreenUtil().setWidth(12)),
+                                  width: ScreenUtil().setWidth(150),
+                                  height: ScreenUtil().setHeight(50),
                                   child: RaisedButton(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
@@ -316,14 +322,14 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                           style: TextStyle(
                                             fontFamily: 'SFProDisplay',
                                             color: Color(0xffffbf2f),
-                                            fontSize: 18,
+                                            fontSize: ScreenUtil().setSp(18),
                                             fontWeight: FontWeight.w700,
                                             fontStyle: FontStyle.normal,
                                           )
                                       ))),
                               Container(
-                                  width: 192,
-                                  height: 50,
+                                  width: ScreenUtil().setWidth(150),
+                                  height: ScreenUtil().setHeight(50),
                                   child: RaisedButton(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
@@ -335,7 +341,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                           style: TextStyle(
                                             fontFamily: 'SFProDisplay',
                                             color: Color(0xffffffff),
-                                            fontSize: 18,
+                                            fontSize: ScreenUtil().setSp(18),
                                             fontWeight: FontWeight.w700,
                                             fontStyle: FontStyle.normal,
                                           )
@@ -348,7 +354,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff000000),
-                                  fontSize: 14,
+                                  fontSize: ScreenUtil().setSp(14),
                                   fontWeight: FontWeight.w100,
                                   fontStyle: FontStyle.normal,
                                 )

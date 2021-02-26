@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './industry_component.dart';
 // import './industry_slider_card.dart';
 import './road_map_widget.dart';
@@ -55,8 +56,8 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 24),
-                        width: 36,
-                        height: 36,
+                        width: ScreenUtil().setWidth(36),
+                        height: ScreenUtil().setHeight(36),
                         decoration: new BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
@@ -71,7 +72,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xff000000),
-                              fontSize: 12,
+                              fontSize: ScreenUtil().setSp(12),
                               fontWeight: FontWeight.w300,
                               fontStyle: FontStyle.normal,
                             )),

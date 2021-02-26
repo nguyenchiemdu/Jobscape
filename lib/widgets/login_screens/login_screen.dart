@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/google_sign_in.dart';
 import './register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -55,7 +56,7 @@ class LoginForm extends StatelessWidget {
               child: SafeArea(
                   child: Container(
                 // padding: EdgeInsets.only(left: 24),
-                margin: EdgeInsets.only(top: 266),
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(276)),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start ,
@@ -66,7 +67,7 @@ class LoginForm extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff303030),
-                            fontSize: 14,
+                            fontSize: ScreenUtil().setSp(14),
                             fontWeight: FontWeight.w400,
                             fontStyle: FontStyle.normal,
                           )),
@@ -77,15 +78,15 @@ class LoginForm extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff303030),
-                            fontSize: 24,
+                            fontSize: ScreenUtil().setSp(24),
                             fontWeight: FontWeight.w900,
                             fontStyle: FontStyle.normal,
                           )),
                     ),
                     Container(
                         margin: EdgeInsets.only(left:24,right:24,bottom: 15),
-                        width: double.infinity,
-                        height: 53,
+                        width: ScreenUtil().setWidth(312),
+                        height: ScreenUtil().setHeight(53),
                         padding: EdgeInsets.only(left: 20),
                         decoration: new BoxDecoration(
                           color: Color(0xffffffff),
@@ -111,9 +112,10 @@ class LoginForm extends StatelessWidget {
                               hintStyle: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff303030),
-                                fontSize: 16,
+                                fontSize: ScreenUtil().setSp(16),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
+
                               ),
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
@@ -123,8 +125,8 @@ class LoginForm extends StatelessWidget {
                             ))),
                     Container(
                         margin: EdgeInsets.only(left:24,right:24,bottom: 15),
-                        width: double.infinity,
-                        height: 53,
+                        width: ScreenUtil().setWidth(312),
+                        height: ScreenUtil().setHeight(53),
                         padding: EdgeInsets.only(left: 20),
                         decoration: new BoxDecoration(
                           color: Color(0xffffffff),
@@ -151,7 +153,7 @@ class LoginForm extends StatelessWidget {
                               hintStyle: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff303030),
-                                fontSize: 16,
+                                fontSize: ScreenUtil().setSp(16),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
                               ),
@@ -162,20 +164,20 @@ class LoginForm extends StatelessWidget {
                               disabledBorder: InputBorder.none,
                             ))),
                     Container(
-                      margin: EdgeInsets.only(bottom: 18),
+                      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(18)),
                       alignment: Alignment.center,
                       child: Text("Forgot you password?",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff000000),
-                            fontSize: 14,
+                            fontSize: ScreenUtil().setSp(14),
                             fontWeight: FontWeight.w100,
                             fontStyle: FontStyle.normal,
                           )),
                     ),
                     Container(
-                        width: double.infinity,
-                        height: 48,
+                        width: ScreenUtil().setWidth(312),
+                        height: ScreenUtil().setHeight(48),
                         margin: EdgeInsets.only(left:24,right:24),
                         child: RaisedButton(onPressed: (){signIn(context,user.text,password.text);},
                             color: Color(0xffffbf2f),
@@ -186,21 +188,24 @@ class LoginForm extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xffffffff),
-                                  fontSize: 20,
+                                  fontSize: ScreenUtil().setSp(20),
                                   fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.normal,
                                 )))),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 21, left: 136, right: 136, bottom: 13),
-                      child: Text("or continue with",
-                          style: TextStyle(
-                            fontFamily: 'SFProDisplay',
-                            color: Color(0xff000000),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w100,
-                            fontStyle: FontStyle.normal,
-                          )),
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(21),bottom: ScreenUtil().setHeight(13),),
+                        // margin: EdgeInsets.only(
+                        //     top: 21, left: 136, right: 136, bottom: 13),
+                        child: Text("or continue with",
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff000000),
+                              fontSize: ScreenUtil().setSp(14),
+                              fontWeight: FontWeight.w100,
+                              fontStyle: FontStyle.normal,
+                            )),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(bottom: 12),
@@ -210,8 +215,8 @@ class LoginForm extends StatelessWidget {
                           InkWell(
                             onTap: () {},
                             child: Container(
-                              width: 79,
-                              height: 49,
+                              width: ScreenUtil().setWidth(79),
+                              height: ScreenUtil().setHeight(49),
                               margin: EdgeInsets.only(right: 10),
                               decoration: new BoxDecoration(
                                 color: Color(0xffffffff),
@@ -239,8 +244,8 @@ class LoginForm extends StatelessWidget {
                               signInGoogle(context);
                             },
                             child: Container(
-                              width: 79,
-                              height: 49,
+                              width: ScreenUtil().setWidth(79),
+                              height: ScreenUtil().setHeight(49),
                               margin: EdgeInsets.only(left: 10),
                               decoration: new BoxDecoration(
                                 color: Color(0xffffffff),
@@ -273,7 +278,7 @@ class LoginForm extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xff000000),
-                              fontSize: 14,
+                              fontSize: ScreenUtil().setSp(14),
                               fontWeight: FontWeight.w100,
                               fontStyle: FontStyle.normal,
                             )),
@@ -282,7 +287,7 @@ class LoginForm extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xff000000),
-                              fontSize: 14,
+                              fontSize: ScreenUtil().setSp(14),
                               fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.normal,
                             ),

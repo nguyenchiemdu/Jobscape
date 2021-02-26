@@ -40,6 +40,28 @@ class RoadMapWidget extends StatelessWidget {
                   ],
                 ),
               ),
+              Text("Journey to X position",
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xffffbf2f),
+                    fontSize: 26,
+                    fontWeight: FontWeight.w900,
+                    fontStyle: FontStyle.normal,
+                    letterSpacing: -0.52,
+
+                  )
+              ),
+              Text("Journey to X position",
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xffffbf2f),
+                    fontSize: 26,
+                    fontWeight: FontWeight.w900,
+                    fontStyle: FontStyle.normal,
+                    letterSpacing: -0.52,
+
+                  )
+              ),
               Text(roadMapData['name'],
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               RoadMapItem(1, roadMapData['listRoadMap'][0]),

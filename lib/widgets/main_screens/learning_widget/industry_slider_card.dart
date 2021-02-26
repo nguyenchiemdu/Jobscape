@@ -20,19 +20,20 @@ class SliderCard extends StatelessWidget {
           child: CarouselSlider.builder(
               itemCount: listJobs.length,
               itemBuilder: (BuildContext context, int index, realIdx) =>
-                  Container(
-                    child: IndustryCard(
-                      listJobs[index],
+                  FittedBox(
+                    child: Container(
+                      child: IndustryCard(
+                        listJobs[index],
+                      ),
                     ),
                   ),
               options: CarouselOptions(
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(milliseconds: 300),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enlargeCenterPage: false,
-                viewportFraction: 0.6,
-                height: 200,
+                // autoPlay: true,
+                // autoPlayInterval: Duration(seconds: 3),
+                // autoPlayAnimationDuration: Duration(milliseconds: 300),
+                // autoPlayCurve: Curves.fastOutSlowIn,
+                // enlargeCenterPage: false,
+                viewportFraction: 0.65,
                 scrollDirection: Axis.horizontal,
               ))),
     );

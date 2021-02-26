@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'road_map_widget.dart';
 
 class IndustryCard extends StatelessWidget {
@@ -26,7 +27,8 @@ class IndustryCard extends StatelessWidget {
             changeScreen(context);
           },
           child: Container(
-            width: 220,
+            width: ScreenUtil().setWidth(217),
+            height: ScreenUtil().setHeight(190),
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Color(0xffffffff),
@@ -47,8 +49,8 @@ class IndustryCard extends StatelessWidget {
                     child: Image.network(
                       jobData['img_src'],
                       fit: BoxFit.fill,
-                      width: 197,
-                      height: 107,
+                      width: ScreenUtil().setWidth(207),
+                      height: ScreenUtil().setHeight(120),
                     ),
                   ),
                 ),
@@ -62,7 +64,7 @@ class IndustryCard extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xff000000),
-                              fontSize: 14,
+                              fontSize: ScreenUtil().setSp(14),
                               fontWeight: FontWeight.w600,
                               fontStyle: FontStyle.normal,
                             )),
@@ -83,7 +85,7 @@ class IndustryCard extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff000000),
-                                  fontSize: 9,
+                                  fontSize: ScreenUtil().setSp(9),
                                   fontWeight: FontWeight.w300,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -102,7 +104,7 @@ class IndustryCard extends StatelessWidget {
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff000000),
-                                fontSize: 9,
+                                fontSize: ScreenUtil().setSp(9),
                                 fontWeight: FontWeight.w300,
                                 fontStyle: FontStyle.normal,
                               ))

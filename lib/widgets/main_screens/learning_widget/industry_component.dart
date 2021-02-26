@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './industry_slider_card.dart';
 import './industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -53,22 +54,23 @@ class _IndustryComponentState extends State<IndustryComponent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 24),
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(24)),
+              width: ScreenUtil().setWidth(312),
               child: Container(
                 margin: EdgeInsets.only(bottom: 8),
                 child: Text(industryField['fieldName'],
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),
-                      fontSize: 16,
+                      fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.normal,
                     )),
               ),
             ),
             Container(
-              width: double.infinity,
-              height: 176,
+              width: ScreenUtil().setWidth(312),
+              height: ScreenUtil().setHeight(180),
               margin: EdgeInsets.only(left: 24, right: 24),
               decoration: new BoxDecoration(
                   color: Color(0xfffffaf0),
@@ -83,7 +85,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff000000),
-                          fontSize: 14,
+                          fontSize: ScreenUtil().setSp(14),
                           fontWeight: FontWeight.w300,
                           fontStyle: FontStyle.italic,
                         )),
@@ -97,7 +99,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xffffbf2f),
-                            fontSize: 14,
+                            fontSize: ScreenUtil().setSp(14),
                             fontWeight: FontWeight.w700,
                             fontStyle: FontStyle.normal,
                           )),
@@ -106,7 +108,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff000000),
-                            fontSize: 14,
+                            fontSize: ScreenUtil().setSp(14),
                             fontWeight: FontWeight.w300,
                             fontStyle: FontStyle.italic,
                           )),
@@ -121,7 +123,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xffffbf2f),
-                            fontSize: 14,
+                            fontSize: ScreenUtil().setSp(14),
                             fontWeight: FontWeight.w700,
                             fontStyle: FontStyle.normal,
                           )),
@@ -130,7 +132,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff000000),
-                            fontSize: 14,
+                            fontSize: ScreenUtil().setSp(14),
                             fontWeight: FontWeight.w300,
                             fontStyle: FontStyle.italic,
                           )),
@@ -154,7 +156,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff000000),
-                                fontSize: 14,
+                                fontSize: ScreenUtil().setSp(14),
                                 fontWeight: FontWeight.w300,
                                 fontStyle: FontStyle.italic,
                               )),
@@ -163,7 +165,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xffffbf2f),
-                                fontSize: 14,
+                                fontSize: ScreenUtil().setSp(14),
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FontStyle.normal,
                               )),
