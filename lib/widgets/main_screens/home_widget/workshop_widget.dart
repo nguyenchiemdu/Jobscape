@@ -85,8 +85,6 @@ class _WorkshopState extends State<Workshop> {
                         fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
-
-
                       )
                   ),
                 ],
@@ -106,8 +104,6 @@ class _WorkshopState extends State<Workshop> {
                       fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
                       fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.normal,
-
-
                     )
                 ),
                 Text("See all (3)",
@@ -125,6 +121,7 @@ class _WorkshopState extends State<Workshop> {
             ),
           ),
           SliderCard(workshopList),
+
           // GridView.count(
           //   childAspectRatio:itemHeight/itemWidth,
           //     shrinkWrap: true,

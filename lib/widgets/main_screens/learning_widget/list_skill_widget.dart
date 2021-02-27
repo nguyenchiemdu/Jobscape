@@ -12,6 +12,7 @@ class ListSkillWidget extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
+
             child: Column(
               children: [
                 Container(

@@ -16,6 +16,7 @@ class WorkshopCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Container(
+          margin: EdgeInsets.only(right: ScreenUtil().setWidth(14)),
           decoration: new BoxDecoration(
             color: Color(0xffffffff),
             borderRadius: BorderRadius.circular(12),
@@ -26,7 +27,7 @@ class WorkshopCard extends StatelessWidget {
                 spreadRadius: 0,
             ) ],
           ),
-        height: ScreenUtil().setHeight(185),
+        height: ScreenUtil().setHeight(192),
         width: ScreenUtil().setWidth(192),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,10 +40,10 @@ class WorkshopCard extends StatelessWidget {
                     child: Image.network(image_source,
                     fit: BoxFit.fill,
                     width: ScreenUtil().setWidth(182),
-                    height: ScreenUtil().setHeight(105)),),
+                    height: ScreenUtil().setHeight(99)),),
               ),
               Container(
-                margin: EdgeInsets.only(top: 8, left:12, right: 5, bottom: 4),
+                margin: EdgeInsets.only(top: 12, left:12, right: 5, bottom: 8),
                 child: Text(title,
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
@@ -58,8 +59,8 @@ class WorkshopCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                        width: 12,
-                        height: 12,
+                        width: ScreenUtil().setWidth(12),
+                        height: ScreenUtil().setHeight(12),
                         margin: EdgeInsets.only(right: 4),
                         child: Image.asset("assets/images/good_for_icon.png")),
                     Container(
@@ -82,8 +83,8 @@ class WorkshopCard extends StatelessWidget {
                   children: [
                     Container(
                         margin: EdgeInsets.only(right:4),
-                        width: 12,
-                        height: 12,
+                        width: ScreenUtil().setWidth(12),
+                        height: ScreenUtil().setHeight(12),
                         child: Image.asset("assets/images/speaker_icon.png")),
                     Text(speaker,
                         style: TextStyle(
@@ -106,8 +107,8 @@ class WorkshopCard extends StatelessWidget {
                   children: [
                     Container(
                       margin: EdgeInsets.only(right: 4),
-                        width: 12,
-                        height: 12,
+                        width: ScreenUtil().setWidth(12),
+                        height: ScreenUtil().setHeight(12),
                         child: Image.asset("assets/images/date_icon.png")),
                     Text(date,
                         style: TextStyle(
