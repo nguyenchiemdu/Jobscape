@@ -90,19 +90,20 @@ class RoadMapWidget extends StatelessWidget {
       //   builder:(BuildContext context,ScrollController scrollController) {
       //     return
           Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
+              ),
+              color: Colors.white,
+            ),
               margin: EdgeInsets.only(top:ScreenUtil().setHeight(178)),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Container(
                     // height: 700,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
-                    ),
-                    color: Colors.white,
-                  ),
+
                   // child: ListView.builder(
                   //   itemCount: 1,
                   //   controller: scrollController,
@@ -134,6 +135,13 @@ class RoadMapWidget extends StatelessWidget {
                         RoadMapItem(1, roadMapData['listRoadMap'][0]),
                         RoadMapItem(2, roadMapData['listRoadMap'][1]),
                           RoadMapItem(2, roadMapData['listRoadMap'][1]),
+                          //Cái thứ 3 bên trên anh làm thêm vào cho nó giống của design nha
+                          Container(
+                            width: ScreenUtil().setWidth(312),
+                            height: ScreenUtil().setHeight(70),
+                            color: Colors.white,
+                          )
+                          //Cho cái Container bên trên là để cho cái bottom Start Journey không che vào
                       ],
                     )
                   ),
@@ -141,7 +149,7 @@ class RoadMapWidget extends StatelessWidget {
               ),
           Positioned(
             top: ScreenUtil().setHeight(150),
-            left: ScreenUtil().setWidth(150),
+            left: ScreenUtil().setWidth(145),
             child: Center(
               child: Container(
                 height: ScreenUtil().setHeight(70),
@@ -153,7 +161,78 @@ class RoadMapWidget extends StatelessWidget {
 
               ),
             ),
-          )
+          ),
+          Positioned(
+            bottom:0,
+            child: Container(
+                width: ScreenUtil().setWidth(360),
+                height: ScreenUtil().setHeight(152),
+                decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24),
+                    ),
+                  color: Color(0xffffffff),
+                  boxShadow: [BoxShadow(
+                      color: Color(0x29000000),
+                      offset: Offset(0,-3),
+                      blurRadius: 10,
+                      spreadRadius: 0
+                  ) ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top:ScreenUtil().setHeight(20),left:ScreenUtil().setWidth(24)),
+                      child: Text(roadMapData['name'],
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xff000000),
+                            fontSize: ScreenUtil().setSp(16),
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+
+                          )
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top:ScreenUtil().setHeight(4),left:ScreenUtil().setWidth(24)),
+                      child: Text("1 - 2 câu mô tả gì đó cho người dùng hiểu rõ",
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xff000000),
+                            fontSize: ScreenUtil().setSp(16),
+                            fontWeight: FontWeight.w300,
+                            fontStyle: FontStyle.italic,
+
+
+                          )
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(top:ScreenUtil().setHeight(16),left:ScreenUtil().setWidth(24)),
+                        width: ScreenUtil().setWidth(312),
+                        height: ScreenUtil().setHeight(50),
+                        child: RaisedButton(onPressed: (){},
+                            color: Color(0xffffbf2f),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text("Start Journey ",
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xffffffff),
+                                  fontSize: ScreenUtil().setSp(18),
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                )
+                            ))),
+                  ],
+                )
+
+            ),
+          ),
 
           ])
         ),
