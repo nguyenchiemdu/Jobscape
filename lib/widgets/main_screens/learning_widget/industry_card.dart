@@ -47,7 +47,7 @@ class IndustryCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
-                      jobData['img_src'],
+                      jobData['imgSrc'],
                       fit: BoxFit.fill,
                       width: ScreenUtil().setWidth(207),
                       height: ScreenUtil().setHeight(120),
@@ -81,7 +81,7 @@ class IndustryCard extends StatelessWidget {
                             ),
                             Text(
                                 "Job opportunity: " +
-                                    jobData['job_opportunity'].toString(),
+                                    jobData['jobOpportunity'].toString(),
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff000000),

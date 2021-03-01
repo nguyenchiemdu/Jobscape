@@ -176,7 +176,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                 ],
               ),
             ),
-            SliderCard(industryField['list_jobs']),
+            SliderCard(industryField['listJobs']),
             new Container(
                 width: double.infinity,
                 height: 0,
