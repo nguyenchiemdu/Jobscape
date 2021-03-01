@@ -74,6 +74,7 @@ flutter:
     - assets/images/mile_stone.png
     - assets/images/next_icon.png
     - assets/images/recommend_icon.png
+    - assets/images/start_learn_icon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
