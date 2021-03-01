@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DatabaseManager {
   final CollectionReference industry =
       FirebaseFirestore.instance.collection('industry');
-
   // Future<void> createWorkshop()
   // async {
   //   return await workshops.add({
@@ -50,4 +49,30 @@ class DatabaseManager {
       return null;
     }
   }
+  Future getReview(String courseReviewId) async {
+    final CollectionReference review =
+      FirebaseFirestore.instance.collection('courseReview/$courseReviewId/listReview');
+    List reviewList = [];
+    try {
+      await review.get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          reviewList.add(element.data());
+        });
+      });
+      return reviewList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+  Future upLoadReview(String courseReviewId,String reviewText) {
+    Map<String,dynamic> reviews = {"user":"Admin Test","reviewText":"Default","upvote":0,"downvote":0,"star":0,"time":"now"};
+    reviews['reviewText'] = reviewText;
+    final CollectionReference review =
+      FirebaseFirestore.instance.collection('courseReview/$courseReviewId/listReview');
+   return review
+          .add(reviews)
+          .then((value) => print("preview uploaded"))
+          .catchError((error) => print("Failed to upload preview: $error"));
+}
 }

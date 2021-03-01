@@ -35,16 +35,19 @@ class SkillItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            margin: EdgeInsets.only(top: ScreenUtil().setHeight(9),right: ScreenUtil().setWidth(9), left: ScreenUtil().setWidth(9)),
-            width: ScreenUtil().setWidth(131),
-            height: ScreenUtil().setHeight(99),
-            decoration: new BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw7L7A7_u4dd2X675qYCf-vIS0-OJzC64uHQ&usqp=CAU"),
-                fit: BoxFit.fill,
-                alignment: Alignment.topCenter,
+          InkWell(
+            onTap: (){changeScreen(context);},
+            child: Container(
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(9),right: ScreenUtil().setWidth(9), left: ScreenUtil().setWidth(9)),
+              width: ScreenUtil().setWidth(131),
+              height: ScreenUtil().setHeight(99),
+              decoration: new BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                image: DecorationImage(
+                  image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw7L7A7_u4dd2X675qYCf-vIS0-OJzC64uHQ&usqp=CAU"),
+                  fit: BoxFit.fill,
+                  alignment: Alignment.topCenter,
+                ),
               ),
             ),
           ),
@@ -86,13 +89,16 @@ class SkillItem extends StatelessWidget {
                 right: ScreenUtil().setWidth(1),
                 bottom: ScreenUtil().setHeight(8),
 
-                child: Container(
-                  width: ScreenUtil().setWidth(32),
-                  height: ScreenUtil().setHeight(32),
-                  decoration: new BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/start_learn_icon.png"),
-                      fit: BoxFit.fill,
+                child: InkWell(
+                  onTap: (){changeScreen(context);},
+                  child: Container(
+                    width: ScreenUtil().setWidth(32),
+                    height: ScreenUtil().setHeight(32),
+                    decoration: new BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/start_learn_icon.png"),
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                 ),

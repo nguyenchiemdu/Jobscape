@@ -16,7 +16,6 @@ class RoadMapItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(roadMapData.toString());
     return Container(
       child: Column(
         children: [

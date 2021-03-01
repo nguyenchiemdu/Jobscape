@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './industry_slider_card.dart';
-import './industry_database.dart';
+import 'package:learning_app/models/industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import './road_map_widget.dart';
 
