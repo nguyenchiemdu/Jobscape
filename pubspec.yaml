@@ -77,6 +77,7 @@ flutter:
     - assets/images/start_learn_icon.png
     - assets/images/yellow_star_icon.png
     - assets/images/grey_star_icon.png
+    - assets/images/like_icon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

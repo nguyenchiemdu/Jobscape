@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 class ListReviewCourse extends StatefulWidget {
@@ -40,20 +41,168 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
           itemCount: listReview.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
-             
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(24),top:ScreenUtil().setHeight(12)),
               child :Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(listReview[index]['user']),
-                  Text(listReview[index]['time']),
-                  Text(listReview[index]['reviewText']),
-                  
+                  Text(listReview[index]['user'],
+                      style: TextStyle(
+                        fontFamily: 'SFProDisplay',
+                        color: Color(0xff000000),
+                        fontSize: ScreenUtil().setSp(13),
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                      )),
                   Row(children: [
-                    Text(' Upvote :'+ listReview[index]['upvote'].toString()),
-                    Text(' Downvote :'+ listReview[index]['downvote'].toString()),
-                    
-                  ],)
-                  
+                    Container(
+                      margin: EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                      // margin: EdgeInsets.only(
+                      //     top: ScreenUtil().setHeight(12),
+                      //     bottom: ScreenUtil().setHeight(14)),
+                      width: ScreenUtil().setWidth(12),
+                      height: ScreenUtil().setHeight(12),
+                      decoration: new BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/yellow_star_icon.png"),
+                          fit: BoxFit.fill,
+                          alignment: Alignment.topCenter,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                      // margin: EdgeInsets.only(
+                      //     top: ScreenUtil().setHeight(12),
+                      //     bottom: ScreenUtil().setHeight(14)),
+                      width: ScreenUtil().setWidth(12),
+                      height: ScreenUtil().setHeight(12),
+                      decoration: new BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/yellow_star_icon.png"),
+                          fit: BoxFit.fill,
+                          alignment: Alignment.topCenter,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                      // margin: EdgeInsets.only(
+                      //     top: ScreenUtil().setHeight(12),
+                      //     bottom: ScreenUtil().setHeight(14)),
+                      width: ScreenUtil().setWidth(12),
+                      height: ScreenUtil().setHeight(12),
+                      decoration: new BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/yellow_star_icon.png"),
+                          fit: BoxFit.fill,
+                          alignment: Alignment.topCenter,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                      // margin: EdgeInsets.only(
+                      //     top: ScreenUtil().setHeight(12),
+                      //     bottom: ScreenUtil().setHeight(14)),
+                      width: ScreenUtil().setWidth(12),
+                      height: ScreenUtil().setHeight(12),
+                      decoration: new BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/yellow_star_icon.png"),
+                          fit: BoxFit.fill,
+                          alignment: Alignment.topCenter,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: ScreenUtil().setWidth(6)),
+                      // margin: EdgeInsets.only(
+                      //     top: ScreenUtil().setHeight(12),
+                      //     bottom: ScreenUtil().setHeight(14)),
+                      width: ScreenUtil().setWidth(12),
+                      height: ScreenUtil().setHeight(12),
+                      decoration: new BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/yellow_star_icon.png"),
+                          fit: BoxFit.fill,
+                          alignment: Alignment.topCenter,
+                        ),
+                      ),
+                    ),
+                    Text(listReview[index]['time'],
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff303030),
+                          fontSize: ScreenUtil().setSp(10),
+                          fontWeight: FontWeight.w300,
+                          fontStyle: FontStyle.italic,
+
+
+                        )),
+
+                  ],),
+                  Container(
+                    margin: EdgeInsets.only(top:ScreenUtil().setHeight(5),bottom: ScreenUtil().setHeight(5)),
+                    width: ScreenUtil().setWidth(275),
+                    child: Text(listReview[index]['reviewText'],
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff000000),
+                          fontSize: ScreenUtil().setSp(12),
+                          fontWeight: FontWeight.w300,
+                          fontStyle: FontStyle.normal,
+
+                        )
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: ScreenUtil().setWidth(12)),
+                        child: Text("Find this review helpful?",
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff303030),
+                              fontSize: ScreenUtil().setSp(10),
+                              fontWeight: FontWeight.w300,
+                              fontStyle: FontStyle.italic,
+                            )
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                        // margin: EdgeInsets.only(
+                        //     top: ScreenUtil().setHeight(12),
+                        //     bottom: ScreenUtil().setHeight(14)),
+                        width: ScreenUtil().setWidth(16),
+                        height: ScreenUtil().setHeight(16),
+                        decoration: new BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/like_icon.png"),
+                            fit: BoxFit.fill,
+                            alignment: Alignment.topCenter,
+                          ),
+                        ),
+                      ),
+                      Text(listReview[index]['upvote'].toString(),
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xffffbf2f),
+                            fontSize: ScreenUtil().setSp(11),
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                          )),
+                    ],
+                  ),
+                  Container(
+                      width: ScreenUtil().setWidth(275),
+                      height: 0,
+                      margin:
+                      EdgeInsets.only(top: ScreenUtil().setHeight(16)),
+                      decoration: new BoxDecoration(
+                        border: Border.all(color: Color(0xFFEEEEEE)),
+                      )),
+
                 ],
               ),
             );

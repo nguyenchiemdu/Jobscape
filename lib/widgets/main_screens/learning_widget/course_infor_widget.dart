@@ -37,7 +37,7 @@ class CrouseInforWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(10)),
+            margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(10),top: ScreenUtil().setHeight(36)),
             child: Text("Student feedback",
                 style: TextStyle(
                   fontFamily: 'SFProDisplay',
@@ -94,7 +94,7 @@ class CrouseInforWidget extends StatelessWidget {
                       )
                   ),
                     Container(
-                        width: ScreenUtil().setWidth(187*58/100),
+                        width: ScreenUtil().setWidth(187*star['5']/100),
                         height: ScreenUtil().setHeight(6),
                         decoration: new BoxDecoration(
                             color: Color(0xffffbf2f),
@@ -210,7 +210,7 @@ class CrouseInforWidget extends StatelessWidget {
                           )
                       ),
                       Container(
-                          width: ScreenUtil().setWidth(187*33/100),
+                          width: ScreenUtil().setWidth(187*star['4']/100),
                           height: ScreenUtil().setHeight(6),
                           decoration: new BoxDecoration(
                               color: Color(0xffffbf2f),
@@ -326,7 +326,7 @@ class CrouseInforWidget extends StatelessWidget {
                           )
                       ),
                       Container(
-                          width: ScreenUtil().setWidth(187*7/100),
+                          width: ScreenUtil().setWidth(187*star['3']/100),
                           height: ScreenUtil().setHeight(6),
                           decoration: new BoxDecoration(
                               color: Color(0xffffbf2f),
@@ -442,7 +442,7 @@ class CrouseInforWidget extends StatelessWidget {
                           )
                       ),
                       Container(
-                          width: ScreenUtil().setWidth(187*1/100),
+                          width: ScreenUtil().setWidth(187*star['2']/100),
                           height: ScreenUtil().setHeight(6),
                           decoration: new BoxDecoration(
                               color: Color(0xffffbf2f),
@@ -558,7 +558,7 @@ class CrouseInforWidget extends StatelessWidget {
                           )
                       ),
                       Container(
-                          width: ScreenUtil().setWidth(187*1/100),
+                          width: ScreenUtil().setWidth(187*star['1']/100),
                           height: ScreenUtil().setHeight(6),
                           decoration: new BoxDecoration(
                               color: Color(0xffffbf2f),
@@ -656,7 +656,6 @@ class CrouseInforWidget extends StatelessWidget {
               )
             ],
           ),
-          Text(courseInfor['name']),
         ],
       ),
     );
