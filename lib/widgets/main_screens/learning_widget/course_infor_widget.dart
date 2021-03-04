@@ -1,12 +1,35 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CrouseInforWidget extends StatelessWidget {
   final Map courseInfor;
+  Map star  = new Map();
   CrouseInforWidget(this.courseInfor);
+  void caculateStar(){
+    int sum =0;
+    int numStar =0;
+    for (int i=1;i<=5;i++){
+      sum+=courseInfor[i.toString()];
+      numStar += courseInfor[i.toString()]*i;
+    }
+    for (int i=1;i<=5;i++){
+      star[i.toString()] = (courseInfor[i.toString()]/sum*100).round();
+    }
+    star['overall'] = (numStar/sum).toStringAsFixed(1);
+    // print(sum);
+    // print(star.toString());
+  }
+  void upLoadCourse(){
+    Map course = {"1":1,"2":10,"3":20,"4":200,"5":1000,"price":300,"review":42347,"name":"Học HTML/CSS cơ bản qua bài tập thực tế","link":"https://edumall.vn/courses/hoc-htmlcss-co-ban-qua-bai-tap-thuc-te","recommender":"Nguyễn Chiếm Dự","courseReviewId":"75moQh3yUBk0KZYTiwDc"};
+    
+  }
   @override
   Widget build(BuildContext context) {
+    print(jsonEncode(courseInfor));
+    caculateStar();
     return Container(
       margin: EdgeInsets.only(left: ScreenUtil().setWidth(24)),
 
@@ -30,7 +53,7 @@ class CrouseInforWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(courseInfor['star'].toString(),
+              Text(star['overall'],
                   style: TextStyle(
                     fontFamily: 'SFProDisplay',
                     color: Color(0xffffbf2f),
@@ -158,7 +181,7 @@ class CrouseInforWidget extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(7)),
-                child: Text("58%",
+                child: Text(star['5'].toString()+"%",
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),
@@ -274,7 +297,7 @@ class CrouseInforWidget extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(7)),
-                child: Text("33%",
+                child: Text(star['4'].toString()+"%",
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),
@@ -390,7 +413,7 @@ class CrouseInforWidget extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(7)),
-                child: Text("7%",
+                child: Text(star['3'].toString()+"%",
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),
@@ -506,7 +529,7 @@ class CrouseInforWidget extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(7)),
-                child: Text("1%",
+                child: Text(star['2'].toString()+"%",
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),
@@ -620,7 +643,7 @@ class CrouseInforWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Text("1%",
+              Text(star['1'].toString()+"%",
                   style: TextStyle(
                     fontFamily: 'SFProDisplay',
                     color: Color(0xff000000),

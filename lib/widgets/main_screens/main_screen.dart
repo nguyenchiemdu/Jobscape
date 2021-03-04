@@ -1,22 +1,12 @@
 import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:learning_app/main.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/home_used_widget.dart';
-// import 'package:learning_app/models/google_sign_in.dart';
-// import 'package:learning_app/widgets/Industry_introduction.dart';
-// import 'package:learning_app/widgets/workshop.dart';
-// import 'package:provider/provider.dart';
-// import 'package:intl/intl.dart';
 import './learning_widget/learning_widget.dart';
-// import 'welcoming.dart';
-// import 'Industry_introduction.dart';
-// import 'carouse_slider_card.dart';
 import './home_widget/home_widget.dart';
 import 'package:learning_app/models/users_database.dart';
-import 'package:firebase_core/firebase_core.dart';
 import './question_widget/question_widget.dart';
+import './workshop_widget/workshop_widget_main.dart';
 
 class LoggedInWidget extends StatefulWidget {
   final int sub;
@@ -68,6 +58,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
     listWidget = [
       [HomeWidget(_selectPage), HomeUsedWidget()],
       MainLearningScreen(),
+      WorkshopWidget(),
       QuestionWidget()
     ];
     return Scaffold(
@@ -105,6 +96,9 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                 ),
               ),
               label: ''),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.folder),label: ''
+              ),
           BottomNavigationBarItem(
               icon: Icon(Icons.help_center_outlined), label: '')
         ],
