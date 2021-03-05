@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/widgets/main_screens/workshop_widget/workshop_card_registered_widget.dart';
+import 'package:learning_app/widgets/main_screens/workshop_widget/workshop_reminder_widget.dart';
 import 'workshop_card_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SliderCard extends StatelessWidget {
+class SliderCardRemind extends StatelessWidget {
   final List workshopList;
-  SliderCard(this.workshopList);
+  SliderCardRemind(this.workshopList);
 
 //   final List listJobs;
 //   _SliderCardState createState() => _SliderCardState(listJobs);
@@ -52,20 +54,20 @@ class SliderCard extends StatelessWidget {
         child: Container(
             width: ScreenUtil().setWidth(327),
             height: ScreenUtil().setHeight(211),
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: workshopList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                child: WorkshopCard(
-                    workshopList[index]['image_source'],
-                    workshopList[index]['for'],
-                    workshopList[index]['title'],
-                    workshopList[index]['date'],
-                    workshopList[index]['speaker']),
-              );
-            },
-          )
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: workshopList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  child: WorkshopCardRegister(
+                      workshopList[index]['image_source'],
+                      workshopList[index]['for'],
+                      workshopList[index]['title'],
+                      workshopList[index]['date'],
+                      workshopList[index]['speaker']),
+                );
+              },
+            )
         ),
       );
     }
