@@ -3,16 +3,15 @@ import 'list_course_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SkillItem extends StatelessWidget {
-  final Map roadMapItem;
-  final int index;
-  SkillItem(this.roadMapItem, this.index);
+  final Map skillItem;
+  SkillItem(this.skillItem);
 
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) =>
-              ListCourseWidget(roadMapItem['listSkill'][index])),
+              ListCourseWidget(skillItem)),
     );
   }
 
@@ -53,7 +52,7 @@ class SkillItem extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(12),bottom: ScreenUtil().setHeight(4), left: ScreenUtil().setWidth(9)),
-            child: Text(roadMapItem['listSkill'][index]['name'],
+            child: Text(skillItem['name'],
                 style: TextStyle(
                   fontFamily: 'SFProDisplay',
                   color: Color(0xff000000),

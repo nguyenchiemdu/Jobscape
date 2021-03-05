@@ -28,7 +28,6 @@ class CrouseInforWidget extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    print(jsonEncode(courseInfor));
     caculateStar();
     return Container(
       margin: EdgeInsets.only(left: ScreenUtil().setWidth(24)),

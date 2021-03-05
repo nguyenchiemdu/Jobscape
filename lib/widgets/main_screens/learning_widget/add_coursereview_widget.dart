@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/models/industry_database.dart';
 class AddReviewFormWidget extends StatelessWidget {
-  final courseReviewId;
-  AddReviewFormWidget(this.courseReviewId);
+  final path;
+  AddReviewFormWidget(this.path);
   final reviewText = TextEditingController();
   final courseReviewDataBase = DatabaseManager();
   void submitReview(){
-    courseReviewDataBase.upLoadReview(courseReviewId,reviewText.text);
+    Map<String,dynamic> reviews = {"user":"Nguyen Hai Phong","reviewText":"Default","upvote":0,"star":0,"time":"now"};
+    reviews['reviewText'] = reviewText.text;
+    courseReviewDataBase.addReview(reviews,path);
   }
   @override
   Widget build(BuildContext context) {

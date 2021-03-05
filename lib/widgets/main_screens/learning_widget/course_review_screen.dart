@@ -127,7 +127,7 @@ class CrouseReviewScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CrouseInforWidget(this.courseItem),
-                  AddReviewFormWidget(courseItem['courseReviewId']),
+                  AddReviewFormWidget(courseItem['path']),
                   Container(
                     margin: EdgeInsets.only(top: ScreenUtil().setHeight(30),left: ScreenUtil().setWidth(24)),
                     child: Text("Reviews",
@@ -140,7 +140,7 @@ class CrouseReviewScreen extends StatelessWidget {
                         )
                     ),
                   ),
-                  ListReviewCourse(courseItem['courseReviewId']),
+                  ListReviewCourse(courseItem['courseReviewId'],courseItem['path']),
                   // RaisedButton(
                   //   onPressed: (){addReview();},
                   //   child: Text('Get review'),

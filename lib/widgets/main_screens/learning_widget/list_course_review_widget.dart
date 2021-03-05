@@ -4,7 +4,8 @@ import 'package:learning_app/models/industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 class ListReviewCourse extends StatefulWidget {
   final String courseReviewid;
-  ListReviewCourse(this.courseReviewid);
+  final String path;
+  ListReviewCourse(this.courseReviewid,this.path);
   @override
   _ListReviewCourseState createState() => _ListReviewCourseState(courseReviewid);
 }
@@ -22,10 +23,12 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
     
   }
   void fetchData() async{
-    final List resultant =  await this.courseReviewDatabase.getReview(this.courseReviewid);
+    final List resultant =  await this.courseReviewDatabase.getListReviewCourse(widget.path);
     setState(() {
         listReview = resultant;
       });
+    // print(listReview.toString());
+    // for (Map review in listReview) courseReviewDatabase.addReview(review,widget.path);
   }
   void udpateData(List newData){
     setState((){

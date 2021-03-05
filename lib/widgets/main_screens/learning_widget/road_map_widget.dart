@@ -4,11 +4,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './road_map_item_widget.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'list_skill_widget.dart';
-
-class RoadMapWidget extends StatelessWidget {
+import 'package:learning_app/models/industry_database.dart';
+class RoadMapWidget extends StatefulWidget {
+  final String path;
   final Map roadMapData;
+  RoadMapWidget(this.roadMapData,this.path);
+
+  @override
+  _RoadMapWidgetState createState() => _RoadMapWidgetState(roadMapData,path);
+}
+
+class _RoadMapWidgetState extends State<RoadMapWidget> {
   Map firstRoadMapItem;
-  RoadMapWidget(this.roadMapData);
+  final String path;
+  final Map roadMapData;
+  List listRoadMap;
+  List<Widget> listRoadMapWidget = [];
+  _RoadMapWidgetState(this.roadMapData,this.path);
   void startJourney(BuildContext context) {
     Navigator.push(
       context,
@@ -16,10 +28,24 @@ class RoadMapWidget extends StatelessWidget {
           builder: (context) => ListSkillWidget(this.firstRoadMapItem)),
     );
   }
+  @override
+  void initState() {
+      // TODO: implement initState
+      super.initState();
+      getData();
+    }
+    void getData()async{
+      List temp =  await DatabaseManager().getListRoadMap(path);
+      setState(() {
+              listRoadMap = temp;
+              listRoadMapWidget= listRoadMap.map((item)=>RoadMapItem(listRoadMap.indexOf(item)+1, item)).toList();
+            });
+      // print('listRoadMapWidget'+listRoadMapWidget.toString());
+      firstRoadMapItem = listRoadMap[0];
+    }
 
   @override
   Widget build(BuildContext context) {
-    firstRoadMapItem = roadMapData['listRoadMap'][0];
     // print(roadMapData.toString());
     return Scaffold(
       body: SafeArea(
@@ -145,9 +171,14 @@ class RoadMapWidget extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold)),
                       ),
-                      RoadMapItem(1, roadMapData['listRoadMap'][0]),
-                      RoadMapItem(2, roadMapData['listRoadMap'][1]),
-                      RoadMapItem(3, roadMapData['listRoadMap'][2]),
+                      Column(
+                        children: listRoadMapWidget,
+                        // [
+                        //   RoadMapItem(1, roadMapData['listRoadMap'][0]),
+                        //   RoadMapItem(2, roadMapData['listRoadMap'][1]),
+                        //   RoadMapItem(3, roadMapData['listRoadMap'][2]),
+                        // ],
+                      ),
                       //Cái thứ 3 bên trên anh làm thêm vào cho nó giống của design nha
                       Container(
                         width: ScreenUtil().setWidth(312),

@@ -5,7 +5,6 @@ import './industry_slider_card.dart';
 import 'package:learning_app/models/industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import './road_map_widget.dart';
-
 class IndustryComponent extends StatefulWidget {
   final String fieldId;
   final Function changeScreen;
@@ -38,12 +37,14 @@ class _IndustryComponentState extends State<IndustryComponent> {
     } else {
       await setState(() {
         industryField = resultant;
+        // print('id la : '+industryField['id'].toString());
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
     if (industryField == null) {
       return Center(
         child: Text('Loading'),
@@ -176,7 +177,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                 ],
               ),
             ),
-            SliderCard(industryField['listJobs']),
+            SliderCard(industryField['id']),
             new Container(
                 width: double.infinity,
                 height: 0,

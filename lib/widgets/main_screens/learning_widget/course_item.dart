@@ -16,7 +16,6 @@ class CourseItemWidget extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    // print(courseItem.toString());
     return Container(
       child: Column(
         children: [

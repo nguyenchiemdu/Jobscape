@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/widgets/main_screens/learning_widget/industry_card.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/skill_item.dart';
 import 'course_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bordered_text/bordered_text.dart';
-
-class ListCourseWidget extends StatelessWidget {
+import 'package:learning_app/models/industry_database.dart';
+class ListCourseWidget extends StatefulWidget {
   final Map skillItem;
   ListCourseWidget(this.skillItem);
+  final DatabaseManager industryDatabase = DatabaseManager();
+  @override
+  _ListCourseWidgetState createState() => _ListCourseWidgetState();
+}
+
+class _ListCourseWidgetState extends State<ListCourseWidget> {
+  List<Widget> listCourseWidget = [];
+  void addData(){
+    DatabaseManager().addCourse(widget.skillItem['listCourse'][0],path: widget.skillItem['path']);
+  }
+  @override
+  void initState() {
+      // TODO: implement initState
+      super.initState();
+      getData();
+    }
+  void getData()async{
+    List listCourse = await widget.industryDatabase.getListCourse(widget.skillItem['path']);
+    setState(() {
+          listCourseWidget = listCourse.map((course)=> CourseItemWidget(course)).toList();
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +86,7 @@ class ListCourseWidget extends StatelessWidget {
                                   child: BorderedText(
                                     strokeWidth: 1,
                                     strokeColor: Color(0xffffbf2f),
-                                    child: Text(skillItem['name'],
+                                    child: Text(widget.skillItem['name'],
                                         style: TextStyle(
                                           fontFamily: 'SFProDisplay',
                                           color: Colors.white,
@@ -74,7 +98,7 @@ class ListCourseWidget extends StatelessWidget {
                                   ),
                                 ),
                                 // Solid text as fill.
-                                Text(skillItem['name'],
+                                Text(widget.skillItem['name'],
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xffffbf2f),
@@ -107,12 +131,15 @@ class ListCourseWidget extends StatelessWidget {
                     color: Colors.white,
                   ),
                   height: ScreenUtil().setHeight(596),
-                  child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: skillItem['listCourse'].length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CourseItemWidget(skillItem['listCourse'][index]);
-                  }),
+                  child: ListView(
+                    children: listCourseWidget,
+                  )
+                    // ListView.builder(
+                    //   padding: const EdgeInsets.all(8),
+                    //   itemCount: widget.skillItem['listCourse'].length,
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     return CourseItemWidget(widget.skillItem['listCourse'][index]);
+                    //   }),
                 ),
                 Container(
                     margin: EdgeInsets.only(

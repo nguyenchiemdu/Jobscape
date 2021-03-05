@@ -33,7 +33,8 @@ class DatabaseManager {
 
   Future getIndustryField(String fieldId) async {
     dynamic industryField;
-
+    // DocumentReference doc_ref= industry.doc("lob23eRlBqmNJqw1hVJP");
+    //                 print(doc_ref.id);
     try {
       Query it = industry.where("field", isEqualTo: fieldId);
 
@@ -42,6 +43,8 @@ class DatabaseManager {
         //   itlist.add(element.data());
         // });
         industryField = querySnapshot.docs[0].data();
+        industryField['id'] = querySnapshot.docs[0].id.toString();
+        industryField['path'] = 'industry/'+querySnapshot.docs[0].id.toString();
       });
       return industryField;
     } catch (e) {
@@ -49,30 +52,163 @@ class DatabaseManager {
       return null;
     }
   }
-  Future getReview(String courseReviewId) async {
-    final CollectionReference review =
-      FirebaseFirestore.instance.collection('courseReview/$courseReviewId/listReview');
-    List reviewList = [];
+  Future getListReviewCourse(String path) async{
+    List result = [];
+    Map tmp;
     try {
-      await review.get().then((querySnapshot) {
+      await FirebaseFirestore.instance.collection(path+'/listReview').get().then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
-          reviewList.add(element.data());
+          tmp = element.data();
+          tmp['id'] = element.id.toString();
+          tmp['path'] = path+'/listReview/'+tmp['id'];
+          result.add(tmp);
         });
       });
-      return reviewList;
-    } catch (e) {
-      print(e.toString());
+      return result;
+    } catch (e){
+        print(e.toString());
       return null;
     }
   }
-  Future upLoadReview(String courseReviewId,String reviewText) {
-    Map<String,dynamic> reviews = {"user":"Admin Test","reviewText":"Default","upvote":0,"downvote":0,"star":0,"time":"now"};
-    reviews['reviewText'] = reviewText;
-    final CollectionReference review =
-      FirebaseFirestore.instance.collection('courseReview/$courseReviewId/listReview');
-   return review
-          .add(reviews)
-          .then((value) => print("preview uploaded"))
-          .catchError((error) => print("Failed to upload preview: $error"));
-}
+   Future getListCourse(String path) async{
+    List result = [];
+    Map tmp;
+    try {
+      await FirebaseFirestore.instance.collection(path+'/listCourse').get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          tmp = element.data();
+          tmp['id'] = element.id.toString();
+          tmp['path'] = path+'/listCourse/'+tmp['id'];
+          result.add(tmp);
+        });
+      });
+      return result;
+    } catch (e){
+        print(e.toString());
+      return null;
+    }
+  }
+  Future getListSkill(String path)async{
+    List result = [];
+    Map tmp;
+    try {
+      await FirebaseFirestore.instance.collection(path+'/listSkill').get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          tmp = element.data();
+          tmp['id'] = element.id.toString();
+          tmp['path'] = path+'/listSkill/'+tmp['id'];
+          result.add(tmp);
+        });
+      });
+      return result;
+    } catch (e){
+        print(e.toString());
+      return null;
+    }
+  }
+  Future<List> getListJobs(String industryId) async{
+    List result = [];
+    Map tmp;
+    try {
+      await FirebaseFirestore.instance.collection('industry/$industryId/listJobs').get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          tmp = element.data();
+          tmp['id'] = element.id.toString();
+          tmp['path'] = 'industry/$industryId/listJobs/'+tmp['id'];
+          result.add(tmp);
+        });
+      });
+      return result;
+    } catch (e){
+        print(e.toString());
+      return null;
+    }
+  }
+  Future getListRoadMap(String path) async{
+    List result = [];
+    Map tmp;
+    try {
+      await FirebaseFirestore.instance.collection(path+'/listRoadMap').get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          tmp = element.data();
+          tmp['id'] = element.id.toString();
+          tmp['path'] = path+'/listRoadMap/'+tmp['id'];
+          result.add(tmp);
+        });
+      });
+      return result;
+    } catch (e){
+        print(e.toString());
+      return null;
+    }
+  }
+  Future addReview(Map data,String path){
+    final CollectionReference listReview =
+      FirebaseFirestore.instance.collection(path+'/listReview');
+    try{
+       return listReview
+          .add(data)
+          .then((value) => print("Review Added"))
+          .catchError((error) => print("Failed to add Review: $error"));
+
+
+    } catch (e){
+      print(e.toString());
+      return null;
+    }
+
+  }
+  Future addCourse(Map<String,dynamic> data,{String path="defaultid"}) async{
+    final CollectionReference listCourse =
+      FirebaseFirestore.instance.collection(path+'/listCourse');
+    try{
+       return listCourse
+          .add(data)
+          .then((value) => print("Course Added"))
+          .catchError((error) => print("Failed to add Course: $error"));
+
+
+    } catch (e){
+      print(e.toString());
+      return null;
+    }
+
+  }
+  
+  Future addSkill(Map<String,dynamic> data,{String path="defaultid"}) async{
+    final CollectionReference listSkills =
+      FirebaseFirestore.instance.collection(path+'/listSkill');
+    try{
+       return listSkills
+          .add(data)
+          .then((value) => print("Skill Added"))
+          .catchError((error) => print("Failed to add Skill: $error"));
+
+
+    } catch (e){
+      print(e.toString());
+      return null;
+    }
+
+  }
+
+  Future addJob(Map<String,dynamic> data,{String path="defaultid"}) async{
+    final CollectionReference listJobs =
+      FirebaseFirestore.instance.collection(path+'/listRoadMap');
+    try{
+       return listJobs
+          .add(data)
+          .then((value) => print("listJob Added"))
+          .catchError((error) => print("Failed to add listJobs: $error"));
+
+
+    } catch (e){
+      print(e.toString());
+      return null;
+    }
+
+  }
+
+
+  
 }

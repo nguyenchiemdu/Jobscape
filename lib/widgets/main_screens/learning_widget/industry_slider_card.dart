@@ -1,18 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'industry_card.dart';
-
-class SliderCard extends StatelessWidget {
-  SliderCard(this.listJobs);
+import 'package:learning_app/models/industry_database.dart';
+class SliderCard extends StatefulWidget {
+  SliderCard(this.fieldId);
 //   final List listJobs;
 //   _SliderCardState createState() => _SliderCardState(listJobs);
 // }
 
 // class _SliderCardState extends State<SliderCard> {
 //   _SliderCardState(this.listJobs);
-  final List listJobs;
+  final String fieldId;
+
+  @override
+  _SliderCardState createState() => _SliderCardState(fieldId);
+}
+
+class _SliderCardState extends State<SliderCard> {
+  List listJobs;
+  final String fieldId;
+  _SliderCardState(this.fieldId);
+  @override
+  void initState() {
+    super.initState();
+    getdata();
+  }
+  void getdata() async{
+    List res = await DatabaseManager().getListJobs(fieldId);
+    setState(() {
+          listJobs = res;
+          // print(listJobs[0]['path']);
+        });
+    // for (int i=0;i<res[0]['listRoadMap'].length;i++){
+    //   DatabaseManager().addJob(res[0]['listRoadMap'][i],path: res[0]['path']);
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (listJobs == null) return Center(child: Text('Loading'),);
+    else
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(left: 24, right: 24),

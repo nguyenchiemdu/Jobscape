@@ -3,10 +3,39 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'skill_item.dart';
 import 'package:bordered_text/bordered_text.dart';
-
-class ListSkillWidget extends StatelessWidget {
+import 'package:learning_app/models/industry_database.dart';
+class ListSkillWidget extends StatefulWidget {
   final Map roadMapItem;
   ListSkillWidget(this.roadMapItem);
+
+  @override
+  _ListSkillWidgetState createState() => _ListSkillWidgetState();
+}
+
+class _ListSkillWidgetState extends State<ListSkillWidget> {
+  DatabaseManager industryDatabase = DatabaseManager();
+  List<Widget> listSkillWidget = [];
+  void addData(){
+    print(widget.roadMapItem.toString());
+    for (Map skill in widget.roadMapItem['listSkill']) {
+      DatabaseManager().addSkill(skill,path: widget.roadMapItem['path']);
+    }
+  }
+  @override
+  void initState() {
+      // TODO: implement initState
+      super.initState();
+      getData();
+    }
+    void getData()async{
+      List listSkill = await industryDatabase.getListSkill(widget.roadMapItem['path']);
+      // print(tmp.toString());
+      // print(widget.roadMapItem.toString());
+      setState(() {
+              listSkillWidget= listSkill.map((skill)=> SkillItem(skill)).toList();
+            });
+      // print(listSkillWidget.toList());
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +92,7 @@ class ListSkillWidget extends StatelessWidget {
                                   child: BorderedText(
                                     strokeWidth: 1,
                                     strokeColor: Color(0xffffbf2f),
-                                    child: Text(roadMapItem['name'],
+                                    child: Text(widget.roadMapItem['name'],
                                         style: TextStyle(
                                           fontFamily: 'SFProDisplay',
                                           color: Colors.white,
@@ -75,7 +104,7 @@ class ListSkillWidget extends StatelessWidget {
                                   ),
                                 ),
                                 // Solid text as fill.
-                                Text(roadMapItem['name'],
+                                Text(widget.roadMapItem['name'],
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xffffbf2f),
@@ -111,10 +140,12 @@ class ListSkillWidget extends StatelessWidget {
                   child: GridView.count(
                     crossAxisCount: 2,
                     childAspectRatio: (149 / 190),
-                    children:
-                        List.generate(roadMapItem['listSkill'].length, (index) {
-                      return SkillItem(roadMapItem, index);
-                    }),
+                    children: 
+                    listSkillWidget
+                    
+                    //     List.generate(widget.roadMapItem['listSkill'].length, (index) {
+                    //   return SkillItem(widget.roadMapItem['listSkill'][index]);
+                    // }),
                   ),
                 ),
                 Container(

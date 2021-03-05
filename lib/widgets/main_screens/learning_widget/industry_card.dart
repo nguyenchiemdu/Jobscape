@@ -13,7 +13,7 @@ class IndustryCard extends StatelessWidget {
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => RoadMapWidget(this.jobData)),
+      MaterialPageRoute(builder: (context) => RoadMapWidget(this.jobData,this.jobData['path'])),
     );
   }
 
