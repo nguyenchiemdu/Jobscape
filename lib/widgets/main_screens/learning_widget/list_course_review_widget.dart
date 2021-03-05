@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:timeago/timeago.dart' as timeago;
 class ListReviewCourse extends StatefulWidget {
   final String courseReviewid;
   final String path;
@@ -14,6 +16,7 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
   _ListReviewCourseState(this.courseReviewid);
   final String courseReviewid;
   List listReview;
+  List<bool> stateUpvote = [];
   final DatabaseManager courseReviewDatabase = DatabaseManager();
   @override
   void initState() {
@@ -27,13 +30,29 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
     setState(() {
         listReview = resultant;
       });
-    // print(listReview.toString());
-    // for (Map review in listReview) courseReviewDatabase.addReview(review,widget.path);
+      for (int i =0;i<listReview.length;i++)
+      if (listReview[i]['listUpvote'] == null || listReview[i]['listUpvote'].indexOf(FirebaseAuth.instance.currentUser.uid)==-1)
+        stateUpvote.add(false);
+      else stateUpvote.add(true);
   }
   void udpateData(List newData){
     setState((){
       listReview = newData;
     });
+  }
+  void upVote(int index){
+    setState(() {
+          if (!stateUpvote[index]){
+            listReview[index]['upvote']+=1;
+            stateUpvote[index] = true;
+          }
+          else if (stateUpvote[index]){
+            listReview[index]['upvote']-=1;
+            stateUpvote[index] = false;
+          }
+          // print(listReview[index]['path']);
+        });
+    courseReviewDatabase.upVote(listReview[index]['path']);
   }
   @override
   Widget build(BuildContext context) {
@@ -132,7 +151,7 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
                         ),
                       ),
                     ),
-                    Text(listReview[index]['time'],
+                    Text(timeago.format(listReview[index]['time'].toDate()),
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff303030),
@@ -172,18 +191,21 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
                             )
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(right: ScreenUtil().setWidth(2)),
-                        // margin: EdgeInsets.only(
-                        //     top: ScreenUtil().setHeight(12),
-                        //     bottom: ScreenUtil().setHeight(14)),
-                        width: ScreenUtil().setWidth(16),
-                        height: ScreenUtil().setHeight(16),
-                        decoration: new BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/like_icon.png"),
-                            fit: BoxFit.fill,
-                            alignment: Alignment.topCenter,
+                      InkWell(
+                        onTap: (){upVote(index);},
+                        child: Container(
+                          margin: EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                          // margin: EdgeInsets.only(
+                          //     top: ScreenUtil().setHeight(12),
+                          //     bottom: ScreenUtil().setHeight(14)),
+                          width: ScreenUtil().setWidth(16),
+                          height: ScreenUtil().setHeight(16),
+                          decoration: new BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/like_icon.png"),
+                              fit: BoxFit.fill,
+                              alignment: Alignment.topCenter,
+                            ),
                           ),
                         ),
                       ),

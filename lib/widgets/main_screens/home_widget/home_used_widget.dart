@@ -74,7 +74,7 @@ class HomeUsedWidget extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Container(
-                                                child: Text("Hello Như,",
+                                                child: Text("Hello "+ Provider.of<GoogleSignInProvider>(context, listen: false).displayName,
                                                     style: TextStyle(
                                                       fontFamily: 'SFProDisplay',
                                                       color: Color(0xff000000),

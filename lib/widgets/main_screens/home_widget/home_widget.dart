@@ -11,6 +11,8 @@ import '../learning_widget/learning_widget.dart';
 import 'ourteam_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'workshop_card_widget.dart';
+import 'package:learning_app/models/google_sign_in.dart';
+import 'package:provider/provider.dart';
 class HomeWidget extends StatelessWidget {
   final Function selectPage;
   HomeWidget(this.selectPage);
@@ -60,7 +62,7 @@ class HomeWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                  child: Text("Hello Như,",
+                                  child: Text("Hello " + Provider.of<GoogleSignInProvider>(context, listen: false).displayName,
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),

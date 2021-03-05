@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'workshop_card.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class DatabaseManager {
   final CollectionReference industry =
       FirebaseFirestore.instance.collection('industry');
@@ -123,6 +123,43 @@ class DatabaseManager {
         print(e.toString());
       return null;
     }
+  }
+  Future upVote(String path)async{
+    List list = path.split('/');
+    String docId = list[list.length-1];
+    list.removeLast();
+    path =  list.join('/');
+    Map result;
+    CollectionReference review = FirebaseFirestore.instance.collection(path);
+    await review.doc(docId).get().then((querySnapshot) => {
+    result = querySnapshot.data()
+    });
+    List listUpvote = result['listUpvote'];
+    if (listUpvote == null || listUpvote.indexOf(FirebaseAuth.instance.currentUser.uid) ==-1)
+      {
+        if (listUpvote == null) listUpvote =[];
+        listUpvote.add(FirebaseAuth.instance.currentUser.uid);
+        await review.doc(docId).update(
+          {
+            'listUpvote' : listUpvote,
+            'upvote': listUpvote.length
+          }
+          )
+          .then((value) => print("UpVoted"))
+          .catchError((error) => print("Failed to add UpVote: $error"));
+      }
+    else
+      {
+        listUpvote.remove(FirebaseAuth.instance.currentUser.uid);
+        await review.doc(docId).update(
+          {
+            'listUpvote' : listUpvote,
+            'upvote': listUpvote.length
+          }
+          )
+          .then((value) => print(" dis UpVoted"))
+          .catchError((error) => print("Failed to dis UpVote: $error"));
+      }
   }
   Future getListRoadMap(String path) async{
     List result = [];

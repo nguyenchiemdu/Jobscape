@@ -5,6 +5,7 @@ import 'package:learning_app/models/users_database.dart';
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   bool _isSigningIn;
+  String displayName = FirebaseAuth.instance.currentUser.displayName;
   GoogleSignInProvider() {
     _isSigningIn = false;
   }
@@ -33,6 +34,7 @@ class GoogleSignInProvider extends ChangeNotifier {
       final FirebaseAuth auth = await FirebaseAuth.instance;
       final User user = auth.currentUser;
       final uid = user.uid;
+      displayName = user.displayName;
       if (authResult.additionalUserInfo.isNewUser) {
         UserDatabaseService(uid:uid).updateUserData("New User", 0,0, 0);
       }
