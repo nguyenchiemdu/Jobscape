@@ -5,6 +5,9 @@ import 'course_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:learning_app/models/industry_database.dart';
+import 'package:excel/excel.dart';
+import 'package:flutter/services.dart' show ByteData, rootBundle;
+
 class ListCourseWidget extends StatefulWidget {
   final Map skillItem;
   ListCourseWidget(this.skillItem);
@@ -15,20 +18,25 @@ class ListCourseWidget extends StatefulWidget {
 
 class _ListCourseWidgetState extends State<ListCourseWidget> {
   List<Widget> listCourseWidget = [];
-  void addData(){
-    DatabaseManager().addCourse(widget.skillItem['listCourse'][0],path: widget.skillItem['path']);
+  void addData() {
+    DatabaseManager().addCourse(widget.skillItem['listCourse'][0],
+        path: widget.skillItem['path']);
   }
+
   @override
   void initState() {
-      // TODO: implement initState
-      super.initState();
-      getData();
-    }
-  void getData()async{
-    List listCourse = await widget.industryDatabase.getListCourse(widget.skillItem['path']);
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
+  void getData() async {
+    List listCourse =
+        await widget.industryDatabase.getListCourse(widget.skillItem['path']);
     setState(() {
-          listCourseWidget = listCourse.map((course)=> CourseItemWidget(course)).toList();
-        });
+      listCourseWidget =
+          listCourse.map((course) => CourseItemWidget(course)).toList();
+    });
   }
 
   @override
@@ -48,8 +56,7 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
                           image: NetworkImage(
                               "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef"),
                           fit: BoxFit.cover)),
-                  child:
-                  Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
@@ -75,7 +82,7 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
                       // Text(roadMapItem['name']),
                       Container(
                           margin:
-                          EdgeInsets.only(top: ScreenUtil().setHeight(24)),
+                              EdgeInsets.only(top: ScreenUtil().setHeight(24)),
                           child: Align(
                             alignment: Alignment.center,
                             child: Stack(
@@ -120,27 +127,30 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
                   // ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(122)),
-                  padding: EdgeInsets.only(top:ScreenUtil().setHeight(16),left:ScreenUtil().setWidth(17),right:ScreenUtil().setWidth(17)),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
+                    margin: EdgeInsets.only(top: ScreenUtil().setHeight(122)),
+                    padding: EdgeInsets.only(
+                        top: ScreenUtil().setHeight(16),
+                        left: ScreenUtil().setWidth(17),
+                        right: ScreenUtil().setWidth(17)),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24),
+                        topRight: Radius.circular(24),
+                      ),
+                      color: Colors.white,
                     ),
-                    color: Colors.white,
-                  ),
-                  height: ScreenUtil().setHeight(596),
-                  child: ListView(
-                    children: listCourseWidget,
-                  )
+                    height: ScreenUtil().setHeight(596),
+                    child: ListView(
+                      children: listCourseWidget,
+                    )
                     // ListView.builder(
                     //   padding: const EdgeInsets.all(8),
                     //   itemCount: widget.skillItem['listCourse'].length,
                     //   itemBuilder: (BuildContext context, int index) {
                     //     return CourseItemWidget(widget.skillItem['listCourse'][index]);
                     //   }),
-                ),
+                    ),
                 Container(
                     margin: EdgeInsets.only(
                         top: ScreenUtil().setHeight(644),

@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserDatabaseService {
   final String uid;
-  final String id = FirebaseAuth.instance.currentUser.uid;
   UserDatabaseService({this.uid});
   final CollectionReference users =
       FirebaseFirestore.instance.collection('users');
@@ -38,6 +37,7 @@ class UserDatabaseService {
   }
 
   Future<List> getRemindWorkShopId() async {
+    final String id = FirebaseAuth.instance.currentUser.uid;
     List remindWorkShop;
     Map l = {};
 
@@ -54,6 +54,7 @@ class UserDatabaseService {
   }
 
   Future addRemindWorkShop(String workshopId) async {
+    final String id = FirebaseAuth.instance.currentUser.uid;
     List remindWorkShopId = await this.getRemindWorkShopId();
     if (remindWorkShopId == null) remindWorkShopId = [];
     if (remindWorkShopId.indexOf(workshopId) == -1) {

@@ -14,15 +14,11 @@ class WorkshopDatabase {
   //     'date': date
   //   });
   // }
-
-  Future getWorkshopList(String status) async {
+  Future getAllWorkshop() async {
     List workshopList = [];
     Map workshop;
     try {
-      await workshops
-          .where("status", isEqualTo: status)
-          .get()
-          .then((querySnapshot) {
+      await workshops.get().then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
           workshop = element.data();
           workshop['id'] = element.id;

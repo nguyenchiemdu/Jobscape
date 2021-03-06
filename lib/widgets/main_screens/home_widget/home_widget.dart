@@ -118,7 +118,7 @@ class HomeWidget extends StatelessWidget {
                     // width: MediaQuery.of(context).size.width*0.9,
                     // height: MediaQuery.of(context).size.height*0.353,
                     width: ScreenUtil().setWidth(324),
-                    height: ScreenUtil().setHeight(268),
+                    height: ScreenUtil().setHeight(270),
                     margin: EdgeInsets.only(left: 24, right: 24, top: 30),
                     decoration: new BoxDecoration(
                       image: DecorationImage(

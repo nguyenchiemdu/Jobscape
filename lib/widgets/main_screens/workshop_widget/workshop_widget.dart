@@ -4,9 +4,10 @@ import 'package:learning_app/models/workshop_database.dart';
 import 'carouse_slider_card_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
-class Workshop extends StatefulWidget {
-  final String status;
-  Workshop(this.status);
+
+class Workshop extends StatelessWidget {
+  final List upcomingWorkshop;
+  Workshop(this.upcomingWorkshop);
   // var workshops = [
   // {'title':'Flutter with Google Experts',
   // 'date': 'Feb 20, 2021',
@@ -30,185 +31,184 @@ class Workshop extends StatefulWidget {
   //   'speaker': 'Linh Dang'},
   // ];
 
+//   @override
+//   _WorkshopState createState() => _WorkshopState(upcomingWorkshop);
+// }
+
+// class _WorkshopState extends State<Workshop> {
+//   List workshopList;
+//   final List upcomingWorkshop;
+//   _WorkshopState(this.upcomingWorkshop);
+//   @override
+//   void initState() {
+//     super.initState();
+//     Firebase.initializeApp().whenComplete(() {
+//       print("completed");
+//       fetDatabaseList();
+//     });
+//   }
+
+  // fetDatabaseList() async {
+  //   // dynamic resultant = await WorkshopDatabase().getWorkshopList(status);
+  //   // if (resultant == null) {
+  //   //   print("Unable to retrieve");
+  //   // } else {
+  //   //   setState(() {
+  //   //     workshopList = resultant;
+  //   //   });
+  //   // }
+  // }
   @override
-  _WorkshopState createState() => _WorkshopState(status);
+  Widget build(BuildContext context) {
+    final curScaleFactor = MediaQuery.of(context).textScaleFactor;
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(30),
+                  bottom: ScreenUtil().setHeight(12)),
+              width: ScreenUtil().setWidth(324),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Today",
+                      style: TextStyle(
+                        fontFamily: 'SFProDisplay',
+                        color: Color(0xff000000),
+                        fontSize:
+                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
+                      )),
+                  Text("See all (3)",
+                      style: TextStyle(
+                        fontFamily: 'SFProDisplay',
+                        color: Color(0xffffbf2f),
+                        fontSize:
+                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                      )),
+                ],
+              ),
+            ),
+          ),
+          SliderCard(upcomingWorkshop),
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(20),
+                  bottom: ScreenUtil().setHeight(12)),
+              width: ScreenUtil().setWidth(324),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Upcoming",
+                      style: TextStyle(
+                        fontFamily: 'SFProDisplay',
+                        color: Color(0xff000000),
+                        fontSize:
+                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
+                      )),
+                  Text("See all (3)",
+                      style: TextStyle(
+                        fontFamily: 'SFProDisplay',
+                        color: Color(0xffffbf2f),
+                        fontSize:
+                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                      )),
+                ],
+              ),
+            ),
+          ),
+          SliderCard(upcomingWorkshop),
+
+          // Container(
+          //   margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:20),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Text("Recommended for you",
+          //           style: TextStyle(
+          //             fontFamily: 'SFProDisplay',
+          //             color: Color(0xff000000),
+          //             fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
+          //             fontWeight: FontWeight.w600,
+          //             fontStyle: FontStyle.normal,
+          //           )
+          //       ),
+          //       Text("See all (3)",
+          //           style: TextStyle(
+          //             fontFamily: 'SFProDisplay',
+          //             color: Color(0xffffbf2f),
+          //             fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
+          //             fontWeight: FontWeight.w400,
+          //             fontStyle: FontStyle.normal,
+
+          //           )
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // SliderCard(workshopList),
+
+          // GridView.count(
+          //   childAspectRatio:itemHeight/itemWidth,
+          //     shrinkWrap: true,
+          //     scrollDirection: Axis.vertical,
+          //     crossAxisCount: 2,
+          //   // crossAxisSpacing: 10,
+          //   // mainAxisSpacing: 10,
+          //   // padding: EdgeInsets.all(10),
+          //   children:
+          //   List.generate(workshops.length, (index) {
+          //     return Container(
+          //       child: WorkshopCard(
+          //           workshops[index]['image_source'],
+          //           workshops[index]['link'],
+          //           workshops[index]['title'],
+          //           workshops[index]['date'],
+          //           workshops[index]['speaker']),
+          //     );
+          //   } ),
+          // ),
+          // Container(
+          //     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          //     child: Text(
+          //       "Most popular workshops",
+          //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          //     )),
+          // SliderCard(),
+          // // GridView.count(
+          // //   childAspectRatio:itemHeight/itemWidth,
+          // //   shrinkWrap: true,
+          // //   scrollDirection: Axis.vertical,
+          // //   crossAxisCount: 2,
+          // //   // crossAxisSpacing: 10,
+          // //   // mainAxisSpacing: 10,
+          // //   // padding: EdgeInsets.all(10),
+          // //   children:
+          // //   List.generate(workshops.length, (index) {
+          // //     return Container(
+          // //       child: WorkshopCard(
+          // //           workshops[index]['image_source'],
+          // //           workshops[index]['link'],
+          // //           workshops[index]['title'],
+          // //           workshops[index]['date'],
+          // //           workshops[index]['speaker']),
+          // //     );
+          // //   } ),
+          // // ),
+        ],
+      ),
+    );
+  }
 }
-
-class _WorkshopState extends State<Workshop> {
-  List workshopList;
-  final String status;
-  _WorkshopState(this.status);
-  @override
-  void initState() {
-    super.initState();
-    Firebase.initializeApp().whenComplete(() {
-      print("completed");
-      fetDatabaseList();
-    });
-  }
-
-  fetDatabaseList() async {
-    dynamic resultant = await WorkshopDatabase().getWorkshopList(status);
-    if (resultant == null) {
-      print("Unable to retrieve");
-    } else {
-      setState(() {
-        workshopList = resultant;
-      });
-    }
-  }
-    @override
-    Widget build(BuildContext context) {
-
-      final curScaleFactor = MediaQuery.of(context).textScaleFactor;
-      return SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top:ScreenUtil().setHeight(30),bottom:ScreenUtil().setHeight(12)),
-                width: ScreenUtil().setWidth(324),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Today",
-                        style: TextStyle(
-                          fontFamily: 'SFProDisplay',
-                          color: Color(0xff000000),
-                          fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.normal,
-                        )
-                    ),
-
-                    Text("See all (3)",
-                        style: TextStyle(
-                          fontFamily: 'SFProDisplay',
-                          color: Color(0xffffbf2f),
-                          fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                        )
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SliderCard(workshopList),
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top:ScreenUtil().setHeight(20),bottom:ScreenUtil().setHeight(12)),
-                width: ScreenUtil().setWidth(324),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Upcoming",
-                        style: TextStyle(
-                          fontFamily: 'SFProDisplay',
-                          color: Color(0xff000000),
-                          fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.normal,
-                        )
-                    ),
-
-                    Text("See all (3)",
-                        style: TextStyle(
-                          fontFamily: 'SFProDisplay',
-                          color: Color(0xffffbf2f),
-                          fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                        )
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SliderCard(workshopList),
-
-            // Container(
-            //   margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:20),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Text("Recommended for you",
-            //           style: TextStyle(
-            //             fontFamily: 'SFProDisplay',
-            //             color: Color(0xff000000),
-            //             fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
-            //             fontWeight: FontWeight.w600,
-            //             fontStyle: FontStyle.normal,
-            //           )
-            //       ),
-            //       Text("See all (3)",
-            //           style: TextStyle(
-            //             fontFamily: 'SFProDisplay',
-            //             color: Color(0xffffbf2f),
-            //             fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
-            //             fontWeight: FontWeight.w400,
-            //             fontStyle: FontStyle.normal,
-
-
-            //           )
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // SliderCard(workshopList),
-
-            // GridView.count(
-            //   childAspectRatio:itemHeight/itemWidth,
-            //     shrinkWrap: true,
-            //     scrollDirection: Axis.vertical,
-            //     crossAxisCount: 2,
-            //   // crossAxisSpacing: 10,
-            //   // mainAxisSpacing: 10,
-            //   // padding: EdgeInsets.all(10),
-            //   children:
-            //   List.generate(workshops.length, (index) {
-            //     return Container(
-            //       child: WorkshopCard(
-            //           workshops[index]['image_source'],
-            //           workshops[index]['link'],
-            //           workshops[index]['title'],
-            //           workshops[index]['date'],
-            //           workshops[index]['speaker']),
-            //     );
-            //   } ),
-            // ),
-            // Container(
-            //     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-            //     child: Text(
-            //       "Most popular workshops",
-            //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            //     )),
-            // SliderCard(),
-            // // GridView.count(
-            // //   childAspectRatio:itemHeight/itemWidth,
-            // //   shrinkWrap: true,
-            // //   scrollDirection: Axis.vertical,
-            // //   crossAxisCount: 2,
-            // //   // crossAxisSpacing: 10,
-            // //   // mainAxisSpacing: 10,
-            // //   // padding: EdgeInsets.all(10),
-            // //   children:
-            // //   List.generate(workshops.length, (index) {
-            // //     return Container(
-            // //       child: WorkshopCard(
-            // //           workshops[index]['image_source'],
-            // //           workshops[index]['link'],
-            // //           workshops[index]['title'],
-            // //           workshops[index]['date'],
-            // //           workshops[index]['speaker']),
-            // //     );
-            // //   } ),
-            // // ),
-          ],
-        ),
-      );
-    }
-  }
-

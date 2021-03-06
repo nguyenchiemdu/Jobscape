@@ -4,9 +4,10 @@ import 'package:learning_app/models/workshop_database.dart';
 import 'carouse_slider_card_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
-class PastWorkshop extends StatefulWidget {
-  final String status;
-  PastWorkshop(this.status);
+
+class PastWorkshop extends StatelessWidget {
+  final List pastWorkshop;
+  PastWorkshop(this.pastWorkshop);
   // var workshops = [
   // {'title':'Flutter with Google Experts',
   // 'date': 'Feb 20, 2021',
@@ -30,36 +31,36 @@ class PastWorkshop extends StatefulWidget {
   //   'speaker': 'Linh Dang'},
   // ];
 
-  @override
-  _PastWorkshopState createState() => _PastWorkshopState(status);
-}
+//   @override
+//   _PastWorkshopState createState() => _PastWorkshopState(pastWorkshop);
+// }
 
-class _PastWorkshopState extends State<PastWorkshop> {
-  List workshopList;
-  final String status;
-  _PastWorkshopState(this.status);
-  @override
-  void initState() {
-    super.initState();
-    Firebase.initializeApp().whenComplete(() {
-      print("completed");
-      fetDatabaseList();
-    });
-  }
+// class _PastWorkshopState extends State<PastWorkshop> {
+//   List workshopList;
+//   final List pastWorkshop;
+//   _PastWorkshopState(this.pastWorkshop);
+//   @override
+//   void initState() {
+//     super.initState();
+//     Firebase.initializeApp().whenComplete(() {
+//       print("completed");
+//       fetDatabaseList();
+//     });
+//   }
 
-  fetDatabaseList() async {
-    dynamic resultant = await WorkshopDatabase().getWorkshopList(status);
-    if (resultant == null) {
-      print("Unable to retrieve");
-    } else {
-      setState(() {
-        workshopList = resultant;
-      });
-    }
-  }
+//   fetDatabaseList() async {
+//     // dynamic resultant = await WorkshopDatabase().getWorkshopList(status);
+//     // if (resultant == null) {
+//     //   print("Unable to retrieve");
+//     // } else {
+//     //   setState(() {
+//     //     workshopList = resultant;
+//     //   });
+//     // }
+//   }
+
   @override
   Widget build(BuildContext context) {
-
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
@@ -68,7 +69,9 @@ class _PastWorkshopState extends State<PastWorkshop> {
         children: [
           Center(
             child: Container(
-              margin: EdgeInsets.only(top:ScreenUtil().setHeight(30),bottom:ScreenUtil().setHeight(12)),
+              margin: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(30),
+                  bottom: ScreenUtil().setHeight(12)),
               width: ScreenUtil().setWidth(324),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,29 +80,30 @@ class _PastWorkshopState extends State<PastWorkshop> {
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff000000),
-                        fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
+                        fontSize:
+                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
                         fontWeight: FontWeight.w600,
                         fontStyle: FontStyle.normal,
-                      )
-                  ),
-
+                      )),
                   Text("See all (3)",
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xffffbf2f),
-                        fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
+                        fontSize:
+                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
-                      )
-                  ),
+                      )),
                 ],
               ),
             ),
           ),
-          SliderCard(workshopList),
+          SliderCard(pastWorkshop),
           Center(
             child: Container(
-              margin: EdgeInsets.only(top:ScreenUtil().setHeight(20),bottom:ScreenUtil().setHeight(12)),
+              margin: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(20),
+                  bottom: ScreenUtil().setHeight(12)),
               width: ScreenUtil().setWidth(324),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,26 +112,25 @@ class _PastWorkshopState extends State<PastWorkshop> {
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff000000),
-                        fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
+                        fontSize:
+                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
                         fontWeight: FontWeight.w600,
                         fontStyle: FontStyle.normal,
-                      )
-                  ),
-
+                      )),
                   Text("See all (3)",
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xffffbf2f),
-                        fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
+                        fontSize:
+                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
-                      )
-                  ),
+                      )),
                 ],
               ),
             ),
           ),
-          SliderCard(workshopList),
+          SliderCard(pastWorkshop),
 
           // Container(
           //   margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:20),
@@ -150,7 +153,6 @@ class _PastWorkshopState extends State<PastWorkshop> {
           //             fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
           //             fontWeight: FontWeight.w400,
           //             fontStyle: FontStyle.normal,
-
 
           //           )
           //       ),
@@ -211,4 +213,3 @@ class _PastWorkshopState extends State<PastWorkshop> {
     );
   }
 }
-
