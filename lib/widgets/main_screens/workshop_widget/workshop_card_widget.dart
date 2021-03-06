@@ -138,12 +138,191 @@ class WorkshopCard extends StatelessWidget {
               bottomLeft: Radius.circular(30),
             ),
           ),
-          child: Center(
-            widthFactor: ScreenUtil().setWidth(20),
-            heightFactor: ScreenUtil().setHeight(20),
-            child: Image.asset("assets/images/info_icon.png",
-                width: ScreenUtil().setWidth(20),
-                height: ScreenUtil().setHeight(20)),
+          child: InkWell(
+            child: Center(
+              widthFactor: ScreenUtil().setWidth(20),
+              heightFactor: ScreenUtil().setHeight(20),
+              child: Image.asset("assets/images/info_icon.png",
+                  width: ScreenUtil().setWidth(20),
+                  height: ScreenUtil().setHeight(20)),
+            ),
+            onTap: () {
+                showDialog(context: context,
+                          builder: (context) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                contentPadding: EdgeInsets.all(0),
+
+                                content: Stack(
+                                  overflow: Overflow.visible,
+                                  children: [
+                                    Positioned(
+                                      top: -50,
+                                      left: ScreenUtil().setWidth(260),
+                                      child: InkResponse(
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: CircleAvatar(
+                                          child: Icon(Icons.close),
+                                          backgroundColor: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                   Container(
+                                       width: ScreenUtil().setWidth(309),
+                                       height: ScreenUtil().setHeight(456),
+                                        // decoration: new BoxDecoration(
+                                        //     color: Color(0xffffffff),
+                                        //     borderRadius: BorderRadius.circular(12),
+                                        //     boxShadow: [BoxShadow(
+                                        //         color: Color(0x26454545),
+                                        //         offset: Offset(0,5),
+                                        //         blurRadius: 6,
+                                        //         spreadRadius: 0
+                                        //     ) ],
+                                        //   ),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.only(top: 8, right: 8, left: 8),
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.circular(12),
+                                                  child: Image.network(image_source,
+                                                      fit: BoxFit.fill,
+                                                      width: ScreenUtil().setWidth(293),
+                                                      height: ScreenUtil().setHeight(159)),
+                                                ),
+                                              ),
+                                              Center(
+                                                child: Container(
+                                                  width: ScreenUtil().setWidth(293),
+                                                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(12), bottom:  ScreenUtil().setHeight(12)),
+                                                  child: Text(title,
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        fontFamily: 'SFProDisplay',
+                                                        color: Color(0xff000000),
+                                                        fontSize: ScreenUtil().setSp(20),
+                                                        fontWeight: FontWeight.w600,
+                                                        fontStyle: FontStyle.normal,
+                                                      )),
+                                                ),
+                                              ),
+                                              Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  width: ScreenUtil().setWidth(261),
+                                                  height: ScreenUtil().setHeight(69),
+                                                  decoration: new BoxDecoration(
+                                                      color: Color(0xffffefcc)
+                                                  ),
+                                                child: Text("Đào tạo MIỄN PHÍ về kỹ năng chuẩn bị kinh doanh, kỹ năng mềm và sử dụng kênh digital để tăng hiệu suất",
+                                                    style: TextStyle(
+                                                      fontFamily: 'SFProDisplay',
+                                                      color: Color(0xff888888),
+                                                      fontSize: ScreenUtil().setSp(14),
+                                                      fontWeight: FontWeight.w400,
+                                                      fontStyle: FontStyle.normal,
+                                                    )
+                                                ),
+                                                ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: ScreenUtil().setHeight(12),left:ScreenUtil().setWidth(20)),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                        margin: EdgeInsets.only(right: ScreenUtil().setWidth(6)),
+                                                        width: ScreenUtil().setWidth(20),
+                                                        height: ScreenUtil().setHeight(20),
+                                                        child: Image.asset("assets/images/speaker_icon.png")),
+                                                    Text(speaker,
+                                                        style: TextStyle(
+                                                          fontFamily: 'SFProDisplay',
+                                                          color: Color(0xff000000),
+                                                          fontSize: ScreenUtil().setSp(14),
+                                                          fontWeight: FontWeight.w300,
+                                                          fontStyle: FontStyle.normal,
+                                                        )),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: ScreenUtil().setHeight(6),left:ScreenUtil().setWidth(20)),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                        width: ScreenUtil().setWidth(20),
+                                                        height: ScreenUtil().setHeight(20),
+                                                        margin: EdgeInsets.only(right: ScreenUtil().setWidth(6)),
+                                                        child: Image.asset("assets/images/good_for_icon.png")),
+                                                    Container(
+                                                      child: Text(for_whom,
+                                                          style: TextStyle(
+                                                            fontFamily: 'SFProDisplay',
+                                                            color: Color(0xff000000),
+                                                            fontSize: ScreenUtil().setSp(14),
+                                                            fontWeight: FontWeight.w300,
+                                                            fontStyle: FontStyle.normal,
+                                                          )),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: ScreenUtil().setHeight(6),left:ScreenUtil().setWidth(20)),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                        margin: EdgeInsets.only(right: ScreenUtil().setWidth(6)),
+                                                        width: ScreenUtil().setWidth(20),
+                                                        height: ScreenUtil().setHeight(20),
+                                                        child: Image.asset("assets/images/date_icon.png")),
+                                                    Text(DateFormat('MMM dd, y').format(timeStamp.toDate()),
+                                                        style: TextStyle(
+                                                          fontFamily: 'SFProDisplay',
+                                                          color: Color(0xff000000),
+                                                          fontSize: ScreenUtil().setSp(14),
+                                                          fontWeight: FontWeight.w300,
+                                                          fontStyle: FontStyle.normal,
+                                                        ))
+                                                  ],
+                                                ),
+                                              ),
+                                              Center(
+                                                child: Container(
+                                                    width: ScreenUtil().setWidth(178),
+                                                    height: ScreenUtil().setHeight(40),
+                                                    margin: EdgeInsets.only(top:ScreenUtil().setHeight(20)),
+                                                    child: RaisedButton(onPressed: (){
+                                                      remindMe();
+                                                      showAlertDialog(context);
+                                                      },
+                                                        color: Color(0xffffbf2f),
+                                                        shape: RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius.circular(8),
+                                                        ),
+                                                        child: Text("Register",
+                                                            style: TextStyle(
+                                                              fontFamily: 'SFProDisplay',
+                                                              color: Color(0xffffffff),
+                                                              fontSize: ScreenUtil().setSp(17),
+                                                              fontWeight: FontWeight.w700,
+                                                              fontStyle: FontStyle.normal,
+                                                            )))),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                  ],
+                                ),
+                                actions: [
+
+                                ],
+                              );
+                          },);
+            },
           )),
       Container(
           margin: EdgeInsets.only(
@@ -161,6 +340,7 @@ class WorkshopCard extends StatelessWidget {
           child: InkWell(
             onTap: () {
               remindMe();
+              showAlertDialog(context);
             },
             child: Center(
               widthFactor: ScreenUtil().setWidth(17),
@@ -172,4 +352,45 @@ class WorkshopCard extends StatelessWidget {
           )),
     ]);
   }
+}
+showAlertDialog(BuildContext context) {
+
+  // set up the button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Registration Confirmation",
+        style: TextStyle(
+          fontFamily: 'SFProDisplay',
+          color: Color(0xff000000),
+          fontSize: ScreenUtil().setSp(20),
+          fontWeight: FontWeight.w600,
+          fontStyle: FontStyle.normal,
+        )
+    ),
+    content: Text("Thank you for registering onto our workshop! Please remember to check your reminder box and join our workshop. We are looking forward to seeing your there.",
+        style: TextStyle(
+          fontFamily: 'SFProDisplay',
+          color: Color(0xff000000),
+          fontSize: ScreenUtil().setSp(14),
+          fontWeight: FontWeight.w300,
+          fontStyle: FontStyle.normal,
+        )),
+    actions: [
+      okButton,
+    ],
+  );
+// show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

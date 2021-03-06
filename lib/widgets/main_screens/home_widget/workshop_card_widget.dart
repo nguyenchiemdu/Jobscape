@@ -17,7 +17,7 @@ class WorkshopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: ScreenUtil().setWidth(14)),
+      margin: EdgeInsets.only(right: ScreenUtil().setWidth(13),bottom: ScreenUtil().setHeight(1),left:ScreenUtil().setWidth(1)),
       decoration: new BoxDecoration(
         color: Color(0xffffffff),
         borderRadius: BorderRadius.circular(12),
