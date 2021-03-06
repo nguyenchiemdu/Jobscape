@@ -118,7 +118,7 @@ class WorkshopCardRegister extends StatelessWidget {
                     width: ScreenUtil().setWidth(12),
                     height: ScreenUtil().setHeight(12),
                     child: Image.asset("assets/images/date_icon.png")),
-                Text(DateFormat('MMM dd y').format(timeStamp.toDate()),
+                Text(DateFormat('MMM dd, y').format(timeStamp.toDate()),
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),

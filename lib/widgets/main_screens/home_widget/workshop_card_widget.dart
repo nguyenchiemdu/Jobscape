@@ -1,12 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class WorkshopCard extends StatelessWidget {
   String image_source;
   String for_whom;
   String title;
-  String date;
+  Timestamp date;
   String speaker;
   final Function redirectWorkshop;
   WorkshopCard(this.image_source, this.for_whom, this.title, this.date,
@@ -107,7 +109,7 @@ class WorkshopCard extends StatelessWidget {
                     width: ScreenUtil().setWidth(12),
                     height: ScreenUtil().setHeight(12),
                     child: Image.asset("assets/images/date_icon.png")),
-                Text(date,
+                Text(DateFormat('MMM dd, y').format(date.toDate()),
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),
