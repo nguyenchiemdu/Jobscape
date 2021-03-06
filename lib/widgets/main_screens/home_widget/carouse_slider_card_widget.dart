@@ -9,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SliderCard extends StatelessWidget {
   List workshopList;
-  SliderCard(this.workshopList);
+  final Function redirectWorkshop;
+  SliderCard(this.workshopList, this.redirectWorkshop);
 
 //   final List listJobs;
 //   _SliderCardState createState() => _SliderCardState(listJobs);
@@ -17,7 +18,6 @@ class SliderCard extends StatelessWidget {
 
 // class _SliderCardState extends State<SliderCard> {
 //   _SliderCardState(this.listJobs);
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,21 +57,22 @@ class SliderCard extends StatelessWidget {
         child: Container(
             width: ScreenUtil().setWidth(324),
             height: ScreenUtil().setHeight(192),
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: workshopList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                child: WorkshopCard(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: workshopList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  child: WorkshopCard(
                     workshopList[index]['image_source'],
                     workshopList[index]['for'],
                     workshopList[index]['title'],
                     workshopList[index]['date'],
-                    workshopList[index]['speaker']),
-              );
-            },
-          )
-        ),
+                    workshopList[index]['speaker'],
+                    redirectWorkshop,
+                  ),
+                );
+              },
+            )),
       );
     }
   }

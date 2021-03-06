@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:learning_app/main.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserDatabaseService {
   final String uid;
-
+  final String id = FirebaseAuth.instance.currentUser.uid;
   UserDatabaseService({this.uid});
-
   final CollectionReference users =
       FirebaseFirestore.instance.collection('users');
 
@@ -34,6 +34,37 @@ class UserDatabaseService {
       return course;
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<List> getRemindWorkShopId() async {
+    List remindWorkShop;
+    Map l = {};
+
+    try {
+      await users
+          .doc(id)
+          .get()
+          .then((user) => {remindWorkShop = user.data()['remindWorkshop']});
+      return remindWorkShop;
+    } catch (e) {
+      print('Failed to get remindWorkshopIds:' + e);
+      return null;
+    }
+  }
+
+  Future addRemindWorkShop(String workshopId) async {
+    List remindWorkShopId = await this.getRemindWorkShopId();
+    if (remindWorkShopId == null) remindWorkShopId = [];
+    if (remindWorkShopId.indexOf(workshopId) == -1) {
+      remindWorkShopId.add(workshopId);
+      await users
+          .doc(id)
+          .update({'remindWorkshop': remindWorkShopId})
+          .then((value) => {print('added remindWorkshop')})
+          .catchError((e) {
+            print('Failed to add remindWorkshop');
+          });
     }
   }
 }

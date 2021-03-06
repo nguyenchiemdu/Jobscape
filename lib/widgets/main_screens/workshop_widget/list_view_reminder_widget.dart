@@ -14,12 +14,10 @@ class SliderCardRemind extends StatelessWidget {
 
 // class _SliderCardState extends State<SliderCard> {
 //   _SliderCardState(this.listJobs);
-
-
   @override
   Widget build(BuildContext context) {
     if (workshopList == null) {
-      return Text("Loading");
+      return Center(child: Text("You don't have any workshops in reminder "));
     } else {
       //   return Center(
       //     child: Container(
@@ -67,8 +65,7 @@ class SliderCardRemind extends StatelessWidget {
                       workshopList[index]['speaker']),
                 );
               },
-            )
-        ),
+            )),
       );
     }
   }

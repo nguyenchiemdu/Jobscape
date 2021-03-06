@@ -17,12 +17,40 @@ class WorkshopDatabase {
 
   Future getWorkshopList(String status) async {
     List workshopList = [];
+    Map workshop;
     try {
-        await workshops.where("status", isEqualTo: status).get().then((querySnapshot) {
+      await workshops
+          .where("status", isEqualTo: status)
+          .get()
+          .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
-          workshopList.add(element.data());
+          workshop = element.data();
+          workshop['id'] = element.id;
+          workshopList.add(workshop);
         });
       });
+      return workshopList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future getRemindWorkshopList(List ids) async {
+    List workshopList = [];
+    Map workshop;
+    try {
+      for (String id in ids) {
+        await workshops
+            // .where("projOwner", whereIn: ids)
+            .doc(id)
+            .get()
+            .then((element) {
+          workshop = element.data();
+          workshop['id'] = element.id;
+          workshopList.add(workshop);
+        });
+      }
       return workshopList;
     } catch (e) {
       print(e.toString());

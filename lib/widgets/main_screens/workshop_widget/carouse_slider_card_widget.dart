@@ -13,11 +13,10 @@ class SliderCard extends StatelessWidget {
 // class _SliderCardState extends State<SliderCard> {
 //   _SliderCardState(this.listJobs);
 
-
   @override
   Widget build(BuildContext context) {
     if (workshopList == null) {
-      return Text("Loading");
+      return Center(child: Text("Loading..."));
     } else {
       //   return Center(
       //     child: Container(
@@ -52,21 +51,21 @@ class SliderCard extends StatelessWidget {
         child: Container(
             width: ScreenUtil().setWidth(327),
             height: ScreenUtil().setHeight(211),
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: workshopList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                child: WorkshopCard(
-                    workshopList[index]['image_source'],
-                    workshopList[index]['for'],
-                    workshopList[index]['title'],
-                    workshopList[index]['date'],
-                    workshopList[index]['speaker']),
-              );
-            },
-          )
-        ),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: workshopList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  child: WorkshopCard(
+                      workshopList[index]['image_source'],
+                      workshopList[index]['for'],
+                      workshopList[index]['title'],
+                      workshopList[index]['date'],
+                      workshopList[index]['speaker'],
+                      workshopList[index]['id']),
+                );
+              },
+            )),
       );
     }
   }

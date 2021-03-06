@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/models/workshop_database.dart';
 import 'carouse_slider_card_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'list_view_reminder_widget.dart';
+
 class RemindWorkshop extends StatefulWidget {
   final String status;
   RemindWorkshop(this.status);
@@ -44,24 +46,25 @@ class _RemindWorkshopState extends State<RemindWorkshop> {
   void initState() {
     super.initState();
     Firebase.initializeApp().whenComplete(() {
-      print("completed");
       fetDatabaseList();
     });
   }
 
   fetDatabaseList() async {
-    dynamic resultant = await WorkshopDatabase().getWorkshopList(status);
-    if (resultant == null) {
-      print("Unable to retrieve");
+    List workShopIds = await UserDatabaseService().getRemindWorkShopId();
+    if (workShopIds == null) {
+      print('unable to retrieve');
     } else {
+      List resultant =
+          await WorkshopDatabase().getRemindWorkshopList(workShopIds);
       setState(() {
         workshopList = resultant;
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
-
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
@@ -70,7 +73,9 @@ class _RemindWorkshopState extends State<RemindWorkshop> {
         children: [
           Center(
             child: Container(
-              margin: EdgeInsets.only(top:ScreenUtil().setHeight(30),bottom:ScreenUtil().setHeight(12)),
+              margin: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(30),
+                  bottom: ScreenUtil().setHeight(12)),
               width: ScreenUtil().setWidth(324),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -88,10 +93,7 @@ class _RemindWorkshopState extends State<RemindWorkshop> {
                         fontSize: ScreenUtil().setSp(13),
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
-
-
-                      )
-                  )
+                      ))
                 ],
               ),
             ),
@@ -119,7 +121,6 @@ class _RemindWorkshopState extends State<RemindWorkshop> {
           //             fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: true),
           //             fontWeight: FontWeight.w400,
           //             fontStyle: FontStyle.normal,
-
 
           //           )
           //       ),
@@ -180,4 +181,3 @@ class _RemindWorkshopState extends State<RemindWorkshop> {
     );
   }
 }
-

@@ -56,7 +56,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
   @override
   Widget build(BuildContext context) {
     listWidget = [
-      [HomeWidget(_selectPage), HomeUsedWidget()],
+      [HomeWidget(_selectPage), HomeUsedWidget(_selectPage)],
       MainLearningScreen(),
       WorkshopWidget(),
       QuestionWidget()
@@ -96,9 +96,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                 ),
               ),
               label: ''),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.folder),label: ''
-              ),
+          BottomNavigationBarItem(icon: Icon(Icons.folder), label: ''),
           BottomNavigationBarItem(
               icon: Icon(Icons.help_center_outlined), label: '')
         ],
