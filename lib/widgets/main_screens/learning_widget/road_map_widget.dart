@@ -288,7 +288,8 @@ showAlertDialog(BuildContext context, String journey, Function startJourney) {
   // set up the button
   Widget okButton = FlatButton(
     child: Text("Ok"),
-    onPressed: startJourney,
+    onPressed: startJourney
+
   );
 
   // set up the AlertDialog
