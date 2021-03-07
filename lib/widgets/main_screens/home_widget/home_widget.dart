@@ -9,7 +9,7 @@ import 'ourteam_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeWidget extends StatelessWidget {
-  final Function selectPage;
+  Function selectPage;
   HomeWidget(this.selectPage);
   dynamic tx = DateTime.now();
 
@@ -62,12 +62,7 @@ class HomeWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                  child: Text(
-                                      "Hello " +
-                                          Provider.of<GoogleSignInProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .displayName,
+                                  child: Text("Hello ",
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xff000000),
