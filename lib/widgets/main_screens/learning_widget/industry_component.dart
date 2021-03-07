@@ -5,6 +5,7 @@ import './industry_slider_card.dart';
 import 'package:learning_app/models/industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import './road_map_widget.dart';
+
 class IndustryComponent extends StatefulWidget {
   final String fieldId;
   final Function changeScreen;
@@ -44,7 +45,6 @@ class _IndustryComponentState extends State<IndustryComponent> {
 
   @override
   Widget build(BuildContext context) {
-
     if (industryField == null) {
       return Center(
         child: Text('Loading'),
@@ -71,7 +71,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
             ),
             Container(
               width: ScreenUtil().setWidth(312),
-              height: ScreenUtil().setHeight(180),
+              height: ScreenUtil().setHeight(183),
               margin: EdgeInsets.only(left: 24, right: 24),
               decoration: new BoxDecoration(
                   color: Color(0xfffffaf0),

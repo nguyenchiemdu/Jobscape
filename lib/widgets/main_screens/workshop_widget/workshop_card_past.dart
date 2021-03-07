@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-class WorkshopCardRegister extends StatelessWidget {
+class WorkshopCardPast extends StatelessWidget {
   String image_source;
   String for_whom;
   String title;
   Timestamp timeStamp;
   String speaker;
+  String workshopId;
   int duration;
-  WorkshopCardRegister(this.image_source, this.for_whom, this.title,
-      this.timeStamp, this.speaker) {
+  WorkshopCardPast(this.image_source, this.for_whom, this.title,
+      this.timeStamp, this.speaker, this.workshopId) {
     // List timeList =
     //     timeStamp.toDate().difference(DateTime.now()).toString().split(':');
     //   int day = (int.parse(timeList[0]) / 24).round();
@@ -328,8 +329,8 @@ class WorkshopCardRegister extends StatelessWidget {
           ]),
         ),
         Container(
-            margin: EdgeInsets.only(left: ScreenUtil().setWidth(134)),
-            width: ScreenUtil().setWidth(60),
+            margin: EdgeInsets.only(left: ScreenUtil().setWidth(156)),
+            width: ScreenUtil().setWidth(38),
             height: ScreenUtil().setHeight(38),
             decoration: new BoxDecoration(
               color: Color(0xffffbf2f),
@@ -338,16 +339,16 @@ class WorkshopCardRegister extends StatelessWidget {
                 bottomLeft: Radius.circular(30),
               ),
             ),
-            child: Center(
-                child: Text(duration.toString() + " next\ndays",
-                    style: TextStyle(
-                      fontFamily: 'SFProDisplay',
-                      color: Color(0xffffffff),
-                      fontSize: ScreenUtil().setSp(13),
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.normal,
-                    )))),
-      ]),
+            child:
+            Center(
+              widthFactor: ScreenUtil().setWidth(20),
+              heightFactor: ScreenUtil().setHeight(20),
+              child: Image.asset("assets/images/info_icon.png",
+                  width: ScreenUtil().setWidth(20),
+                  height: ScreenUtil().setHeight(20)),
+            ),
+              ),
+                ]),
     );
   }
 }

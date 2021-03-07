@@ -81,11 +81,12 @@ class HomeUsedWidget extends StatelessWidget {
                                   children: [
                                     Container(
                                         child: Text(
-                                            "Hello " +
-                                                Provider.of<GoogleSignInProvider>(
-                                                        context,
-                                                        listen: false)
-                                                    .displayName,
+                                            "Hello ",
+                                                // +
+                                                // Provider.of<GoogleSignInProvider>(
+                                                //         context,
+                                                //         listen: false)
+                                                //     .displayName,
                                             style: TextStyle(
                                               fontFamily: 'SFProDisplay',
                                               color: Color(0xff000000),

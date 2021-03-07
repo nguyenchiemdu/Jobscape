@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/models/workshop_database.dart';
+import 'package:learning_app/widgets/main_screens/workshop_widget/list_view_past_widget.dart';
 import 'carouse_slider_card_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -98,7 +99,7 @@ class PastWorkshop extends StatelessWidget {
               ),
             ),
           ),
-          SliderCard(pastWorkshop),
+          ListCardPast(pastWorkshop),
           Center(
             child: Container(
               margin: EdgeInsets.only(
@@ -130,7 +131,7 @@ class PastWorkshop extends StatelessWidget {
               ),
             ),
           ),
-          SliderCard(pastWorkshop),
+          ListCardPast(pastWorkshop),
 
           // Container(
           //   margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:20),

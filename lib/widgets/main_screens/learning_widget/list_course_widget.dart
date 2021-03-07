@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/industry_card.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/skill_item.dart';
@@ -18,9 +21,18 @@ class ListCourseWidget extends StatefulWidget {
 
 class _ListCourseWidgetState extends State<ListCourseWidget> {
   List<Widget> listCourseWidget = [];
-  void addData() {
-    DatabaseManager().addCourse(widget.skillItem['listCourse'][0],
-        path: widget.skillItem['path']);
+  List listCourse;
+  void addData(String path) async {
+    List res = await DatabaseManager().getListCourse(path);
+    int length;
+    if (res == null)
+      length = 0;
+    else
+      length = res.length;
+    if (length == 0)
+      readExcel(widget.skillItem['name'].toString());
+    else
+      print('data base alredy has data');
   }
 
   @override
@@ -28,15 +40,65 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
     // TODO: implement initState
     super.initState();
     getData();
+    // Dòng dưới này là để add data từ file excel, nếu k add thì comment lại
+    // addData(widget.skillItem['path']);
+  }
+
+  void readExcel(String sheetName) async {
+    var file =
+        "/Users/dunguyenchiem/Documents/flutter/learing_app/Onlinecourses.xlsx";
+    var bytes = File(file).readAsBytesSync();
+    var excel = Excel.decodeBytes(bytes);
+    Map<String, dynamic> course;
+    // for (var table in excel.tables.keys) {
+    //   print(table); //sheet Name
+    //   print(excel.tables[table].maxCols);
+    //   print(excel.tables[table].maxRows);
+    // for (var row in excel.tables[sheetName].rows) {
+    //   print("$row");
+    // }
+    // }
+    for (int i = 1; i < excel.tables[sheetName].rows.length; i++) {
+      course = {
+        "3": 0,
+        "review": 0,
+        "4": 0,
+        "price": 0,
+        "link":
+            "https://edumall.vn/courses/hoc-htmlcss-co-ban-qua-bai-tap-thuc-te",
+        "1": 0,
+        "5": 0,
+        "2": 0,
+        "name": "Null",
+      };
+      course['name'] = excel.tables[sheetName].rows[i][1];
+      course['provider'] = excel.tables[sheetName].rows[i][2];
+      course['review'] =
+          double.tryParse(excel.tables[sheetName].rows[i][3].toString());
+      if (course['review'] == null) course['review'] == 0;
+      course['level'] =
+          excel.tables[sheetName].rows[i][4].toString()[0].toUpperCase() +
+              excel.tables[sheetName].rows[i][4].toString().substring(1);
+      course['price'] =
+          double.tryParse(excel.tables[sheetName].rows[i][5].toString());
+      if (course['price'] == null) course['price'] = 0;
+      if (excel.tables[sheetName].rows[i][5].toString() == 'subcription' ||
+          excel.tables[sheetName].rows[i][5].toString() == 'Subcription')
+        course['price'] = 'Subcription';
+      course['link'] = excel.tables[sheetName].rows[i][6];
+      print(course.toString());
+      await DatabaseManager().addCourse(course, path: widget.skillItem['path']);
+    }
   }
 
   void getData() async {
-    List listCourse =
+    listCourse =
         await widget.industryDatabase.getListCourse(widget.skillItem['path']);
     setState(() {
       listCourseWidget =
           listCourse.map((course) => CourseItemWidget(course)).toList();
     });
+    // print(jsonEncode(listCourse));
   }
 
   @override
