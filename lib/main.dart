@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
     if (resultant == null) {
       print("Unable to retrieve");
     } else {
-      await setState(() {
+      setState(() {
         enrolled_course = resultant;
       });
     }
@@ -66,6 +66,7 @@ class _MyAppState extends State<MyApp> {
                   fontFamily: 'SFProDisplay',
                 ),
                 title: 'Learning App',
+
                 home: RoutePage(enrolled_course)),
           );
         }
@@ -106,7 +107,11 @@ class RoutePage extends StatelessWidget {
           if (provider.isSigningIn) {
             return buildLoading();
           } else if (snapsot.hasData) {
+            if (enrolled_course == null) {
+              return Text("Loading");
+            } else {
             return enrolled_course == 0 ? LoggedInWidget(0) : LoggedInWidget(1);
+            }
           } else {
             return Container(
                 decoration: BoxDecoration(

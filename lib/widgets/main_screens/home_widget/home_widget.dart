@@ -36,7 +36,7 @@ class HomeWidget extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: ScreenUtil().setHeight(110)),
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(68)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -141,22 +141,22 @@ class HomeWidget extends StatelessWidget {
                       children: [
                         Container(
                           margin: EdgeInsets.only(top: 28, left: 24),
-                          child: Text("Get your job now!",
+                          child: Text("Here’s how to get your Dream Job!",
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff303030),
                                 fontSize: ScreenUtil()
-                                    .setSp(24, allowFontScalingSelf: true),
+                                    .setSp(16, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.w700,
                                 fontStyle: FontStyle.normal,
                               )),
                         ),
                         Container(
                           width: ScreenUtil().setWidth(151),
-                          height: ScreenUtil().setHeight(93),
+                          height: ScreenUtil().setHeight(100),
                           margin: EdgeInsets.only(top: 6, left: 24),
                           child: Text(
-                              "Explore free customized learning journeys for... Technology jobs recommended by 300+ professionals",
+                              "Explore the essential skill sets to secure a job in Information Technology, Marketing, Finance, and more. Recommended by 300+ professionals.\nAnd totally FREE.",
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff303030),
@@ -167,13 +167,13 @@ class HomeWidget extends StatelessWidget {
                               )),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 59, left: 25, right: 25),
+                          margin: EdgeInsets.only(top: ScreenUtil().setHeight(59), left: 25, right: 25),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
                                 children: [
-                                  Text("7+",
+                                  Text("300+",
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xffffbf2f),
@@ -181,7 +181,7 @@ class HomeWidget extends StatelessWidget {
                                         fontWeight: FontWeight.w700,
                                         fontStyle: FontStyle.normal,
                                       )),
-                                  Text("highlight1",
+                                  Text("Professionals",
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xff000000),
@@ -200,7 +200,7 @@ class HomeWidget extends StatelessWidget {
                                   )),
                               Column(
                                 children: [
-                                  Text("7+",
+                                  Text("30+",
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xffffbf2f),
@@ -208,7 +208,7 @@ class HomeWidget extends StatelessWidget {
                                         fontWeight: FontWeight.w700,
                                         fontStyle: FontStyle.normal,
                                       )),
-                                  Text("highlight1",
+                                  Text("Roadmaps",
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xff000000),
@@ -227,7 +227,7 @@ class HomeWidget extends StatelessWidget {
                                   )),
                               Column(
                                 children: [
-                                  Text("7+",
+                                  Text("1500+",
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xffffbf2f),
@@ -235,7 +235,7 @@ class HomeWidget extends StatelessWidget {
                                         fontWeight: FontWeight.w700,
                                         fontStyle: FontStyle.normal,
                                       )),
-                                  Text("highlight1",
+                                  Text("Courses",
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xff000000),

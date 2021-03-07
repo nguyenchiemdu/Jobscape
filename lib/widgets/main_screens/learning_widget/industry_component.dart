@@ -70,6 +70,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
               ),
             ),
             Container(
+              padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: ScreenUtil().setWidth(12), top: ScreenUtil().setHeight(12)),
               width: ScreenUtil().setWidth(312),
               height: ScreenUtil().setHeight(183),
               margin: EdgeInsets.only(left: 24, right: 24),
@@ -81,7 +82,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                 children: [
                   Container(
                     margin: EdgeInsets.only(
-                        top: 10, bottom: 4, left: 12, right: 16),
+                        bottom: ScreenUtil().setSp(4)),
                     child: Text(industryField['briefIntro'],
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
@@ -92,7 +93,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                         )),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 4, left: 12),
+                    margin: EdgeInsets.only(bottom: ScreenUtil().setSp(4)),
                     child: RichText(
                         text: new TextSpan(children: [
                       new TextSpan(
@@ -116,7 +117,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                     ])),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 12),
+                    // margin: EdgeInsets.only(left: 12),
                     child: RichText(
                         text: new TextSpan(children: [
                       new TextSpan(
@@ -140,7 +141,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                     ])),
                   ),
                   Container(
-                    margin: EdgeInsets.only(right: 12, top: 12, bottom: 16),
+                    margin: EdgeInsets.only(top:ScreenUtil().setSp(12)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,

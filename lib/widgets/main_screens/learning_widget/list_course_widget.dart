@@ -10,6 +10,7 @@ import 'package:bordered_text/bordered_text.dart';
 import 'package:learning_app/models/industry_database.dart';
 import 'package:excel/excel.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
+import 'proof_submit_widget.dart';
 
 class ListCourseWidget extends StatefulWidget {
   final Map skillItem;
@@ -34,7 +35,13 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
     else
       print('data base alredy has data');
   }
-
+  void changeScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => SubmitProof()),
+    );
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -220,7 +227,8 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
                     width: ScreenUtil().setWidth(312),
                     height: ScreenUtil().setHeight(50),
                     child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          changeScreen(context);},
                         color: Color(0xffffbf2f),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),

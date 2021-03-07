@@ -34,6 +34,7 @@ dependencies:
   bordered_text: ^1.0.1
   timeago: ^3.0.1
   excel: ^1.1.5
+  dotted_border: ^1.0.7
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
@@ -83,6 +84,8 @@ flutter:
     - assets/images/register_icon.png
     - assets/images/bell_icon.png
     - assets/images/link_icon.png
+    - assets/images/image_upload.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

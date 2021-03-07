@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import './industry_component.dart';
 // import './industry_slider_card.dart';
 import './road_map_widget.dart';
@@ -11,6 +12,8 @@ class MainLearningScreen extends StatefulWidget {
 }
 
 class _MainLearningScreenState extends State<MainLearningScreen> {
+
+  dynamic tx = DateTime.now();
   Map roadMapData;
   Map roadMapItem;
   String loadingScreen = 'main';
@@ -47,7 +50,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
           ),
           child: SafeArea(
             child: Container(
-              margin: EdgeInsets.only(top: 88),
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(46)),
               child: Column(
                 children: [
                   Row(
@@ -68,7 +71,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                       ),
                       Container(
                         margin: EdgeInsets.only(right: 24),
-                        child: Text("Today is Monday, 15 Feb, 2021 ",
+                        child: Text("Today is " + DateFormat.yMMMMd().format(tx),
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xff000000),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:learning_app/widgets/main_screens/learning_widget/proof_submit_widget.dart';
 import 'skill_item.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:learning_app/models/industry_database.dart';
@@ -20,6 +21,13 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
     for (Map skill in widget.roadMapItem['listSkill']) {
       DatabaseManager().addSkill(skill,path: widget.roadMapItem['path']);
     }
+  }
+  void changeScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => SubmitProof()),
+    );
   }
   @override
   void initState() {
@@ -155,7 +163,9 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
                     width: ScreenUtil().setWidth(312),
                     height: ScreenUtil().setHeight(50),
                     child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          changeScreen(context);
+                        },
                         color: Color(0xffffbf2f),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
