@@ -4,8 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/learning_widget.dart';
 import 'package:dotted_border/dotted_border.dart';
 
-class Submit extends StatelessWidget {
+class Submit extends StatefulWidget {
+  @override
+  _SubmitState createState() => _SubmitState();
+}
 
+class _SubmitState extends State<Submit> {
+  List<String> _locations = ['HTML', 'CSS', 'Javascript', 'NodeJS'];
+  String _selectedLocation;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -97,9 +103,68 @@ class Submit extends StatelessWidget {
             ],
           ),
           Center(
+            child: Container(
+              margin: EdgeInsets.only(top:ScreenUtil().setHeight(36),bottom: ScreenUtil().setHeight(16)),
+              width: ScreenUtil().setWidth(300),
+              height: ScreenUtil().setHeight(36),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Color(0xffffbf2f)),
+              ),
+              padding: EdgeInsets.all(10),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(12),
+                    //   borderSide: BorderSide(
+                    //     color: Colors.transparent,
+                    //   ),
+                    // ),
+                    // hintText:
+                    // "Select the skill",
+                    // hintStyle: TextStyle(
+                    //   fontFamily: 'SFProDisplay',
+                    //   color: Color(0xff888888),
+                    //   fontSize: ScreenUtil().setSp(14),
+                    //   fontWeight: FontWeight.w300,
+                    //   fontStyle: FontStyle.italic,
+                    // ),
+                  
+                  hint: Text('Select the skill',
+                      style: TextStyle(
+                        fontFamily: 'SFProDisplay',
+                        color: Color(0xff000000),
+                        fontSize: ScreenUtil().setSp(14),
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                      )),
+                  // Not necessary for Option 1
+                  value: _selectedLocation,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedLocation = newValue;
+                    });
+                  },
+
+                  items: _locations.map((location) {
+                    return DropdownMenuItem(
+                      child: new Text(location,
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xff000000),
+                            fontSize: ScreenUtil().setSp(14),
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                          )),
+                      value: location,
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+          ),
+          Center(
             child:Container(
-                margin: EdgeInsets.only(top:ScreenUtil().setHeight(48)),
-                padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
                 width: ScreenUtil().setWidth(300),
                 height: ScreenUtil().setHeight(167),
                 decoration: new BoxDecoration(

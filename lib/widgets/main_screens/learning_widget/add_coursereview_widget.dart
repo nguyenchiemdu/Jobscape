@@ -104,20 +104,22 @@ class AddReviewFormWidget extends StatelessWidget {
                     controller: reviewText,
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    submitReview();
-                  },
-                  child: Positioned(
-                    left: ScreenUtil().setWidth(267),
-                    child: Container(
-                      // margin: EdgeInsets.only(left: ScreenUtil().setWidth(267),top: ScreenUtil().setHeight(17)),
-                      width: ScreenUtil().setWidth(18),
-                      height: ScreenUtil().setHeight(18),
-                      decoration: new BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/post_icon.png"),
-                          fit: BoxFit.fill,
+                Container(
+                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(267),top: ScreenUtil().setHeight(15)),
+                child: InkWell(
+                    onTap: () {
+                      submitReview();
+                    },
+                    child: Positioned(
+                      child: Container(
+                        // margin: EdgeInsets.only(left: ScreenUtil().setWidth(267),top: ScreenUtil().setHeight(17)),
+                        width: ScreenUtil().setWidth(18),
+                        height: ScreenUtil().setHeight(18),
+                        decoration: new BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/post_icon.png"),
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),

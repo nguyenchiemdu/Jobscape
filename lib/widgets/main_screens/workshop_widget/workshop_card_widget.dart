@@ -21,6 +21,7 @@ class WorkshopCard extends StatelessWidget {
     if (status)
       showAlertDialog(context);
     else
+      showAlertRegistered(context);
       // thong bao may da dang ki workshop nay roi
       ;
   }
@@ -399,6 +400,46 @@ showAlertDialog(BuildContext context) {
         )),
     content: Text(
         "Thank you for registering onto our workshop! Please remember to check your reminder box and join our workshop. We are looking forward to seeing your there.",
+        style: TextStyle(
+          fontFamily: 'SFProDisplay',
+          color: Color(0xff000000),
+          fontSize: ScreenUtil().setSp(14),
+          fontWeight: FontWeight.w300,
+          fontStyle: FontStyle.normal,
+        )),
+    actions: [
+      okButton,
+    ],
+  );
+// show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+showAlertRegistered(BuildContext context) {
+  // set up the button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Registration Notification",
+        style: TextStyle(
+          fontFamily: 'SFProDisplay',
+          color: Color(0xff000000),
+          fontSize: ScreenUtil().setSp(20),
+          fontWeight: FontWeight.w600,
+          fontStyle: FontStyle.normal,
+        )),
+    content: Text(
+        "You already registered for this event. Please wait for further instructions from hosts or see more information in the Reminder Box",
         style: TextStyle(
           fontFamily: 'SFProDisplay',
           color: Color(0xff000000),
