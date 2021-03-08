@@ -59,7 +59,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
       [HomeWidget(_selectPage), HomeUsedWidget(_selectPage)],
       MainLearningScreen(),
       WorkshopWidget(),
-      QuestionWidget()
+      // QuestionWidget()
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -97,8 +97,8 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
               ),
               label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.folder), label: ''),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.help_center_outlined), label: '')
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.help_center_outlined), label: '')
         ],
       ),
     );
