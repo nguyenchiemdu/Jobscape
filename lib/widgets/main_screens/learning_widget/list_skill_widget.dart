@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/proof_submit_widget.dart';
 import 'skill_item.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:learning_app/models/industry_database.dart';
+
 class ListSkillWidget extends StatefulWidget {
   final Map roadMapItem;
   ListSkillWidget(this.roadMapItem);
@@ -15,35 +18,43 @@ class ListSkillWidget extends StatefulWidget {
 
 class _ListSkillWidgetState extends State<ListSkillWidget> {
   DatabaseManager industryDatabase = DatabaseManager();
+  UserDatabaseService userDatabase =
+      UserDatabaseService(uid: FirebaseAuth.instance.currentUser.uid);
   List<Widget> listSkillWidget = [];
-  void addData(){
+  void addData() {
     print(widget.roadMapItem.toString());
     for (Map skill in widget.roadMapItem['listSkill']) {
-      DatabaseManager().addSkill(skill,path: widget.roadMapItem['path']);
+      DatabaseManager().addSkill(skill, path: widget.roadMapItem['path']);
     }
   }
+
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => SubmitProof()),
+      MaterialPageRoute(builder: (context) => SubmitProof()),
     );
   }
+
   @override
   void initState() {
-      // TODO: implement initState
-      super.initState();
-      getData();
-    }
-    void getData()async{
-      List listSkill = await industryDatabase.getListSkill(widget.roadMapItem['path']);
-      // print(tmp.toString());
-      // print(widget.roadMapItem.toString());
-      setState(() {
-              listSkillWidget= listSkill.map((skill)=> SkillItem(skill)).toList();
-            });
-      // print(listSkillWidget.toList());
-    }
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
+  void getData() async {
+    List listSkill =
+        await industryDatabase.getListSkill(widget.roadMapItem['path']);
+    List listLearnedSkill =
+        await userDatabase.getLearnedSkills(widget.roadMapItem['path']);
+    print('listLearnedSkill :' + listLearnedSkill.toString());
+    // print(tmp.toString());
+    // print(widget.roadMapItem.toString());
+    setState(() {
+      listSkillWidget = listSkill.map((skill) => SkillItem(skill)).toList();
+    });
+    // print(listSkillWidget.toList());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +68,12 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
                   height: ScreenUtil().setHeight(270),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Color(0xfffafafa),
+                      color: Color(0xfffafafa),
                       image: DecorationImage(
                           image: NetworkImage(
                               "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef"),
                           fit: BoxFit.cover)),
-                  child:
-                  Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
@@ -89,7 +99,7 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
                       // Text(roadMapItem['name']),
                       Container(
                           margin:
-                          EdgeInsets.only(top: ScreenUtil().setHeight(24)),
+                              EdgeInsets.only(top: ScreenUtil().setHeight(24)),
                           child: Align(
                             alignment: Alignment.center,
                             child: Stack(
@@ -126,16 +136,19 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
                           )),
                     ],
                   ),
-                      // RaisedButton(
-                      //   onPressed: () {
-                      //     Navigator.pop(context);
-                      //   },
-                      //   child: Icon(Icons.arrow_back),
-                      // ),
+                  // RaisedButton(
+                  //   onPressed: () {
+                  //     Navigator.pop(context);
+                  //   },
+                  //   child: Icon(Icons.arrow_back),
+                  // ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: ScreenUtil().setHeight(122)),
-                  padding: EdgeInsets.only(top:ScreenUtil().setHeight(16),left:ScreenUtil().setWidth(17),right:ScreenUtil().setWidth(17)),
+                  padding: EdgeInsets.only(
+                      top: ScreenUtil().setHeight(16),
+                      left: ScreenUtil().setWidth(17),
+                      right: ScreenUtil().setWidth(17)),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -146,15 +159,14 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
                   ),
                   height: ScreenUtil().setHeight(596),
                   child: GridView.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: (149 / 190),
-                    children: 
-                    listSkillWidget
-                    
-                    //     List.generate(widget.roadMapItem['listSkill'].length, (index) {
-                    //   return SkillItem(widget.roadMapItem['listSkill'][index]);
-                    // }),
-                  ),
+                      crossAxisCount: 2,
+                      childAspectRatio: (149 / 190),
+                      children: listSkillWidget
+
+                      //     List.generate(widget.roadMapItem['listSkill'].length, (index) {
+                      //   return SkillItem(widget.roadMapItem['listSkill'][index]);
+                      // }),
+                      ),
                 ),
                 Container(
                     margin: EdgeInsets.only(
