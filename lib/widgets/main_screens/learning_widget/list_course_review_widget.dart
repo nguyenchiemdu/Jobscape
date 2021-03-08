@@ -60,6 +60,7 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
     else  return Container(
       height: 300,
       child: ListView.builder(
+        padding: EdgeInsets.all(0),
           itemCount: listReview.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
@@ -67,14 +68,17 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
               child :Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(listReview[index]['user'],
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff000000),
-                        fontSize: ScreenUtil().setSp(13),
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                      )),
+                  Container(
+                    margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(4)),
+                    child: Text(listReview[index]['user'],
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff000000),
+                          fontSize: ScreenUtil().setSp(13),
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                        )),
+                  ),
                   Row(children: [
                     Container(
                       margin: EdgeInsets.only(right: ScreenUtil().setWidth(2)),
