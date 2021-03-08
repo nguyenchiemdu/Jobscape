@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/workshop_database.dart';
@@ -36,8 +38,9 @@ class Workshop extends StatefulWidget {
 }
 
 class _WorkshopState extends State<Workshop> {
-  List workshopList;
-
+  List workshopList = [];
+  List workshopRandom = [];
+  Random r = Random();
   @override
   void initState() {
     super.initState();
@@ -48,10 +51,15 @@ class _WorkshopState extends State<Workshop> {
   }
 
   fetDatabaseList() async {
-    dynamic resultant = await DatabaseManager().getWorkshopList();
+    List resultant = await DatabaseManager().getWorkshopList();
+
     if (resultant == null) {
       print("Unable to retrieve");
     } else {
+      int start = r.nextInt(resultant.length - 1);
+      for (int i = start; i < start + 4; i++) {
+        workshopRandom.add(resultant[i % (resultant.length - 1)]);
+      }
       await setState(() {
         workshopList = resultant;
       });
@@ -122,7 +130,7 @@ class _WorkshopState extends State<Workshop> {
             ],
           ),
         ),
-        SliderCard(workshopList, widget.redirectWorkshop),
+        SliderCard(workshopRandom, widget.redirectWorkshop),
 
         // GridView.count(
         //   childAspectRatio:itemHeight/itemWidth,

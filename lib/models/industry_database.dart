@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'workshop_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 class DatabaseManager {
   final CollectionReference industry =
       FirebaseFirestore.instance.collection('industry');
@@ -44,7 +48,8 @@ class DatabaseManager {
         // });
         industryField = querySnapshot.docs[0].data();
         industryField['id'] = querySnapshot.docs[0].id.toString();
-        industryField['path'] = 'industry/'+querySnapshot.docs[0].id.toString();
+        industryField['path'] =
+            'industry/' + querySnapshot.docs[0].id.toString();
       });
       return industryField;
     } catch (e) {
@@ -52,200 +57,217 @@ class DatabaseManager {
       return null;
     }
   }
-  Future getListReviewCourse(String path) async{
+
+  Future getListReviewCourse(String path) async {
     List result = [];
     Map tmp;
     try {
-      await FirebaseFirestore.instance.collection(path+'/listReview').get().then((querySnapshot) {
+      await FirebaseFirestore.instance
+          .collection(path + '/listReview')
+          .orderBy('time', descending: true)
+          .get()
+          .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
           tmp = element.data();
           tmp['id'] = element.id.toString();
-          tmp['path'] = path+'/listReview/'+tmp['id'];
+          tmp['path'] = path + '/listReview/' + tmp['id'];
           result.add(tmp);
         });
       });
       return result;
-    } catch (e){
-        print(e.toString());
+    } catch (e) {
+      print(e.toString());
       return null;
     }
   }
-   Future getListCourse(String path) async{
+
+  Future getListCourse(String path) async {
     List result = [];
     Map tmp;
     try {
-      await FirebaseFirestore.instance.collection(path+'/listCourse').get().then((querySnapshot) {
+      await FirebaseFirestore.instance
+          .collection(path + '/listCourse')
+          .get()
+          .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
           tmp = element.data();
           tmp['id'] = element.id.toString();
-          tmp['path'] = path+'/listCourse/'+tmp['id'];
+          tmp['path'] = path + '/listCourse/' + tmp['id'];
           result.add(tmp);
         });
       });
       return result;
-    } catch (e){
-        print(e.toString());
+    } catch (e) {
+      print(e.toString());
       return null;
     }
   }
-  Future getListSkill(String path)async{
+
+  Future getListSkill(String path) async {
     List result = [];
     Map tmp;
     try {
-      await FirebaseFirestore.instance.collection(path+'/listSkill').get().then((querySnapshot) {
+      await FirebaseFirestore.instance
+          .collection(path + '/listSkill')
+          .orderBy('order')
+          .get()
+          .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
           tmp = element.data();
           tmp['id'] = element.id.toString();
-          tmp['path'] = path+'/listSkill/'+tmp['id'];
+          tmp['path'] = path + '/listSkill/' + tmp['id'];
           result.add(tmp);
         });
       });
       return result;
-    } catch (e){
-        print(e.toString());
+    } catch (e) {
+      print(e.toString());
       return null;
     }
   }
-  Future<List> getListJobs(String industryId) async{
+
+  Future<List> getListJobs(String industryId) async {
     List result = [];
     Map tmp;
     try {
-      await FirebaseFirestore.instance.collection('industry/$industryId/listJobs').get().then((querySnapshot) {
+      await FirebaseFirestore.instance
+          .collection('industry/$industryId/listJobs')
+          .get()
+          .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
           tmp = element.data();
           tmp['id'] = element.id.toString();
-          tmp['path'] = 'industry/$industryId/listJobs/'+tmp['id'];
+          tmp['path'] = 'industry/$industryId/listJobs/' + tmp['id'];
           result.add(tmp);
         });
       });
       return result;
-    } catch (e){
-        print(e.toString());
+    } catch (e) {
+      print(e.toString());
       return null;
     }
   }
-  Future upVote(String path)async{
+
+  Future upVote(String path) async {
     List list = path.split('/');
-    String docId = list[list.length-1];
+    String docId = list[list.length - 1];
     list.removeLast();
-    path =  list.join('/');
+    path = list.join('/');
     Map result;
     CollectionReference review = FirebaseFirestore.instance.collection(path);
-    await review.doc(docId).get().then((querySnapshot) => {
-    result = querySnapshot.data()
-    });
+    await review
+        .doc(docId)
+        .get()
+        .then((querySnapshot) => {result = querySnapshot.data()});
     List listUpvote = result['listUpvote'];
-    if (listUpvote == null || listUpvote.indexOf(FirebaseAuth.instance.currentUser.uid) ==-1)
-      {
-        if (listUpvote == null) listUpvote =[];
-        listUpvote.add(FirebaseAuth.instance.currentUser.uid);
-        await review.doc(docId).update(
-          {
-            'listUpvote' : listUpvote,
-            'upvote': listUpvote.length
-          }
-          )
+    if (listUpvote == null ||
+        listUpvote.indexOf(FirebaseAuth.instance.currentUser.uid) == -1) {
+      if (listUpvote == null) listUpvote = [];
+      listUpvote.add(FirebaseAuth.instance.currentUser.uid);
+      await review
+          .doc(docId)
+          .update({'listUpvote': listUpvote, 'upvote': listUpvote.length})
           .then((value) => print("UpVoted"))
           .catchError((error) => print("Failed to add UpVote: $error"));
-      }
-    else
-      {
-        listUpvote.remove(FirebaseAuth.instance.currentUser.uid);
-        await review.doc(docId).update(
-          {
-            'listUpvote' : listUpvote,
-            'upvote': listUpvote.length
-          }
-          )
+    } else {
+      listUpvote.remove(FirebaseAuth.instance.currentUser.uid);
+      await review
+          .doc(docId)
+          .update({'listUpvote': listUpvote, 'upvote': listUpvote.length})
           .then((value) => print(" dis UpVoted"))
           .catchError((error) => print("Failed to dis UpVote: $error"));
-      }
+    }
   }
-  Future getListRoadMap(String path) async{
+
+  Future getListRoadMap(String path) async {
     List result = [];
     Map tmp;
     try {
-      await FirebaseFirestore.instance.collection(path+'/listRoadMap').get().then((querySnapshot) {
+      await FirebaseFirestore.instance
+          .collection(path + '/listRoadMap')
+          .get()
+          .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
           tmp = element.data();
           tmp['id'] = element.id.toString();
-          tmp['path'] = path+'/listRoadMap/'+tmp['id'];
+          tmp['path'] = path + '/listRoadMap/' + tmp['id'];
           result.add(tmp);
         });
       });
       return result;
-    } catch (e){
-        print(e.toString());
+    } catch (e) {
+      print(e.toString());
       return null;
     }
   }
-  Future addReview(Map data,String path){
+
+  Future addReview(Map data, String path) async {
+    List list = path.split('/');
+    int rating = data['star'];
+    int star;
+    String courseId = list[list.length - 1];
+    list.removeLast();
+    String listCoursePath = list.join('/');
+    final CollectionReference listCourse =
+        FirebaseFirestore.instance.collection(listCoursePath);
     final CollectionReference listReview =
-      FirebaseFirestore.instance.collection(path+'/listReview');
-    try{
-       return listReview
+        FirebaseFirestore.instance.collection(path + '/listReview');
+    try {
+      await listCourse.doc(courseId).get().then((res) {
+        star = res.data()[rating.toString()];
+      });
+      star += 1;
+      await listCourse.doc(courseId).update({rating.toString(): star});
+      listReview
           .add(data)
           .then((value) => print("Review Added"))
           .catchError((error) => print("Failed to add Review: $error"));
-
-
-    } catch (e){
+    } catch (e) {
       print(e.toString());
-      return null;
     }
-
   }
-  Future addCourse(Map<String,dynamic> data,{String path="defaultid"}) async{
+
+  Future addCourse(Map<String, dynamic> data,
+      {String path = "defaultid"}) async {
     final CollectionReference listCourse =
-      FirebaseFirestore.instance.collection(path+'/listCourse');
-    try{
-       return listCourse
+        FirebaseFirestore.instance.collection(path + '/listCourse');
+    try {
+      return listCourse
           .add(data)
           .then((value) => print("Course Added"))
           .catchError((error) => print("Failed to add Course: $error"));
-
-
-    } catch (e){
+    } catch (e) {
       print(e.toString());
       return null;
     }
-
   }
-  
-  Future addSkill(Map<String,dynamic> data,{String path="defaultid"}) async{
+
+  Future addSkill(Map<String, dynamic> data,
+      {String path = "defaultid"}) async {
     final CollectionReference listSkills =
-      FirebaseFirestore.instance.collection(path+'/listSkill');
-    try{
-       return listSkills
+        FirebaseFirestore.instance.collection(path + '/listSkill');
+    try {
+      return listSkills
           .add(data)
           .then((value) => print("Skill Added"))
           .catchError((error) => print("Failed to add Skill: $error"));
-
-
-    } catch (e){
+    } catch (e) {
       print(e.toString());
       return null;
     }
-
   }
 
-  Future addJob(Map<String,dynamic> data,{String path="defaultid"}) async{
+  Future addJob(Map<String, dynamic> data, {String path = "defaultid"}) async {
     final CollectionReference listJobs =
-      FirebaseFirestore.instance.collection(path+'/listRoadMap');
-    try{
-       return listJobs
+        FirebaseFirestore.instance.collection(path + '/listRoadMap');
+    try {
+      return listJobs
           .add(data)
           .then((value) => print("listJob Added"))
           .catchError((error) => print("Failed to add listJobs: $error"));
-
-
-    } catch (e){
+    } catch (e) {
       print(e.toString());
       return null;
     }
-
   }
-
-
-  
 }

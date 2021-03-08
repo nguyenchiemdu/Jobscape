@@ -6,7 +6,6 @@ import 'package:learning_app/widgets/main_screens/learning_widget/submit_instruc
 import 'package:learning_app/widgets/main_screens/learning_widget/submit_widget.dart';
 
 class SubmitProof extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +49,7 @@ class SubmitProof extends StatelessWidget {
                       // Text(roadMapItem['name']),
                       Container(
                           margin:
-                          EdgeInsets.only(top: ScreenUtil().setHeight(24)),
+                              EdgeInsets.only(top: ScreenUtil().setHeight(24)),
                           child: Align(
                             alignment: Alignment.center,
                             child: Stack(
@@ -115,34 +114,33 @@ class SubmitProof extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                          width: ScreenUtil().setWidth(234),
-                        height: ScreenUtil().setHeight(33),
-                        decoration: new BoxDecoration(
-                          color: Color(0xffffffff),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [BoxShadow(
-                              color: Color(0x1a454545),
-                              offset: Offset(0,5),
-                              blurRadius: 6,
-                              spreadRadius: 0
-                          ) ],
-                        ),
+                            width: ScreenUtil().setWidth(234),
+                            height: ScreenUtil().setHeight(33),
+                            decoration: new BoxDecoration(
+                              color: Color(0xffffffff),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Color(0x1a454545),
+                                    offset: Offset(0, 5),
+                                    blurRadius: 6,
+                                    spreadRadius: 0)
+                              ],
+                            ),
                             child: TabBar(
                               indicator: BoxDecoration(
                                 color: Color(0xffffbf2f),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               tabs: [
-                                Text(
-                                  "Instruction",
+                                Text("Instruction",
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
                                       fontSize: ScreenUtil().setSp(16),
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
-                                    )
-                                ),
+                                    )),
                                 Text("Submit",
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
@@ -155,26 +153,21 @@ class SubmitProof extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            height: 550,
+                            height: 529,
                             child: TabBarView(
-                              children: [
-                                SubmitInstruction(),
-                                Submit()
-                              ],
+                              children: [SubmitInstruction(), Submit()],
                             ),
                           ),
                         ],
                       ),
-
                     )
-                  // ListView.builder(
-                  //   padding: const EdgeInsets.all(8),
-                  //   itemCount: widget.skillItem['listCourse'].length,
-                  //   itemBuilder: (BuildContext context, int index) {
-                  //     return CourseItemWidget(widget.skillItem['listCourse'][index]);
-                  //   }),
-                ),
-
+                    // ListView.builder(
+                    //   padding: const EdgeInsets.all(8),
+                    //   itemCount: widget.skillItem['listCourse'].length,
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     return CourseItemWidget(widget.skillItem['listCourse'][index]);
+                    //   }),
+                    ),
               ],
             ),
           ),

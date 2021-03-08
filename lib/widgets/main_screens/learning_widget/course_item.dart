@@ -176,7 +176,7 @@ class CourseItemWidget extends StatelessWidget {
           Container(
               width: ScreenUtil().setWidth(312),
               height: 0,
-              margin: EdgeInsets.only(top: ScreenUtil().setHeight(16)),
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(16),bottom: ScreenUtil().setHeight(20)),
               decoration: new BoxDecoration(
                 border: Border.all(color: Color(0xFFEEEEEE)),
               ))

@@ -20,6 +20,9 @@ class CrouseInforWidget extends StatelessWidget {
       else
         star[i.toString()] = 0;
     }
+    print(courseInfor.toString());
+    print('num star' + numStar.toString());
+    print('sum' + sum.toString());
     if (sum != 0)
       star['overall'] = (numStar / sum).toStringAsFixed(1);
     else

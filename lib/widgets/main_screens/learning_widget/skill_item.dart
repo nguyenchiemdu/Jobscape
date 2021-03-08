@@ -18,7 +18,7 @@ class SkillItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: ScreenUtil().setWidth(7),top: ScreenUtil().setHeight(20),left:ScreenUtil().setWidth(7),),
+      margin: EdgeInsets.only(right: ScreenUtil().setWidth(7),top: ScreenUtil().setHeight(18),left:ScreenUtil().setWidth(7),bottom: ScreenUtil().setHeight(2)),
         width: 149,
         height: 190,
         decoration: new BoxDecoration(
@@ -37,7 +37,7 @@ class SkillItem extends StatelessWidget {
           InkWell(
             onTap: (){changeScreen(context);},
             child: Container(
-              margin: EdgeInsets.only(top: ScreenUtil().setHeight(9),right: ScreenUtil().setWidth(9), left: ScreenUtil().setWidth(9)),
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(9),right: ScreenUtil().setWidth(9), left: ScreenUtil().setWidth(9),),
               width: ScreenUtil().setWidth(131),
               height: ScreenUtil().setHeight(99),
               decoration: new BoxDecoration(
