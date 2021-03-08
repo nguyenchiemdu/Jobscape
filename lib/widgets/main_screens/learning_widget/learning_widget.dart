@@ -12,7 +12,6 @@ class MainLearningScreen extends StatefulWidget {
 }
 
 class _MainLearningScreenState extends State<MainLearningScreen> {
-
   dynamic tx = DateTime.now();
   Map roadMapData;
   Map roadMapItem;
@@ -71,14 +70,15 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                       ),
                       Container(
                         margin: EdgeInsets.only(right: 24),
-                        child: Text("Today is " + DateFormat.yMMMMd().format(tx),
-                            style: TextStyle(
-                              fontFamily: 'SFProDisplay',
-                              color: Color(0xff000000),
-                              fontSize: ScreenUtil().setSp(12),
-                              fontWeight: FontWeight.w300,
-                              fontStyle: FontStyle.normal,
-                            )),
+                        child:
+                            Text("Today is " + DateFormat.yMMMMd().format(tx),
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xff000000),
+                                  fontSize: ScreenUtil().setSp(12),
+                                  fontWeight: FontWeight.w300,
+                                  fontStyle: FontStyle.normal,
+                                )),
                       )
                     ],
                   ),
@@ -86,7 +86,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                   Container(
                       margin: EdgeInsets.only(top: 22),
                       child: IndustryComponent('it', changeScreen)),
-                  // IndustryComponent('it', changeScreen),
+                  // IndustryComponent('marketing', changeScreen),
                   // IndustryComponent('it', changeScreen),
                 ],
               ),

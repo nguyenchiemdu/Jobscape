@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:learning_app/widgets/main_screens/learning_widget/add_coursereview_widget.dart';
 import './industry_slider_card.dart';
 import 'package:learning_app/models/industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -70,7 +73,10 @@ class _IndustryComponentState extends State<IndustryComponent> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(right: ScreenUtil().setWidth(12), left: ScreenUtil().setWidth(12), top: ScreenUtil().setHeight(12)),
+              padding: EdgeInsets.only(
+                  right: ScreenUtil().setWidth(12),
+                  left: ScreenUtil().setWidth(12),
+                  top: ScreenUtil().setHeight(12)),
               width: ScreenUtil().setWidth(312),
               height: ScreenUtil().setHeight(183),
               margin: EdgeInsets.only(left: 24, right: 24),
@@ -81,8 +87,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(
-                        bottom: ScreenUtil().setSp(4)),
+                    margin: EdgeInsets.only(bottom: ScreenUtil().setSp(4)),
                     child: Text(industryField['briefIntro'],
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
@@ -141,7 +146,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                     ])),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top:ScreenUtil().setSp(12)),
+                    margin: EdgeInsets.only(top: ScreenUtil().setSp(12)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,

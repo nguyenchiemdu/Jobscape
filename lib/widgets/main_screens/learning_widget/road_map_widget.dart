@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,13 +8,14 @@ import './road_map_item_widget.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'list_skill_widget.dart';
 import 'package:learning_app/models/industry_database.dart';
+
 class RoadMapWidget extends StatefulWidget {
   final String path;
   final Map roadMapData;
-  RoadMapWidget(this.roadMapData,this.path);
+  RoadMapWidget(this.roadMapData, this.path);
 
   @override
-  _RoadMapWidgetState createState() => _RoadMapWidgetState(roadMapData,path);
+  _RoadMapWidgetState createState() => _RoadMapWidgetState(roadMapData, path);
 }
 
 class _RoadMapWidgetState extends State<RoadMapWidget> {
@@ -21,7 +24,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
   final Map roadMapData;
   List listRoadMap;
   List<Widget> listRoadMapWidget = [];
-  _RoadMapWidgetState(this.roadMapData,this.path);
+  _RoadMapWidgetState(this.roadMapData, this.path);
   void startJourney(BuildContext context) {
     Navigator.push(
       context,
@@ -29,21 +32,53 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
           builder: (context) => ListSkillWidget(this.firstRoadMapItem)),
     );
   }
+
   @override
   void initState() {
-      // TODO: implement initState
-      super.initState();
-      getData();
+    // TODO: implement initState
+    super.initState();
+    getData();
+    // addRoadmap();
+  }
+
+  void getData() async {
+    List temp = await DatabaseManager().getListRoadMap(path);
+    // print(jsonEncode(temp));
+    setState(() {
+      listRoadMap = temp;
+      listRoadMapWidget = listRoadMap
+          .map((item) => RoadMapItem(listRoadMap.indexOf(item) + 1, item))
+          .toList();
+    });
+    // print('listRoadMapWidget'+listRoadMapWidget.toString());
+    firstRoadMapItem = listRoadMap[0];
+  }
+
+  void addRoadmap() async {
+    List listRoadMap = [
+      {
+        "content":
+            "Content Content Content Content Content Content Content Content Content Content Content Content Content Content",
+        "name": "Must-have",
+        'order': 1
+      },
+      {
+        "content":
+            "Content Content Content Content Content Content Content Content Content Content Content Content Content Content",
+        "name": "Fast Track",
+        'order': 2
+      },
+      {
+        "content":
+            "Content Content Content Content Content Content Content Content Content Content Content Content Content Content",
+        "name": "Advanced",
+        'order': 3
+      }
+    ];
+    for (Map<String, dynamic> roadMap in listRoadMap) {
+      await DatabaseManager().addRoadmap(roadMap, path: path);
     }
-    void getData()async{
-      List temp =  await DatabaseManager().getListRoadMap(path);
-      setState(() {
-              listRoadMap = temp;
-              listRoadMapWidget= listRoadMap.map((item)=>RoadMapItem(listRoadMap.indexOf(item)+1, item)).toList();
-            });
-      // print('listRoadMapWidget'+listRoadMapWidget.toString());
-      firstRoadMapItem = listRoadMap[0];
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +120,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                     ),
                   ),
                   Container(
-                      margin:
-                          EdgeInsets.only(top: ScreenUtil().setHeight(68)),
+                      margin: EdgeInsets.only(top: ScreenUtil().setHeight(68)),
                       child: Align(
                         alignment: Alignment.center,
                         child: Stack(
@@ -152,8 +186,9 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                     child: Column(
                   children: [
                     Container(
-                      margin:
-                          EdgeInsets.only(top: ScreenUtil().setHeight(37),bottom:ScreenUtil().setHeight(30)),
+                      margin: EdgeInsets.only(
+                          top: ScreenUtil().setHeight(37),
+                          bottom: ScreenUtil().setHeight(30)),
                       child: Text("Recommended by 100+ professionals/advisors",
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -192,8 +227,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                   width: ScreenUtil().setWidth(70),
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image:
-                              AssetImage("assets/images/recommend_icon.png"),
+                          image: AssetImage("assets/images/recommend_icon.png"),
                           fit: BoxFit.cover)),
                 ),
               ),
@@ -237,15 +271,15 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                         margin: EdgeInsets.only(
                             top: ScreenUtil().setHeight(4),
                             left: ScreenUtil().setWidth(24)),
-                        child: Text(
-                            "1 - 2 câu mô tả gì đó cho người dùng hiểu rõ",
-                            style: TextStyle(
-                              fontFamily: 'SFProDisplay',
-                              color: Color(0xff000000),
-                              fontSize: ScreenUtil().setSp(16),
-                              fontWeight: FontWeight.w300,
-                              fontStyle: FontStyle.italic,
-                            )),
+                        child:
+                            Text("1 - 2 câu mô tả gì đó cho người dùng hiểu rõ",
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xff000000),
+                                  fontSize: ScreenUtil().setSp(16),
+                                  fontWeight: FontWeight.w300,
+                                  fontStyle: FontStyle.italic,
+                                )),
                       ),
                       Container(
                           margin: EdgeInsets.only(
@@ -255,7 +289,10 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                           height: ScreenUtil().setHeight(50),
                           child: RaisedButton(
                               onPressed: () {
-                                showAlertDialog(context,roadMapData['name'], () {startJourney(context);});
+                                showAlertDialog(context, roadMapData['name'],
+                                    () {
+                                  startJourney(context);
+                                });
                               },
                               color: Color(0xffffbf2f),
                               shape: RoundedRectangleBorder(
@@ -278,19 +315,13 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
 }
 
 showAlertDialog(BuildContext context, String journey, Function startJourney) {
-
   Widget cancelButton = FlatButton(
       onPressed: () {
         Navigator.of(context).pop();
       },
-      child: Text("Cancel")
-  );
+      child: Text("Cancel"));
   // set up the button
-  Widget okButton = FlatButton(
-    child: Text("Ok"),
-    onPressed: startJourney
-
-  );
+  Widget okButton = FlatButton(child: Text("Ok"), onPressed: startJourney);
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
@@ -301,9 +332,11 @@ showAlertDialog(BuildContext context, String journey, Function startJourney) {
           fontSize: ScreenUtil().setSp(20),
           fontWeight: FontWeight.w600,
           fontStyle: FontStyle.normal,
-        )
-    ),
-    content: Text("Would you like to start your journey to become a " + journey+ " with us now?",
+        )),
+    content: Text(
+        "Would you like to start your journey to become a " +
+            journey +
+            " with us now?",
         style: TextStyle(
           fontFamily: 'SFProDisplay',
           color: Color(0xff000000),

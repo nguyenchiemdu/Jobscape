@@ -17,7 +17,7 @@ class LoginForm extends StatelessWidget {
     );
   }
 
-  void signIn(BuildContext context,user,password) async {
+  void signIn(BuildContext context, user, password) async {
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -59,7 +59,7 @@ class LoginForm extends StatelessWidget {
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(276)),
                 width: double.infinity,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start ,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       margin: EdgeInsets.only(left: 24),
@@ -73,8 +73,8 @@ class LoginForm extends StatelessWidget {
                           )),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left:24,top:3,bottom:22),
-                      child: Text("Sign in with Jobscape",
+                      margin: EdgeInsets.only(left: 24, top: 3, bottom: 22),
+                      child: Text("Sign in to your Jobscape account",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff303030),
@@ -84,7 +84,8 @@ class LoginForm extends StatelessWidget {
                           )),
                     ),
                     Container(
-                        margin: EdgeInsets.only(left:24,right:24,bottom: 15),
+                        margin:
+                            EdgeInsets.only(left: 24, right: 24, bottom: 15),
                         width: ScreenUtil().setWidth(312),
                         height: ScreenUtil().setHeight(53),
                         padding: EdgeInsets.only(left: 20),
@@ -115,7 +116,6 @@ class LoginForm extends StatelessWidget {
                                 fontSize: ScreenUtil().setSp(16),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
-
                               ),
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
@@ -124,7 +124,8 @@ class LoginForm extends StatelessWidget {
                               disabledBorder: InputBorder.none,
                             ))),
                     Container(
-                        margin: EdgeInsets.only(left:24,right:24,bottom: 15),
+                        margin:
+                            EdgeInsets.only(left: 24, right: 24, bottom: 15),
                         width: ScreenUtil().setWidth(312),
                         height: ScreenUtil().setHeight(53),
                         padding: EdgeInsets.only(left: 20),
@@ -164,7 +165,8 @@ class LoginForm extends StatelessWidget {
                               disabledBorder: InputBorder.none,
                             ))),
                     Container(
-                      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(18)),
+                      margin:
+                          EdgeInsets.only(bottom: ScreenUtil().setHeight(18)),
                       alignment: Alignment.center,
                       child: Text("Forgot you password?",
                           style: TextStyle(
@@ -178,8 +180,11 @@ class LoginForm extends StatelessWidget {
                     Container(
                         width: ScreenUtil().setWidth(312),
                         height: ScreenUtil().setHeight(48),
-                        margin: EdgeInsets.only(left:24,right:24),
-                        child: RaisedButton(onPressed: (){signIn(context,user.text,password.text);},
+                        margin: EdgeInsets.only(left: 24, right: 24),
+                        child: RaisedButton(
+                            onPressed: () {
+                              signIn(context, user.text, password.text);
+                            },
                             color: Color(0xffffbf2f),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -194,7 +199,10 @@ class LoginForm extends StatelessWidget {
                                 )))),
                     Center(
                       child: Container(
-                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(21),bottom: ScreenUtil().setHeight(13),),
+                        margin: EdgeInsets.only(
+                          top: ScreenUtil().setHeight(21),
+                          bottom: ScreenUtil().setHeight(13),
+                        ),
                         // margin: EdgeInsets.only(
                         //     top: 21, left: 136, right: 136, bottom: 13),
                         child: Text("or continue with",

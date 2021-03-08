@@ -19,21 +19,21 @@ class DatabaseManager {
   //   });
   // }
 
-  Future getIndustryList() async {
-    List industryList = [];
+  // Future getIndustryList() async {
+  //   List industryList = [];
 
-    try {
-      await industry.get().then((querySnapshot) {
-        querySnapshot.docs.forEach((element) {
-          industryList.add(element.data());
-        });
-      });
-      return industryList;
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
+  //   try {
+  //     await industry.get().then((querySnapshot) {
+  //       querySnapshot.docs.forEach((element) {
+  //         industryList.add(element.data());
+  //       });
+  //     });
+  //     return industryList;
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return null;
+  //   }
+  // }
 
   Future getIndustryField(String fieldId) async {
     dynamic industryField;
@@ -185,6 +185,7 @@ class DatabaseManager {
     try {
       await FirebaseFirestore.instance
           .collection(path + '/listRoadMap')
+          .orderBy('order')
           .get()
           .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
@@ -257,14 +258,30 @@ class DatabaseManager {
     }
   }
 
-  Future addJob(Map<String, dynamic> data, {String path = "defaultid"}) async {
+  Future addRoadmap(Map<String, dynamic> data,
+      {String path = "defaultid"}) async {
     final CollectionReference listJobs =
         FirebaseFirestore.instance.collection(path + '/listRoadMap');
     try {
       return listJobs
           .add(data)
-          .then((value) => print("listJob Added"))
-          .catchError((error) => print("Failed to add listJobs: $error"));
+          .then((value) => print("Roadmap Added"))
+          .catchError((error) => print("Failed to add Roadmap: $error"));
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future addJob(Map<String, dynamic> data,
+      {String fieldId = "defaultid"}) async {
+    final CollectionReference listJobs = FirebaseFirestore.instance
+        .collection('industry/$fieldId' + '/listJobs');
+    try {
+      return listJobs
+          .add(data)
+          .then((value) => print("Job Added"))
+          .catchError((error) => print("Failed to add Job: $error"));
     } catch (e) {
       print(e.toString());
       return null;
