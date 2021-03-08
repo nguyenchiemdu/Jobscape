@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/models/google_sign_in.dart';
@@ -48,7 +49,7 @@ class HomeWidget extends StatelessWidget {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             image: NetworkImage(
-                                'https://bizweb.dktcdn.net/100/175/849/files/chup-anh-profile-doanh-nhan-chan-dung-nghe-nghiep-dep-o-ha-noi-12.jpg?v=1556771914677#.YCeLPA8sis8.link'),
+                                FirebaseAuth.instance.currentUser.photoURL),
                             fit: BoxFit.fill,
                           )),
                     ),
@@ -62,12 +63,11 @@ class HomeWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                  child: Text("Hello ",
-                                      // +
-                                      // Provider.of<GoogleSignInProvider>(
-                                      //         context,
-                                      //         listen: false)
-                                      //     .displayName,
+                                  child: Text(
+                                      "Hello " +
+                                          FirebaseAuth
+                                              .instance.currentUser.displayName
+                                              .toString(),
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xff000000),
@@ -167,7 +167,10 @@ class HomeWidget extends StatelessWidget {
                               )),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: ScreenUtil().setHeight(59), left: 25, right: 25),
+                          margin: EdgeInsets.only(
+                              top: ScreenUtil().setHeight(59),
+                              left: 25,
+                              right: 25),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

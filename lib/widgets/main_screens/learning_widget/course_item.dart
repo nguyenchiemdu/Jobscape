@@ -14,8 +14,27 @@ class CourseItemWidget extends StatelessWidget {
     );
   }
 
+  String caculateStar() {
+    Map courseInfor = courseItem;
+    // print(courseInfor.toString());
+    int sum = 0;
+    int numStar = 0;
+    for (int i = 1; i <= 5; i++) {
+      sum += courseInfor[i.toString()];
+      numStar += courseInfor[i.toString()] * i;
+    }
+
+    if (sum != 0)
+      return (numStar / sum).toStringAsFixed(1);
+    else
+      return '0';
+    // print(sum);
+    // print(star.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
+    String overallStar = caculateStar();
     return Container(
       child: Column(
         children: [
@@ -87,7 +106,9 @@ class CourseItemWidget extends StatelessWidget {
                             fontStyle: FontStyle.normal,
                           )),
                       new TextSpan(
-                          text: courseItem['price'].toString() + "\$",
+                          text: courseItem['price'] != 0
+                              ? courseItem['price'].toString() + "\$"
+                              : 'Free',
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xffffbf2f),
@@ -109,7 +130,7 @@ class CourseItemWidget extends StatelessWidget {
                           fontStyle: FontStyle.normal,
                         )),
                     new TextSpan(
-                        text: courseItem['star'].toString() + "/5",
+                        text: overallStar + "/5",
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xffffbf2f),
@@ -176,7 +197,9 @@ class CourseItemWidget extends StatelessWidget {
           Container(
               width: ScreenUtil().setWidth(312),
               height: 0,
-              margin: EdgeInsets.only(top: ScreenUtil().setHeight(16),bottom: ScreenUtil().setHeight(20)),
+              margin: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(16),
+                  bottom: ScreenUtil().setHeight(20)),
               decoration: new BoxDecoration(
                 border: Border.all(color: Color(0xFFEEEEEE)),
               ))

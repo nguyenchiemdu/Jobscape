@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/models/google_sign_in.dart';
@@ -65,8 +66,8 @@ class HomeUsedWidget extends StatelessWidget {
                             decoration: new BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                  image: NetworkImage(
-                                      'https://bizweb.dktcdn.net/100/175/849/files/chup-anh-profile-doanh-nhan-chan-dung-nghe-nghiep-dep-o-ha-noi-12.jpg?v=1556771914677#.YCeLPA8sis8.link'),
+                                  image: NetworkImage(FirebaseAuth
+                                      .instance.currentUser.photoURL),
                                   fit: BoxFit.fill,
                                 )),
                           ),
@@ -80,13 +81,12 @@ class HomeUsedWidget extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                        child: Text(
-                                            "Hello ",
-                                                // +
-                                                // Provider.of<GoogleSignInProvider>(
-                                                //         context,
-                                                //         listen: false)
-                                                //     .displayName,
+                                        child: Text("Hello ",
+                                            // +
+                                            // Provider.of<GoogleSignInProvider>(
+                                            //         context,
+                                            //         listen: false)
+                                            //     .displayName,
                                             style: TextStyle(
                                               fontFamily: 'SFProDisplay',
                                               color: Color(0xff000000),

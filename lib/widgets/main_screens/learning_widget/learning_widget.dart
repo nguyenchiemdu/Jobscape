@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -64,7 +65,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                               image: NetworkImage(
-                                  'https://bizweb.dktcdn.net/100/175/849/files/chup-anh-profile-doanh-nhan-chan-dung-nghe-nghiep-dep-o-ha-noi-12.jpg?v=1556771914677#.YCeLPA8sis8.link'),
+                                  FirebaseAuth.instance.currentUser.photoURL),
                               fit: BoxFit.fill,
                             )),
                       ),
