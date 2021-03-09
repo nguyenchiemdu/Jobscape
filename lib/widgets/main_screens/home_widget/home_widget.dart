@@ -121,11 +121,6 @@ class HomeWidget extends StatelessWidget {
                     height: ScreenUtil().setHeight(270),
                     margin: EdgeInsets.only(left: 24, right: 24, top: 30),
                     decoration: new BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/getjob.png"),
-                        fit: BoxFit.fitWidth,
-                        alignment: Alignment.topCenter,
-                      ),
                       color: Color(0xffffffff),
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
@@ -140,35 +135,50 @@ class HomeWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 28, left: 24),
-                          child: Text("Here’s how to get your Dream Job!",
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xff303030),
-                                fontSize: ScreenUtil()
-                                    .setSp(16, allowFontScalingSelf: true),
-                                fontWeight: FontWeight.w700,
-                                fontStyle: FontStyle.normal,
-                              )),
+                          width: ScreenUtil().setWidth(324),
+                          height: ScreenUtil().setHeight(190),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/getjob.png"),
+                              fit: BoxFit.cover,
+                              // alignment: Alignment.topCenter,
+                            ),
+                          ),
+                          padding: EdgeInsets.only(top: 28, left: 24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Here’s how to get your Dream Job!",
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xff303030),
+                                    fontSize: ScreenUtil()
+                                        .setSp(16, allowFontScalingSelf: true),
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                  )),
+                              Container(
+                                width: ScreenUtil().setWidth(151),
+                                height: ScreenUtil().setHeight(100),
+                                margin: EdgeInsets.only(top: 6),
+                                child: Text(
+                                    "Explore the essential skill sets to secure a job in Information Technology, Marketing, Finance, and more. Recommended by 300+ professionals.\nAnd totally FREE.",
+                                    style: TextStyle(
+                                      fontFamily: 'SFProDisplay',
+                                      color: Color(0xff303030),
+                                      fontSize: ScreenUtil()
+                                          .setSp(12, allowFontScalingSelf: true),
+                                      fontWeight: FontWeight.w300,
+                                      fontStyle: FontStyle.normal,
+                                    )),
+                              ),
+                            ],
+                          ),
                         ),
-                        Container(
-                          width: ScreenUtil().setWidth(151),
-                          height: ScreenUtil().setHeight(100),
-                          margin: EdgeInsets.only(top: 6, left: 24),
-                          child: Text(
-                              "Explore the essential skill sets to secure a job in Information Technology, Marketing, Finance, and more. Recommended by 300+ professionals.\nAnd totally FREE.",
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xff303030),
-                                fontSize: ScreenUtil()
-                                    .setSp(12, allowFontScalingSelf: true),
-                                fontWeight: FontWeight.w300,
-                                fontStyle: FontStyle.normal,
-                              )),
-                        ),
+
                         Container(
                           margin: EdgeInsets.only(
-                              top: ScreenUtil().setHeight(59),
+                              top: ScreenUtil().setHeight(15),
                               left: 25,
                               right: 25),
                           child: Row(
@@ -196,7 +206,7 @@ class HomeWidget extends StatelessWidget {
                               ),
                               Container(
                                   width: 0,
-                                  height: 50,
+                                  height: ScreenUtil().setHeight(50),
                                   decoration: new BoxDecoration(
                                     border:
                                         Border.all(color: Color(0xFFEEEEEE)),
@@ -223,7 +233,7 @@ class HomeWidget extends StatelessWidget {
                               ),
                               Container(
                                   width: 0,
-                                  height: 50,
+                                  height: ScreenUtil().setHeight(50),
                                   decoration: new BoxDecoration(
                                     border:
                                         Border.all(color: Color(0xFFEEEEEE)),
