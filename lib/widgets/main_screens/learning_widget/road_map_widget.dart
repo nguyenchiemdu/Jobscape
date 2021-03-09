@@ -289,10 +289,8 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                           height: ScreenUtil().setHeight(50),
                           child: RaisedButton(
                               onPressed: () {
-                                showAlertDialog(context, roadMapData['name'],
-                                    () {
-                                  startJourney(context);
-                                });
+                                showAlertDialog(context, roadMapData['name'], () {startJourney(context);}
+                                );
                               },
                               color: Color(0xffffbf2f),
                               shape: RoundedRectangleBorder(
@@ -321,7 +319,12 @@ showAlertDialog(BuildContext context, String journey, Function startJourney) {
       },
       child: Text("Cancel"));
   // set up the button
-  Widget okButton = FlatButton(child: Text("Ok"), onPressed: startJourney);
+  Widget okButton = FlatButton(child: Text("Ok"),
+      onPressed:
+      () {
+        Navigator.of(context).pop();
+        startJourney();
+      });
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(

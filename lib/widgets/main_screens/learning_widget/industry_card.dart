@@ -60,6 +60,7 @@ class IndustryCard extends StatelessWidget {
                     children: [
                       Container(
                         margin: EdgeInsets.only(bottom: 7, left: 13),
+                        width: ScreenUtil().setWidth(170),
                         child: Text(jobData['name'],
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
