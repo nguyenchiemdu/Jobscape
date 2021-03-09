@@ -223,6 +223,7 @@ class _SubmitState extends State<Submit> {
             child: Container(
                 width: ScreenUtil().setWidth(300),
                 height: ScreenUtil().setHeight(167),
+                padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
                 decoration: new BoxDecoration(
                   color: Color(0xffffffff),
                   borderRadius: BorderRadius.circular(14),

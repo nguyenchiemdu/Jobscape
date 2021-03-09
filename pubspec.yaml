@@ -93,6 +93,11 @@ flutter:
     - assets/images/link_icon.png
     - assets/images/image_upload.png
     - assets/images/post_icon.png
+    - assets/images/scholar_icon.png
+    - assets/images/cv_icon.png
+    - assets/images/background_user_profile.png
+    - assets/images/edit_icon.png
+    - assets/images/logout_icon.png
 
   #   - images/a_dot_ham.jpeg
 

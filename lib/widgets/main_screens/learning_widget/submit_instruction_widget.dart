@@ -207,7 +207,7 @@ class SubmitInstruction extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(14)),
-              child: Text("Why do we need your proof?",
+              child: Text("Privacy Policy",
                   style: TextStyle(
                     fontFamily: 'SFProDisplay',
                     color: Color(0xff000000),

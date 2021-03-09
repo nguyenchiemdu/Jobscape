@@ -74,7 +74,7 @@ class LoginForm extends StatelessWidget {
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 24, top: 3, bottom: 22),
-                      child: Text("Sign in to your Jobscape account",
+                      child: Text("Sign in",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff303030),
