@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/home_used_widget.dart';
+import 'package:learning_app/widgets/main_screens/user_profile_widget/user_profile_widget.dart';
 import './learning_widget/learning_widget.dart';
 import './home_widget/home_widget.dart';
 import 'package:learning_app/models/users_database.dart';
@@ -59,7 +60,8 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
       [HomeWidget(_selectPage), HomeUsedWidget(_selectPage)],
       MainLearningScreen(),
       WorkshopWidget(),
-      // QuestionWidget()
+      // QuestionWidget(),
+      UserProfileWidget()
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -99,6 +101,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
           BottomNavigationBarItem(icon: Icon(Icons.folder), label: ''),
           // BottomNavigationBarItem(
           //     icon: Icon(Icons.help_center_outlined), label: '')
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "")
         ],
       ),
     );

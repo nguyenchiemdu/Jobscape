@@ -6,8 +6,11 @@ import 'package:learning_app/widgets/main_screens/learning_widget/submit_instruc
 import 'package:learning_app/widgets/main_screens/learning_widget/submit_widget.dart';
 
 class SubmitProof extends StatelessWidget {
+  List<String> listNameSkill;
+  SubmitProof(this.listNameSkill);
   @override
   Widget build(BuildContext context) {
+    // print(listNameSkill.toString());
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -155,7 +158,10 @@ class SubmitProof extends StatelessWidget {
                           Container(
                             height: 529,
                             child: TabBarView(
-                              children: [SubmitInstruction(), Submit()],
+                              children: [
+                                SubmitInstruction(),
+                                Submit(listNameSkill)
+                              ],
                             ),
                           ),
                         ],

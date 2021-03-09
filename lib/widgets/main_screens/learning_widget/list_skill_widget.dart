@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/proof_submit_widget.dart';
+import 'package:learning_app/widgets/main_screens/learning_widget/road_map_item_widget.dart';
 import 'skill_item.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:learning_app/models/industry_database.dart';
@@ -21,17 +22,20 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
   UserDatabaseService userDatabase =
       UserDatabaseService(uid: FirebaseAuth.instance.currentUser.uid);
   List<Widget> listSkillWidget = [];
+  List listSkill;
   void addData() {
-    print(widget.roadMapItem.toString());
     for (Map skill in widget.roadMapItem['listSkill']) {
       DatabaseManager().addSkill(skill, path: widget.roadMapItem['path']);
     }
   }
 
   void changeScreen(BuildContext context) {
+    List<String> listNameSkill =
+        listSkill.map((e) => e['name'].toString()).toList();
+    print(listSkill.toString());
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SubmitProof()),
+      MaterialPageRoute(builder: (context) => SubmitProof(listNameSkill)),
     );
   }
 
@@ -43,15 +47,15 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
   }
 
   void getData() async {
-    List listSkill =
-        await industryDatabase.getListSkill(widget.roadMapItem['path']);
+    List res = await industryDatabase.getListSkill(widget.roadMapItem['path']);
     List listLearnedSkill =
         await userDatabase.getLearnedSkills(widget.roadMapItem['path']);
-    print('listLearnedSkill :' + listLearnedSkill.toString());
+    // print('listLearnedSkill :' + listLearnedSkill.toString());
     // print(tmp.toString());
     // print(widget.roadMapItem.toString());
     setState(() {
-      listSkillWidget = listSkill.map((skill) => SkillItem(skill)).toList();
+      listSkill = res;
+      listSkillWidget = res.map((skill) => SkillItem(skill)).toList();
     });
     // print(listSkillWidget.toList());
   }

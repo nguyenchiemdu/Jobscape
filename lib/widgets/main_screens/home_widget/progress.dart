@@ -31,7 +31,8 @@ class _ProgressState extends State<Progress> {
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SubmitProof()),
+      MaterialPageRoute(
+          builder: (context) => SubmitProof(['This is in the home page'])),
     );
   }
 

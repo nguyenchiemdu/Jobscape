@@ -35,13 +35,16 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
     else
       print('data base alredy has data');
   }
+
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => SubmitProof()),
+          builder: (context) =>
+              SubmitProof([widget.skillItem['name'].toString()])),
     );
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -228,7 +231,8 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
                   height: ScreenUtil().setHeight(50),
                   child: RaisedButton(
                       onPressed: () {
-                        changeScreen(context);},
+                        changeScreen(context);
+                      },
                       color: Color(0xffffbf2f),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),

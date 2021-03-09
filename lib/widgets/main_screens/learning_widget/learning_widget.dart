@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:learning_app/models/firebase_storage.dart';
 import './industry_component.dart';
 // import './industry_slider_card.dart';
 import './road_map_widget.dart';
