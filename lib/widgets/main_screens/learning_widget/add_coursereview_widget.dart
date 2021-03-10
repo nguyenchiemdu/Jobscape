@@ -7,6 +7,7 @@ import 'package:learning_app/models/google_sign_in.dart';
 import 'package:intl/intl.dart';
 // import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/widgets/main_screens/workshop_widget/list_view_reminder_widget.dart';
 
 class AddReviewFormWidget extends StatelessWidget {
@@ -15,10 +16,11 @@ class AddReviewFormWidget extends StatelessWidget {
   int rating;
   final reviewText = TextEditingController();
   final courseReviewDataBase = DatabaseManager();
-  void submitReview() {
+  void submitReview() async{
     // FirebaseAuth.instance.currentUser.displayName
+    String displayName = await UserDatabaseService().getUserDisplayname();
     Map<String, dynamic> reviews = {
-      "user": FirebaseAuth.instance.currentUser.displayName,
+      "user": displayName,
       "reviewText": "Default",
       "upvote": 0,
       "star": 0,
