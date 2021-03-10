@@ -25,7 +25,7 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
   UserDatabaseService userDatabase =
       UserDatabaseService(uid: FirebaseAuth.instance.currentUser.uid);
   List<Widget> listSkillWidget = [];
-  List listSkill;
+  List<Map> listSkill;
   void addData() {
     for (Map skill in widget.roadMapItem['listSkill']) {
       DatabaseManager().addSkill(skill, path: widget.roadMapItem['path']);
@@ -35,10 +35,9 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
   void changeScreen(BuildContext context) {
     List<String> listNameSkill =
         listSkill.map((e) => e['name'].toString()).toList();
-    print(listSkill.toString());
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SubmitProof(listNameSkill)),
+      MaterialPageRoute(builder: (context) => SubmitProof(listSkill)),
     );
   }
 
@@ -49,7 +48,7 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
     getData();
   }
   void getData() async {
-    List res = await industryDatabase.getListSkill(widget.roadMapItem['path']);
+    List<Map> res = await industryDatabase.getListSkill(widget.roadMapItem['path']);
     List listLearnedSkill =
         await userDatabase.getLearnedSkills(widget.roadMapItem['path']);
     // print('listLearnedSkill :' + listLearnedSkill.toString());

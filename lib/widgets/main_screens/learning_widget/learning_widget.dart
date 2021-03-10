@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_app/models/firebase_storage.dart';
+import 'package:learning_app/widgets/main_screens/learning_widget/avatar_leaning_widget.dart';
 import './industry_component.dart';
 // import './industry_slider_card.dart';
 import './road_map_widget.dart';
@@ -58,18 +59,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 24),
-                        width: ScreenUtil().setWidth(36),
-                        height: ScreenUtil().setHeight(36),
-                        decoration: new BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  FirebaseAuth.instance.currentUser.photoURL),
-                              fit: BoxFit.fill,
-                            )),
-                      ),
+                      AvatarLearningWidget(),
                       Container(
                         margin: EdgeInsets.only(right: 24),
                         child:

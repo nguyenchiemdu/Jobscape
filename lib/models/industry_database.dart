@@ -104,7 +104,7 @@ class DatabaseManager {
   }
 
   Future getListSkill(String path) async {
-    List result = [];
+    List<Map> result = [];
     Map tmp;
     try {
       await FirebaseFirestore.instance

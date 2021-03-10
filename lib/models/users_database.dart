@@ -12,16 +12,71 @@ class UserDatabaseService {
   final CollectionReference users =
       FirebaseFirestore.instance.collection('users');
 
-  Future updateUserData(String name, int completed_course, int enrolled_course,
+  Future updateUserData( int completed_course, int enrolled_course,
       int reputation) async {
-    return await users.doc(uid).set({
-      'name': name,
+      String displayName = FirebaseAuth.instance.currentUser.displayName;
+      String photoURL = FirebaseAuth.instance.currentUser.photoURL;
+      if (displayName==null){
+        displayName = FirebaseAuth.instance.currentUser.email.split('@')[0];
+      }
+      if (photoURL== null){
+        photoURL = 'https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/avatar%2Fdefault-avatar.png?alt=media&token=96da3222-7de1-4b6e-b825-a4a5a309a97a';
+      }
+      String backgroundURL = 'https://i.pinimg.com/originals/42/0b/4b/420b4b7bfb03ae2310ce5d614d8cb216.jpg';
+      return await users.doc(uid).set({
+      'displayName':  displayName,
+      'email' : FirebaseAuth.instance.currentUser.email,
       'completed_course': completed_course,
       'enrolled_course': enrolled_course,
       'reputation': reputation,
+      'photoURL': photoURL,
+      'backgroundURL' : backgroundURL,
     });
   }
+  Future<String> getUserDisplayname()async{
+    String uid  = FirebaseAuth.instance.currentUser.uid;
+    String res;
+    await users.doc(uid)
+          .get()
+          .then((value){res = value.data()['displayName'];} )
+          .onError((error, stackTrace){print('failed to get user displayName : '+error.toString());});
+    return res;
+  }
 
+  Future<String> getUserbackgroundURL()async{
+    String uid  = FirebaseAuth.instance.currentUser.uid;
+    String res;
+    await users.doc(uid)
+          .get()
+          .then((value){res = value.data()['backgroundURL'];} )
+          .onError((error, stackTrace){print('failed to get user photoURL : '+error.toString());});
+    return res;
+  }
+  Future<String> getUserphotoURL()async{
+    String uid  = FirebaseAuth.instance.currentUser.uid;
+    String res;
+    await users.doc(uid)
+          .get()
+          .then((value){res = value.data()['photoURL'];} )
+          .onError((error, stackTrace){print('failed to get user photoURL : '+error.toString());});
+    return res;
+  }
+  Future<Map> getUserInfor() async{
+    Map res;
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    await users.doc(uid)
+          .get()
+          .then((value) => res = value.data())
+          .onError((error, stackTrace){print('failed to get user infor : '+error.toString());return null;});
+    return res;
+  }
+  Future uploadProfile(Map proFile) async{
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    await users.doc(uid)
+                .update(proFile)
+                .then((value) => print('upload profile completed'))
+                .onError((error, stackTrace){print('failed to upload profile : '+error.toString());});
+  }
   Future initJoinWorkshop() async {
     await users
         .doc(uid)
@@ -91,6 +146,23 @@ class UserDatabaseService {
       print('Failed to get remindWorkshopIds:' + e);
       return null;
     }
+  }
+
+  Future submitProof({String skillName,String fullPath,String proofURL})async{
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    CollectionReference listProof = FirebaseFirestore.instance.collection('users/$uid/listProof');
+    List list = fullPath.split('/');
+    String skillId = list[list.length-1];
+    list.removeLast();
+    String pathToSkill =list.join('/'); 
+
+    await listProof.add({
+      'skillId': skillId,
+      'skillName' : skillName,
+      'pathToSkill':pathToSkill,
+      'proofURL':proofURL
+    }).then((value) => print('submitted Proof'))
+    .onError((error, stackTrace) {print('Failed to submit Proof : '+error.toString());});
   }
 
   Future<bool> addRemindWorkShop(String workshopId) async {

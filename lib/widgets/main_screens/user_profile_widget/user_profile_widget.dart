@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/google_sign_in.dart';
+import 'package:learning_app/widgets/main_screens/home_widget/display_name_widget.dart';
+import 'package:learning_app/widgets/main_screens/user_profile_widget/background_image_profile_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/course_completed_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/journey_completed_widget.dart';
 import 'package:provider/provider.dart';
@@ -20,16 +22,7 @@ class UserProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: ScreenUtil().setWidth(360),
-          height: ScreenUtil().setHeight(259),
-            decoration: new BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      FirebaseAuth.instance.currentUser.photoURL),
-                  fit: BoxFit.fill,
-                )),
-        ),
+        BackgroundProfileWidget(),
 
         Container(
           width: ScreenUtil().setWidth(360),
@@ -55,15 +48,14 @@ class UserProfileWidget extends StatelessWidget {
                         children: [
                           Container(
                             margin: EdgeInsets.only(right: ScreenUtil().setWidth(10),),
-                            child: Text(FirebaseAuth.instance.currentUser.displayName.toString(),
-                                style: TextStyle(
+                            child: DisplayName(
+                              style:  TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff000000),
                                   fontSize: ScreenUtil().setSp(20,allowFontScalingSelf: false),
                                   fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.normal,
-                                )
-                            ),
+                                ) ,)
                           ),
                           InkWell(
                             onTap: () {

@@ -10,7 +10,7 @@ class WorkshopCardRegister extends StatelessWidget {
   String title;
   Timestamp timeStamp;
   String speaker;
-  int duration;
+  Duration duration;
   WorkshopCardRegister(this.image_source, this.for_whom, this.title,
       this.timeStamp, this.speaker) {
     // List timeList =
@@ -18,9 +18,8 @@ class WorkshopCardRegister extends StatelessWidget {
     //   int day = (int.parse(timeList[0]) / 24).round();
     // print(DateFormat('d').format(timeStamp.toDate()));
     // print(DateFormat('d').format(DateTime.now()));
-    duration = int.parse(DateFormat('d').format(timeStamp.toDate())) -
-        int.parse(DateFormat('d').format(DateTime.now()));
-    // print(duration);
+     duration = timeStamp.toDate().difference(DateTime.now()); 
+     print(duration.inDays);
   }
 
   @override
@@ -339,7 +338,7 @@ class WorkshopCardRegister extends StatelessWidget {
               ),
             ),
             child: Center(
-                child: Text(duration.toString() + " next\ndays",
+                child: Text(duration.inDays.toString() + " next\ndays",
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xffffffff),

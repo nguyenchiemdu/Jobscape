@@ -44,7 +44,8 @@ class WorkshopDatabase {
             .then((element) {
           workshop = element.data();
           workshop['id'] = element.id;
-          workshopList.add(workshop);
+          Timestamp date = workshop['date'];
+          if (date.toDate().compareTo(DateTime.now())>=0) workshopList.add(workshop);
         });
       }
       return workshopList;

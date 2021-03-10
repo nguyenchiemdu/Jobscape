@@ -41,7 +41,7 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
       context,
       MaterialPageRoute(
           builder: (context) =>
-              SubmitProof([widget.skillItem['name'].toString()])),
+              SubmitProof([widget.skillItem])),
     );
   }
 

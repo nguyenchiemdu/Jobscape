@@ -32,7 +32,7 @@ class _ProgressState extends State<Progress> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => SubmitProof(['This is in the home page'])),
+          builder: (context) => SubmitProof([{'name': 'this is from home page'}])),
     );
   }
 

@@ -39,7 +39,7 @@ class GoogleSignInProvider extends ChangeNotifier {
       final uid = user.uid;
       displayName = user.displayName;
       if (authResult.additionalUserInfo.isNewUser) {
-        UserDatabaseService(uid: uid).updateUserData("New User", 0, 0, 0);
+        UserDatabaseService(uid: uid).updateUserData( 0, 0, 0);
       }
     }
 

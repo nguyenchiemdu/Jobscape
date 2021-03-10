@@ -6,8 +6,8 @@ import 'package:learning_app/widgets/main_screens/learning_widget/submit_instruc
 import 'package:learning_app/widgets/main_screens/learning_widget/submit_widget.dart';
 
 class SubmitProof extends StatelessWidget {
-  List<String> listNameSkill;
-  SubmitProof(this.listNameSkill);
+  List<Map> listSkill;
+  SubmitProof(this.listSkill);
   @override
   Widget build(BuildContext context) {
     // print(listNameSkill.toString());
@@ -160,7 +160,7 @@ class SubmitProof extends StatelessWidget {
                             child: TabBarView(
                               children: [
                                 SubmitInstruction(),
-                                Submit(listNameSkill)
+                                Submit(listSkill)
                               ],
                             ),
                           ),

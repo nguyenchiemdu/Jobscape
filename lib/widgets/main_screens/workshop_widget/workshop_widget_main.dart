@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/workshop_database.dart';
@@ -41,6 +44,7 @@ class _WorkshopWidgetState extends State<WorkshopWidget> {
 
   @override
   Widget build(BuildContext context) {
+    print( FirebaseAuth.instance.currentUser.toString());
     return Scaffold(
       // appBar:
       //    TabBar(

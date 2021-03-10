@@ -1,35 +1,106 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:learning_app/models/google_sign_in.dart';
+import 'package:learning_app/models/users_database.dart';
+import 'package:learning_app/widgets/main_screens/user_profile_widget/avatar_edit_profile_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/course_completed_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/journey_completed_widget.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
-class EditUserProfile extends StatelessWidget {
-  TextEditingController nameController = TextEditingController()..text = FirebaseAuth.instance.currentUser.displayName.toString();
-  TextEditingController emailController = TextEditingController()..text = FirebaseAuth.instance.currentUser.email;
-  final positionController = TextEditingController();
-  final ageController = TextEditingController();
-  final experienceController = TextEditingController();
-  final companyController = TextEditingController();
+class EditUserProfile extends StatefulWidget {
+  @override
+  _EditUserProfileState createState() => _EditUserProfileState();
+}
 
+class _EditUserProfileState extends State<EditUserProfile> {
+  TextEditingController nameController = TextEditingController()..text = '';
+
+  TextEditingController emailController = TextEditingController()..text = '';
+
+  final positionController = TextEditingController();
+
+  final ageController = TextEditingController();
+
+  final experienceController = TextEditingController();
+
+  final companyController = TextEditingController();
+  Map userInfor;
+  PickedFile image;
+  @override
+  void initState() {
+      // TODO: implement initState
+      super.initState();
+      getData();
+    }
+  void getData() async{
+    userInfor =  await UserDatabaseService().getUserInfor();
+    setState(() {
+          nameController = TextEditingController()..text = userInfor['displayName'];
+          emailController = TextEditingController()..text = userInfor['email']; 
+        });
+    print(userInfor.toString());
+  }
+  uploadProfile()async{
+    Map<String,dynamic> newInfor = {};
+    newInfor['displayName'] = nameController.text;
+    newInfor['currentPosition'] = positionController.text;
+    newInfor['age'] = ageController.text;
+    newInfor['yearExperience'] = experienceController.text;
+    newInfor['company'] = companyController.text;
+    newInfor['email'] = emailController.text;
+    await UserDatabaseService().uploadProfile(newInfor);
+  }
+  submitCV() async{
+      final _storage = FirebaseStorage.instance;
+      String uid =FirebaseAuth.instance.currentUser.uid;
+      
+      if (image != null) {
+        var file = File(image.path);
+        //upload to FireBase
+        var _snapshot = await _storage
+            .ref()
+            .child('CV/$uid')
+            .putFile(file)
+            .whenComplete(() => print('Upload CV  to Storage complete'))
+            .onError((error, stackTrace) {
+          print('Failed to upload CV to storage:' + error);
+          return null;
+        });
+        
+
+      } else {
+        print('No Path received');
+      }
+  }
+  chooseCV() async {
+    final _picker = ImagePicker();
+    
+    //CHeck permission
+    // await Permission.photos.request();
+    await Permission.photos.request();
+    var permissionStatus = await Permission.photos.status;
+    if (permissionStatus.isGranted) {
+      //Select Image
+      image = await _picker.getImage(source: ImageSource.gallery);
+      
+      
+    } else {
+      print('Grand permissions and try again');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Stack(
           children: [
-            Container(
-              width: ScreenUtil().setWidth(360),
-              height: ScreenUtil().setHeight(259),
-              decoration: new BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        FirebaseAuth.instance.currentUser.photoURL),
-                    fit: BoxFit.fill,
-                  )),
-            ),
+            AvatarEditProfileWidget(),
             Container(
               width: ScreenUtil().setWidth(360),
               height: ScreenUtil().setHeight(760),
@@ -335,7 +406,7 @@ class EditUserProfile extends StatelessWidget {
                                     width: ScreenUtil().setWidth(120),
                                     height: ScreenUtil().setHeight(28),
                                     child: RaisedButton(
-                                        onPressed: () {},
+                                        onPressed: () {chooseCV();},
                                         color: Color(0xffffbf2f),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(6),
@@ -348,11 +419,13 @@ class EditUserProfile extends StatelessWidget {
                                               fontWeight: FontWeight.w700,
                                               fontStyle: FontStyle.normal,
                                             )))),
+                                
                               ],
                             ),
                           ),
                         )),
-                  )
+                  ),
+                  RaisedButton(onPressed: (){uploadProfile();submitCV();}, child: Text('Save'),)
                 ],
               ),
             )

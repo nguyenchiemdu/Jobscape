@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/models/google_sign_in.dart';
+import 'package:learning_app/widgets/main_screens/home_widget/avatar_home_widget.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/advisor_widget.dart';
+import 'package:learning_app/widgets/main_screens/home_widget/display_name_widget.dart';
 import './workshop_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -41,18 +43,7 @@ class HomeWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 21, right: 12),
-                      width: ScreenUtil().setWidth(48),
-                      height: ScreenUtil().setWidth(48),
-                      decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                FirebaseAuth.instance.currentUser.photoURL),
-                            fit: BoxFit.fill,
-                          )),
-                    ),
+                    AvatarHomeWidget(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -63,19 +54,16 @@ class HomeWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                  child: Text(
-                                      "Hello " +
-                                          FirebaseAuth
-                                              .instance.currentUser.displayName
-                                              .toString(),
-                                      style: TextStyle(
-                                        fontFamily: 'SFProDisplay',
-                                        color: Color(0xff000000),
-                                        fontSize: ScreenUtil().setSp(14,
-                                            allowFontScalingSelf: true),
-                                        fontWeight: FontWeight.w700,
-                                        fontStyle: FontStyle.normal,
-                                      ))),
+                                  child: DisplayName(title:'Hello ',
+                                    style: TextStyle(
+                                          fontFamily: 'SFProDisplay',
+                                          color: Color(0xff000000),
+                                          fontSize: ScreenUtil().setSp(14,
+                                              allowFontScalingSelf: true),
+                                          fontWeight: FontWeight.w700,
+                                          fontStyle: FontStyle.normal,
+                                        ) 
+                                  ,)),
                               Container(
                                 child: Text(
                                   "Today is " + DateFormat.yMMMMd().format(tx),

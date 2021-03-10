@@ -1,19 +1,25 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:learning_app/models/users_database.dart';
 // import 'package:learning_app/models/firebase_storage.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/learning_widget.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Submit extends StatefulWidget {
-  final List<String> listNameSkill;
-  Submit(this.listNameSkill);
+  final List<Map> listSkill;
+  List<String> listNameSkill;
+  Submit(this.listSkill){
+listNameSkill =
+        listSkill.map((e) => e['name'].toString()).toList();
+  }
   @override
   _SubmitState createState() => _SubmitState(listNameSkill);
 }
@@ -22,10 +28,40 @@ class _SubmitState extends State<Submit> {
   List<String> _locations;
   String _selectedLocation;
   _SubmitState(this._locations);
+  PickedFile image;
+  submit() async{
+      final _storage = FirebaseStorage.instance;
+      String uid =FirebaseAuth.instance.currentUser.uid;
+      
+      if (image != null && _selectedLocation != null) {
+        var file = File(image.path);
+        //upload to FireBase
+        var _snapshot = await _storage
+            .ref()
+            .child('listProof/$_selectedLocation/$uid')
+            .putFile(file)
+            .whenComplete(() => print('Upload Proof  to Storage complete'))
+            .onError((error, stackTrace) {
+          print('Failed to upload Image:' + error);
+          return null;
+        });
+        var downloadURLs = await _snapshot.ref.getDownloadURL();
+        int index = _locations.indexOf(_selectedLocation);
+        if (index ==-1) print('please choose the skill');
+        else
+        {
+          //upload to Firestore
+          await UserDatabaseService().submitProof(fullPath: widget.listSkill[index]['path'],skillName: _selectedLocation,proofURL: downloadURLs );
+        }
+        
+
+      } else {
+        print('No Path received or No Skill Name received');
+      }
+  }
   uploadImage() async {
-    final _storage = FirebaseStorage.instance;
     final _picker = ImagePicker();
-    PickedFile image;
+    
     //CHeck permission
     // await Permission.photos.request();
     await Permission.photos.request();
@@ -33,23 +69,8 @@ class _SubmitState extends State<Submit> {
     if (permissionStatus.isGranted) {
       //Select Image
       image = await _picker.getImage(source: ImageSource.gallery);
-      var file = File(image.path);
-      if (image != null) {
-        //upload to FireBase
-        var _snapshot = await _storage
-            .ref()
-            .child('tryimage')
-            .putFile(file)
-            .whenComplete(() => print('Upload Image complete'))
-            .onError((error, stackTrace) {
-          print('Failed to upload Image:' + error);
-          return null;
-        });
-        var downloadURLs = await _snapshot.ref.getDownloadURL();
-        print(downloadURLs);
-      } else {
-        print('No Path received');
-      }
+      
+      
     } else {
       print('Grand permissions and try again');
     }
@@ -198,7 +219,6 @@ class _SubmitState extends State<Submit> {
                   onChanged: (newValue) {
                     setState(() {
                       _selectedLocation = newValue;
-                      print(newValue);
                     });
                   },
 
@@ -304,12 +324,14 @@ class _SubmitState extends State<Submit> {
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.italic,
                               )),
-                        )
+                        ),
+                      
                       ],
                     ),
                   ),
                 )),
-          )
+          ),
+          TextButton(onPressed: (){submit();}, child: Text('Submit'))
         ],
       ),
     );

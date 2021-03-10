@@ -47,7 +47,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
       final User user = auth.currentUser;
       final uid = user.uid;
       //Create a new documnet for the user with the uid
-      await UserDatabaseService(uid: uid).updateUserData("New user", 0, 0, 0);
+      await UserDatabaseService(uid: uid).updateUserData( 0, 0, 0);
     } on FirebaseAuthException catch (e) {
       print('Failed with error code: ${e.code}');
       print(e.message);
