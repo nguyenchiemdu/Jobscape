@@ -124,8 +124,7 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
                 decoration: BoxDecoration(
                     color: Color(0xfffafafa),
                     image: DecorationImage(
-                        image: NetworkImage(
-                            "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef"),
+                        image: AssetImage("assets/images/top_image.png"),
                         fit: BoxFit.cover)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

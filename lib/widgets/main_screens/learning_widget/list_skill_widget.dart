@@ -18,6 +18,9 @@ class ListSkillWidget extends StatefulWidget {
 }
 
 class _ListSkillWidgetState extends State<ListSkillWidget> {
+
+  // final roadMapData;
+  // _ListSkillWidgetState(this.roadMapData);
   DatabaseManager industryDatabase = DatabaseManager();
   UserDatabaseService userDatabase =
       UserDatabaseService(uid: FirebaseAuth.instance.currentUser.uid);
@@ -45,7 +48,6 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
     super.initState();
     getData();
   }
-
   void getData() async {
     List res = await industryDatabase.getListSkill(widget.roadMapItem['path']);
     List listLearnedSkill =
@@ -73,8 +75,7 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
                 decoration: BoxDecoration(
                     color: Color(0xfffafafa),
                     image: DecorationImage(
-                        image: NetworkImage(
-                            "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef"),
+                        image: AssetImage("assets/images/top_image.png"),
                         fit: BoxFit.cover)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

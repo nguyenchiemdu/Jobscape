@@ -117,8 +117,8 @@ class SubmitProof extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            width: ScreenUtil().setWidth(234),
-                            height: ScreenUtil().setHeight(33),
+                            width: ScreenUtil().setWidth(312),
+                            height: ScreenUtil().setHeight(34),
                             decoration: new BoxDecoration(
                               color: Color(0xffffffff),
                               borderRadius: BorderRadius.circular(10),

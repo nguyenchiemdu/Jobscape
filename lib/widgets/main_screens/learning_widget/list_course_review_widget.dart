@@ -18,6 +18,7 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
   _ListReviewCourseState(this.courseReviewid);
   final String courseReviewid;
   List listReview;
+  bool like = false; 
   List<bool> stateUpvote = [];
   final DatabaseManager courseReviewDatabase = DatabaseManager();
   @override
@@ -270,8 +271,8 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
                               height: ScreenUtil().setHeight(16),
                               decoration: new BoxDecoration(
                                 image: DecorationImage(
-                                  image:
-                                      AssetImage("assets/images/like_icon.png"),
+                                  image: stateUpvote[index] == true? 
+                                      AssetImage("assets/images/like_icon.png") : AssetImage("assets/images/unlike_icon.png"),
                                   fit: BoxFit.fill,
                                   alignment: Alignment.topCenter,
                                 ),
@@ -281,7 +282,7 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
                           Text(listReview[index]['upvote'].toString(),
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
-                                color: Color(0xffffbf2f),
+                                color: stateUpvote[index] ==  true? Color(0xffffbf2f) : Color(0xff303030),
                                 fontSize: ScreenUtil().setSp(11),
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FontStyle.normal,

@@ -74,7 +74,7 @@ class AddReviewFormWidget extends StatelessWidget {
                 child: Stack(
               children: [
                 Container(
-                  width: ScreenUtil().setWidth(295),
+                  width: ScreenUtil().setWidth(312),
                   height: ScreenUtil().setHeight(71),
                   child: TextField(
                     style: TextStyle(
@@ -105,7 +105,7 @@ class AddReviewFormWidget extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(267),top: ScreenUtil().setHeight(15)),
+                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(280),top: ScreenUtil().setHeight(15)),
                 child: InkWell(
                     onTap: () {
                       submitReview();

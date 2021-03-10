@@ -8,6 +8,13 @@ import 'package:learning_app/widgets/main_screens/user_profile_widget/journey_co
 import 'package:provider/provider.dart';
 
 class EditUserProfile extends StatelessWidget {
+  TextEditingController nameController = TextEditingController()..text = FirebaseAuth.instance.currentUser.displayName.toString();
+  TextEditingController emailController = TextEditingController()..text = FirebaseAuth.instance.currentUser.email;
+  final positionController = TextEditingController();
+  final ageController = TextEditingController();
+  final experienceController = TextEditingController();
+  final companyController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -37,7 +44,7 @@ class EditUserProfile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(24),top: ScreenUtil().setHeight(232)),
+                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(24),top: ScreenUtil().setHeight(232),bottom:ScreenUtil().setHeight(36)),
                     child: Text("Edit Profile",
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
@@ -48,46 +55,48 @@ class EditUserProfile extends StatelessWidget {
                         )
                     ),
                   ),
+                  Center(
+                    child: Container(
+                        // margin:
+                        // EdgeInsets.only(left: 24, right: 24, bottom: 15),
+                        width: ScreenUtil().setWidth(312),
+                        height: ScreenUtil().setHeight(40),
+                        padding: EdgeInsets.only(left: ScreenUtil().setWidth(18)),
+                        decoration: new BoxDecoration(
+                          color: Color(0xffffffff),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Color(0xffffefcc)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0x1a777777),
+                                offset: Offset(0, 2),
+                                blurRadius: 3,
+                                spreadRadius: 0)
+                          ],
+                        ),
+                        child: TextField(
+                            // controller: password,
+                            controller: nameController,
+                            decoration: InputDecoration(
+                              hintText: 'Your Name',
+                              // contentPadding: EdgeInsets.only(
+                              //     left: 14, top: 18, bottom: 18),
+                              hintStyle: TextStyle(
+                                fontFamily: 'SFProDisplay',
+                                color: Color(0xff303030),
+                                fontSize: ScreenUtil().setSp(16),
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                              ),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ))),
+                  ),
                   Container(
-                      // margin:
-                      // EdgeInsets.only(left: 24, right: 24, bottom: 15),
-                      width: ScreenUtil().setWidth(327),
-                      height: ScreenUtil().setHeight(40),
-                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(18)),
-                      decoration: new BoxDecoration(
-                        color: Color(0xffffffff),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Color(0xffffefcc)),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0x1a777777),
-                              offset: Offset(0, 2),
-                              blurRadius: 3,
-                              spreadRadius: 0)
-                        ],
-                      ),
-                      child: TextField(
-                          obscureText: true,
-                          // controller: password,
-                          decoration: InputDecoration(
-                            hintText: 'Password',
-                            // contentPadding: EdgeInsets.only(
-                            //     left: 14, top: 18, bottom: 18),
-                            hintStyle: TextStyle(
-                              fontFamily: 'SFProDisplay',
-                              color: Color(0xff303030),
-                              fontSize: ScreenUtil().setSp(16),
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                            ),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                          ))),
-                  Container(
-                    margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
+                    margin: EdgeInsets.only(top: ScreenUtil().setHeight(10),left:ScreenUtil().setWidth(24),right: ScreenUtil().setWidth(24)),
                     child: Row(
                       children: [
                         Container(
@@ -109,16 +118,15 @@ class EditUserProfile extends StatelessWidget {
                               ],
                             ),
                             child: TextField(
-                                obscureText: true,
-                                // controller: password,
+                                controller: positionController,
                                 decoration: InputDecoration(
-                                  // hintText: 'Password',
+                                  hintText: 'Current Position',
                                   // contentPadding: EdgeInsets.only(
                                   //     left: 14, top: 18, bottom: 18),
                                   hintStyle: TextStyle(
                                     fontFamily: 'SFProDisplay',
-                                    color: Color(0xff303030),
-                                    fontSize: ScreenUtil().setSp(16),
+                                    color: Color(0xffbbbbbb),
+                                    fontSize: ScreenUtil().setSp(15),
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
                                   ),
@@ -131,7 +139,7 @@ class EditUserProfile extends StatelessWidget {
                         Container(
                             width: ScreenUtil().setWidth(54),
                             height: ScreenUtil().setHeight(40),
-                            padding: EdgeInsets.only(left: ScreenUtil().setWidth(18)),
+                            padding: EdgeInsets.only(left: ScreenUtil().setWidth(15)),
                             decoration: new BoxDecoration(
                               color: Color(0xffffffff),
                               borderRadius: BorderRadius.circular(10),
@@ -145,16 +153,15 @@ class EditUserProfile extends StatelessWidget {
                               ],
                             ),
                             child: TextField(
-                                obscureText: true,
-                                // controller: password,
+                                controller: ageController,
                                 decoration: InputDecoration(
-                                  // hintText: 'Password',
+                                  hintText: 'Age',
                                   // contentPadding: EdgeInsets.only(
                                   //     left: 14, top: 18, bottom: 18),
                                   hintStyle: TextStyle(
                                     fontFamily: 'SFProDisplay',
-                                    color: Color(0xff303030),
-                                    fontSize: ScreenUtil().setSp(16),
+                                    color: Color(0xffbbbbbb),
+                                    fontSize: ScreenUtil().setSp(15),
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
                                   ),
@@ -167,117 +174,120 @@ class EditUserProfile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                      margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-                      width: ScreenUtil().setWidth(327),
-                      height: ScreenUtil().setHeight(40),
-                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(18)),
-                      decoration: new BoxDecoration(
-                        color: Color(0xffffffff),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Color(0xffffefcc)),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0x1a777777),
-                              offset: Offset(0, 2),
-                              blurRadius: 3,
-                              spreadRadius: 0)
-                        ],
-                      ),
-                      child: TextField(
-                          obscureText: true,
-                          // controller: password,
-                          decoration: InputDecoration(
-                            hintText: 'Password',
-                            // contentPadding: EdgeInsets.only(
-                            //     left: 14, top: 18, bottom: 18),
-                            hintStyle: TextStyle(
+                  Center(
+                    child: Container(
+                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
+                        width: ScreenUtil().setWidth(312),
+                        height: ScreenUtil().setHeight(40),
+                        padding: EdgeInsets.only(left: ScreenUtil().setWidth(18)),
+                        decoration: new BoxDecoration(
+                          color: Color(0xffffffff),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Color(0xffffefcc)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0x1a777777),
+                                offset: Offset(0, 2),
+                                blurRadius: 3,
+                                spreadRadius: 0)
+                          ],
+                        ),
+                        child: TextField(
+                            controller: experienceController,
+                            decoration: InputDecoration(
+                              hintText: 'Years of experience (Fresher/Funior/Senior)',
+                              // contentPadding: EdgeInsets.only(
+                              //     left: 14, top: 18, bottom: 18),
+                              hintStyle: TextStyle(
                               fontFamily: 'SFProDisplay',
-                              color: Color(0xff303030),
-                              fontSize: ScreenUtil().setSp(16),
+                              color: Color(0xffbbbbbb),
+                              fontSize: ScreenUtil().setSp(15),
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.normal,
-                            ),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                          ))),
-                  Container(
-                      margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-                      width: ScreenUtil().setWidth(327),
-                      height: ScreenUtil().setHeight(40),
-                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(18)),
-                      decoration: new BoxDecoration(
-                        color: Color(0xffffffff),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Color(0xffffefcc)),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0x1a777777),
-                              offset: Offset(0, 2),
-                              blurRadius: 3,
-                              spreadRadius: 0)
-                        ],
-                      ),
-                      child: TextField(
-                          obscureText: true,
-                          // controller: password,
-                          decoration: InputDecoration(
-                            hintText: 'Password',
-                            // contentPadding: EdgeInsets.only(
-                            //     left: 14, top: 18, bottom: 18),
-                            hintStyle: TextStyle(
-                              fontFamily: 'SFProDisplay',
-                              color: Color(0xff303030),
-                              fontSize: ScreenUtil().setSp(16),
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                            ),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                          ))),
-                  Container(
-                      margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-                      width: ScreenUtil().setWidth(327),
-                      height: ScreenUtil().setHeight(40),
-                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(18)),
-                      decoration: new BoxDecoration(
-                        color: Color(0xffffffff),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Color(0xffffefcc)),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0x1a777777),
-                              offset: Offset(0, 2),
-                              blurRadius: 3,
-                              spreadRadius: 0)
-                        ],
-                      ),
-                      child: TextField(
-                          obscureText: true,
-                          // controller: password,
-                          decoration: InputDecoration(
-                            // hintText: 'Password',
-                            // contentPadding: EdgeInsets.only(
-                            //     left: 14, top: 18, bottom: 18),
-                            hintStyle: TextStyle(
-                              fontFamily: 'SFProDisplay',
-                              color: Color(0xff303030),
-                              fontSize: ScreenUtil().setSp(16),
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                            ),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                          ))),
+                          ),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ))),
+                  ),
+                  Center(
+                    child: Container(
+                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
+                        width: ScreenUtil().setWidth(312),
+                        height: ScreenUtil().setHeight(40),
+                        padding: EdgeInsets.only(left: ScreenUtil().setWidth(18)),
+                        decoration: new BoxDecoration(
+                          color: Color(0xffffffff),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Color(0xffffefcc)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0x1a777777),
+                                offset: Offset(0, 2),
+                                blurRadius: 3,
+                                spreadRadius: 0)
+                          ],
+                        ),
+                        child: TextField(
+                            controller: companyController,
+                            decoration: InputDecoration(
+                              hintText: 'Your company',
+                              // contentPadding: EdgeInsets.only(
+                              //     left: 14, top: 18, bottom: 18),
+                              hintStyle: TextStyle(
+                                fontFamily: 'SFProDisplay',
+                                color: Color(0xffbbbbbb),
+                                fontSize: ScreenUtil().setSp(15),
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                              ),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ))),
+                  ),
+                  Center(
+                    child: Container(
+                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
+                        width: ScreenUtil().setWidth(312),
+                        height: ScreenUtil().setHeight(40),
+                        padding: EdgeInsets.only(left: ScreenUtil().setWidth(18)),
+                        decoration: new BoxDecoration(
+                          color: Color(0xffffffff),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Color(0xffffefcc)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0x1a777777),
+                                offset: Offset(0, 2),
+                                blurRadius: 3,
+                                spreadRadius: 0)
+                          ],
+                        ),
+                        child: TextField(
+                        controller: emailController,
+                        decoration: InputDecoration(
+                        hintText: 'Email',
+                        // contentPadding: EdgeInsets.only(
+                        //     left: 14, top: 18, bottom: 18),
+                        hintStyle: TextStyle(
+                        fontFamily: 'SFProDisplay',
+                        color: Color(0xff303030),
+                        fontSize: ScreenUtil().setSp(16),
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        ),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                         ))),
+                  ),
                   Center(
                     child: Container(
                       margin: EdgeInsets.only(top:ScreenUtil().setHeight(45)),

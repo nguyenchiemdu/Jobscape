@@ -98,6 +98,8 @@ flutter:
     - assets/images/background_user_profile.png
     - assets/images/edit_icon.png
     - assets/images/logout_icon.png
+    - assets/images/unlike_icon.png
+    - assets/images/top_image.png
 
   #   - images/a_dot_ham.jpeg
 

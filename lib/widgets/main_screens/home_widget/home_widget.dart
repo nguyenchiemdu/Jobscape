@@ -159,11 +159,12 @@ class HomeWidget extends StatelessWidget {
                                   )),
                               Container(
                                 width: ScreenUtil().setWidth(151),
-                                height: ScreenUtil().setHeight(100),
+                                height: ScreenUtil().setHeight(130),
                                 margin: EdgeInsets.only(top: 6),
                                 child: Text(
                                     "Explore the essential skill sets to secure a job in Information Technology, Marketing, Finance, and more. Recommended by 300+ professionals.\nAnd totally FREE.",
                                     style: TextStyle(
+                                      height: 1.3,
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff303030),
                                       fontSize: ScreenUtil()
