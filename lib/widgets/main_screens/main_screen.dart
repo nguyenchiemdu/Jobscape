@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_screenutil/screen_util.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/home_used_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/user_profile_widget.dart';
 import './learning_widget/learning_widget.dart';
@@ -68,41 +69,76 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
       body: selectIndex == 0
           ? listWidget[selectIndex][sub]
           : listWidget[selectIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectPage,
-        // backgroundColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: Theme.of(context).primaryColor,
-        currentIndex: selectIndex,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: ''),
-          BottomNavigationBarItem(
-              icon: UnconstrainedBox(
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.yellow),
-                  // color: Colors.yellow,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/nav_bar_learning_scr.png',
-                          width: 20, color: Colors.white),
-                      Text(
-                        'Learn',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
+      bottomNavigationBar: Container(
+        width: ScreenUtil().setWidth(360),
+        height: ScreenUtil().setHeight(59),
+        decoration: new BoxDecoration(
+          color: Color(0xffffffff),
+          boxShadow: [BoxShadow(
+              color: Color(0x26454545),
+              offset: Offset(0,-2),
+              blurRadius: 5,
+              spreadRadius: 0
+          )],
+            borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),)
+        ),
+        child: BottomNavigationBar(
+          onTap: _selectPage,
+          // backgroundColor: Theme.of(context).primaryColor,
+          currentIndex: selectIndex,
+          items: [
+            BottomNavigationBarItem(icon: Container(
+              width: ScreenUtil().setWidth(24),
+              height: ScreenUtil().setHeight(24),
+              decoration: new BoxDecoration(
+                image: DecorationImage(
+                  image: selectIndex == 0? AssetImage("assets/images/chosen_homepage_icon.png") :
+                  AssetImage("assets/images/homepage_icon.png"),
+                  fit: BoxFit.cover,
                 ),
               ),
-              label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.folder), label: ''),
-          // BottomNavigationBarItem(
-          //     icon: Icon(Icons.help_center_outlined), label: '')
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "")
-        ],
+            ), label: ''),
+            BottomNavigationBarItem(
+                icon: Container(
+                  width: ScreenUtil().setWidth(24),
+                  height: ScreenUtil().setHeight(24),
+                  decoration: new BoxDecoration(
+                    image: DecorationImage(
+                      image: selectIndex == 1? AssetImage("assets/images/chosen_learning_icon.png") :
+                      AssetImage("assets/images/learning_icon.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                label: ''),
+            BottomNavigationBarItem(icon: Container(
+              width: ScreenUtil().setWidth(24),
+              height: ScreenUtil().setHeight(24),
+              decoration: new BoxDecoration(
+                image: DecorationImage(
+                  image: selectIndex == 2?
+                  AssetImage("assets/images/choosen_workshop_icon.png") : AssetImage("assets/images/workshop_icon.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ), label: ''),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.help_center_outlined), label: '')
+            BottomNavigationBarItem(icon: Container(
+              width: ScreenUtil().setWidth(24),
+              height: ScreenUtil().setHeight(24),
+              decoration: new BoxDecoration(
+                image: DecorationImage(
+                  image: selectIndex == 3? AssetImage("assets/images/chosen_userprofile_icon.png"):
+                  AssetImage("assets/images/userprofile_icon.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ), label: "")
+          ],
+        ),
       ),
     );
   }

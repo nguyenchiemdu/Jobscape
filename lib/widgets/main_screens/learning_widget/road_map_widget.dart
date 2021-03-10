@@ -93,7 +93,8 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
               width: ScreenUtil().setWidth(360),
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(roadMapData['imgSrc']),
+                      colorFilter: new ColorFilter.mode(Colors.white.withOpacity(0.9), BlendMode.dstATop),
+                      image: NetworkImage(roadMapData['imgSrc'],),
                       fit: BoxFit.cover)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

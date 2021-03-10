@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +22,12 @@ class HomeWidget extends StatelessWidget {
     selectPage(2);
   }
 
+
   @override
   Widget build(BuildContext context) {
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
-
+    Random random = new Random();
+    int randomQuote = random.nextInt(quotes.length);
     return SingleChildScrollView(
         child: Container(
       decoration: BoxDecoration(
@@ -83,8 +87,7 @@ class HomeWidget extends StatelessWidget {
                         Container(
                           width: ScreenUtil().setWidth(258),
                           margin: EdgeInsets.only(bottom: 4),
-                          child: Text(
-                              "\"Plant your garden and decorate your own soul, instead of waiting for someone to bring you flowers.\"",
+                          child: Text("\"" + quotes[randomQuote] + "\"",
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff000000),
@@ -277,3 +280,25 @@ class HomeWidget extends StatelessWidget {
     ));
   }
 }
+final quotes = ["Plant your garden and decorate your own soul, instead of waiting for someone to bring you flowers.",
+  "The best way to get started is to quit talking and begin doing.",
+"Don’t Let Yesterday Take Up Too Much Of Today.",
+"You Learn More From Failure Than From Success. Don’t Let It Stop You. Failure Builds Character.",
+"It’s Not Whether You Get Knocked Down, It’s Whether You Get Up.",
+"The people who are crazy enough to think they can change the world are the ones who do.",
+"Failure Will Never Overtake Me If My Determination To Succeed Is Strong Enough.",
+"We May Encounter Many Defeats But We Must Not Be Defeated.",
+"Knowing Is Not Enough; We Must Apply. Wishing Is Not Enough; We Must Do.",
+"Imagine Your Life Is Perfect In Every Respect; What Would It Look Like?",
+"We Generate Fears While We Sit. We Overcome Them By Action.",
+"Whether You Think You Can Or Think You Can’t, You’re Right.",
+"Security Is Mostly A Superstition. Life Is Either A Daring Adventure Or Nothing.",
+"The Man Who Has Confidence In Himself Gains The Confidence Of Others.",
+"The Only Limit To Our Realization Of Tomorrow Will Be Our Doubts Of Today.",
+"What You Lack In Talent Can Be Made Up With Desire, Hustle And Giving 110% All The Time."
+"Wisdom is not a product of schooling but of the lifelong attempt to acquire it.",
+"Develop a passion for learning. If you do, you will never cease to grow.",
+"You don’t understand anything until you learn it more than one way.",
+  "Change is the end result of all true learning.",
+  "The beautiful thing about learning is nobody can take it away from you."
+];

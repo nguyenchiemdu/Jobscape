@@ -100,6 +100,14 @@ flutter:
     - assets/images/logout_icon.png
     - assets/images/unlike_icon.png
     - assets/images/top_image.png
+    - assets/images/workshop_icon.png
+    - assets/images/userprofile_icon.png
+    - assets/images/learning_icon.png
+    - assets/images/homepage_icon.png
+    - assets/images/choosen_workshop_icon.png
+    - assets/images/chosen_learning_icon.png
+    - assets/images/chosen_userprofile_icon.png
+    - assets/images/chosen_homepage_icon.png
 
   #   - images/a_dot_ham.jpeg
 

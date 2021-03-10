@@ -52,7 +52,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
           ),
           child: SafeArea(
             child: Container(
-              margin: EdgeInsets.only(top: ScreenUtil().setHeight(46)),
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(44)),
               child: Column(
                 children: [
                   Row(
@@ -76,7 +76,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                   ),
                   // Welcoming(),
                   Container(
-                      margin: EdgeInsets.only(top: 22),
+                      // margin: EdgeInsets.only(top: 22),
                       child: IndustryComponent('it', changeScreen)),
                   // IndustryComponent('marketing', changeScreen),
                   // IndustryComponent('it', changeScreen),

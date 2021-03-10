@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:learning_app/widgets/main_screens/home_widget/progress.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/add_coursereview_widget.dart';
 import './industry_slider_card.dart';
 import 'package:learning_app/models/industry_database.dart';
@@ -58,7 +60,11 @@ class _IndustryComponentState extends State<IndustryComponent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: ScreenUtil().setWidth(24)),
+              // margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(20)),
+              child: Progress(),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(24),top:ScreenUtil().setHeight(20)),
               width: ScreenUtil().setWidth(312),
               child: Container(
                 margin: EdgeInsets.only(bottom: 8),
