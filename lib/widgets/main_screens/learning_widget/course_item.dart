@@ -5,12 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CourseItemWidget extends StatelessWidget {
   final Map courseItem;
-  CourseItemWidget(this.courseItem);
+  final String imgScr;
+  CourseItemWidget(this.courseItem, this.imgScr);
 
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CrouseReviewScreen(courseItem)),
+      MaterialPageRoute(
+          builder: (context) => CrouseReviewScreen(courseItem, imgScr)),
     );
   }
 

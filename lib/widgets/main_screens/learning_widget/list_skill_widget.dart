@@ -11,14 +11,14 @@ import 'package:learning_app/models/industry_database.dart';
 
 class ListSkillWidget extends StatefulWidget {
   final Map roadMapItem;
-  ListSkillWidget(this.roadMapItem);
+  final String imgScr;
+  ListSkillWidget(this.roadMapItem, this.imgScr);
 
   @override
   _ListSkillWidgetState createState() => _ListSkillWidgetState();
 }
 
 class _ListSkillWidgetState extends State<ListSkillWidget> {
-
   // final roadMapData;
   // _ListSkillWidgetState(this.roadMapData);
   DatabaseManager industryDatabase = DatabaseManager();
@@ -47,8 +47,10 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
     super.initState();
     getData();
   }
+
   void getData() async {
-    List<Map> res = await industryDatabase.getListSkill(widget.roadMapItem['path']);
+    List<Map> res =
+        await industryDatabase.getListSkill(widget.roadMapItem['path']);
     List listLearnedSkill =
         await userDatabase.getLearnedSkills(widget.roadMapItem['path']);
     // print('listLearnedSkill :' + listLearnedSkill.toString());
@@ -56,7 +58,8 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
     // print(widget.roadMapItem.toString());
     setState(() {
       listSkill = res;
-      listSkillWidget = res.map((skill) => SkillItem(skill)).toList();
+      listSkillWidget =
+          res.map((skill) => SkillItem(skill, widget.imgScr)).toList();
     });
     // print(listSkillWidget.toList());
   }
@@ -74,8 +77,7 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
                 decoration: BoxDecoration(
                     color: Color(0xfffafafa),
                     image: DecorationImage(
-                        image: AssetImage("assets/images/top_image.png"),
-                        fit: BoxFit.cover)),
+                        image: NetworkImage(widget.imgScr), fit: BoxFit.cover)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

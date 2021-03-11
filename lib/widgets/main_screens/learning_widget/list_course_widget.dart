@@ -14,7 +14,8 @@ import 'proof_submit_widget.dart';
 
 class ListCourseWidget extends StatefulWidget {
   final Map skillItem;
-  ListCourseWidget(this.skillItem);
+  final String imgSrc;
+  ListCourseWidget(this.skillItem, this.imgSrc);
   final DatabaseManager industryDatabase = DatabaseManager();
   @override
   _ListCourseWidgetState createState() => _ListCourseWidgetState();
@@ -39,9 +40,7 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) =>
-              SubmitProof([widget.skillItem])),
+      MaterialPageRoute(builder: (context) => SubmitProof([widget.skillItem])),
     );
   }
 
@@ -105,8 +104,9 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
     listCourse =
         await widget.industryDatabase.getListCourse(widget.skillItem['path']);
     setState(() {
-      listCourseWidget =
-          listCourse.map((course) => CourseItemWidget(course)).toList();
+      listCourseWidget = listCourse
+          .map((course) => CourseItemWidget(course, widget.imgSrc))
+          .toList();
     });
     // print(jsonEncode(listCourse));
   }
@@ -124,8 +124,7 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
                 decoration: BoxDecoration(
                     color: Color(0xfffafafa),
                     image: DecorationImage(
-                        image: AssetImage("assets/images/top_image.png"),
-                        fit: BoxFit.cover)),
+                        image: NetworkImage(widget.imgSrc), fit: BoxFit.cover)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

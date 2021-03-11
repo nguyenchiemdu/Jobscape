@@ -5,12 +5,13 @@ import 'list_skill_widget.dart';
 class RoadMapItem extends StatelessWidget {
   final int index;
   final Map roadMapData;
-  RoadMapItem(this.index, this.roadMapData);
+  final String imgScr;
+  RoadMapItem(this.index, this.roadMapData, this.imgScr);
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => ListSkillWidget(this.roadMapData)),
+          builder: (context) => ListSkillWidget(this.roadMapData, this.imgScr)),
     );
   }
 

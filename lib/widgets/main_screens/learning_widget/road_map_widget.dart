@@ -31,7 +31,8 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => ListSkillWidget(this.firstRoadMapItem)),
+          builder: (context) =>
+              ListSkillWidget(this.firstRoadMapItem, roadMapData['imgSrc'])),
     );
     Map<String, dynamic> data = {'isNewUser': false};
     await UserDatabaseService().uploadProfile(data);
@@ -52,7 +53,8 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
     setState(() {
       listRoadMap = temp;
       listRoadMapWidget = listRoadMap
-          .map((item) => RoadMapItem(listRoadMap.indexOf(item) + 1, item))
+          .map((item) => RoadMapItem(
+              listRoadMap.indexOf(item) + 1, item, roadMapData['imgSrc']))
           .toList();
       isNewUser = res;
     });
