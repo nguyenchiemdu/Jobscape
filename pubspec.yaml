@@ -108,6 +108,17 @@ flutter:
     - assets/images/chosen_learning_icon.png
     - assets/images/chosen_userprofile_icon.png
     - assets/images/chosen_homepage_icon.png
+    - assets/images/logo.png
+    - assets/images/logo_cyrada.png
+    - assets/images/logo_facebook.png
+    - assets/images/logo_paypal.png
+    - assets/images/logo_phenikaa.png
+    - assets/images/logo_snorke.png
+    - assets/images/logo_sun.png
+    - assets/images/logo_viettel.png
+    - assets/images/logo_vinbigdata.png
+    - assets/images/logo_vng.png
+    - assets/images/logo_fpt.png
 
   #   - images/a_dot_ham.jpeg
 

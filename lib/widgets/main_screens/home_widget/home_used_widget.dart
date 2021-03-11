@@ -130,14 +130,6 @@ class HomeUsedWidget extends StatelessWidget {
               // SliderCard(),
               Advisor(),
               OurTeam(),
-              RaisedButton(
-                onPressed: () {
-                  final provider =
-                      Provider.of<GoogleSignInProvider>(context, listen: false);
-                  provider.logout();
-                },
-                child: Text('Logg out'),
-              ),
             ],
           ),
         ),

@@ -66,12 +66,38 @@ class Workshop extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          InkWell(
+            onTap: () {},
+            child: Container(
+              width: ScreenUtil().setWidth(126),
+              height: ScreenUtil().setHeight(30),
+              decoration: new BoxDecoration(
+                  color: Color(0xffffbf2f),
+                  borderRadius: BorderRadius.circular(8)
+              ),
+            padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+            margin: EdgeInsets.only(left:ScreenUtil().setWidth(24),top:ScreenUtil().setHeight(20)),
+            child: Row(
+              children: [
+                Icon(Icons.add),
+                Text("Add workshop",
+                    style: TextStyle(
+                      fontFamily: 'SFProDisplay',
+                      color: Color(0xff000000),
+                      fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.normal,
+                    )
+                )
+              ],
+            ),
+          ),),
           Center(
             child: Container(
               margin: EdgeInsets.only(
-                  top: ScreenUtil().setHeight(30),
+                  top: ScreenUtil().setHeight(16),
                   bottom: ScreenUtil().setHeight(12)),
-              width: ScreenUtil().setWidth(324),
+              width: ScreenUtil().setWidth(312),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -103,7 +129,7 @@ class Workshop extends StatelessWidget {
               margin: EdgeInsets.only(
                   top: ScreenUtil().setHeight(20),
                   bottom: ScreenUtil().setHeight(12)),
-              width: ScreenUtil().setWidth(324),
+              width: ScreenUtil().setWidth(312),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

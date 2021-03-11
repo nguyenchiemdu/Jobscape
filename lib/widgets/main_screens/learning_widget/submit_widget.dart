@@ -80,259 +80,312 @@ class _SubmitState extends State<Submit> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: ScreenUtil().setHeight(25)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Submit your proof",
-              style: TextStyle(
-                fontFamily: 'SFProDisplay',
-                color: Color(0xff000000),
-                fontSize: ScreenUtil().setSp(16),
-                fontWeight: FontWeight.w700,
-                fontStyle: FontStyle.normal,
-              )),
-          Container(
-            margin: EdgeInsets.only(top: ScreenUtil().setHeight(16)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(right: ScreenUtil().setWidth(7)),
-                  child: Text(
-                    "• ",
-                    style: TextStyle(
-                      color: Color(0xffffbf2f),
-                      fontSize: ScreenUtil().setSp(30),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Submit your proof",
+                style: TextStyle(
+                  fontFamily: 'SFProDisplay',
+                  color: Color(0xff000000),
+                  fontSize: ScreenUtil().setSp(16),
+                  fontWeight: FontWeight.w700,
+                  fontStyle: FontStyle.normal,
+                )),
+            Container(
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(14)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(right:ScreenUtil().setWidth(7), top: ScreenUtil().setHeight(4)),
+                      width: ScreenUtil().setWidth(6),
+                      height: ScreenUtil().setHeight(6),
+                      decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xffffbf2f)
+                      )
+                  ),
+                  Container(
+                    width: ScreenUtil().setWidth(294),
+                    child: new Text("File format: Image or Document (.img, .png, .pdf.)",
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff454545),
+                          fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                        )
                     ),
-                  ),
-                ),
-                Expanded(
-                  child:
-                      Text("File format: Image or Document (.img, .png, .pdf)",
-                          style: TextStyle(
-                            fontFamily: 'SFProDisplay',
-                            color: Color(0xff454545),
-                            fontSize: ScreenUtil().setSp(14),
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                          )),
-                ),
-              ],
+                  )
+                ],),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(right: ScreenUtil().setWidth(7)),
-                child: Text(
-                  "• ",
-                  style: TextStyle(
-                    color: Color(0xffffbf2f),
-                    fontSize: ScreenUtil().setSp(30),
+            Container(
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(14)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(right:ScreenUtil().setWidth(7), top: ScreenUtil().setHeight(4)),
+                      width: ScreenUtil().setWidth(6),
+                      height: ScreenUtil().setHeight(6),
+                      decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xffffbf2f)
+                      )
                   ),
-                ),
-              ),
-              Expanded(
-                child: Text("Standard processing time: 72 hours",
-                    style: TextStyle(
-                      fontFamily: 'SFProDisplay',
-                      color: Color(0xff454545),
-                      fontSize: ScreenUtil().setSp(14),
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                    )),
-              ),
-            ],
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(right: ScreenUtil().setWidth(7)),
-                child: Text(
-                  "• ",
-                  style: TextStyle(
-                    color: Color(0xffffbf2f),
-                    fontSize: ScreenUtil().setSp(30),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  width: ScreenUtil().setWidth(293),
-                  child: Text(
-                      "After your proof gets validated by admin, your next skill(s) will be unlocked.",
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff454545),
-                        fontSize: ScreenUtil().setSp(14),
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                      )),
-                ),
-              ),
-            ],
-          ),
-          Center(
-            child: Container(
-              margin: EdgeInsets.only(
-                  top: ScreenUtil().setHeight(36),
-                  bottom: ScreenUtil().setHeight(16)),
-              width: ScreenUtil().setWidth(300),
-              height: ScreenUtil().setHeight(36),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Color(0xffffbf2f)),
-              ),
-              padding: EdgeInsets.all(10),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  // border: OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(12),
-                  //   borderSide: BorderSide(
-                  //     color: Colors.transparent,
-                  //   ),
-                  // ),
-                  // hintText:
-                  // "Select the skill",
-                  // hintStyle: TextStyle(
-                  //   fontFamily: 'SFProDisplay',
-                  //   color: Color(0xff888888),
-                  //   fontSize: ScreenUtil().setSp(14),
-                  //   fontWeight: FontWeight.w300,
-                  //   fontStyle: FontStyle.italic,
-                  // ),
-
-                  hint: Text('Select the skill',
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff000000),
-                        fontSize: ScreenUtil().setSp(14),
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                      )),
-                  // Not necessary for Option 1
-                  value: _selectedLocation,
-                  onChanged: (newValue) {
-                    setState(() {
-                      _selectedLocation = newValue;
-                    });
-                  },
-
-                  items: _locations.map((location) {
-                    return DropdownMenuItem(
-                      child: new Text(location,
-                          style: TextStyle(
-                            fontFamily: 'SFProDisplay',
-                            color: Color(0xff000000),
-                            fontSize: ScreenUtil().setSp(14),
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                          )),
-                      value: location,
-                    );
-                  }).toList(),
-                ),
-              ),
+                  Container(
+                    width: ScreenUtil().setWidth(294),
+                    child: new Text("Size: maximum 2 GB",
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff454545),
+                          fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                        )
+                    ),
+                  )
+                ],),
             ),
-          ),
-          Center(
-            child: Container(
+            Container(
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(14)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(right:ScreenUtil().setWidth(7), top: ScreenUtil().setHeight(4)),
+                      width: ScreenUtil().setWidth(6),
+                      height: ScreenUtil().setHeight(6),
+                      decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xffffbf2f)
+                      )
+                  ),
+                  Container(
+                    width: ScreenUtil().setWidth(294),
+                    child: new Text("Standard processing time: 72 hours",
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff454545),
+                          fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                        )
+                    ),
+                  )
+                ],),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(14)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(right:ScreenUtil().setWidth(7), top: ScreenUtil().setHeight(4)),
+                      width: ScreenUtil().setWidth(6),
+                      height: ScreenUtil().setHeight(6),
+                      decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xffffbf2f)
+                      )
+                  ),
+                  Container(
+                    width: ScreenUtil().setWidth(294),
+                    child: new Text("After your proof is validated by admin, your next skill(s) will be unlocked.",
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff454545),
+                          fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                        )
+                    ),
+                  )
+                ],),
+            ),
+            Center(
+              child: Container(
+                margin: EdgeInsets.only(
+                    top: ScreenUtil().setHeight(15),
+                    bottom: ScreenUtil().setHeight(16)),
                 width: ScreenUtil().setWidth(300),
-                height: ScreenUtil().setHeight(167),
-                padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
-                decoration: new BoxDecoration(
-                  color: Color(0xffffffff),
-                  borderRadius: BorderRadius.circular(14),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Color(0x1a000000),
-                        offset: Offset(0, 3),
-                        blurRadius: 10,
-                        spreadRadius: 0)
-                  ],
+                height: ScreenUtil().setHeight(36),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Color(0xffffbf2f)),
                 ),
-                child: DottedBorder(
-                  borderType: BorderType.RRect,
-                  strokeWidth: 1,
-                  radius: Radius.circular(12),
-                  dashPattern: [4, 4],
-                  color: Color(0xffffbf2f),
-                  child: Container(
-                    width: ScreenUtil().setWidth(276),
-                    height: ScreenUtil().setHeight(143),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: ScreenUtil().setWidth(48),
-                          height: ScreenUtil().setHeight(48),
-                          decoration: new BoxDecoration(
-                            image: DecorationImage(
-                              image:
-                                  AssetImage("assets/images/image_upload.png"),
-                              fit: BoxFit.fill,
+                padding: EdgeInsets.all(10),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(12),
+                    //   borderSide: BorderSide(
+                    //     color: Colors.transparent,
+                    //   ),
+                    // ),
+                    // hintText:
+                    // "Select the skill",
+                    // hintStyle: TextStyle(
+                    //   fontFamily: 'SFProDisplay',
+                    //   color: Color(0xff888888),
+                    //   fontSize: ScreenUtil().setSp(14),
+                    //   fontWeight: FontWeight.w300,
+                    //   fontStyle: FontStyle.italic,
+                    // ),
+
+                    hint: Text('Select the skill',
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff000000),
+                          fontSize: ScreenUtil().setSp(14),
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                        )),
+                    // Not necessary for Option 1
+                    value: _selectedLocation,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _selectedLocation = newValue;
+                      });
+                    },
+
+                    items: _locations.map((location) {
+                      return DropdownMenuItem(
+                        child: new Text(location,
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff000000),
+                              fontSize: ScreenUtil().setSp(14),
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                            )),
+                        value: location,
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                  width: ScreenUtil().setWidth(300),
+                  height: ScreenUtil().setHeight(167),
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
+                  decoration: new BoxDecoration(
+                    color: Color(0xffffffff),
+                    borderRadius: BorderRadius.circular(14),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0x1a000000),
+                          offset: Offset(0, 3),
+                          blurRadius: 10,
+                          spreadRadius: 0)
+                    ],
+                  ),
+                  child: DottedBorder(
+                    borderType: BorderType.RRect,
+                    strokeWidth: 1,
+                    radius: Radius.circular(12),
+                    dashPattern: [4, 4],
+                    color: Color(0xffffbf2f),
+                    child: Container(
+                      width: ScreenUtil().setWidth(276),
+                      height: ScreenUtil().setHeight(143),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: ScreenUtil().setWidth(48),
+                            height: ScreenUtil().setHeight(48),
+                            decoration: new BoxDecoration(
+                              image: DecorationImage(
+                                image:
+                                    AssetImage("assets/images/image_upload.png"),
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(
-                              top: ScreenUtil().setHeight(4),
-                            ),
-                            width: ScreenUtil().setWidth(120),
-                            height: ScreenUtil().setHeight(28),
-                            child: RaisedButton(
-                                onPressed: () {
-                                  uploadImage();
-                                },
-                                color: Color(0xffffbf2f),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Text("Upload file",
-                                    style: TextStyle(
-                                      fontFamily: 'SFProDisplay',
-                                      color: Color(0xffffffff),
-                                      fontSize: ScreenUtil().setSp(15),
-                                      fontWeight: FontWeight.w700,
-                                      fontStyle: FontStyle.normal,
-                                    )))),
-                        Container(
-                          margin:
-                              EdgeInsets.only(top: ScreenUtil().setHeight(9)),
-                          child: Text("Drag files here",
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xffffbf2f),
-                                fontSize: ScreenUtil().setSp(14),
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                              )),
-                        ),
-                        Container(
-                          margin:
-                              EdgeInsets.only(top: ScreenUtil().setHeight(1)),
-                          child: Text(
-                              "(Drag and drop files here, or browse your phone)",
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xff888888),
-                                fontSize: ScreenUtil().setSp(11),
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.italic,
-                              )),
-                        ),
-                      
-                      ],
+                          Container(
+                              margin: EdgeInsets.only(
+                                top: ScreenUtil().setHeight(4),
+                              ),
+                              width: ScreenUtil().setWidth(120),
+                              height: ScreenUtil().setHeight(28),
+                              child: RaisedButton(
+                                  onPressed: () {
+                                    uploadImage();
+                                  },
+                                  color: Color(0xffffbf2f),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text("Upload file",
+                                      style: TextStyle(
+                                        fontFamily: 'SFProDisplay',
+                                        color: Color(0xffffffff),
+                                        fontSize: ScreenUtil().setSp(15),
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.normal,
+                                      )))),
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: ScreenUtil().setHeight(9)),
+                            child: Text("Drag files here",
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xffffbf2f),
+                                  fontSize: ScreenUtil().setSp(14),
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FontStyle.normal,
+                                )),
+                          ),
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: ScreenUtil().setHeight(1)),
+                            child: Text(
+                                "(Drag and drop files here, or browse your phone)",
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xff888888),
+                                  fontSize: ScreenUtil().setSp(11),
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.italic,
+                                )),
+                          ),
+
+                        ],
+                      ),
                     ),
+                  )),
+            ),
+            Center(
+              child: Container(
+                  margin: EdgeInsets.only(
+                    top: ScreenUtil().setHeight(25),
                   ),
-                )),
-          ),
-          TextButton(onPressed: (){submit();}, child: Text('Submit'))
-        ],
+                  width: ScreenUtil().setWidth(312),
+                  height: ScreenUtil().setHeight(44),
+                  child: RaisedButton(
+                      onPressed: () {
+                        submit();
+                      },
+                      color: Color(0xffffbf2f),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text("Save Profile",
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xffffffff),
+                            fontSize: ScreenUtil()
+                                .setSp(18, allowFontScalingSelf: false),
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                          )))),
+            ),
+          ],
+        ),
       ),
     );
   }
