@@ -39,6 +39,17 @@ class UserDatabaseService {
     });
   }
 
+  Future getPathToJoinedJourney() async {
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    String res;
+    await users.doc(uid).get().then((value) {
+      res = value.data()['pathToJoinedJourney'];
+    }).onError((error, stackTrace) {
+      print(error.toString());
+    });
+    return res;
+  }
+
   Future<bool> getTypeOfUser() async {
     String uid = FirebaseAuth.instance.currentUser.uid;
     bool res;

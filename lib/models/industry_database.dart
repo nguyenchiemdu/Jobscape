@@ -58,6 +58,39 @@ class DatabaseManager {
     }
   }
 
+  Future getAllSkills(String path) async {
+    List<String> allSkill = [];
+    int i = 10;
+    CollectionReference listRoadMap =
+        FirebaseFirestore.instance.collection('/$path/listRoadMap');
+    allSkill = await listRoadMap.get().then((listResult) async {
+      List<String> res = [];
+      for (QueryDocumentSnapshot roadMap in listResult.docs) {
+        String pathtoSkill = roadMap.reference.path;
+        // print(pathtoSkill);
+        CollectionReference listSkillCollection =
+            FirebaseFirestore.instance.collection('$pathtoSkill/listSkill');
+
+        List<String> res2 = await listSkillCollection.get().then((listSkill) {
+          List<String> res = [];
+          for (QueryDocumentSnapshot skill in listSkill.docs) {
+            // print(skill.data()['name']);
+            res.add(skill.data()['name']);
+          }
+          // print('res' + res.toString());
+          return res;
+        });
+        res.addAll(res2);
+      }
+      return res;
+    }).onError((error, stackTrace) {
+      print(error.toString());
+      return null;
+    });
+    // print(allSkill.toString());
+    return allSkill;
+  }
+
   Future getListReviewCourse(String path) async {
     List result = [];
     Map tmp;

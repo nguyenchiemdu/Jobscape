@@ -24,7 +24,7 @@ class SubmitProof extends StatelessWidget {
                       color: Color(0xfffafafa),
                       image: DecorationImage(
                           image: NetworkImage(
-                              "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef"),
+                              "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/BackgroundImageForIndustry%2FProof%2F1_SkillSubmit.jpeg?alt=media&token=e112cff4-81f4-4455-a0e8-d20a5c952e71"),
                           fit: BoxFit.cover)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +33,10 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
           builder: (context) =>
               ListSkillWidget(this.firstRoadMapItem, roadMapData['imgSrc'])),
     );
-    Map<String, dynamic> data = {'isNewUser': false};
+    Map<String, dynamic> data = {
+      'isNewUser': false,
+      'pathToJoinedJourney': roadMapData['path']
+    };
     await UserDatabaseService().uploadProfile(data);
   }
 
@@ -43,6 +45,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
     // TODO: implement initState
     super.initState();
     getData();
+    // print(roadMapData.toString());
     // addRoadmap();
   }
 

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:learning_app/models/industry_database.dart';
 import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/proof_submit_widget.dart';
 
@@ -34,13 +35,14 @@ class _ProgressState extends State<Progress> {
     });
   }
 
-  void changeScreen(BuildContext context) {
+  void changeScreen(BuildContext context) async {
+    String path = await UserDatabaseService().getPathToJoinedJourney();
+    List<String> listSkillName = await DatabaseManager().getAllSkills(path);
+    List<Map<String, dynamic>> listMapSkillName =
+        listSkillName.map((e) => {'name': e}).toList();
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => SubmitProof([
-                {'name': 'this is from home page'}
-              ])),
+      MaterialPageRoute(builder: (context) => SubmitProof(listMapSkillName)),
     );
   }
 
