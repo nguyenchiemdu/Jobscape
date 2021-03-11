@@ -28,8 +28,9 @@ class IndustryCard extends StatelessWidget {
           },
           child: Container(
             width: ScreenUtil().setWidth(217),
-            height: ScreenUtil().setHeight(190),
-            decoration: new BoxDecoration(
+            constraints: BoxConstraints(
+              maxHeight: double.infinity,
+            ),              decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Color(0xffffffff),
               boxShadow: [
@@ -86,30 +87,33 @@ class IndustryCard extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff000000),
-                                  fontSize: ScreenUtil().setSp(9),
+                                  fontSize: ScreenUtil().setSp(10),
                                   fontWeight: FontWeight.w300,
                                   fontStyle: FontStyle.normal,
                                 )),
                           ],
                         ),
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 13, right: 4),
-                            width: 13,
-                            height: 13,
-                            child: Image.asset("assets/images/salary_icon.png"),
-                          ),
-                          Text('Salary: ' + jobData['salary'].toString() + '\$',
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xff000000),
-                                fontSize: ScreenUtil().setSp(9),
-                                fontWeight: FontWeight.w300,
-                                fontStyle: FontStyle.normal,
-                              ))
-                        ],
+                      Container(
+                        margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(10)),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 13, right: 4),
+                              width: 13,
+                              height: 13,
+                              child: Image.asset("assets/images/salary_icon.png"),
+                            ),
+                            Text('Salary: ' + jobData['salary'].toString() + '\$',
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xff000000),
+                                  fontSize: ScreenUtil().setSp(10),
+                                  fontWeight: FontWeight.w300,
+                                  fontStyle: FontStyle.normal,
+                                ))
+                          ],
+                        ),
                       ),
                     ],
                   )

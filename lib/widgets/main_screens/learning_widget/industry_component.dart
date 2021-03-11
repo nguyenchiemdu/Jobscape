@@ -83,7 +83,8 @@ class _IndustryComponentState extends State<IndustryComponent> {
               width: ScreenUtil().setWidth(312),
               constraints: BoxConstraints(
                 maxHeight: double.infinity,
-              ),              margin: EdgeInsets.only(left: 24, right: 24),
+              ),
+              margin: EdgeInsets.only(left: 24, right: 24),
               decoration: new BoxDecoration(
                   color: Color(0xfffffaf0),
                   borderRadius: BorderRadius.circular(15)),
