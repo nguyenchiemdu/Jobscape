@@ -27,21 +27,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     Firebase.initializeApp().whenComplete(() {
       print("completed");
-      fetDatabaseList();
     });
-  }
-
-  int enrolled_course;
-  fetDatabaseList() async {
-    dynamic resultant = await UserDatabaseService()
-        .getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid);
-    if (resultant == null) {
-      print("Unable to retrieve");
-    } else {
-      setState(() {
-        enrolled_course = resultant;
-      });
-    }
   }
 
   @override
@@ -58,7 +44,7 @@ class _MyAppState extends State<MyApp> {
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return ScreenUtilInit(
-            designSize: Size(360,760),
+            designSize: Size(360, 760),
             builder: () => MaterialApp(
                 theme: ThemeData(
                   primarySwatch: Colors.yellow,
@@ -66,8 +52,7 @@ class _MyAppState extends State<MyApp> {
                   fontFamily: 'SFProDisplay',
                 ),
                 title: 'Learning App',
-
-                home: RoutePage(enrolled_course)),
+                home: RoutePage()),
           );
         }
 
@@ -93,9 +78,33 @@ class LoadingPage extends StatelessWidget {
 //   return enrolled_course;
 // }
 
-class RoutePage extends StatelessWidget {
-  int enrolled_course;
-  RoutePage(this.enrolled_course);
+class RoutePage extends StatefulWidget {
+  @override
+  _RoutePageState createState() => _RoutePageState();
+}
+
+class _RoutePageState extends State<RoutePage> {
+  void initState() {
+    super.initState();
+    Firebase.initializeApp().whenComplete(() {
+      print("completed");
+      fetDatabaseList();
+    });
+  }
+
+  int enrolled_course = 0;
+  fetDatabaseList() async {
+    dynamic resultant = await UserDatabaseService()
+        .getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid);
+    if (resultant == null) {
+      print("Unable to retrieve");
+    } else {
+      setState(() {
+        enrolled_course = resultant;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -110,7 +119,7 @@ class RoutePage extends StatelessWidget {
             if (enrolled_course == null) {
               return Text("Loading");
             } else {
-            return enrolled_course == 0 ? LoggedInWidget(0) : LoggedInWidget(1);
+              return enrolled_course == 0 ? LoggedInWidget() : LoggedInWidget();
             }
           } else {
             return Container(

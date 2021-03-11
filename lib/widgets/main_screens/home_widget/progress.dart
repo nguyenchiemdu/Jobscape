@@ -11,7 +11,9 @@ class Progress extends StatefulWidget {
 }
 
 class _ProgressState extends State<Progress> {
-  int joindedWorkshop = 0;
+  int registeredWorkshop = 0;
+  int enrolledCourse = 0;
+  int proofsSubmitted = 0;
   @override
   void initState() {
     // TODO: implement initState
@@ -22,9 +24,13 @@ class _ProgressState extends State<Progress> {
   void getData() async {
     int result =
         await UserDatabaseService(uid: FirebaseAuth.instance.currentUser.uid)
-            .getJoinedWorkshop();
+            .getRegisteredWorkshop();
+    int result2 = await UserDatabaseService().getEnrolledCourse();
+    int result3 = await UserDatabaseService().getProofsSubmitted();
     setState(() {
-      joindedWorkshop = result;
+      registeredWorkshop = result;
+      enrolledCourse = result2;
+      proofsSubmitted = result3;
     });
   }
 
@@ -32,7 +38,9 @@ class _ProgressState extends State<Progress> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => SubmitProof([{'name': 'this is from home page'}])),
+          builder: (context) => SubmitProof([
+                {'name': 'this is from home page'}
+              ])),
     );
   }
 
@@ -109,7 +117,7 @@ class _ProgressState extends State<Progress> {
                                           top: ScreenUtil().setHeight(20),
                                           bottom: ScreenUtil().setHeight(2),
                                           left: ScreenUtil().setWidth(5)),
-                                      child: Text("Register",
+                                      child: Text("Enrolled",
                                           style: TextStyle(
                                             fontFamily: 'SFProDisplay',
                                             color: Color(0xff000000),
@@ -124,7 +132,7 @@ class _ProgressState extends State<Progress> {
                                       child: RichText(
                                           text: new TextSpan(children: [
                                         new TextSpan(
-                                            text: "9",
+                                            text: enrolledCourse.toString(),
                                             style: TextStyle(
                                               fontFamily: 'SFProDisplay',
                                               color: Color(0xff000000),
@@ -133,7 +141,7 @@ class _ProgressState extends State<Progress> {
                                               fontStyle: FontStyle.normal,
                                             )),
                                         new TextSpan(
-                                            text: " workshops",
+                                            text: " course",
                                             style: TextStyle(
                                               fontFamily: 'SFProDisplay',
                                               color: Color(0xff000000),
@@ -167,7 +175,7 @@ class _ProgressState extends State<Progress> {
                                         margin: EdgeInsets.only(
                                             bottom: ScreenUtil().setHeight(2),
                                             left: ScreenUtil().setWidth(5)),
-                                        child: Text("Joined",
+                                        child: Text("Registered",
                                             style: TextStyle(
                                               fontFamily: 'SFProDisplay',
                                               color: Color(0xff000000),
@@ -182,7 +190,8 @@ class _ProgressState extends State<Progress> {
                                         child: RichText(
                                             text: new TextSpan(children: [
                                           new TextSpan(
-                                              text: joindedWorkshop.toString(),
+                                              text:
+                                                  registeredWorkshop.toString(),
                                               style: TextStyle(
                                                 fontFamily: 'SFProDisplay',
                                                 color: Color(0xff000000),
@@ -290,7 +299,6 @@ class _ProgressState extends State<Progress> {
                             ),
                             color: Colors.transparent,
                             onPressed: () {
-                              print('tapped btn');
                               changeScreen(context);
                             },
                             child: null,
@@ -403,7 +411,7 @@ class _ProgressState extends State<Progress> {
                                         child: RichText(
                                             text: new TextSpan(children: [
                                           new TextSpan(
-                                              text: "14",
+                                              text: proofsSubmitted.toString(),
                                               style: TextStyle(
                                                 fontFamily: 'SFProDisplay',
                                                 color: Color(0xff000000),

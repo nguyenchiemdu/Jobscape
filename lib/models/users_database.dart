@@ -33,15 +33,17 @@ class UserDatabaseService {
       'reputation': reputation,
       'photoURL': photoURL,
       'backgroundURL': backgroundURL,
+      'isNewUser': true,
+      'registeredWorkshop': 0,
+      'proofsSubmitted': 0
     });
   }
 
-  Future<int> getTypeOfUser() async {
+  Future<bool> getTypeOfUser() async {
     String uid = FirebaseAuth.instance.currentUser.uid;
-    int res;
+    bool res;
     await users.doc(uid).get().then((value) {
-      res = value.data()['enrolled_course'];
-      print('get type of user successfully');
+      res = value.data()['isNewUser'];
     }).onError((error, stackTrace) {
       print('Failed to get type of user: ' + error.toString());
     });
@@ -106,15 +108,40 @@ class UserDatabaseService {
     });
   }
 
-  Future initJoinWorkshop() async {
+  Future initRegisteredWorkshop() async {
     await users
         .doc(uid)
         .update({
-          'joinedWorkshop': 0,
+          'registeredWorkshop': 0,
         })
-        .then((value) => print('init joinedWorkshop completed '))
+        .then((value) => print('init registeredWorkshop completed '))
         .catchError((e) {
-          print('init joinedWorkshop error: ' + e);
+          print('init registeredWorkshop error: ' + e);
+        });
+  }
+
+  Future initErnolledCourse() async {
+    await users
+        .doc(uid)
+        .update({
+          'enrolled_course': 0,
+        })
+        .then((value) => print('init enrolled_course completed '))
+        .catchError((e) {
+          print('init enrolled_course error: ' + e);
+        });
+  }
+
+  Future initNumber(String field) async {
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    await users
+        .doc(uid)
+        .update({
+          field: 0,
+        })
+        .then((value) => print('init $field completed '))
+        .catchError((e) {
+          print('init $field error: ' + e.toString());
         });
   }
 
@@ -130,15 +157,45 @@ class UserDatabaseService {
     return res;
   }
 
-  Future<int> getJoinedWorkshop() async {
+  Future<int> getProofsSubmitted() async {
+    String uid = FirebaseAuth.instance.currentUser.uid;
     int res;
     await users.doc(uid).get().then((snapshot) {
-      if (snapshot.data()['joinedWorkshop'] == null) {
-        print('joined workshop is null, trying to init ');
-        initJoinWorkshop();
+      if (snapshot.data()['proofsSubmitted'] == null) {
+        print('proofsSubmitted is null, trying to init ');
+        initNumber('proofsSubmitted');
         res = 0;
       } else {
-        res = snapshot['joinedWorkshop'];
+        res = snapshot.data()['proofsSubmitted'];
+      }
+    });
+    return res;
+  }
+
+  Future<int> getRegisteredWorkshop() async {
+    int res;
+    await users.doc(uid).get().then((snapshot) {
+      if (snapshot.data()['registeredWorkshop'] == null) {
+        print('registeredWorkshop is null, trying to init ');
+        initRegisteredWorkshop();
+        res = 0;
+      } else {
+        res = snapshot.data()['registeredWorkshop'];
+      }
+    });
+    return res;
+  }
+
+  Future<int> getEnrolledCourse() async {
+    int res;
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    await users.doc(uid).get().then((snapshot) {
+      if (snapshot.data()['enrolled_course'] == null) {
+        print('enrolled course is null, trying to init ');
+        initErnolledCourse();
+        res = 0;
+      } else {
+        res = snapshot.data()['enrolled_course'];
       }
     });
     return res;
@@ -186,7 +243,7 @@ class UserDatabaseService {
     String skillId = list[list.length - 1];
     list.removeLast();
     String pathToSkill = list.join('/');
-
+    int proofsSubmitted = 0;
     await listProof
         .add({
           'skillId': skillId,
@@ -198,9 +255,20 @@ class UserDatabaseService {
         .onError((error, stackTrace) {
           print('Failed to submit Proof : ' + error.toString());
         });
+    await users.doc(uid).get().then((value) {
+      proofsSubmitted = value.data()['proofsSubmitted'];
+    }).onError((error, stackTrace) {
+      print(error.toString());
+    });
+    proofsSubmitted += 1;
+    await users.doc(uid).update({'proofsSubmitted': proofsSubmitted}).onError(
+        (error, stackTrace) {
+      print(error.toString());
+    });
   }
 
   Future<bool> addRemindWorkShop(String workshopId) async {
+    int registeredWorkshop = 0;
     final String id = FirebaseAuth.instance.currentUser.uid;
     List remindWorkShopId = await this.getRemindWorkShopId();
     if (remindWorkShopId == null) remindWorkShopId = [];
@@ -217,6 +285,19 @@ class UserDatabaseService {
           .catchError((e) {
             print('Failed to add remindWorkshop');
           });
+      await users.doc(id).get().then((value) async {
+        registeredWorkshop = value.data()['registeredWorkshop'];
+        registeredWorkshop += 1;
+        await users
+            .doc(id)
+            .update({'registeredWorkshop': registeredWorkshop}).onError(
+                (error, stackTrace) {
+          print(error.toString());
+        });
+      }).onError((error, stackTrace) {
+        print(error.toString());
+      });
+
       return true;
     } else
       return false;

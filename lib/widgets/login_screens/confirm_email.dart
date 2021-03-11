@@ -121,14 +121,12 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
   }
 
   Future<void> checkEmailVerified() async {
-    final enrolled_course = await UserDatabaseService()
-        .getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid);
     user = auth.currentUser;
     await user.reload();
     if (user.emailVerified) {
       timer.cancel();
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => RoutePage(enrolled_course)));
+          MaterialPageRoute(builder: (context) => RoutePage()));
     }
   }
 }

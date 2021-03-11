@@ -24,7 +24,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
   final String path;
   final Map roadMapData;
   List listRoadMap;
-  int enrolled_course = 0;
+  bool isNewUser = false;
   List<Widget> listRoadMapWidget = [];
   _RoadMapWidgetState(this.roadMapData, this.path);
   void startJourney(BuildContext context) async {
@@ -33,7 +33,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
       MaterialPageRoute(
           builder: (context) => ListSkillWidget(this.firstRoadMapItem)),
     );
-    Map<String, dynamic> data = {'enrolled_course': 1};
+    Map<String, dynamic> data = {'isNewUser': false};
     await UserDatabaseService().uploadProfile(data);
   }
 
@@ -47,14 +47,14 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
 
   void getData() async {
     List temp = await DatabaseManager().getListRoadMap(path);
-    int course = await UserDatabaseService().getTypeOfUser();
+    bool res = await UserDatabaseService().getTypeOfUser();
     // print(jsonEncode(temp));
     setState(() {
       listRoadMap = temp;
       listRoadMapWidget = listRoadMap
           .map((item) => RoadMapItem(listRoadMap.indexOf(item) + 1, item))
           .toList();
-      enrolled_course = course;
+      isNewUser = res;
     });
     // print('listRoadMapWidget'+listRoadMapWidget.toString());
     firstRoadMapItem = listRoadMap[0];
@@ -241,7 +241,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                 ),
               ),
             ),
-            enrolled_course == 0
+            isNewUser
                 ? Positioned(
                     bottom: 0,
                     child: Container(

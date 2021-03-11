@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_app/models/firebase_storage.dart';
+import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/progress.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/avatar_leaning_widget.dart';
 import './industry_component.dart';
@@ -19,7 +20,22 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
   dynamic tx = DateTime.now();
   Map roadMapData;
   Map roadMapItem;
+  bool isNewUser = true;
   String loadingScreen = 'main';
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  void getData() async {
+    bool res = await UserDatabaseService().getTypeOfUser();
+    setState(() {
+      isNewUser = res;
+    });
+  }
+
   void changeScreen(String screen, dynamic passingData) {
     if (screen == 'roadmap' && passingData != null) {
       roadMapData = passingData;
@@ -78,7 +94,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                   // Welcoming(),
                   Container(
                     // margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(20)),
-                    child: Progress(),
+                    child: !isNewUser ? Progress() : null,
                   ),
                   Container(
                       // margin: EdgeInsets.only(top: 22),
