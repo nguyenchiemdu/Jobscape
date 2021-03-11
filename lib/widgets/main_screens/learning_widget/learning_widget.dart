@@ -78,7 +78,7 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                   Container(
                       // margin: EdgeInsets.only(top: 22),
                       child: IndustryComponent('it', changeScreen)),
-                  // IndustryComponent('marketing', changeScreen),
+                  IndustryComponent('marketing', changeScreen),
                   // IndustryComponent('it', changeScreen),
                 ],
               ),

@@ -156,7 +156,7 @@ class SubmitProof extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            height: 529,
+                            height: 528,
                             child: TabBarView(
                               children: [
                                 SubmitInstruction(),

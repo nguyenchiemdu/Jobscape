@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:learning_app/models/users_database.dart';
 import './road_map_item_widget.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'list_skill_widget.dart';
@@ -23,14 +24,17 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
   final String path;
   final Map roadMapData;
   List listRoadMap;
+  int enrolled_course = 0;
   List<Widget> listRoadMapWidget = [];
   _RoadMapWidgetState(this.roadMapData, this.path);
-  void startJourney(BuildContext context) {
+  void startJourney(BuildContext context) async {
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => ListSkillWidget(this.firstRoadMapItem)),
     );
+    Map<String, dynamic> data = {'enrolled_course': 1};
+    await UserDatabaseService().uploadProfile(data);
   }
 
   @override
@@ -43,12 +47,14 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
 
   void getData() async {
     List temp = await DatabaseManager().getListRoadMap(path);
+    int course = await UserDatabaseService().getTypeOfUser();
     // print(jsonEncode(temp));
     setState(() {
       listRoadMap = temp;
       listRoadMapWidget = listRoadMap
           .map((item) => RoadMapItem(listRoadMap.indexOf(item) + 1, item))
           .toList();
+      enrolled_course = course;
     });
     // print('listRoadMapWidget'+listRoadMapWidget.toString());
     firstRoadMapItem = listRoadMap[0];
@@ -93,8 +99,11 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
               width: ScreenUtil().setWidth(360),
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      colorFilter: new ColorFilter.mode(Colors.white.withOpacity(0.9), BlendMode.dstATop),
-                      image: NetworkImage(roadMapData['imgSrc'],),
+                      colorFilter: new ColorFilter.mode(
+                          Colors.white.withOpacity(0.9), BlendMode.dstATop),
+                      image: NetworkImage(
+                        roadMapData['imgSrc'],
+                      ),
                       fit: BoxFit.cover)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -232,81 +241,85 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                 ),
               ),
             ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                  width: ScreenUtil().setWidth(360),
-                  height: ScreenUtil().setHeight(152),
-                  decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
-                    ),
-                    color: Color(0xffffffff),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color(0x29000000),
-                          offset: Offset(0, -3),
-                          blurRadius: 10,
-                          spreadRadius: 0)
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: ScreenUtil().setHeight(20),
-                            left: ScreenUtil().setWidth(24)),
-                        child: Text(roadMapData['name'],
-                            style: TextStyle(
-                              fontFamily: 'SFProDisplay',
-                              color: Color(0xff000000),
-                              fontSize: ScreenUtil().setSp(16),
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                            )),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: ScreenUtil().setHeight(4),
-                            left: ScreenUtil().setWidth(24)),
-                        child:
-                            Text("1 - 2 câu mô tả gì đó cho người dùng hiểu rõ",
-                                style: TextStyle(
-                                  fontFamily: 'SFProDisplay',
-                                  color: Color(0xff000000),
-                                  fontSize: ScreenUtil().setSp(16),
-                                  fontWeight: FontWeight.w300,
-                                  fontStyle: FontStyle.italic,
-                                )),
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(
-                              top: ScreenUtil().setHeight(16),
-                              left: ScreenUtil().setWidth(24)),
-                          width: ScreenUtil().setWidth(312),
-                          height: ScreenUtil().setHeight(50),
-                          child: RaisedButton(
-                              onPressed: () {
-                                showAlertDialog(context, roadMapData['name'], () {startJourney(context);}
-                                );
-                              },
-                              color: Color(0xffffbf2f),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text("Start Journey ",
+            enrolled_course == 0
+                ? Positioned(
+                    bottom: 0,
+                    child: Container(
+                        width: ScreenUtil().setWidth(360),
+                        height: ScreenUtil().setHeight(152),
+                        decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24),
+                          ),
+                          color: Color(0xffffffff),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0x29000000),
+                                offset: Offset(0, -3),
+                                blurRadius: 10,
+                                spreadRadius: 0)
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil().setHeight(20),
+                                  left: ScreenUtil().setWidth(24)),
+                              child: Text(roadMapData['name'],
                                   style: TextStyle(
                                     fontFamily: 'SFProDisplay',
-                                    color: Color(0xffffffff),
-                                    fontSize: ScreenUtil().setSp(18),
-                                    fontWeight: FontWeight.w700,
+                                    color: Color(0xff000000),
+                                    fontSize: ScreenUtil().setSp(16),
+                                    fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.normal,
-                                  )))),
-                    ],
-                  )),
-            ),
+                                  )),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil().setHeight(4),
+                                  left: ScreenUtil().setWidth(24)),
+                              child: Text(
+                                  "1 - 2 câu mô tả gì đó cho người dùng hiểu rõ",
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xff000000),
+                                    fontSize: ScreenUtil().setSp(16),
+                                    fontWeight: FontWeight.w300,
+                                    fontStyle: FontStyle.italic,
+                                  )),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(
+                                    top: ScreenUtil().setHeight(16),
+                                    left: ScreenUtil().setWidth(24)),
+                                width: ScreenUtil().setWidth(312),
+                                height: ScreenUtil().setHeight(50),
+                                child: RaisedButton(
+                                    onPressed: () {
+                                      showAlertDialog(
+                                          context, roadMapData['name'], () {
+                                        startJourney(context);
+                                      });
+                                    },
+                                    color: Color(0xffffbf2f),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text("Start Journey ",
+                                        style: TextStyle(
+                                          fontFamily: 'SFProDisplay',
+                                          color: Color(0xffffffff),
+                                          fontSize: ScreenUtil().setSp(18),
+                                          fontWeight: FontWeight.w700,
+                                          fontStyle: FontStyle.normal,
+                                        )))),
+                          ],
+                        )),
+                  )
+                : Container(),
           ])),
     );
   }
@@ -319,9 +332,9 @@ showAlertDialog(BuildContext context, String journey, Function startJourney) {
       },
       child: Text("Cancel"));
   // set up the button
-  Widget okButton = FlatButton(child: Text("Ok"),
-      onPressed:
-      () {
+  Widget okButton = FlatButton(
+      child: Text("Ok"),
+      onPressed: () {
         Navigator.of(context).pop();
         startJourney();
       });

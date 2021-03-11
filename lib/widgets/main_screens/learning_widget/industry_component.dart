@@ -22,7 +22,6 @@ class IndustryComponent extends StatefulWidget {
 
 class _IndustryComponentState extends State<IndustryComponent> {
   final String fieldId;
-
   _IndustryComponentState(this.fieldId);
   dynamic industryField;
   final dbManager = DatabaseManager();
@@ -64,7 +63,9 @@ class _IndustryComponentState extends State<IndustryComponent> {
               child: Progress(),
             ),
             Container(
-              margin: EdgeInsets.only(left: ScreenUtil().setWidth(24),top:ScreenUtil().setHeight(20)),
+              margin: EdgeInsets.only(
+                  left: ScreenUtil().setWidth(24),
+                  top: ScreenUtil().setHeight(20)),
               width: ScreenUtil().setWidth(312),
               child: Container(
                 margin: EdgeInsets.only(bottom: 8),

@@ -44,7 +44,6 @@ class _WorkshopWidgetState extends State<WorkshopWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print( FirebaseAuth.instance.currentUser.toString());
     return Scaffold(
       // appBar:
       //    TabBar(
@@ -87,7 +86,7 @@ class _WorkshopWidgetState extends State<WorkshopWidget> {
 
                   // width: 200,
                   child: TabBar(
-                    labelColor:Color(0xff000000),
+                    labelColor: Color(0xff000000),
                     unselectedLabelColor: Color(0xff000000),
                     indicator: BoxDecoration(
                       color: Color(0xffffbf2f),
