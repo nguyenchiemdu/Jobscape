@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CourseItemWidget extends StatelessWidget {
   final Map courseItem;
   final String imgScr;
-  CourseItemWidget(this.courseItem, this.imgScr);
+  final String courseLogoSrc;
+  CourseItemWidget(this.courseItem, this.imgScr, this.courseLogoSrc);
 
   void changeScreen(BuildContext context) {
     Navigator.push(
@@ -48,7 +49,7 @@ class CourseItemWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.network(
-                    "https://i0.wp.com/sourceofapk.com/wp-content/uploads/2020/11/udemy-tv-apk-latest.jpg?fit=600%2C600&ssl=1",
+                    courseLogoSrc,
                     fit: BoxFit.fill,
                     width: ScreenUtil().setWidth(75),
                     height: ScreenUtil().setHeight(75),

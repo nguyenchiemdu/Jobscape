@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:learning_app/models/logo_course_database.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/industry_card.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/skill_item.dart';
 import 'course_item.dart';
@@ -24,6 +25,7 @@ class ListCourseWidget extends StatefulWidget {
 class _ListCourseWidgetState extends State<ListCourseWidget> {
   List<Widget> listCourseWidget = [];
   List listCourse;
+  Map logo;
   void addData(String path) async {
     List res = await DatabaseManager().getListCourse(path);
     int length;
@@ -103,9 +105,12 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
   void getData() async {
     listCourse =
         await widget.industryDatabase.getListCourse(widget.skillItem['path']);
+    Map mapLogo = await LogoCourseDataBase().getAllCourseLogo();
+    // print(logo.toString());
     setState(() {
       listCourseWidget = listCourse
-          .map((course) => CourseItemWidget(course, widget.imgSrc))
+          .map((course) => CourseItemWidget(
+              course, widget.imgSrc, mapLogo[course['provider']]))
           .toList();
     });
     // print(jsonEncode(listCourse));
