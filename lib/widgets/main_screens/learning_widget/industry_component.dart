@@ -59,10 +59,6 @@ class _IndustryComponentState extends State<IndustryComponent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              // margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(20)),
-              child: Progress(),
-            ),
-            Container(
               margin: EdgeInsets.only(
                   left: ScreenUtil().setWidth(24),
                   top: ScreenUtil().setHeight(20)),
@@ -85,8 +81,9 @@ class _IndustryComponentState extends State<IndustryComponent> {
                   left: ScreenUtil().setWidth(12),
                   top: ScreenUtil().setHeight(12)),
               width: ScreenUtil().setWidth(312),
-              height: ScreenUtil().setHeight(183),
-              margin: EdgeInsets.only(left: 24, right: 24),
+              constraints: BoxConstraints(
+                maxHeight: double.infinity,
+              ),              margin: EdgeInsets.only(left: 24, right: 24),
               decoration: new BoxDecoration(
                   color: Color(0xfffffaf0),
                   borderRadius: BorderRadius.circular(15)),

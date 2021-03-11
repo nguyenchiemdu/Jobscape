@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_app/models/firebase_storage.dart';
+import 'package:learning_app/widgets/main_screens/home_widget/progress.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/avatar_leaning_widget.dart';
 import './industry_component.dart';
 // import './industry_slider_card.dart';
@@ -75,6 +76,10 @@ class _MainLearningScreenState extends State<MainLearningScreen> {
                     ],
                   ),
                   // Welcoming(),
+                  Container(
+                    // margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(20)),
+                    child: Progress(),
+                  ),
                   Container(
                       // margin: EdgeInsets.only(top: 22),
                       child: IndustryComponent('it', changeScreen)),
