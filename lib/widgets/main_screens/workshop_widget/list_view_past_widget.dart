@@ -51,7 +51,7 @@ class ListCardPast extends StatelessWidget {
       return Center(
         child: Container(
             width: ScreenUtil().setWidth(327),
-            height: ScreenUtil().setHeight(211),
+            height: ScreenUtil().setHeight(230),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: workshopList.length,

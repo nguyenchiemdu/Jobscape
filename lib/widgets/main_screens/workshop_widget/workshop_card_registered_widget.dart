@@ -51,7 +51,7 @@ class WorkshopCardRegister extends StatelessWidget {
                   ),
                   Container(
                     width: ScreenUtil().setWidth(309),
-                    height: ScreenUtil().setHeight(400),
+                    height: ScreenUtil().setHeight(415),
                     // decoration: new BoxDecoration(
                     //     color: Color(0xffffffff),
                     //     borderRadius: BorderRadius.circular(12),

@@ -54,12 +54,11 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
     getData();
     print(widget.skillItem['name'].toString());
     // Dòng dưới này là để add data từ file excel, nếu k add thì comment lại
-    addData(widget.skillItem['path']);
+    // addData(widget.skillItem['path']);
   }
 
   void readExcel(String sheetName) async {
-    var file =
-        "/Users/dunguyenchiem/Documents/flutter_project/learning_app/Onlinecourses.xlsx";
+    var file = "assets/res/Onlinecourses.xlsx";
     var bytes = File(file).readAsBytesSync();
     var excel = Excel.decodeBytes(bytes);
     Map<String, dynamic> course;

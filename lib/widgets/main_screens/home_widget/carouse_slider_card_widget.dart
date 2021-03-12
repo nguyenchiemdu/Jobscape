@@ -56,7 +56,7 @@ class SliderCard extends StatelessWidget {
       return Center(
         child: Container(
             width: ScreenUtil().setWidth(324),
-            height: ScreenUtil().setHeight(192),
+            height: ScreenUtil().setHeight(205),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: workshopList.length,

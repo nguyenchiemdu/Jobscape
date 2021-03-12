@@ -54,7 +54,7 @@ class WorkshopCardPast extends StatelessWidget {
                   ),
                   Container(
                     width: ScreenUtil().setWidth(309),
-                    height: ScreenUtil().setHeight(400),
+                    height: ScreenUtil().setHeight(415),
                     // decoration: new BoxDecoration(
                     //     color: Color(0xffffffff),
                     //     borderRadius: BorderRadius.circular(12),
@@ -220,7 +220,7 @@ class WorkshopCardPast extends StatelessWidget {
               )
             ],
           ),
-          height: ScreenUtil().setHeight(211),
+          height: ScreenUtil().setHeight(220),
           width: ScreenUtil().setWidth(192),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
