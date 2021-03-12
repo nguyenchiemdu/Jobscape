@@ -119,6 +119,8 @@ flutter:
     - assets/images/logo_vinbigdata.png
     - assets/images/logo_vng.png
     - assets/images/logo_fpt.png
+    - assets/images/add_icon.png
+    - assets/images/addimage_card.png
 
   #   - images/a_dot_ham.jpeg
 

@@ -118,10 +118,13 @@ class _EditUserProfileState extends State<EditUserProfile> {
         Container(
           width: ScreenUtil().setWidth(360),
           height: ScreenUtil().setHeight(760),
+
           decoration: new BoxDecoration(
+
             image: DecorationImage(
               image: AssetImage("assets/images/background_user_profile.png"),
               fit: BoxFit.fill,
+                colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5),BlendMode.dstOver)
             ),
           ),
           child: SingleChildScrollView(
@@ -495,7 +498,35 @@ class _EditUserProfileState extends State<EditUserProfile> {
               ),
             ),
           ),
-        )
+        ),
+        Positioned(
+          left: ScreenUtil().setWidth(110),
+        top: ScreenUtil().setHeight(60),
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(8)),
+              width: ScreenUtil().setWidth(46),
+              height: ScreenUtil().setHeight(46),
+              decoration: new BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                      "assets/images/add_icon.png"),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+            Text("Add new avatar",
+                style: TextStyle(
+                  fontFamily: 'SFProDisplay',
+                  color: Color(0xffffffff),
+                  fontSize: ScreenUtil().setSp(20,allowFontScalingSelf: false),
+                  fontWeight: FontWeight.w700,
+                  fontStyle: FontStyle.normal,
+                )
+            )
+          ],
+        ),)
       ]),
     );
   }
