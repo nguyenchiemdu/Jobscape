@@ -34,7 +34,7 @@ class _WorkshopState extends State<Workshop> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
-        date.value = TextEditingValue(text: DateFormat.yMMMMd().format(picked));
+        date.value = TextEditingValue(text: DateFormat('MMM dd, y').format(picked));
       });
   }
 
