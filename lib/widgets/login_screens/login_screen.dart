@@ -52,7 +52,7 @@ class LoginForm extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("assets/images/backgroundlogin.png"),
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
                 child: Container(
@@ -316,10 +316,10 @@ class LoginForm extends StatelessWidget {
                 )),
               Positioned(
                 left: ScreenUtil().setWidth(120),
-                top: ScreenUtil().setHeight(80),
+                top: ScreenUtil().setHeight(75),
                 child: Container(
-                  width: ScreenUtil().setWidth(110),
-                  height: ScreenUtil().setHeight(110),
+                  width: ScreenUtil().setWidth(116),
+                  height: ScreenUtil().setHeight(130),
                   decoration: new BoxDecoration(
                     image: DecorationImage(
                       image:
