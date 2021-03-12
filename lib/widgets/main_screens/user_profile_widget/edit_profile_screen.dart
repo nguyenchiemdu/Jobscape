@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:learning_app/models/google_sign_in.dart';
 import 'package:learning_app/models/users_database.dart';
+import 'package:learning_app/widgets/main_screens/learning_widget/submit_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/avatar_edit_profile_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/course_completed_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/journey_completed_widget.dart';
@@ -34,6 +35,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
   TextEditingController companyController = TextEditingController();
   Map userInfor;
   PickedFile image;
+  PickedFile avatar;
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
@@ -95,6 +97,29 @@ class _EditUserProfileState extends State<EditUserProfile> {
     }
   }
 
+  submitAvatar() async {
+    final _storage = FirebaseStorage.instance;
+    String uid = FirebaseAuth.instance.currentUser.uid;
+
+    if (avatar != null) {
+      var file = File(avatar.path);
+      //upload to FireBase
+      var _snapshot = await _storage
+          .ref()
+          .child('avatar/$uid')
+          .putFile(file)
+          .whenComplete(() => print('Upload avatar  to Storage complete'))
+          .onError((error, stackTrace) {
+        print('Failed to upload avatar to storage:' + error);
+        return null;
+      });
+      var downloadURLs = await _snapshot.ref.getDownloadURL();
+      await UserDatabaseService().updateUserPhotoURL(downloadURLs);
+    } else {
+      print('No Path to avatar received');
+    }
+  }
+
   chooseCV() async {
     final _picker = ImagePicker();
 
@@ -110,6 +135,21 @@ class _EditUserProfileState extends State<EditUserProfile> {
     }
   }
 
+  chooseAvatar() async {
+    final _picker = ImagePicker();
+
+    //CHeck permission
+    // await Permission.photos.request();
+    await Permission.photos.request();
+    var permissionStatus = await Permission.photos.status;
+    if (permissionStatus.isGranted) {
+      //Select Image
+      avatar = await _picker.getImage(source: ImageSource.gallery);
+    } else {
+      print('Grand permissions and try again');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -118,14 +158,12 @@ class _EditUserProfileState extends State<EditUserProfile> {
         Container(
           width: ScreenUtil().setWidth(360),
           height: ScreenUtil().setHeight(760),
-
           decoration: new BoxDecoration(
-
             image: DecorationImage(
-              image: AssetImage("assets/images/background_user_profile.png"),
-              fit: BoxFit.fill,
-                colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5),BlendMode.dstOver)
-            ),
+                image: AssetImage("assets/images/background_user_profile.png"),
+                fit: BoxFit.fill,
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.5), BlendMode.dstOver)),
           ),
           child: SingleChildScrollView(
             child: Column(
@@ -463,6 +501,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                           onPressed: () {
                             uploadProfile();
                             submitCV();
+                            submitAvatar();
                           },
                           color: Color(0xffffbf2f),
                           shape: RoundedRectangleBorder(
@@ -501,32 +540,37 @@ class _EditUserProfileState extends State<EditUserProfile> {
         ),
         Positioned(
           left: ScreenUtil().setWidth(110),
-        top: ScreenUtil().setHeight(60),
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(8)),
-              width: ScreenUtil().setWidth(46),
-              height: ScreenUtil().setHeight(46),
-              decoration: new BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                      "assets/images/add_icon.png"),
-                  fit: BoxFit.fill,
+          top: ScreenUtil().setHeight(60),
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  chooseAvatar();
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(8)),
+                  width: ScreenUtil().setWidth(46),
+                  height: ScreenUtil().setHeight(46),
+                  decoration: new BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/add_icon.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Text("Add new avatar",
-                style: TextStyle(
-                  fontFamily: 'SFProDisplay',
-                  color: Color(0xffffffff),
-                  fontSize: ScreenUtil().setSp(20,allowFontScalingSelf: false),
-                  fontWeight: FontWeight.w700,
-                  fontStyle: FontStyle.normal,
-                )
-            )
-          ],
-        ),)
+              Text("Add new avatar",
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xffffffff),
+                    fontSize:
+                        ScreenUtil().setSp(20, allowFontScalingSelf: false),
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                  ))
+            ],
+          ),
+        )
       ]),
     );
   }

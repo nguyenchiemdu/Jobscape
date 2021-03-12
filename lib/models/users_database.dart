@@ -83,6 +83,15 @@ class UserDatabaseService {
     return res;
   }
 
+  Future updateUserPhotoURL(String photoURL) async {
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    await users.doc(uid).update({'photoURL': photoURL}).then((value) {
+      print('updated user photo URL');
+    }).onError((error, stackTrace) {
+      print(error.toString());
+    });
+  }
+
   Future<String> getUserphotoURL() async {
     String uid = FirebaseAuth.instance.currentUser.uid;
     String res;
@@ -103,7 +112,7 @@ class UserDatabaseService {
         .then((value) => res = value.data())
         .onError((error, stackTrace) {
       print('failed to get user infor : ' + error.toString());
-      return null;
+      return {};
     });
     return res;
   }
