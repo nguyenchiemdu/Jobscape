@@ -34,7 +34,8 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
     else
       length = res.length;
     if (length == 0)
-      readExcel(widget.skillItem['name'].toString());
+      readExcel(widget.skillItem['name']);
+    // .toString().substring(0, 31)
     else
       print('data base alredy has data');
   }
@@ -51,13 +52,14 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
     // TODO: implement initState
     super.initState();
     getData();
+    print(widget.skillItem['name'].toString());
     // Dòng dưới này là để add data từ file excel, nếu k add thì comment lại
-    // addData(widget.skillItem['path']);
+    addData(widget.skillItem['path']);
   }
 
   void readExcel(String sheetName) async {
     var file =
-        "/Users/dunguyenchiem/Documents/flutter/learing_app/Onlinecourses.xlsx";
+        "/Users/dunguyenchiem/Documents/flutter_project/learning_app/Onlinecourses.xlsx";
     var bytes = File(file).readAsBytesSync();
     var excel = Excel.decodeBytes(bytes);
     Map<String, dynamic> course;

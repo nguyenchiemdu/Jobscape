@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:excel/excel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -64,8 +67,46 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
     // print(listSkillWidget.toList());
   }
 
+  int intConvert(String s) {
+    if (double.tryParse(s) != null) {
+      return double.parse(s).round();
+    } else
+      return 999;
+  }
+
+  void readExcel() async {
+    String sheetName = 'Machine Learning Engineer';
+    var file =
+        "/Users/dunguyenchiem/Documents/flutter_project/learning_app/LearningRoadmap.xlsx";
+    var bytes = File(file).readAsBytesSync();
+    var excel = Excel.decodeBytes(bytes);
+    Map<String, dynamic> skill;
+    int condition;
+    if (widget.roadMapItem['name'] == 'Must-have') condition = 1;
+    if (widget.roadMapItem['name'] == 'Fast Track') condition = 2;
+    if (widget.roadMapItem['name'] == 'Advanced') condition = 3;
+
+    for (int i = 1; i < excel.tables[sheetName].rows.length; i++)
+      if (intConvert(excel.tables[sheetName].rows[i][1].toString()) ==
+          condition) {
+        skill = {'name': 'null', 'category': 'null', 'order': 0};
+        skill['name'] = excel.tables[sheetName].rows[i][0];
+        skill['category'] = excel.tables[sheetName].rows[i][2];
+        skill['order'] =
+            intConvert(excel.tables[sheetName].rows[i][3].toString());
+        // print(
+        //     intConvert(excel.tables[sheetName].rows[i][1].toString()).toString());
+        print(i.toString());
+        print(skill.toString());
+        await DatabaseManager()
+            .addSkill(skill, path: widget.roadMapItem['path']);
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // print(widget.roadMapItem.toString());
+    // readExcel();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(

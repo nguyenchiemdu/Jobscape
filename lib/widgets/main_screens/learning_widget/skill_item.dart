@@ -81,7 +81,7 @@ class SkillItem extends StatelessWidget {
                 margin: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
                 width: ScreenUtil().setWidth(131),
                 height: ScreenUtil().setHeight(57),
-                child: Text("Content - Content - Content\nContent",
+                child: Text(skillItem['category'],
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff888888),
