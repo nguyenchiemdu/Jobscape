@@ -14,6 +14,14 @@ class WorkshopDatabase {
   //     'date': date
   //   });
   // }
+  Future AddWorkshop(Map<String, dynamic> data) async {
+    await workshops.add(data).then((value) {
+      print('add workshop completed');
+    }).onError((error, stackTrace) {
+      print(error.toString());
+    });
+  }
+
   Future getAllWorkshop() async {
     List workshopList = [];
     Map workshop;
@@ -45,7 +53,8 @@ class WorkshopDatabase {
           workshop = element.data();
           workshop['id'] = element.id;
           Timestamp date = workshop['date'];
-          if (date.toDate().compareTo(DateTime.now())>=0) workshopList.add(workshop);
+          if (date.toDate().compareTo(DateTime.now()) >= 0)
+            workshopList.add(workshop);
         });
       }
       return workshopList;

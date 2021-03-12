@@ -12,8 +12,9 @@ class WorkshopCard extends StatelessWidget {
   Timestamp timeStamp;
   String speaker;
   String workshopId;
+  String description;
   WorkshopCard(this.image_source, this.for_whom, this.title, this.timeStamp,
-      this.speaker, this.workshopId);
+      this.speaker, this.workshopId, this.description);
   void remindMe(BuildContext context) async {
     bool status = await UserDatabaseService().addRemindWorkShop(workshopId);
     // nếu đã có workshop trong reminder thì status sẽ là false, còn chưa thì là true
@@ -22,8 +23,8 @@ class WorkshopCard extends StatelessWidget {
       showAlertDialog(context);
     else
       showAlertRegistered(context);
-      // thong bao may da dang ki workshop nay roi
-      ;
+    // thong bao may da dang ki workshop nay roi
+    ;
   }
 
   @override
@@ -228,8 +229,7 @@ class WorkshopCard extends StatelessWidget {
                                 height: ScreenUtil().setHeight(69),
                                 decoration:
                                     new BoxDecoration(color: Color(0xffffefcc)),
-                                child: Text(
-                                    "Đào tạo MIỄN PHÍ về kỹ năng chuẩn bị kinh doanh, kỹ năng mềm và sử dụng kênh digital để tăng hiệu suất",
+                                child: Text(description,
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff888888),
@@ -419,6 +419,7 @@ showAlertDialog(BuildContext context) {
     },
   );
 }
+
 showAlertRegistered(BuildContext context) {
   // set up the button
   Widget okButton = FlatButton(

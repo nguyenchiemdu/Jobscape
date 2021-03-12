@@ -57,12 +57,14 @@ class SliderCard extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   child: WorkshopCard(
-                      workshopList[index]['image_source'],
-                      workshopList[index]['for'],
-                      workshopList[index]['title'],
-                      workshopList[index]['date'],
-                      workshopList[index]['speaker'],
-                      workshopList[index]['id']),
+                    workshopList[index]['image_source'],
+                    workshopList[index]['for'],
+                    workshopList[index]['title'],
+                    workshopList[index]['date'],
+                    workshopList[index]['speaker'],
+                    workshopList[index]['id'],
+                    workshopList[index]['description'],
+                  ),
                 );
               },
             )),
