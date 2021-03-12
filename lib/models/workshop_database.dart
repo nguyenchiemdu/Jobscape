@@ -26,7 +26,10 @@ class WorkshopDatabase {
     List workshopList = [];
     Map workshop;
     try {
-      await workshops.get().then((querySnapshot) {
+      await workshops
+          .where('status', isEqualTo: true)
+          .get()
+          .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
           workshop = element.data();
           workshop['id'] = element.id;

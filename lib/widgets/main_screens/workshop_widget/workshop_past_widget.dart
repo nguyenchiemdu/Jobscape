@@ -8,7 +8,18 @@ import 'package:firebase_core/firebase_core.dart';
 
 class PastWorkshop extends StatelessWidget {
   final List pastWorkshop;
-  PastWorkshop(this.pastWorkshop);
+  List fromJobscape;
+  List fromUser;
+  PastWorkshop(this.pastWorkshop) {
+    fromJobscape = [];
+    fromUser = [];
+    pastWorkshop.forEach((element) {
+      if (element['fromUser'] != null && element['fromuser'])
+        fromUser.add(element);
+      else
+        fromJobscape.add(element);
+    });
+  }
   // var workshops = [
   // {'title':'Flutter with Google Experts',
   // 'date': 'Feb 20, 2021',
@@ -99,7 +110,7 @@ class PastWorkshop extends StatelessWidget {
               ),
             ),
           ),
-          ListCardPast(pastWorkshop),
+          ListCardPast(fromJobscape),
           Center(
             child: Container(
               margin: EdgeInsets.only(
@@ -131,7 +142,7 @@ class PastWorkshop extends StatelessWidget {
               ),
             ),
           ),
-          ListCardPast(pastWorkshop),
+          ListCardPast(fromUser),
 
           // Container(
           //   margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:20),

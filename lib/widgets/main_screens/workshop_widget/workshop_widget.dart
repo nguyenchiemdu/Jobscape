@@ -75,7 +75,9 @@ class _WorkshopState extends State<Workshop> {
         'title': workshopName.text,
         'organizationContact': contactInfo.text,
         'link': linkToJoin.text,
-        'description': description.text
+        'description': description.text,
+        'status': false,
+        'fromUser': true
       };
 
       await WorkshopDatabase().AddWorkshop(data);
