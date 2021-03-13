@@ -323,11 +323,17 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                                               });
                                             });
                                       } else
-                                        showDialog(context: context,
-                                            builder: (BuildContext context){
-                                              return AdvanceCustomAlert2("Registration Confirmation",
-                                                  "As we only support 1 learning path at a time, therefore, if you start " + roadMapData['name'] + " journey, your current journey will be forced to end. Do you still want to start?",
-                                                      (){});
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AdvanceCustomAlert2(
+                                                  "Registration Confirmation",
+                                                  "As we only support 1 learning path at a time, therefore, if you start " +
+                                                      roadMapData['name'] +
+                                                      " journey, your current journey will be forced to end. Do you still want to start?",
+                                                  () {
+                                                startJourney(context);
+                                              });
                                             });
                                     },
                                     color: Color(0xffffbf2f),
