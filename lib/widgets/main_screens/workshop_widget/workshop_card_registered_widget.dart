@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,10 +69,19 @@ class WorkshopCardRegister extends StatelessWidget {
                           margin: EdgeInsets.only(top: 8, right: 8, left: 8),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: Image.network(image_source,
-                                fit: BoxFit.fill,
-                                width: ScreenUtil().setWidth(293),
-                                height: ScreenUtil().setHeight(159)),
+                            child:
+                                // Image.network(image_source,
+                                CachedNetworkImage(
+                                    imageUrl: image_source,
+                                    placeholder: (context, url) => Image(
+                                        image: AssetImage(
+                                            'assets/images/top_image.png')),
+                                    // CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.error),
+                                    fit: BoxFit.fill,
+                                    width: ScreenUtil().setWidth(293),
+                                    height: ScreenUtil().setHeight(159)),
                           ),
                         ),
                         Center(

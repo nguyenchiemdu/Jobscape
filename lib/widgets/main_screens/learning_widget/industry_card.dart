@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +14,9 @@ class IndustryCard extends StatelessWidget {
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => RoadMapWidget(this.jobData,this.jobData['path'])),
+      MaterialPageRoute(
+          builder: (context) =>
+              RoadMapWidget(this.jobData, this.jobData['path'])),
     );
   }
 
@@ -30,7 +33,8 @@ class IndustryCard extends StatelessWidget {
             width: ScreenUtil().setWidth(217),
             constraints: BoxConstraints(
               maxHeight: double.infinity,
-            ),              decoration: new BoxDecoration(
+            ),
+            decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Color(0xffffffff),
               boxShadow: [
@@ -47,8 +51,15 @@ class IndustryCard extends StatelessWidget {
                   margin: EdgeInsets.only(bottom: 9, top: 5, right: 5, left: 5),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      jobData['imgSrc'],
+                    child:
+                        // Image.network(
+                        // jobData['imgSrc'],
+                        CachedNetworkImage(
+                      imageUrl: jobData['imgSrc'],
+                      placeholder: (context, url) => Image(
+                          image: AssetImage('assets/images/top_image.png')),
+                      // CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                       fit: BoxFit.fill,
                       width: ScreenUtil().setWidth(207),
                       height: ScreenUtil().setHeight(120),
@@ -95,16 +106,21 @@ class IndustryCard extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(10)),
+                        margin:
+                            EdgeInsets.only(bottom: ScreenUtil().setHeight(10)),
                         child: Row(
                           children: [
                             Container(
                               margin: EdgeInsets.only(left: 13, right: 4),
                               width: 13,
                               height: 13,
-                              child: Image.asset("assets/images/salary_icon.png"),
+                              child:
+                                  Image.asset("assets/images/salary_icon.png"),
                             ),
-                            Text('Salary: ' + jobData['salary'].toString() + '\$',
+                            Text(
+                                'Salary: ' +
+                                    jobData['salary'].toString() +
+                                    '\$',
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff000000),

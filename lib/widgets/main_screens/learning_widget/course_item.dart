@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'course_review_screen.dart';
@@ -48,8 +49,15 @@ class CourseItemWidget extends StatelessWidget {
                 // margin: EdgeInsets.only(bottom: 9, top: 5, right: 5, left: 5),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    courseLogoSrc,
+                  child:
+                      // Image.network(
+                      //   courseLogoSrc,
+                      CachedNetworkImage(
+                    imageUrl: courseLogoSrc,
+                    placeholder: (context, url) =>
+                        Image(image: AssetImage('assets/images/top_image.png')),
+                    // CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                     fit: BoxFit.fill,
                     width: ScreenUtil().setWidth(75),
                     height: ScreenUtil().setHeight(75),

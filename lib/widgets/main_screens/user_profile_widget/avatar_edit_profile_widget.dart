@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/users_database.dart';
@@ -32,7 +33,7 @@ class _AvatarEditProfileWidgetState extends State<AvatarEditProfileWidget> {
       height: ScreenUtil().setHeight(259),
       decoration: new BoxDecoration(
           image: DecorationImage(
-        image: NetworkImage(url),
+        image: CachedNetworkImageProvider(url),
         fit: BoxFit.fill,
       )),
     );
