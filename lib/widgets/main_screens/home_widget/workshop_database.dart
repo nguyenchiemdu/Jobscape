@@ -43,4 +43,23 @@ class DatabaseManager {
       return null;
     }
   }
+
+  Future getFullWorkshop() async {
+    List workshopList = [];
+
+    try {
+      await workshops
+          .orderBy('date', descending: true)
+          .get()
+          .then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          workshopList.add(element.data());
+        });
+      });
+      return workshopList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }

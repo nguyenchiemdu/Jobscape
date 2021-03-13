@@ -21,10 +21,10 @@ class UserDatabaseService {
     }
     if (photoURL == null) {
       photoURL =
-          'https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/avatar%2Fdefault-avatar.png?alt=media&token=96da3222-7de1-4b6e-b825-a4a5a309a97a';
+          'https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/avatar%2Favatar.png?alt=media&token=a72c897f-1ce3-4e1d-ba00-aaba287b66eb';
     }
     String backgroundURL =
-        'https://i.pinimg.com/originals/42/0b/4b/420b4b7bfb03ae2310ce5d614d8cb216.jpg';
+        'https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/avatar%2Fcover.png?alt=media&token=b3be3201-e739-430b-862d-faa1a96f66a2';
     return await users.doc(uid).set({
       'displayName': displayName,
       'email': FirebaseAuth.instance.currentUser.email,

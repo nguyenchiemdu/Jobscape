@@ -33,8 +33,12 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
       length = 0;
     else
       length = res.length;
-    if (length == 0)
+    if (length == 0) if (widget.skillItem['name'].length <= 30)
       readExcel(widget.skillItem['name']);
+    else {
+      print('line too long');
+      readExcel(widget.skillItem['name'].toString().substring(0, 30));
+    }
     // .toString().substring(0, 31)
     else
       print('data base alredy has data');
@@ -54,11 +58,11 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
     getData();
     print(widget.skillItem['name'].toString());
     // Dòng dưới này là để add data từ file excel, nếu k add thì comment lại
-    // addData(widget.skillItem['path']);
+    addData(widget.skillItem['path']);
   }
 
   void readExcel(String sheetName) async {
-    var file = "assets/res/Onlinecourses.xlsx";
+    var file = "/Users/dunguyenchiem/Documents/newdata.xlsx";
     var bytes = File(file).readAsBytesSync();
     var excel = Excel.decodeBytes(bytes);
     Map<String, dynamic> course;

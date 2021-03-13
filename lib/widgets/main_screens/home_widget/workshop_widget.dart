@@ -51,7 +51,8 @@ class _WorkshopState extends State<Workshop> {
   }
 
   fetDatabaseList() async {
-    List resultant = await DatabaseManager().getWorkshopList();
+    List res = await DatabaseManager().getWorkshopList();
+    List resultant = await DatabaseManager().getFullWorkshop();
     List listRandom = [];
     if (resultant == null) {
       print("Unable to retrieve");
@@ -68,7 +69,7 @@ class _WorkshopState extends State<Workshop> {
       } else
         listRandom = resultant;
       await setState(() {
-        workshopList = resultant;
+        workshopList = res;
         workshopRandom = listRandom;
       });
     }

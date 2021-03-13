@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CourseItemWidget extends StatelessWidget {
   final Map courseItem;
   final String imgScr;
-  final String courseLogoSrc;
+  String courseLogoSrc;
   CourseItemWidget(this.courseItem, this.imgScr, this.courseLogoSrc);
 
   void changeScreen(BuildContext context) {
@@ -38,6 +38,10 @@ class CourseItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (courseLogoSrc == null) {
+      courseLogoSrc = 'http://google.com';
+      print(courseItem['provider']);
+    }
     String overallStar = caculateStar();
     return Container(
       child: Column(
