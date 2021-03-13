@@ -202,7 +202,7 @@ class LoginForm extends StatelessWidget {
                     child: Container(
                       margin: EdgeInsets.only(
                         top: ScreenUtil().setHeight(21),
-                        bottom: ScreenUtil().setHeight(13),
+                        bottom: ScreenUtil().setHeight(20),
                       ),
                       // margin: EdgeInsets.only(
                       //     top: 21, left: 136, right: 136, bottom: 13),
@@ -217,7 +217,7 @@ class LoginForm extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 12),
+                    margin: EdgeInsets.only(bottom: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

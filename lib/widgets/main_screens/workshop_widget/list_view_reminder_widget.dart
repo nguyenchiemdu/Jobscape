@@ -51,7 +51,7 @@ class SliderCardRemind extends StatelessWidget {
       return Center(
         child: Container(
             width: ScreenUtil().setWidth(327),
-            height: ScreenUtil().setHeight(230),
+            height: ScreenUtil().setHeight(235),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: workshopList.length,

@@ -122,6 +122,7 @@ flutter:
     - assets/images/add_icon.png
     - assets/images/addimage_card.png
     - assets/res/Onlinecourses.xlsx
+    - assets/images/speed_icon.png
 
   #   - images/a_dot_ham.jpeg
 

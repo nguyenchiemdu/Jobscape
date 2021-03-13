@@ -12,8 +12,9 @@ class WorkshopCardPast extends StatelessWidget {
   String speaker;
   String workshopId;
   int duration;
+  String description;
   WorkshopCardPast(this.image_source, this.for_whom, this.title,
-      this.timeStamp, this.speaker, this.workshopId) {
+      this.timeStamp, this.speaker, this.workshopId,this.description) {
     // List timeList =
     //     timeStamp.toDate().difference(DateTime.now()).toString().split(':');
     //   int day = (int.parse(timeList[0]) / 24).round();
@@ -54,7 +55,7 @@ class WorkshopCardPast extends StatelessWidget {
                   ),
                   Container(
                     width: ScreenUtil().setWidth(309),
-                    height: ScreenUtil().setHeight(415),
+                    height: ScreenUtil().setHeight(425),
                     // decoration: new BoxDecoration(
                     //     color: Color(0xffffffff),
                     //     borderRadius: BorderRadius.circular(12),
@@ -99,7 +100,7 @@ class WorkshopCardPast extends StatelessWidget {
                           decoration: new BoxDecoration(
                               color: Color(0xffffefcc)
                           ),
-                          child: Text("Đào tạo MIỄN PHÍ về kỹ năng chuẩn bị kinh doanh, kỹ năng mềm và sử dụng kênh digital để tăng hiệu suất",
+                          child: Text(description,
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff888888),

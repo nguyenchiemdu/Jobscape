@@ -63,7 +63,8 @@ class ListCardPast extends StatelessWidget {
                       workshopList[index]['title'],
                       workshopList[index]['date'],
                       workshopList[index]['speaker'],
-                      workshopList[index]['id']),
+                      workshopList[index]['id'],
+                      workshopList[index]['description']),
                 );
               },
             )),

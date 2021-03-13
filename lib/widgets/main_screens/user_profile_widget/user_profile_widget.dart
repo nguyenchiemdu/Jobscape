@@ -254,8 +254,13 @@ class UserProfileWidget extends StatelessWidget {
         child: InkWell(
           onTap: () {
             final provider =
-                Provider.of<GoogleSignInProvider>(context, listen: false);
-            provider.logout();
+            Provider.of<GoogleSignInProvider>(context, listen: false);
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AdvanceCustomAlert2("Log out", "Are you sure you want to logout now?",() {provider.logout();});
+                });
+            //provider.logout();
           },
           child: Container(
             width: ScreenUtil().setWidth(30),

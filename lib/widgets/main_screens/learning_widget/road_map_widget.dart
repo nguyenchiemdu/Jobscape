@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learning_app/models/users_database.dart';
+import 'package:learning_app/widgets/login_screens/warning.dart';
 import './road_map_item_widget.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'list_skill_widget.dart';
@@ -304,10 +305,18 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                                 height: ScreenUtil().setHeight(50),
                                 child: RaisedButton(
                                     onPressed: () {
-                                      showAlertDialog(
-                                          context, roadMapData['name'], () {
-                                        startJourney(context);
-                                      });
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AdvanceCustomAlert2("Registration Confirmation",
+                                                "Would you like to start your journey to become a"+roadMapData['name'] + " with us now?",
+                                                    () {startJourney(context);}
+                                                    );
+                                          });
+                                      // showAlertDialog(
+                                      //     context, roadMapData['name'], () {
+                                      //   startJourney(context);
+                                      // });
                                     },
                                     color: Color(0xffffbf2f),
                                     shape: RoundedRectangleBorder(
