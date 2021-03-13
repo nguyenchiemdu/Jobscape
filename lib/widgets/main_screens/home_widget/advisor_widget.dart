@@ -35,8 +35,8 @@ class Advisor extends StatelessWidget {
           Center(
             child: Container(
               width: ScreenUtil().setWidth(324),
-              margin: EdgeInsets.only(top:ScreenUtil().setHeight(30), bottom: ScreenUtil().setHeight(20)),
-              child: Text("Our Advisors",
+              margin: EdgeInsets.only(top:ScreenUtil().setHeight(30), bottom: ScreenUtil().setHeight(10)),
+              child: Text("Our Contributors",
                   style: TextStyle(
                     fontFamily: 'SFProDisplay',
                     color: Color(0xff000000),
@@ -55,6 +55,21 @@ class Advisor extends StatelessWidget {
               ),
             child: Column(
               children: [
+                Center(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        bottom: ScreenUtil().setWidth(10)),
+                    child: Text("Recommending the best learning journeys",
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff000000),
+                          fontSize: ScreenUtil().setSp(12),
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.italic,
+                        )),
+                  ),
+                ),
+
                 Container(
                   margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(10)),
                   child: Row(

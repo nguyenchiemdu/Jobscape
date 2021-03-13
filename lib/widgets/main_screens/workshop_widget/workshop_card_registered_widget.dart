@@ -235,7 +235,7 @@ class WorkshopCardRegister extends StatelessWidget {
               )
             ],
           ),
-          height: ScreenUtil().setHeight(211),
+          height: ScreenUtil().setHeight(225),
           width: ScreenUtil().setWidth(192),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

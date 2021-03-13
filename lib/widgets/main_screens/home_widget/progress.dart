@@ -40,6 +40,7 @@ class _ProgressState extends State<Progress> {
     List<String> listSkillName = await DatabaseManager().getAllSkills(path);
     List<Map<String, dynamic>> listMapSkillName =
         listSkillName.map((e) => {'name': e}).toList();
+        print(listSkillName.toString());
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SubmitProof(listMapSkillName)),
@@ -88,11 +89,11 @@ class _ProgressState extends State<Progress> {
                               top: ScreenUtil().setHeight(20),
                               left: ScreenUtil().setWidth(14),
                               right: ScreenUtil().setWidth(17)),
-                          width: ScreenUtil().setWidth(46),
-                          height: ScreenUtil().setHeight(50.4),
+                          width: ScreenUtil().setWidth(50),
+                          height: ScreenUtil().setHeight(50),
                           decoration: new BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/images/plus_icon.png"),
+                              image: AssetImage("assets/images/speed_icon.png"),
                               fit: BoxFit.fill,
                               alignment: Alignment.topCenter,
                             ),

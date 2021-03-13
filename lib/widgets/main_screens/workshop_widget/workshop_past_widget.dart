@@ -97,15 +97,15 @@ class PastWorkshop extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         fontStyle: FontStyle.normal,
                       )),
-                  Text("See all (3)",
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xffffbf2f),
-                        fontSize:
-                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                      )),
+                  // Text("See all (3)",
+                  //     style: TextStyle(
+                  //       fontFamily: 'SFProDisplay',
+                  //       color: Color(0xffffbf2f),
+                  //       fontSize:
+                  //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                  //       fontWeight: FontWeight.w400,
+                  //       fontStyle: FontStyle.normal,
+                  //     )),
                 ],
               ),
             ),
@@ -129,15 +129,15 @@ class PastWorkshop extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         fontStyle: FontStyle.normal,
                       )),
-                  Text("See all (3)",
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xffffbf2f),
-                        fontSize:
-                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                      )),
+                  // Text("See all (3)",
+                  //     style: TextStyle(
+                  //       fontFamily: 'SFProDisplay',
+                  //       color: Color(0xffffbf2f),
+                  //       fontSize:
+                  //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                  //       fontWeight: FontWeight.w400,
+                  //       fontStyle: FontStyle.normal,
+                  //     )),
                 ],
               ),
             ),
