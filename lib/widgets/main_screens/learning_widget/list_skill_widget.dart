@@ -207,7 +207,7 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
                 child: GridView.count(
                     padding: EdgeInsets.all(0),
                     crossAxisCount: 2,
-                    childAspectRatio: (149 / 190),
+                    childAspectRatio: (149 / 222),
                     children: listSkillWidget
 
                     //     List.generate(widget.roadMapItem['listSkill'].length, (index) {

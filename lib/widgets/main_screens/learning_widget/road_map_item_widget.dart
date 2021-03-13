@@ -47,19 +47,22 @@ class RoadMapItem extends StatelessWidget {
                   fontStyle: FontStyle.normal,
                 )),
           ),
-          Container(
-            margin: EdgeInsets.only(
-                top: ScreenUtil().setHeight(6),
-                left: ScreenUtil().setWidth(28)),
-            width: ScreenUtil().setWidth(275),
-            child: Text(roadMapData['content'],
-                style: TextStyle(
-                  fontFamily: 'SFProDisplay',
-                  color: Color(0xff888888),
-                  fontSize: ScreenUtil().setSp(14),
-                  fontWeight: FontWeight.w300,
-                  fontStyle: FontStyle.italic,
-                )),
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(6),),
+                  // left: ScreenUtil().setWidth(28)),
+              width: ScreenUtil().setWidth(275),
+              child: Text(roadMapData['content'],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xff888888),
+                    fontSize: ScreenUtil().setSp(14),
+                    fontWeight: FontWeight.w300,
+                    fontStyle: FontStyle.italic,
+                  )),
+            ),
           ),
           Container(
             margin: EdgeInsets.only(

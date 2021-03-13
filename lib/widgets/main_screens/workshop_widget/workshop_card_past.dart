@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WorkshopCardPast extends StatelessWidget {
   String image_source;
@@ -14,8 +15,9 @@ class WorkshopCardPast extends StatelessWidget {
   String workshopId;
   int duration;
   String description;
+  String link;
   WorkshopCardPast(this.image_source, this.for_whom, this.title, this.timeStamp,
-      this.speaker, this.workshopId, this.description) {
+      this.speaker, this.workshopId, this.description,this.link) {
     // List timeList =
     //     timeStamp.toDate().difference(DateTime.now()).toString().split(':');
     //   int day = (int.parse(timeList[0]) / 24).round();
@@ -208,14 +210,23 @@ class WorkshopCardPast extends StatelessWidget {
                                   height: ScreenUtil().setHeight(20),
                                   child: Image.asset(
                                       "assets/images/link_icon.png")),
-                              Text("https:\/\/ww.loremlorem.com\/",
-                                  style: TextStyle(
-                                    fontFamily: 'SFProDisplay',
-                                    color: Color(0xff000000),
-                                    fontSize: ScreenUtil().setSp(14),
-                                    fontWeight: FontWeight.w300,
-                                    fontStyle: FontStyle.normal,
-                                  )),
+                                InkWell(
+                                    onTap: () => launch(link),
+                                    child: Flexible(
+                                      child: Container(
+                                      width: ScreenUtil().setWidth(240),
+                                      child: Text(link,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                      fontFamily: 'SFProDisplay',
+                                      color: Colors.blue,
+                                      fontSize: ScreenUtil().setSp(14),
+                                      fontWeight: FontWeight.w300,
+                                      fontStyle: FontStyle.normal,
+                                      )),
+                                      ),
+                                    ),
+                                    ),
                             ],
                           ),
                         ),
@@ -343,14 +354,20 @@ class WorkshopCardPast extends StatelessWidget {
                       width: ScreenUtil().setWidth(12),
                       height: ScreenUtil().setHeight(12),
                       child: Image.asset("assets/images/link_icon.png")),
-                  Text("https:\/\/ww.loremlorem.com\/",
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff000000),
-                        fontSize: ScreenUtil().setSp(9),
-                        fontWeight: FontWeight.w300,
-                        fontStyle: FontStyle.normal,
-                      )),
+                  Flexible(
+                    child: Container(
+                      width: ScreenUtil().setWidth(140),
+                      child: Text(link,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xff000000),
+                            fontSize: ScreenUtil().setSp(9),
+                            fontWeight: FontWeight.w300,
+                            fontStyle: FontStyle.normal,
+                          )),
+                    ),
+                  ),
                 ],
               ),
             ),
