@@ -49,8 +49,8 @@ class WorkshopCard extends StatelessWidget {
                   // Image.network(image_source,
                   CachedNetworkImage(
                       imageUrl: image_source,
-                      placeholder: (context, url) => Image(
-                          image: AssetImage('assets/images/top_image.png')),
+                      // placeholder: (context, url) => Image(
+                      //     image: AssetImage('assets/images/top_image.png')),
                       // CircularProgressIndicator(),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                       fit: BoxFit.fill,

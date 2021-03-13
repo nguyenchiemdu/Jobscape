@@ -107,7 +107,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                     child: RichText(
                         text: new TextSpan(children: [
                       new TextSpan(
-                          text: "+333 ",
+                          text: '+' + industryField['jobVacancies'].toString(),
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xffffbf2f),
@@ -116,7 +116,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                             fontStyle: FontStyle.normal,
                           )),
                       new TextSpan(
-                          text: "Job Vacancies ",
+                          text: " Job Vacancies ",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff000000),
@@ -131,7 +131,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                     child: RichText(
                         text: new TextSpan(children: [
                       new TextSpan(
-                          text: "+69 ",
+                          text: industryField['learningJourney'].toString(),
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xffffbf2f),
@@ -140,7 +140,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                             fontStyle: FontStyle.normal,
                           )),
                       new TextSpan(
-                          text: "Learning Journeys to explore",
+                          text: " Learning Journeys to explore",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff000000),
@@ -164,7 +164,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                         RichText(
                             text: new TextSpan(children: [
                           new TextSpan(
-                              text: "Starting salary  ",
+                              text: "Starting salary ",
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff000000),
@@ -173,7 +173,8 @@ class _IndustryComponentState extends State<IndustryComponent> {
                                 fontStyle: FontStyle.italic,
                               )),
                           new TextSpan(
-                              text: "\$400",
+                              text: "\$" +
+                                  industryField['startingSalary'].toString(),
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xffffbf2f),

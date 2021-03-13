@@ -29,7 +29,7 @@ dependencies:
   google_sign_in: "^4.5.1"
   font_awesome_flutter : "^8.10.0"
   provider: ^4.3.3
-  path_provider: ^2.0.1
+  path_provider: ^1.6.0
   intl: ^0.16.1
   carousel_slider: ^3.0.0
   flutter_screenutil: ^4.0.3+1
@@ -41,7 +41,6 @@ dependencies:
   permission_handler: ^5.0.1+1
   image_picker: ^0.6.7+4
   cached_network_image: ^2.5.1
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
@@ -124,6 +123,7 @@ flutter:
     - assets/images/addimage_card.png
     - assets/res/Onlinecourses.xlsx
     - assets/images/speed_icon.png
+
 
   #   - images/a_dot_ham.jpeg
 

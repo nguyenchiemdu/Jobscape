@@ -56,8 +56,8 @@ class IndustryCard extends StatelessWidget {
                         // jobData['imgSrc'],
                         CachedNetworkImage(
                       imageUrl: jobData['imgSrc'],
-                      placeholder: (context, url) => Image(
-                          image: AssetImage('assets/images/top_image.png')),
+                      // placeholder: (context, url) => Image(
+                      //     image: AssetImage('assets/images/top_image.png')),
                       // CircularProgressIndicator(),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                       fit: BoxFit.fill,

@@ -14,8 +14,8 @@ class WorkshopCardPast extends StatelessWidget {
   String workshopId;
   int duration;
   String description;
-  WorkshopCardPast(this.image_source, this.for_whom, this.title,
-      this.timeStamp, this.speaker, this.workshopId,this.description) {
+  WorkshopCardPast(this.image_source, this.for_whom, this.title, this.timeStamp,
+      this.speaker, this.workshopId, this.description) {
     // List timeList =
     //     timeStamp.toDate().difference(DateTime.now()).toString().split(':');
     //   int day = (int.parse(timeList[0]) / 24).round();
@@ -30,14 +30,14 @@ class WorkshopCardPast extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        showDialog(context: context,
+        showDialog(
+          context: context,
           builder: (context) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               contentPadding: EdgeInsets.all(0),
-
               content: Stack(
                 overflow: Overflow.visible,
                 children: [
@@ -73,23 +73,26 @@ class WorkshopCardPast extends StatelessWidget {
                           margin: EdgeInsets.only(top: 8, right: 8, left: 8),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: 
-                            // Image.network(image_source,
-                            CachedNetworkImage(
-                    imageUrl: image_source,
-                    placeholder: (context, url) =>
-                        Image(image: AssetImage('assets/images/top_image.png')),
-                    // CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                                fit: BoxFit.fill,
-                                width: ScreenUtil().setWidth(293),
-                                height: ScreenUtil().setHeight(159)),
+                            child:
+                                // Image.network(image_source,
+                                CachedNetworkImage(
+                                    imageUrl: image_source,
+                                    // placeholder: (context, url) =>
+                                    //     Image(image: AssetImage('assets/images/top_image.png')),
+                                    // CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.error),
+                                    fit: BoxFit.fill,
+                                    width: ScreenUtil().setWidth(293),
+                                    height: ScreenUtil().setHeight(159)),
                           ),
                         ),
                         Center(
                           child: Container(
                             width: ScreenUtil().setWidth(293),
-                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(12), bottom:  ScreenUtil().setHeight(12)),
+                            margin: EdgeInsets.only(
+                                top: ScreenUtil().setHeight(12),
+                                bottom: ScreenUtil().setHeight(12)),
                             child: Text(title,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -105,9 +108,8 @@ class WorkshopCardPast extends StatelessWidget {
                           padding: EdgeInsets.all(10),
                           width: ScreenUtil().setWidth(261),
                           height: ScreenUtil().setHeight(69),
-                          decoration: new BoxDecoration(
-                              color: Color(0xffffefcc)
-                          ),
+                          decoration:
+                              new BoxDecoration(color: Color(0xffffefcc)),
                           child: Text(description,
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
@@ -115,18 +117,21 @@ class WorkshopCardPast extends StatelessWidget {
                                 fontSize: ScreenUtil().setSp(14),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
-                              )
-                          ),
+                              )),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: ScreenUtil().setHeight(12),left:ScreenUtil().setWidth(20)),
+                          margin: EdgeInsets.only(
+                              top: ScreenUtil().setHeight(12),
+                              left: ScreenUtil().setWidth(20)),
                           child: Row(
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(right: ScreenUtil().setWidth(6)),
+                                  margin: EdgeInsets.only(
+                                      right: ScreenUtil().setWidth(6)),
                                   width: ScreenUtil().setWidth(20),
                                   height: ScreenUtil().setHeight(20),
-                                  child: Image.asset("assets/images/speaker_icon.png")),
+                                  child: Image.asset(
+                                      "assets/images/speaker_icon.png")),
                               Text(speaker,
                                   style: TextStyle(
                                     fontFamily: 'SFProDisplay',
@@ -139,14 +144,18 @@ class WorkshopCardPast extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: ScreenUtil().setHeight(6),left:ScreenUtil().setWidth(20)),
+                          margin: EdgeInsets.only(
+                              top: ScreenUtil().setHeight(6),
+                              left: ScreenUtil().setWidth(20)),
                           child: Row(
                             children: [
                               Container(
                                   width: ScreenUtil().setWidth(20),
                                   height: ScreenUtil().setHeight(20),
-                                  margin: EdgeInsets.only(right: ScreenUtil().setWidth(6)),
-                                  child: Image.asset("assets/images/good_for_icon.png")),
+                                  margin: EdgeInsets.only(
+                                      right: ScreenUtil().setWidth(6)),
+                                  child: Image.asset(
+                                      "assets/images/good_for_icon.png")),
                               Container(
                                 child: Text(for_whom,
                                     style: TextStyle(
@@ -161,15 +170,21 @@ class WorkshopCardPast extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: ScreenUtil().setHeight(6),left:ScreenUtil().setWidth(20)),
+                          margin: EdgeInsets.only(
+                              top: ScreenUtil().setHeight(6),
+                              left: ScreenUtil().setWidth(20)),
                           child: Row(
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(right: ScreenUtil().setWidth(6)),
+                                  margin: EdgeInsets.only(
+                                      right: ScreenUtil().setWidth(6)),
                                   width: ScreenUtil().setWidth(20),
                                   height: ScreenUtil().setHeight(20),
-                                  child: Image.asset("assets/images/date_icon.png")),
-                              Text(DateFormat('MMM dd, y').format(timeStamp.toDate()),
+                                  child: Image.asset(
+                                      "assets/images/date_icon.png")),
+                              Text(
+                                  DateFormat('MMM dd, y')
+                                      .format(timeStamp.toDate()),
                                   style: TextStyle(
                                     fontFamily: 'SFProDisplay',
                                     color: Color(0xff000000),
@@ -181,14 +196,18 @@ class WorkshopCardPast extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: ScreenUtil().setHeight(6),left:ScreenUtil().setWidth(20)),
+                          margin: EdgeInsets.only(
+                              top: ScreenUtil().setHeight(6),
+                              left: ScreenUtil().setWidth(20)),
                           child: Row(
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(right: ScreenUtil().setWidth(6)),
+                                  margin: EdgeInsets.only(
+                                      right: ScreenUtil().setWidth(6)),
                                   width: ScreenUtil().setWidth(20),
                                   height: ScreenUtil().setHeight(20),
-                                  child: Image.asset("assets/images/link_icon.png")),
+                                  child: Image.asset(
+                                      "assets/images/link_icon.png")),
                               Text("https:\/\/ww.loremlorem.com\/",
                                   style: TextStyle(
                                     fontFamily: 'SFProDisplay',
@@ -205,11 +224,10 @@ class WorkshopCardPast extends StatelessWidget {
                   ),
                 ],
               ),
-              actions: [
-
-              ],
+              actions: [],
             );
-          },);
+          },
+        );
       },
       child: Stack(children: [
         Container(
@@ -231,7 +249,8 @@ class WorkshopCardPast extends StatelessWidget {
           ),
           height: ScreenUtil().setHeight(220),
           width: ScreenUtil().setWidth(192),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
               margin: EdgeInsets.only(top: 5, right: 5, left: 5),
               child: ClipRRect(
@@ -338,26 +357,25 @@ class WorkshopCardPast extends StatelessWidget {
           ]),
         ),
         Container(
-            margin: EdgeInsets.only(left: ScreenUtil().setWidth(156)),
-            width: ScreenUtil().setWidth(38),
-            height: ScreenUtil().setHeight(38),
-            decoration: new BoxDecoration(
-              color: Color(0xffffbf2f),
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(12),
-                bottomLeft: Radius.circular(30),
-              ),
+          margin: EdgeInsets.only(left: ScreenUtil().setWidth(156)),
+          width: ScreenUtil().setWidth(38),
+          height: ScreenUtil().setHeight(38),
+          decoration: new BoxDecoration(
+            color: Color(0xffffbf2f),
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(12),
+              bottomLeft: Radius.circular(30),
             ),
-            child:
-            Center(
-              widthFactor: ScreenUtil().setWidth(20),
-              heightFactor: ScreenUtil().setHeight(20),
-              child: Image.asset("assets/images/info_icon.png",
-                  width: ScreenUtil().setWidth(20),
-                  height: ScreenUtil().setHeight(20)),
-            ),
-              ),
-                ]),
+          ),
+          child: Center(
+            widthFactor: ScreenUtil().setWidth(20),
+            heightFactor: ScreenUtil().setHeight(20),
+            child: Image.asset("assets/images/info_icon.png",
+                width: ScreenUtil().setWidth(20),
+                height: ScreenUtil().setHeight(20)),
+          ),
+        ),
+      ]),
     );
   }
 }

@@ -52,16 +52,24 @@ class _WorkshopState extends State<Workshop> {
 
   fetDatabaseList() async {
     List resultant = await DatabaseManager().getWorkshopList();
-
+    List listRandom = [];
     if (resultant == null) {
       print("Unable to retrieve");
     } else {
-      int start = r.nextInt(resultant.length - 1);
-      for (int i = start; i < start + 4; i++) {
-        workshopRandom.add(resultant[i % (resultant.length - 1)]);
-      }
+      List<int> listNumber = [];
+      if (resultant.length > 4) {
+        while (listNumber.length < 4) {
+          int i = r.nextInt(resultant.length - 1);
+          if (listNumber.indexOf(i) == -1) listNumber.add(i);
+        }
+        listNumber.forEach((i) {
+          listRandom.add(resultant[i]);
+        });
+      } else
+        listRandom = resultant;
       await setState(() {
         workshopList = resultant;
+        workshopRandom = listRandom;
       });
     }
   }

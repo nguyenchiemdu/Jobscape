@@ -54,8 +54,8 @@ class CourseItemWidget extends StatelessWidget {
                       //   courseLogoSrc,
                       CachedNetworkImage(
                     imageUrl: courseLogoSrc,
-                    placeholder: (context, url) =>
-                        Image(image: AssetImage('assets/images/top_image.png')),
+                    // placeholder: (context, url) =>
+                    //     Image(image: AssetImage('assets/images/top_image.png')),
                     // CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                     fit: BoxFit.fill,
