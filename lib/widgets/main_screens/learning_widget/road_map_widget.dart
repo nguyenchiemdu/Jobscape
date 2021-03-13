@@ -49,9 +49,12 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
     // addRoadmap();
   }
 
+  String pathToJoinedJourney = '';
   void getData() async {
     List temp = await DatabaseManager().getListRoadMap(path);
     bool res = await UserDatabaseService().getTypeOfUser();
+    String respath = await UserDatabaseService().getPathToJoinedJourney();
+    if (respath == null) respath = 'isNull';
     // print(jsonEncode(temp));
     setState(() {
       listRoadMap = temp;
@@ -60,9 +63,11 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
               listRoadMap.indexOf(item) + 1, item, roadMapData['imgSrc']))
           .toList();
       isNewUser = res;
+      pathToJoinedJourney = respath;
     });
     // print('listRoadMapWidget'+listRoadMapWidget.toString());
     firstRoadMapItem = listRoadMap[0];
+    print(respath);
   }
 
   void addRoadmap() async {
@@ -246,7 +251,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                 ),
               ),
             ),
-            isNewUser
+            pathToJoinedJourney != path
                 ? Positioned(
                     bottom: 0,
                     child: Container(
@@ -304,10 +309,13 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                                 height: ScreenUtil().setHeight(50),
                                 child: RaisedButton(
                                     onPressed: () {
-                                      showAlertDialog(
-                                          context, roadMapData['name'], () {
-                                        startJourney(context);
-                                      });
+                                      if (isNewUser) {
+                                        showAlertDialog(
+                                            context, roadMapData['name'], () {
+                                          startJourney(context);
+                                        });
+                                      } else
+                                        print('thong bao da dang ki course');
                                     },
                                     color: Color(0xffffbf2f),
                                     shape: RoundedRectangleBorder(

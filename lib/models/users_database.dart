@@ -35,7 +35,8 @@ class UserDatabaseService {
       'backgroundURL': backgroundURL,
       'isNewUser': true,
       'registeredWorkshop': 0,
-      'proofsSubmitted': 0
+      'proofsSubmitted': 0,
+      'journeyCompleted': 0,
     });
   }
 

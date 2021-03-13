@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -101,9 +102,25 @@ class _WorkshopState extends State<Workshop> {
     }
   }
 
+  List todayWorkshop = [];
+  List upComingWorkshop = [];
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
+    Timestamp now = Timestamp.now();
+    DateFormat form = DateFormat('y/MM/d');
+    print(form.format(now.toDate()));
+    for (Map workshop in widget.upcomingWorkshop) {
+      if (form.format(now.toDate()) == form.format(workshop['date'].toDate()))
+        todayWorkshop.add(workshop);
+      else
+        upComingWorkshop.add(workshop);
+    }
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
@@ -540,7 +557,7 @@ class _WorkshopState extends State<Workshop> {
               ),
             ),
           ),
-          SliderCard(widget.upcomingWorkshop),
+          SliderCard(todayWorkshop),
           Center(
             child: Container(
               margin: EdgeInsets.only(
@@ -572,7 +589,7 @@ class _WorkshopState extends State<Workshop> {
               ),
             ),
           ),
-          SliderCard(widget.upcomingWorkshop),
+          SliderCard(upComingWorkshop),
 
           // Container(
           //   margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:20),

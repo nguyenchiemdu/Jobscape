@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/google_sign_in.dart';
+import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/widgets/login_screens/warning.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/display_name_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/background_image_profile_widget.dart';
@@ -12,12 +13,33 @@ import 'package:provider/provider.dart';
 
 import 'edit_profile_screen.dart';
 
-class UserProfileWidget extends StatelessWidget {
+class UserProfileWidget extends StatefulWidget {
+  @override
+  _UserProfileWidgetState createState() => _UserProfileWidgetState();
+}
+
+class _UserProfileWidgetState extends State<UserProfileWidget> {
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => EditUserProfile()),
     );
+  }
+
+  int courseCompleted = 0;
+  int journeyCompleted = 0;
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  void getData() async {
+    Map userInfor = await UserDatabaseService().getUserInfor();
+    setState(() {
+      courseCompleted = userInfor['completed_course'];
+      journeyCompleted = userInfor['journeyCompleted'];
+    });
   }
 
   @override
@@ -134,7 +156,7 @@ class UserProfileWidget extends StatelessWidget {
                         )),
                     Column(
                       children: [
-                        Text("12",
+                        Text(courseCompleted.toString(),
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xffffbf2f),
@@ -167,7 +189,7 @@ class UserProfileWidget extends StatelessWidget {
                         )),
                     Column(
                       children: [
-                        Text("07",
+                        Text(journeyCompleted.toString(),
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xffffbf2f),
