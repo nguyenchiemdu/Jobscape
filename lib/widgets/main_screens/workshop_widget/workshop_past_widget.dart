@@ -79,70 +79,74 @@ class PastWorkshop extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: Container(
-              margin: EdgeInsets.only(
-                  top: ScreenUtil().setHeight(30),
-                  bottom: ScreenUtil().setHeight(12)),
-              width: ScreenUtil().setWidth(324),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("From Jobscape",
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff000000),
-                        fontSize:
-                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                      )),
-                  // Text("See all (3)",
-                  //     style: TextStyle(
-                  //       fontFamily: 'SFProDisplay',
-                  //       color: Color(0xffffbf2f),
-                  //       fontSize:
-                  //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                  //       fontWeight: FontWeight.w400,
-                  //       fontStyle: FontStyle.normal,
-                  //     )),
-                ],
-              ),
-            ),
-          ),
-          ListCardPast(fromJobscape),
-          Center(
-            child: Container(
-              margin: EdgeInsets.only(
-                  top: ScreenUtil().setHeight(20),
-                  bottom: ScreenUtil().setHeight(12)),
-              width: ScreenUtil().setWidth(324),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("From our users",
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff000000),
-                        fontSize:
-                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                      )),
-                  // Text("See all (3)",
-                  //     style: TextStyle(
-                  //       fontFamily: 'SFProDisplay',
-                  //       color: Color(0xffffbf2f),
-                  //       fontSize:
-                  //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                  //       fontWeight: FontWeight.w400,
-                  //       fontStyle: FontStyle.normal,
-                  //     )),
-                ],
-              ),
-            ),
-          ),
-          ListCardPast(fromUser),
+          fromJobscape.length > 0
+              ? Center(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil().setHeight(30),
+                        bottom: ScreenUtil().setHeight(12)),
+                    width: ScreenUtil().setWidth(324),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("From Jobscape",
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff000000),
+                              fontSize: ScreenUtil()
+                                  .setSp(14, allowFontScalingSelf: true),
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                            )),
+                        // Text("See all (3)",
+                        //     style: TextStyle(
+                        //       fontFamily: 'SFProDisplay',
+                        //       color: Color(0xffffbf2f),
+                        //       fontSize:
+                        //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        //       fontWeight: FontWeight.w400,
+                        //       fontStyle: FontStyle.normal,
+                        //     )),
+                      ],
+                    ),
+                  ),
+                )
+              : Container(),
+          fromJobscape.length > 0 ? ListCardPast(fromJobscape) : Container(),
+          fromUser.length > 0
+              ? Center(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil().setHeight(20),
+                        bottom: ScreenUtil().setHeight(12)),
+                    width: ScreenUtil().setWidth(324),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("From our users",
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff000000),
+                              fontSize: ScreenUtil()
+                                  .setSp(14, allowFontScalingSelf: true),
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                            )),
+                        // Text("See all (3)",
+                        //     style: TextStyle(
+                        //       fontFamily: 'SFProDisplay',
+                        //       color: Color(0xffffbf2f),
+                        //       fontSize:
+                        //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        //       fontWeight: FontWeight.w400,
+                        //       fontStyle: FontStyle.normal,
+                        //     )),
+                      ],
+                    ),
+                  ),
+                )
+              : Container(),
+          fromUser.length > 0 ? ListCardPast(fromUser) : Container(),
 
           // Container(
           //   margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:20),

@@ -68,7 +68,6 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
     });
     // print('listRoadMapWidget'+listRoadMapWidget.toString());
     firstRoadMapItem = listRoadMap[0];
-    print(respath);
   }
 
   void addRoadmap() async {

@@ -64,7 +64,10 @@ class CourseItemWidget extends StatelessWidget {
                       onTap: () => launch(courseItem['link']))),
               IconButton(
                 icon: Icon(Icons.content_copy),
-                onPressed: () async {
+                onPressed: () {
+                  Clipboard.setData(new ClipboardData(text: controller.text));
+                  // print('copied to clipboard');
+
                   // await FlutterClipboard.copy(controller.text);
 
                   // Scaffold.of(context).showSnackBar(

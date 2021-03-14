@@ -53,7 +53,7 @@ class _RemindWorkshopState extends State<RemindWorkshop> {
   fetDatabaseList() async {
     List workShopIds = await UserDatabaseService().getRemindWorkShopId();
     if (workShopIds == null) {
-      print('unable to retrieve');
+      print('No workshop Ids');
     } else {
       List resultant =
           await WorkshopDatabase().getRemindWorkshopList(workShopIds);

@@ -129,7 +129,10 @@ class _EditUserProfileState extends State<EditUserProfile> {
     var permissionStatus = await Permission.photos.status;
     if (permissionStatus.isGranted) {
       //Select Image
-      image = await _picker.getImage(source: ImageSource.gallery);
+      PickedFile res = await _picker.getImage(source: ImageSource.gallery);
+      setState(() {
+        image = res;
+      });
     } else {
       print('Grand permissions and try again');
     }
@@ -144,7 +147,10 @@ class _EditUserProfileState extends State<EditUserProfile> {
     var permissionStatus = await Permission.photos.status;
     if (permissionStatus.isGranted) {
       //Select Image
-      avatar = await _picker.getImage(source: ImageSource.gallery);
+      PickedFile result = await _picker.getImage(source: ImageSource.gallery);
+      setState(() {
+        avatar = result;
+      });
     } else {
       print('Grand permissions and try again');
     }
@@ -154,7 +160,9 @@ class _EditUserProfileState extends State<EditUserProfile> {
   Widget build(BuildContext context) {
     return Material(
       child: Stack(children: [
-        AvatarEditProfileWidget(),
+        avatar == null
+            ? AvatarEditProfileWidget()
+            : new Image.asset(avatar.path),
         Container(
           width: ScreenUtil().setWidth(360),
           height: ScreenUtil().setHeight(760),
@@ -463,6 +471,12 @@ class _EditUserProfileState extends State<EditUserProfile> {
                                   ),
                                 ),
                               ),
+                              image == null
+                                  ? Container()
+                                  : Text("..." +
+                                      image.path.substring(
+                                          image.path.length - 20,
+                                          image.path.length)),
                               Container(
                                   margin: EdgeInsets.only(
                                     top: ScreenUtil().setHeight(4),

@@ -94,14 +94,16 @@ class _RoutePageState extends State<RoutePage> {
 
   int enrolled_course = 0;
   fetDatabaseList() async {
-    dynamic resultant = await UserDatabaseService()
-        .getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid);
-    if (resultant == null) {
-      print("Unable to retrieve");
-    } else {
-      setState(() {
-        enrolled_course = resultant;
-      });
+    if (FirebaseAuth.instance.currentUser != null) {
+      dynamic resultant = await UserDatabaseService()
+          .getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid);
+      if (resultant == null) {
+        print("Unable to retrieve");
+      } else {
+        setState(() {
+          enrolled_course = resultant;
+        });
+      }
     }
   }
 
@@ -116,6 +118,7 @@ class _RoutePageState extends State<RoutePage> {
           if (provider.isSigningIn) {
             return buildLoading();
           } else if (snapsot.hasData) {
+            // fetDatabaseList();
             if (enrolled_course == null) {
               return Text("Loading");
             } else {

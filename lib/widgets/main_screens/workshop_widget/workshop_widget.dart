@@ -114,7 +114,6 @@ class _WorkshopState extends State<Workshop> {
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
     Timestamp now = Timestamp.now();
     DateFormat form = DateFormat('y/MM/d');
-    print(form.format(now.toDate()));
     for (Map workshop in widget.upcomingWorkshop) {
       if (form.format(now.toDate()) == form.format(workshop['date'].toDate()))
         todayWorkshop.add(workshop);
@@ -526,70 +525,76 @@ class _WorkshopState extends State<Workshop> {
               ),
             ),
           ),
-          Center(
-            child: Container(
-              margin: EdgeInsets.only(
-                  top: ScreenUtil().setHeight(16),
-                  bottom: ScreenUtil().setHeight(12)),
-              width: ScreenUtil().setWidth(312),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Today",
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff000000),
-                        fontSize:
-                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                      )),
-                  // Text("See all (3)",
-                  //     style: TextStyle(
-                  //       fontFamily: 'SFProDisplay',
-                  //       color: Color(0xffffbf2f),
-                  //       fontSize:
-                  //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                  //       fontWeight: FontWeight.w400,
-                  //       fontStyle: FontStyle.normal,
-                  //     )),
-                ],
-              ),
-            ),
-          ),
-          SliderCard(todayWorkshop),
-          Center(
-            child: Container(
-              margin: EdgeInsets.only(
-                  top: ScreenUtil().setHeight(20),
-                  bottom: ScreenUtil().setHeight(12)),
-              width: ScreenUtil().setWidth(312),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Upcoming",
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff000000),
-                        fontSize:
-                            ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                      )),
-                  // Text("See all (3)",
-                  //     style: TextStyle(
-                  //       fontFamily: 'SFProDisplay',
-                  //       color: Color(0xffffbf2f),
-                  //       fontSize:
-                  //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                  //       fontWeight: FontWeight.w400,
-                  //       fontStyle: FontStyle.normal,
-                  //     )),
-                ],
-              ),
-            ),
-          ),
-          SliderCard(upComingWorkshop),
+          todayWorkshop.length > 0
+              ? Center(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil().setHeight(16),
+                        bottom: ScreenUtil().setHeight(12)),
+                    width: ScreenUtil().setWidth(312),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Today",
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff000000),
+                              fontSize: ScreenUtil()
+                                  .setSp(14, allowFontScalingSelf: true),
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                            )),
+                        // Text("See all (3)",
+                        //     style: TextStyle(
+                        //       fontFamily: 'SFProDisplay',
+                        //       color: Color(0xffffbf2f),
+                        //       fontSize:
+                        //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        //       fontWeight: FontWeight.w400,
+                        //       fontStyle: FontStyle.normal,
+                        //     )),
+                      ],
+                    ),
+                  ),
+                )
+              : Container(),
+          todayWorkshop.length > 0 ? SliderCard(todayWorkshop) : Container(),
+          upComingWorkshop.length > 0
+              ? Center(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil().setHeight(20),
+                        bottom: ScreenUtil().setHeight(12)),
+                    width: ScreenUtil().setWidth(312),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Upcoming",
+                            style: TextStyle(
+                              fontFamily: 'SFProDisplay',
+                              color: Color(0xff000000),
+                              fontSize: ScreenUtil()
+                                  .setSp(14, allowFontScalingSelf: true),
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                            )),
+                        // Text("See all (3)",
+                        //     style: TextStyle(
+                        //       fontFamily: 'SFProDisplay',
+                        //       color: Color(0xffffbf2f),
+                        //       fontSize:
+                        //           ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        //       fontWeight: FontWeight.w400,
+                        //       fontStyle: FontStyle.normal,
+                        //     )),
+                      ],
+                    ),
+                  ),
+                )
+              : Container(),
+          upComingWorkshop.length > 0
+              ? SliderCard(upComingWorkshop)
+              : Container(),
 
           // Container(
           //   margin: EdgeInsets.only(left: 24,right:24, bottom: 17,top:20),

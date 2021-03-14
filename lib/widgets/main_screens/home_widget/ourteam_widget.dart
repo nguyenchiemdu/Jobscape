@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -376,8 +377,8 @@ class OurTeam extends StatelessWidget {
                           height: ScreenUtil().setHeight(50),
                           decoration: new BoxDecoration(
                               image: DecorationImage(
-                                image:
-                                    NetworkImage(teamList[2]['image_source']),
+                                image: CachedNetworkImageProvider(
+                                    teamList[2]['image_source']),
                                 fit: BoxFit.fill,
                               ),
                               borderRadius:
