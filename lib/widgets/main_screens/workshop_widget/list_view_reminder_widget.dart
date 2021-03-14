@@ -62,7 +62,9 @@ class SliderCardRemind extends StatelessWidget {
                       workshopList[index]['for'],
                       workshopList[index]['title'],
                       workshopList[index]['date'],
-                      workshopList[index]['speaker']),
+                      workshopList[index]['speaker'],
+                  workshopList[index]['description'],
+                  workshopList[index]['link']),
                 );
               },
             )),

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WorkshopCardRegister extends StatelessWidget {
   String image_source;
@@ -12,8 +13,10 @@ class WorkshopCardRegister extends StatelessWidget {
   Timestamp timeStamp;
   String speaker;
   Duration duration;
+  String description;
+  String link;
   WorkshopCardRegister(this.image_source, this.for_whom, this.title,
-      this.timeStamp, this.speaker) {
+      this.timeStamp, this.speaker,this.description,this.link) {
     // List timeList =
     //     timeStamp.toDate().difference(DateTime.now()).toString().split(':');
     //   int day = (int.parse(timeList[0]) / 24).round();
@@ -52,7 +55,7 @@ class WorkshopCardRegister extends StatelessWidget {
                   ),
                   Container(
                     width: ScreenUtil().setWidth(309),
-                    height: ScreenUtil().setHeight(415),
+                    height: ScreenUtil().setHeight(455),
                     // decoration: new BoxDecoration(
                     //     color: Color(0xffffffff),
                     //     borderRadius: BorderRadius.circular(12),
@@ -86,7 +89,7 @@ class WorkshopCardRegister extends StatelessWidget {
                         ),
                         Center(
                           child: Container(
-                            width: ScreenUtil().setWidth(293),
+                            width: ScreenUtil().setWidth(285),
                             margin: EdgeInsets.only(
                                 top: ScreenUtil().setHeight(12),
                                 bottom: ScreenUtil().setHeight(12)),
@@ -103,12 +106,11 @@ class WorkshopCardRegister extends StatelessWidget {
                         ),
                         Container(
                           padding: EdgeInsets.all(10),
-                          width: ScreenUtil().setWidth(261),
+                          width: ScreenUtil().setWidth(255),
                           height: ScreenUtil().setHeight(69),
                           decoration:
                               new BoxDecoration(color: Color(0xffffefcc)),
-                          child: Text(
-                              "Đào tạo MIỄN PHÍ về kỹ năng chuẩn bị kinh doanh, kỹ năng mềm và sử dụng kênh digital để tăng hiệu suất",
+                          child: Text(description,
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff888888),
@@ -155,6 +157,7 @@ class WorkshopCardRegister extends StatelessWidget {
                                   child: Image.asset(
                                       "assets/images/good_for_icon.png")),
                               Container(
+                                width: ScreenUtil().setWidth(240),
                                 child: Text(for_whom,
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
@@ -206,14 +209,20 @@ class WorkshopCardRegister extends StatelessWidget {
                                   height: ScreenUtil().setHeight(20),
                                   child: Image.asset(
                                       "assets/images/link_icon.png")),
-                              Text("https:\/\/ww.loremlorem.com\/",
-                                  style: TextStyle(
-                                    fontFamily: 'SFProDisplay',
-                                    color: Color(0xff000000),
-                                    fontSize: ScreenUtil().setSp(14),
-                                    fontWeight: FontWeight.w300,
-                                    fontStyle: FontStyle.normal,
-                                  )),
+                              InkWell(
+                                onTap: () => launch(link),
+                                child: Container(
+                                  width: ScreenUtil().setWidth(240),
+                                  child: Text(link,
+                                      style: TextStyle(
+                                        fontFamily: 'SFProDisplay',
+                                        color: Colors.blue,
+                                        fontSize: ScreenUtil().setSp(14),
+                                        fontWeight: FontWeight.w300,
+                                        fontStyle: FontStyle.normal,
+                                      )),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -341,14 +350,20 @@ class WorkshopCardRegister extends StatelessWidget {
                       width: ScreenUtil().setWidth(12),
                       height: ScreenUtil().setHeight(12),
                       child: Image.asset("assets/images/link_icon.png")),
-                  Text("https:\/\/ww.loremlorem.com\/",
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff000000),
-                        fontSize: ScreenUtil().setSp(9),
-                        fontWeight: FontWeight.w300,
-                        fontStyle: FontStyle.normal,
-                      )),
+                  Flexible(
+                    child: Container(
+                      width: ScreenUtil().setWidth(185),
+                      child: Text(link,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xff000000),
+                            fontSize: ScreenUtil().setSp(9),
+                            fontWeight: FontWeight.w300,
+                            fontStyle: FontStyle.normal,
+                          )),
+                    ),
+                  ),
                 ],
               ),
             ),

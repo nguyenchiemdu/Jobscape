@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'course_review_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/services.dart';
+// import 'package:clipboard_manager/clipboard_manager.dart';
+// import 'package:clipboard/clipboard.dart';
 
 class CourseItemWidget extends StatelessWidget {
   final Map courseItem;
@@ -42,6 +46,35 @@ class CourseItemWidget extends StatelessWidget {
       courseLogoSrc = 'http://google.com';
       print(courseItem['provider']);
     }
+    TextEditingController controller = TextEditingController()
+      ..text = courseItem['link'];
+    Widget buildCopy() => Builder(
+          builder: (context) => Row(
+            children: [
+              Expanded(
+                  child: InkWell(
+                      child: TextField(
+                        controller: controller,
+                        enabled: false,
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Colors.blue,
+                        ),
+                      ),
+                      onTap: () => launch(courseItem['link']))),
+              IconButton(
+                icon: Icon(Icons.content_copy),
+                onPressed: () async {
+                  // await FlutterClipboard.copy(controller.text);
+
+                  // Scaffold.of(context).showSnackBar(
+                  //   SnackBar(content: Text('✓   Copied to Clipboard')),
+                  // );
+                },
+              ),
+            ],
+          ),
+        );
     String overallStar = caculateStar();
     return Container(
       child: Column(
@@ -193,7 +226,14 @@ class CourseItemWidget extends StatelessWidget {
                     width: ScreenUtil().setWidth(95),
                     height: ScreenUtil().setHeight(30),
                     child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return EnrollAlert(
+                                    courseItem['name'], buildCopy());
+                              });
+                        },
                         color: Color(0xffffbf2f),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -221,5 +261,81 @@ class CourseItemWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class EnrollAlert extends StatelessWidget {
+  String course;
+  Widget buildcopy;
+
+  EnrollAlert(this.course, this.buildcopy);
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Stack(
+          overflow: Overflow.visible,
+          alignment: Alignment.topCenter,
+          children: [
+            Container(
+              // constraints: BoxConstraints(
+              //   maxHeight: double.infinity,
+              // ),
+              height: ScreenUtil().setHeight(450),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 70, 10, 10),
+                child: Column(
+                  children: [
+                    Text(
+                      "Welcome to the " + course,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: ScreenUtil()
+                              .setSp(20, allowFontScalingSelf: false)),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "You can use the provided link below to study on your laptop/tablet/PC or click the link to start learn right on your phone.\n\nDon't forget to come back and submit your certificate of completion in the Submit Proof section to unlock the new skills and keep discovering and grouwing with us!",
+                      style: TextStyle(
+                          fontSize: ScreenUtil()
+                              .setSp(14, allowFontScalingSelf: false)),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    buildcopy,
+                    Container(
+                      margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
+                      child: RaisedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        color: Color(0xffffbf2f),
+                        child: Text(
+                          'OK',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+                top: -60,
+                child: CircleAvatar(
+                  backgroundColor: Color(0xffffbf2f),
+                  radius: 50,
+                  child: Icon(
+                    Icons.star_border_rounded,
+                    color: Colors.white,
+                    size: 50,
+                  ),
+                )),
+          ],
+        ));
   }
 }

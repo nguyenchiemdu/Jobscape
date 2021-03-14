@@ -20,7 +20,7 @@ class AdvanceCustomAlert extends StatelessWidget {
               // constraints: BoxConstraints(
               //   maxHeight: double.infinity,
               // ),
-              height: ScreenUtil().setHeight(250),
+              height: ScreenUtil().setHeight(270),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(15, 70, 10, 10),
                 child: Column(

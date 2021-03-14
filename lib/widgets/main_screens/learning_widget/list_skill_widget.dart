@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:learning_app/models/road_map_database.dart';
 import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/proof_submit_widget.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/road_map_item_widget.dart';
@@ -56,13 +57,19 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
         await industryDatabase.getListSkill(widget.roadMapItem['path']);
     List listLearnedSkill =
         await userDatabase.getLearnedSkills(widget.roadMapItem['path']);
+    List roadMapImgSrc = await RoadMapDataBase().getListRoadMapReference();
+    String skillImgSrc;
+    for (Map item in roadMapImgSrc)
+      if (item['order'] == widget.roadMapItem['order'])
+        skillImgSrc = item['imgSrc'];
     // print('listLearnedSkill :' + listLearnedSkill.toString());
     // print(tmp.toString());
     // print(widget.roadMapItem.toString());
     setState(() {
       listSkill = res;
-      listSkillWidget =
-          res.map((skill) => SkillItem(skill, widget.imgScr)).toList();
+      listSkillWidget = res
+          .map((skill) => SkillItem(skill, widget.imgScr, skillImgSrc))
+          .toList();
     });
     // print(listSkillWidget.toList());
   }
@@ -207,7 +214,7 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
                 child: GridView.count(
                     padding: EdgeInsets.all(0),
                     crossAxisCount: 2,
-                    childAspectRatio: (149 / 190),
+                    childAspectRatio: (149 / 222),
                     children: listSkillWidget
 
                     //     List.generate(widget.roadMapItem['listSkill'].length, (index) {
