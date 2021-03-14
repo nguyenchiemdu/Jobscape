@@ -257,7 +257,7 @@ class HomeWidget extends StatelessWidget {
                     )),
               ),
 
-              // IndustryIntro(),
+              //IndustryIntro(),
               Workshop(redirectWorkshop),
               Advisor(),
               OurTeam(),

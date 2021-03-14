@@ -18,6 +18,29 @@ class SkillItem extends StatelessWidget {
           builder: (context) => ListCourseWidget(skillItem, imgSrc)),
     );
   }
+  String imageFind(category) {
+    switch (category) {
+      case 'optional':
+        return "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/SkillImg%2Foptional.jpg?alt=media&token=b53646cb-a130-4dcb-b8b4-82b14eb83d84";
+        break;
+      case 'must-learn':
+        return "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/SkillImg%2Fmust%20learn.jpg?alt=media&token=ddaf7458-76fe-491f-8cff-f03a1a5c4d26";
+        break;
+      case 'programming language':
+        return "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/SkillImg%2Fprogramming_language.jpg?alt=media&token=a404cfee-7903-4fea-a16e-bcc36a2c1e84";
+        break;
+      case 'tool':
+        return "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/SkillImg%2Ftool.jpg?alt=media&token=ebc7a43b-db08-4cd0-bcab-ca9316c0fffe";
+        break;
+      case 'library':
+        return "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/SkillImg%2Flibrary.jpg?alt=media&token=da30180e-1802-44a3-9425-45c8a01ef420";
+        break;
+      case 'framework':
+        return "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/SkillImg%2Fframework.png?alt=media&token=86c18489-7e34-4e3a-bae3-c999a132f545";
+        break;
+    }
+  }
+
 
   String stringFind(category) {
     switch (category) {
@@ -105,7 +128,7 @@ class SkillItem extends StatelessWidget {
                   decoration: new BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
-                      image: NetworkImage(skillImgSrc),
+                      image: NetworkImage(imageFind(skillItem['category'])),
                       fit: BoxFit.fill,
                       alignment: Alignment.topCenter,
                     ),
