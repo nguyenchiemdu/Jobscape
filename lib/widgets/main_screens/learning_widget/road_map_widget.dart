@@ -315,7 +315,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                                             builder: (BuildContext context) {
                                               return AdvanceCustomAlert2(
                                                   "Registration Confirmation",
-                                                  "Would you like to start your journey to become a" +
+                                                  "Would you like to start your journey to become a " +
                                                       roadMapData['name'] +
                                                       " with us now?", () {
                                                 startJourney(context);

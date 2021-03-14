@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_screenutil/screen_util.dart';
 import 'package:learning_app/main.dart';
 import 'login_screen.dart';
 import 'package:learning_app/models/users_database.dart';
@@ -48,9 +49,23 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        
         children: [
+          Center(
+          child: Container(
+            margin: EdgeInsets.only(top:ScreenUtil().setHeight(82)),
+            width: ScreenUtil().setWidth(116),
+            height: ScreenUtil().setHeight(130),
+            decoration: new BoxDecoration(
+              image: DecorationImage(
+                image:
+                AssetImage("assets/images/logo.png"),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),),
           Container(
-            margin: EdgeInsets.only(top: 320, bottom: 9, left: 50),
+            margin: EdgeInsets.only(top: ScreenUtil().setHeight(125), bottom: 9, left: 50),
             child: Text("Verification",
                 style: TextStyle(
                   fontFamily: 'SFProDisplay',
@@ -86,7 +101,7 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
             ])),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 208, left: 50, right: 50),
+            margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(186), left: 50, right: 50),
             child: Text(
                 "Please click on the link to verify your email address. If you don’t see it, please kindly check your spam folder.",
                 style: TextStyle(

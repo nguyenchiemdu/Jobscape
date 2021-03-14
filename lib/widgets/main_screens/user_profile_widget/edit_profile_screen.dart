@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:learning_app/models/google_sign_in.dart';
 import 'package:learning_app/models/users_database.dart';
+import 'package:learning_app/widgets/login_screens/warning.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/submit_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/avatar_edit_profile_widget.dart';
 import 'package:learning_app/widgets/main_screens/user_profile_widget/course_completed_widget.dart';
@@ -516,6 +517,12 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             uploadProfile();
                             submitCV();
                             submitAvatar();
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AdvanceCustomAlert("Success","Profile changes saved successfully!");
+
+                                });
                           },
                           color: Color(0xffffbf2f),
                           shape: RoundedRectangleBorder(

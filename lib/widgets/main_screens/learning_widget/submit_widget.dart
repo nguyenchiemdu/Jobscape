@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:learning_app/models/users_database.dart';
+import 'package:learning_app/widgets/login_screens/warning.dart';
 // import 'package:learning_app/models/firebase_storage.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/learning_widget.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -136,7 +137,7 @@ class _SubmitState extends State<Submit> {
                   ),
                   Container(
                     width: ScreenUtil().setWidth(294),
-                    child: new Text("Size: maximum 2 GB",
+                    child: new Text("Size: maximum 2 MB",
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff454545),
@@ -369,6 +370,11 @@ class _SubmitState extends State<Submit> {
                   child: RaisedButton(
                       onPressed: () {
                         submit();
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AdvanceCustomAlert("Success","Successfully upload your proof.!");
+                            });
                       },
                       color: Color(0xffffbf2f),
                       shape: RoundedRectangleBorder(
