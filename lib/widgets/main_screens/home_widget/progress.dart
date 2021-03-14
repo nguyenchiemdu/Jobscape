@@ -356,7 +356,7 @@ class _ProgressState extends State<Progress> {
                                       child: RichText(
                                           text: new TextSpan(children: [
                                         new TextSpan(
-                                            text: "29",
+                                            text: "0",
                                             style: TextStyle(
                                               fontFamily: 'SFProDisplay',
                                               color: Color(0xff000000),
