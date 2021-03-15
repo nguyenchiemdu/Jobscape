@@ -37,6 +37,7 @@ class UserDatabaseService {
       'registeredWorkshop': 0,
       'proofsSubmitted': 0,
       'journeyCompleted': 0,
+      'typeUser' : 'trial'
     });
   }
 
