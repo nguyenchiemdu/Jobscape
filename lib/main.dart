@@ -1,14 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+// Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:learning_app/models/google_sign_in.dart';
 
 import 'package:provider/provider.dart';
 import './widgets/login_screens/login_screen.dart';
 import './widgets/main_screens/main_screen.dart';
-import 'package:learning_app/models/users_database.dart';
-
+import 'package:learning_app/models/users_database.dart'; 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -22,14 +23,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  @override
+   @override
   void initState() {
     super.initState();
-    Firebase.initializeApp().whenComplete(() {
-      print("completed");
-    });
+    // Firebase.initializeApp().whenComplete(() {
+    //   print("completed");
+    // });
   }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -43,17 +43,17 @@ class _MyAppState extends State<MyApp> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return ScreenUtilInit(
+          return  
+               ScreenUtilInit(
             designSize: Size(360, 760),
             builder: () => MaterialApp(
-                theme: ThemeData(
-                  primarySwatch: Colors.yellow,
-                  accentColor: Colors.red,
-                  fontFamily: 'SFProDisplay',
-                ),
-                title: 'Learning App',
-                home: RoutePage()),
-          );
+              theme: ThemeData(
+                primarySwatch: Colors.yellow,
+                accentColor: Colors.red,
+                fontFamily: 'SFProDisplay',
+              ),
+              title: 'Learning App',
+              home: RoutePage()));
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
@@ -73,10 +73,7 @@ class LoadingPage extends StatelessWidget {
     );
   }
 }
-// Future<int> getEnrolledCourse() async {
-//
-//   return enrolled_course;
-// }
+final enrolled_course = UserDatabaseService().getUserEnrolledCourse(FirebaseAuth.instance.currentUser.uid.toString());
 
 class RoutePage extends StatefulWidget {
   @override

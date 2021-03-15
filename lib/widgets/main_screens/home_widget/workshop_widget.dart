@@ -68,10 +68,14 @@ class _WorkshopState extends State<Workshop> {
         });
       } else
         listRandom = resultant;
-      await setState(() {
+        // print(res);
+        // print(listRandom);
+      if (this.mounted){
+        setState(() {
         workshopList = res;
         workshopRandom = listRandom;
       });
+      }
     }
   }
 

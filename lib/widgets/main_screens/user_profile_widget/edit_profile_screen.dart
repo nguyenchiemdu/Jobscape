@@ -163,7 +163,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
       child: Stack(children: [
         avatar == null
             ? AvatarEditProfileWidget()
-            : new Image.asset(avatar.path),
+            : Image.file(File(avatar.path)),
         Container(
           width: ScreenUtil().setWidth(360),
           height: ScreenUtil().setHeight(760),
