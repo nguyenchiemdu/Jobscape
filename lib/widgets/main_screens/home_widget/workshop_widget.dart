@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/workshop_database.dart';
@@ -52,6 +53,11 @@ class _WorkshopState extends State<Workshop> {
 
   fetDatabaseList() async {
     List res = await DatabaseManager().getWorkshopList();
+    res.sort((a,b){
+      Timestamp timea = a['date'];
+      Timestamp timeb = b['date'];
+      return timea.compareTo(timeb);
+    });
     List resultant = await DatabaseManager().getFullWorkshop();
     List listRandom = [];
     if (resultant == null) {
@@ -70,6 +76,11 @@ class _WorkshopState extends State<Workshop> {
         listRandom = resultant;
         // print(res);
         // print(listRandom);
+        listRandom.sort((a,b){
+      Timestamp timea = a['date'];
+      Timestamp timeb = b['date'];
+      return timea.compareTo(timeb);
+    });
       if (this.mounted){
         setState(() {
         workshopList = res;

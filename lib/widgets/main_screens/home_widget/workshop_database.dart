@@ -20,7 +20,8 @@ class DatabaseManager {
 
     try {
       await workshops
-          .orderBy('date', descending: true)
+          .where('status', isEqualTo: true)
+          // .orderBy('date', descending: true)
           .get()
           .then((querySnapshot) {
         querySnapshot.docs.forEach((element) {
@@ -32,8 +33,6 @@ class DatabaseManager {
       for (Map element in workshopList) {
         if (now.compareTo(element['date']) <= 0)
           result.add(element);
-        else
-          break;
         // print(now.compareTo(element['date']).toString());
       }
       // print(workshopList);

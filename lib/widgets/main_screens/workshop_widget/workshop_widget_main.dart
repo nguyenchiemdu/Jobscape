@@ -27,6 +27,8 @@ class _WorkshopWidgetState extends State<WorkshopWidget> {
 
   void getdata() async {
     List listWorkshop = await WorkshopDatabase().getAllWorkshop();
+    
+    // print(listWorkshop.toString());
     List past = [];
     List upcoming = [];
     for (Map workshop in listWorkshop) {
@@ -36,7 +38,19 @@ class _WorkshopWidgetState extends State<WorkshopWidget> {
       } else if (timeStamp.toDate().compareTo(DateTime.now()) > 0)
         upcoming.add(workshop);
     }
-    await setState(() {
+    past.sort((a,b){
+      Timestamp timea = a['date'];
+      Timestamp timeb = b['date'];
+      return timea.compareTo(timeb);
+    });
+
+    upcoming.sort((a,b){
+      Timestamp timea = a['date'];
+      Timestamp timeb = b['date'];
+      return timea.compareTo(timeb);
+    });
+
+    setState(() {
       pastWorkshop = past;
       upcomingWorkshop = upcoming;
     });

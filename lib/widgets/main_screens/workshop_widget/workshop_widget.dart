@@ -112,6 +112,7 @@ class _WorkshopState extends State<Workshop> {
   @override
   Widget build(BuildContext context) {
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
+    // print(widget.upcomingWorkshop);
     Timestamp now = Timestamp.now();
     DateFormat form = DateFormat('y/MM/d');
     for (Map workshop in widget.upcomingWorkshop) {

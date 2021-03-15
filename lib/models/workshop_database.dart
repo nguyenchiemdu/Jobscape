@@ -60,6 +60,11 @@ class WorkshopDatabase {
             workshopList.add(workshop);
         });
       }
+      workshopList.sort((a,b){
+      Timestamp timea = a['date'];
+      Timestamp timeb = b['date'];
+      return timea.compareTo(timeb);
+    });
       return workshopList;
     } catch (e) {
       print(e.toString());
