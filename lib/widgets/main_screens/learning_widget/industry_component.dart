@@ -164,7 +164,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                         RichText(
                             text: new TextSpan(children: [
                           new TextSpan(
-                              text: "Starting salary ",
+                              text: "Starting monthly salary ",
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',
                                 color: Color(0xff000000),
