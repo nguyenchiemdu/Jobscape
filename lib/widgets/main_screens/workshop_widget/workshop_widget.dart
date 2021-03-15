@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_app/models/workshop_database.dart';
@@ -280,6 +281,10 @@ class _WorkshopState extends State<Workshop> {
                                         ],
                                       ),
                                       child: TextField(
+                                          maxLines: 5,
+                                          minLines: 1,
+                                          expands: true,
+                                          keyboardType: TextInputType.multiline,
                                           controller: description,
                                           decoration: InputDecoration(
                                             hintText: 'Brief description',
@@ -449,7 +454,7 @@ class _WorkshopState extends State<Workshop> {
                                           controller: contactInfo,
                                           decoration: InputDecoration(
                                             hintText:
-                                                'Organization Contact (Link)',
+                                                'Organizer\'s Contact (Link)',
                                             // contentPadding: EdgeInsets.only(
                                             //     left: 14, top: 18, bottom: 18),
                                             hintStyle: TextStyle(

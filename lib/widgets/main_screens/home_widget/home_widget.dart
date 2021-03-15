@@ -155,7 +155,7 @@ class HomeWidget extends StatelessWidget {
                                 child: Text(
                                     "Explore the essential skill sets to secure a job in Information Technology, Marketing, Finance, and more. Recommended by 300+ professionals.\nAnd totally FREE.",
                                     style: TextStyle(
-                                      height: 1.3,
+                                      height: 1.2,
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff303030),
                                       fontSize: ScreenUtil()
