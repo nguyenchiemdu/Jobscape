@@ -95,6 +95,10 @@ class AddReviewFormWidget extends StatelessWidget {
                       ),
                       hintText:
                           "Tell us about your own personal experience taking this course.",
+                      suffixIcon: IconButton(
+                        onPressed: () {submitReview();},
+                        icon: Icon(Icons.send,color: Color(0xffffbf2f))
+                      ),
                       hintStyle: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff888888),
@@ -104,27 +108,6 @@ class AddReviewFormWidget extends StatelessWidget {
                       ),
                     ),
                     controller: reviewText,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(280),top: ScreenUtil().setHeight(15)),
-                child: InkWell(
-                    onTap: () {
-                      submitReview();
-                    },
-                    child: Positioned(
-                      child: Container(
-                        // margin: EdgeInsets.only(left: ScreenUtil().setWidth(267),top: ScreenUtil().setHeight(17)),
-                        width: ScreenUtil().setWidth(18),
-                        height: ScreenUtil().setHeight(18),
-                        decoration: new BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/post_icon.png"),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
                 ),
               ],

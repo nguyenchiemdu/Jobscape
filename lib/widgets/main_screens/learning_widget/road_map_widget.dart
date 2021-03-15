@@ -287,20 +287,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                                     fontStyle: FontStyle.normal,
                                   )),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: ScreenUtil().setHeight(4),
-                                  left: ScreenUtil().setWidth(24)),
-                              child: Text(
-                                  "1 - 2 câu mô tả gì đó cho người dùng hiểu rõ",
-                                  style: TextStyle(
-                                    fontFamily: 'SFProDisplay',
-                                    color: Color(0xff000000),
-                                    fontSize: ScreenUtil().setSp(16),
-                                    fontWeight: FontWeight.w300,
-                                    fontStyle: FontStyle.italic,
-                                  )),
-                            ),
+
                             Container(
                                 margin: EdgeInsets.only(
                                     top: ScreenUtil().setHeight(16),

@@ -131,104 +131,104 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
                               fontStyle: FontStyle.normal,
                             )),
                       ),
-                      Row(
-                        children: listStar,
-                        // [
-                        //   Container(
-                        //     margin:
-                        //         EdgeInsets.only(right: ScreenUtil().setWidth(2)),
-                        //     // margin: EdgeInsets.only(
-                        //     //     top: ScreenUtil().setHeight(12),
-                        //     //     bottom: ScreenUtil().setHeight(14)),
-                        //     width: ScreenUtil().setWidth(12),
-                        //     height: ScreenUtil().setHeight(12),
-                        //     decoration: new BoxDecoration(
-                        //       image: DecorationImage(
-                        //         image: AssetImage(
-                        //             "assets/images/yellow_star_icon.png"),
-                        //         fit: BoxFit.fill,
-                        //         alignment: Alignment.topCenter,
-                        //       ),
-                        //     ),
-                        //   ),
-                        //   Container(
-                        //     margin:
-                        //         EdgeInsets.only(right: ScreenUtil().setWidth(2)),
-                        //     // margin: EdgeInsets.only(
-                        //     //     top: ScreenUtil().setHeight(12),
-                        //     //     bottom: ScreenUtil().setHeight(14)),
-                        //     width: ScreenUtil().setWidth(12),
-                        //     height: ScreenUtil().setHeight(12),
-                        //     decoration: new BoxDecoration(
-                        //       image: DecorationImage(
-                        //         image: AssetImage(
-                        //             "assets/images/yellow_star_icon.png"),
-                        //         fit: BoxFit.fill,
-                        //         alignment: Alignment.topCenter,
-                        //       ),
-                        //     ),
-                        //   ),
-                        //   Container(
-                        //     margin:
-                        //         EdgeInsets.only(right: ScreenUtil().setWidth(2)),
-                        //     // margin: EdgeInsets.only(
-                        //     //     top: ScreenUtil().setHeight(12),
-                        //     //     bottom: ScreenUtil().setHeight(14)),
-                        //     width: ScreenUtil().setWidth(12),
-                        //     height: ScreenUtil().setHeight(12),
-                        //     decoration: new BoxDecoration(
-                        //       image: DecorationImage(
-                        //         image: AssetImage(
-                        //             "assets/images/yellow_star_icon.png"),
-                        //         fit: BoxFit.fill,
-                        //         alignment: Alignment.topCenter,
-                        //       ),
-                        //     ),
-                        //   ),
-                        //   Container(
-                        //     margin:
-                        //         EdgeInsets.only(right: ScreenUtil().setWidth(2)),
-                        //     // margin: EdgeInsets.only(
-                        //     //     top: ScreenUtil().setHeight(12),
-                        //     //     bottom: ScreenUtil().setHeight(14)),
-                        //     width: ScreenUtil().setWidth(12),
-                        //     height: ScreenUtil().setHeight(12),
-                        //     decoration: new BoxDecoration(
-                        //       image: DecorationImage(
-                        //         image: AssetImage(
-                        //             "assets/images/yellow_star_icon.png"),
-                        //         fit: BoxFit.fill,
-                        //         alignment: Alignment.topCenter,
-                        //       ),
-                        //     ),
-                        //   ),
-                        //   Container(
-                        //     margin:
-                        //         EdgeInsets.only(right: ScreenUtil().setWidth(6)),
-                        //     // margin: EdgeInsets.only(
-                        //     //     top: ScreenUtil().setHeight(12),
-                        //     //     bottom: ScreenUtil().setHeight(14)),
-                        //     width: ScreenUtil().setWidth(12),
-                        //     height: ScreenUtil().setHeight(12),
-                        //     decoration: new BoxDecoration(
-                        //       image: DecorationImage(
-                        //         image: AssetImage(
-                        //             "assets/images/yellow_star_icon.png"),
-                        //         fit: BoxFit.fill,
-                        //         alignment: Alignment.topCenter,
-                        //       ),
-                        //     ),
-                        //   ),
-                        //   Text(timeago.format(listReview[index]['time'].toDate()),
-                        //       style: TextStyle(
-                        //         fontFamily: 'SFProDisplay',
-                        //         color: Color(0xff303030),
-                        //         fontSize: ScreenUtil().setSp(10),
-                        //         fontWeight: FontWeight.w300,
-                        //         fontStyle: FontStyle.italic,
-                        //       )),
-                        // ],
-                      ),
+                    Row(
+                          children: listStar,
+                          // [
+                          //   Container(
+                          //     margin:
+                          //         EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                          //     // margin: EdgeInsets.only(
+                          //     //     top: ScreenUtil().setHeight(12),
+                          //     //     bottom: ScreenUtil().setHeight(14)),
+                          //     width: ScreenUtil().setWidth(12),
+                          //     height: ScreenUtil().setHeight(12),
+                          //     decoration: new BoxDecoration(
+                          //       image: DecorationImage(
+                          //         image: AssetImage(
+                          //             "assets/images/yellow_star_icon.png"),
+                          //         fit: BoxFit.fill,
+                          //         alignment: Alignment.topCenter,
+                          //       ),
+                          //     ),
+                          //   ),
+                          //   Container(
+                          //     margin:
+                          //         EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                          //     // margin: EdgeInsets.only(
+                          //     //     top: ScreenUtil().setHeight(12),
+                          //     //     bottom: ScreenUtil().setHeight(14)),
+                          //     width: ScreenUtil().setWidth(12),
+                          //     height: ScreenUtil().setHeight(12),
+                          //     decoration: new BoxDecoration(
+                          //       image: DecorationImage(
+                          //         image: AssetImage(
+                          //             "assets/images/yellow_star_icon.png"),
+                          //         fit: BoxFit.fill,
+                          //         alignment: Alignment.topCenter,
+                          //       ),
+                          //     ),
+                          //   ),
+                          //   Container(
+                          //     margin:
+                          //         EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                          //     // margin: EdgeInsets.only(
+                          //     //     top: ScreenUtil().setHeight(12),
+                          //     //     bottom: ScreenUtil().setHeight(14)),
+                          //     width: ScreenUtil().setWidth(12),
+                          //     height: ScreenUtil().setHeight(12),
+                          //     decoration: new BoxDecoration(
+                          //       image: DecorationImage(
+                          //         image: AssetImage(
+                          //             "assets/images/yellow_star_icon.png"),
+                          //         fit: BoxFit.fill,
+                          //         alignment: Alignment.topCenter,
+                          //       ),
+                          //     ),
+                          //   ),
+                          //   Container(
+                          //     margin:
+                          //         EdgeInsets.only(right: ScreenUtil().setWidth(2)),
+                          //     // margin: EdgeInsets.only(
+                          //     //     top: ScreenUtil().setHeight(12),
+                          //     //     bottom: ScreenUtil().setHeight(14)),
+                          //     width: ScreenUtil().setWidth(12),
+                          //     height: ScreenUtil().setHeight(12),
+                          //     decoration: new BoxDecoration(
+                          //       image: DecorationImage(
+                          //         image: AssetImage(
+                          //             "assets/images/yellow_star_icon.png"),
+                          //         fit: BoxFit.fill,
+                          //         alignment: Alignment.topCenter,
+                          //       ),
+                          //     ),
+                          //   ),
+                          //   Container(
+                          //     margin:
+                          //         EdgeInsets.only(right: ScreenUtil().setWidth(6)),
+                          //     // margin: EdgeInsets.only(
+                          //     //     top: ScreenUtil().setHeight(12),
+                          //     //     bottom: ScreenUtil().setHeight(14)),
+                          //     width: ScreenUtil().setWidth(12),
+                          //     height: ScreenUtil().setHeight(12),
+                          //     decoration: new BoxDecoration(
+                          //       image: DecorationImage(
+                          //         image: AssetImage(
+                          //             "assets/images/yellow_star_icon.png"),
+                          //         fit: BoxFit.fill,
+                          //         alignment: Alignment.topCenter,
+                          //       ),
+                          //     ),
+                          //   ),
+                          //   Text(timeago.format(listReview[index]['time'].toDate()),
+                          //       style: TextStyle(
+                          //         fontFamily: 'SFProDisplay',
+                          //         color: Color(0xff303030),
+                          //         fontSize: ScreenUtil().setSp(10),
+                          //         fontWeight: FontWeight.w300,
+                          //         fontStyle: FontStyle.italic,
+                          //       )),
+                          // ],
+                        ),
                       Container(
                         margin: EdgeInsets.only(
                             top: ScreenUtil().setHeight(5),

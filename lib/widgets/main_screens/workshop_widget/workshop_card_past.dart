@@ -212,19 +212,18 @@ class WorkshopCardPast extends StatelessWidget {
                                       "assets/images/link_icon.png")),
                                 InkWell(
                                     onTap: () => launch(link),
-                                    child: Flexible(
-                                      child: Container(
-                                      width: ScreenUtil().setWidth(240),
-                                      child: Text(link,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                      fontFamily: 'SFProDisplay',
-                                      color: Colors.blue,
-                                      fontSize: ScreenUtil().setSp(14),
-                                      fontWeight: FontWeight.w300,
-                                      fontStyle: FontStyle.normal,
-                                      )),
-                                      ),
+                                    child: Container(
+                                    width: ScreenUtil().setWidth(200),
+                                    child: Text(link,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Colors.blue,
+                                    fontSize: ScreenUtil().setSp(14),
+                                    fontWeight: FontWeight.w300,
+                                    fontStyle: FontStyle.normal,
+                                    )),
                                     ),
                                     ),
                             ],
