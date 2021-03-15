@@ -27,8 +27,8 @@ class AddReviewFormWidget extends StatelessWidget {
       "time": DateTime.now()
     };
     reviews['star'] = rating;
-    reviews['reviewText'] =
-        'This course is very wonderful for newbies like me. Very well explain, the professor are so helpful. Thank you Jobscape';
+    reviews['reviewText'] = reviewText.text;
+        // 'This course is very wonderful for newbies like me. Very well explain, the professor are so helpful. Thank you Jobscape';
     courseReviewDataBase.addReview(reviews, path);
   }
 
