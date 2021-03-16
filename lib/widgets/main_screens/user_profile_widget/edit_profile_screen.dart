@@ -517,12 +517,14 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             uploadProfile();
                             submitCV();
                             submitAvatar();
+                            Navigator.pop(context);
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AdvanceCustomAlert("Success","Profile changes saved successfully!");
 
                                 });
+                           
                           },
                           color: Color(0xffffbf2f),
                           shape: RoundedRectangleBorder(

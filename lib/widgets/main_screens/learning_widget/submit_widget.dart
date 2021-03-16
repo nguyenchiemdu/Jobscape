@@ -69,8 +69,10 @@ class _SubmitState extends State<Submit> {
     var permissionStatus = await Permission.photos.status;
     if (permissionStatus.isGranted) {
       //Select Image
-      image = await _picker.getImage(source: ImageSource.gallery);
-      
+      PickedFile res = await _picker.getImage(source: ImageSource.gallery);
+      setState(() {
+              image = res;
+            });
       
     } else {
       print('Grand permissions and try again');
@@ -345,7 +347,9 @@ class _SubmitState extends State<Submit> {
                             margin:
                                 EdgeInsets.only(top: ScreenUtil().setHeight(1)),
                             child: Text(
-                                "(Drag and drop files here, or browse your phone)",
+                                image == null 
+                                ? "(Drag and drop files here, or browse your phone)"
+                                : image.path.substring(image.path.length-20, image.path.length),
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff888888),

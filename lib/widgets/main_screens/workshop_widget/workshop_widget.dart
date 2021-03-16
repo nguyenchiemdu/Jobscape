@@ -97,7 +97,10 @@ class _WorkshopState extends State<Workshop> {
     var permissionStatus = await Permission.photos.status;
     if (permissionStatus.isGranted) {
       //Select Image
-      image = await _picker.getImage(source: ImageSource.gallery);
+      PickedFile res = await _picker.getImage(source: ImageSource.gallery);
+      setState(() {
+              image = res;
+            });
     } else {
       print('Grand permissions and try again');
     }
@@ -180,8 +183,10 @@ class _WorkshopState extends State<Workshop> {
                                                 ScreenUtil().setHeight(8)),
                                         width: ScreenUtil().setWidth(304),
                                         height: ScreenUtil().setHeight(159),
-                                        child: Image.asset(
-                                            "assets/images/addimage_card.png")),
+                                        child: image == null 
+                                          ?  Image.asset(
+                                            "assets/images/addimage_card.png")
+                                          : Image.file(File(image.path))),
                                   ),
                                   Container(
                                       margin: EdgeInsets.only(
