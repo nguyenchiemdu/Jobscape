@@ -7,7 +7,8 @@ class SkillItem extends StatelessWidget {
   final Map skillItem;
   final String imgSrc;
   final String skillImgSrc;
-  SkillItem(this.skillItem, this.imgSrc, this.skillImgSrc);
+  final bool isUnlocked ;
+  SkillItem(this.skillItem, this.imgSrc, this.skillImgSrc,this.isUnlocked);
   // String optional = "This skill will surely accommodate your career as a special plus point.";
   // String mustHave = "98% of professionals surveyed recommended this skill";
   // String language = "% of engineers surveyed use this programming language";
@@ -140,7 +141,9 @@ class SkillItem extends StatelessWidget {
                     top: ScreenUtil().setHeight(12),
                     bottom: ScreenUtil().setHeight(4),
                     left: ScreenUtil().setWidth(9)),
-                child: Text(skillItem['name'],
+                child: Text(skillItem['name']
+                +' '+ isUnlocked.toString()
+                 ,
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),

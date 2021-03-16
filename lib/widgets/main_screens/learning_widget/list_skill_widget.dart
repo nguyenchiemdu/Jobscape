@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:excel/excel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,30 +46,94 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
     );
   }
 
+
+  int maxOrderUnlocked(List skills, List learnedSkills,int numberIndex){
+      int res = numberIndex ~/2+skills[0]['order']-1;
+      int tmp = 0;
+      int maxOrder = 0;
+      List listOrder  = [];
+      for (int i=0;i< skills.length;i++){
+        if (learnedSkills.indexOf(skills[i]['name']) >=0 &&  listOrder.indexOf(skills[i]['order'])==-1){
+          listOrder.add(skills[i]['order']);
+          maxOrder = max(maxOrder,skills[i]['order']);
+        }
+      }
+      int maxContinous = 0;
+      for (int i=1;i< maxOrder;i++)
+        if (listOrder.indexOf(i)>=0)
+          maxContinous =i;
+        else break;
+      int condition = res %2;
+      if (maxContinous % 2 == condition)
+        tmp = maxContinous;
+      else tmp = maxContinous -1 ;
+      
+      // print(listOrder.toString());
+      if (res > tmp)
+        return res;
+      else return tmp+2;
+  }
+
+  int numberIndexs(List skills){
+    List d = [];
+    for (Map skill in skills)
+      if (d.indexOf(skill['order'])==-1)
+      d.add(skill['order']);
+    return d.length;
+  }
+  bool checkIfallUnlocked(List skills, int maxUnlock){
+      Set set = skills.map((e) => e['order']).toSet();
+      List listOrder = set.toList();
+      if (listOrder[listOrder.length-2] == maxUnlock)
+        return true;
+      else return false;
+      
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getData();
   }
-
+  List unlockStatus = [];
   void getData() async {
+    // print(widget.roadMapItem['path']);
     List<Map> res =
         await industryDatabase.getListSkill(widget.roadMapItem['path']);
+    int numberIndex = numberIndexs(res);
+    unlockStatus = res.map((e) => false).toList();
+    for (int i =0;i< res.length;i++)
+        if (res[i]['order'] < numberIndex ~/2+res[0]['order'])
+          unlockStatus[i]=true;
+
+        //-------------
     List listLearnedSkill =
         await userDatabase.getLearnedSkills(widget.roadMapItem['path']);
+        listLearnedSkill = listLearnedSkill.map((e) => e['skillName']).toList();
+        int maxUnlock = maxOrderUnlocked(res,listLearnedSkill,numberIndex);
+        //------------------
+        bool allUnlocked = checkIfallUnlocked(res, maxUnlock);
+        if (allUnlocked) maxUnlock = 999;
+
+        
+        // print(numberIndex);
+        print('unlock '+maxUnlock.toString()+ ' first order');
+        // print(listLearnedSkill);
     List roadMapImgSrc = await RoadMapDataBase().getListRoadMapReference();
     String skillImgSrc;
     for (Map item in roadMapImgSrc)
       if (item['order'] == widget.roadMapItem['order'])
         skillImgSrc = item['imgSrc'];
-    // print('listLearnedSkill :' + listLearnedSkill.toString());
-    // print(tmp.toString());
-    // print(widget.roadMapItem.toString());
     setState(() {
       listSkill = res;
       listSkillWidget = res
-          .map((skill) => SkillItem(skill, widget.imgScr, skillImgSrc))
+          .map((skill){
+            bool isUnlocked = false;
+            if (skill['order']<= maxUnlock)
+              isUnlocked = true;
+            return SkillItem(skill, widget.imgScr, skillImgSrc,isUnlocked);
+            })
           .toList();
     });
     // print(listSkillWidget.toList());

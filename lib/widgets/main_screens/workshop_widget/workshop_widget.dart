@@ -281,10 +281,6 @@ class _WorkshopState extends State<Workshop> {
                                         ],
                                       ),
                                       child: TextField(
-                                          maxLines: 5,
-                                          minLines: 1,
-                                          expands: true,
-                                          keyboardType: TextInputType.multiline,
                                           controller: description,
                                           decoration: InputDecoration(
                                             hintText: 'Brief description',

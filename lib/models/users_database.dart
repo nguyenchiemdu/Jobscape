@@ -170,8 +170,9 @@ class UserDatabaseService {
   Future<List> getLearnedSkills(String path) async {
     List res = [];
     await FirebaseFirestore.instance
-        .collection('/users/$uid/listLearnedSkill')
-        .where('path', isEqualTo: path)
+        // .collection('/users/$uid/listLearnedSkill')
+        .collection('/users/$uid/listProof')
+        .where('pathToSkill', isEqualTo: path+'/listSkill')
         .get()
         .then((querySnapshot) => querySnapshot.docs.forEach((element) {
               res.add(element.data());
