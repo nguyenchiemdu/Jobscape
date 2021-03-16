@@ -11,7 +11,7 @@ List teamList = [
     "facebook": "https://www.facebook.com/thanhlong.vu2000/",
     "email": "longvu2000.hust@gmai.com",
     "image_source":
-        "https://scontent.fhan2-6.fna.fbcdn.net/v/t1.0-9/122993091_1786227968195384_6352613809980811447_o.jpg?_nc_cat=103&ccb=1-3&_nc_sid=8bfeb9&_nc_ohc=jYq9NRYwKJ0AX-7cpSX&_nc_ht=scontent.fhan2-6.fna&oh=6791f04318ed7e224d9f1f3280c18693&oe=606FB399"
+        "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/Team%2FH%E1%BA%A3i%20Phong.jpg?alt=media&token=b6f95b12-0ae2-4f6a-83d1-55022b244f05"
   },
   {
     "name": "Ninh Quynh Anh",
@@ -19,7 +19,7 @@ List teamList = [
     "facebook": "https://www.facebook.com/thanhlong.vu2000/",
     "email": "longvu2000.hust@gmai.com",
     "image_source":
-        "https://scontent.fhan2-1.fna.fbcdn.net/v/t1.0-9/101821252_1506262619582014_7120640460323377320_o.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=1op8yuie_J8AX9cHTVV&_nc_ht=scontent.fhan2-1.fna&oh=981e66c4f781f840b045e3da640df665&oe=606FA77E"
+        "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/Team%2FQuynh%20Anh.jpg?alt=media&token=2978b944-09eb-4cc4-99e5-c5ec8b0aeb73"
   },
   {
     "name": "Vu Thanh Long",
@@ -27,7 +27,7 @@ List teamList = [
     "facebook": "https://www.facebook.com/thanhlong.vu2000/",
     "email": "longvu2000.hust@gmai.com",
     "image_source":
-        "https://kenh14cdn.com/203336854389633024/2020/11/16/photo-1-16055422352601266792499.jpg",
+        "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/Team%2FLong.jpg?alt=media&token=f9e88cda-c4ab-45bc-90cb-8f86bdae39e5",
   },
   {
     "name": "Nguyen Chiem Du",
@@ -42,9 +42,7 @@ List teamList = [
     "position": "UI/UX Designer",
     "facebook": "https://www.facebook.com/thanhlong.vu2000/",
     "email": "longvu2000.hust@gmai.com",
-    "image_source":
-        "https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-9/157874471_2539810756314702_7734877179043287353_o.jpg?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=SOxfRhcgOiUAX__-GNU&_nc_ht=scontent.fhan2-2.fna&oh=997bf4949ba6d066068984c1ecd19ff7&oe=60703D8A",
-  },
+    "image_source":"https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/Team%2FC%20Nh%C6%B0.jpg?alt=media&token=a14db82d-c68c-4740-938e-8658871fb873"},
 ];
 
 class OurTeam extends StatelessWidget {
@@ -66,7 +64,7 @@ class OurTeam extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'SFProDisplay',
                 color: Color(0xff000000),
-                fontSize: ScreenUtil().setSp(14),
+                fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.normal,
               )),
@@ -113,7 +111,7 @@ class OurTeam extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
-                                      fontSize: ScreenUtil().setSp(11),
+                                      fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FontStyle.normal,
                                     )),
@@ -125,7 +123,7 @@ class OurTeam extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
-                                      fontSize: ScreenUtil().setSp(11),
+                                      fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                       fontWeight: FontWeight.w300,
                                       fontStyle: FontStyle.normal,
                                     )),
@@ -149,48 +147,48 @@ class OurTeam extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(12))),
                         ),
                       ),
-                      Positioned(
-                        left: ScreenUtil().setWidth(90),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 4),
-                              width: ScreenUtil().setWidth(26),
-                              height: ScreenUtil().setHeight(26),
-                              decoration: new BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26454545),
-                                        offset: Offset(0, 5),
-                                        blurRadius: 6,
-                                        spreadRadius: 0)
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/facebook_icon.png"),
-                                    fit: BoxFit.fill,
-                                  )),
-                            ),
-                            Container(
-                              width: ScreenUtil().setWidth(26),
-                              height: ScreenUtil().setHeight(26),
-                              decoration: new BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26454545),
-                                        offset: Offset(0, 5),
-                                        blurRadius: 6,
-                                        spreadRadius: 0)
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/google_icon.png"),
-                                    fit: BoxFit.fill,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Positioned(
+                      //   left: ScreenUtil().setWidth(90),
+                      //   child: Row(
+                      //     children: [
+                      //       Container(
+                      //         margin: EdgeInsets.only(right: 4),
+                      //         width: ScreenUtil().setWidth(26),
+                      //         height: ScreenUtil().setHeight(26),
+                      //         decoration: new BoxDecoration(
+                      //             boxShadow: [
+                      //               BoxShadow(
+                      //                   color: Color(0x26454545),
+                      //                   offset: Offset(0, 5),
+                      //                   blurRadius: 6,
+                      //                   spreadRadius: 0)
+                      //             ],
+                      //             image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   "assets/images/facebook_icon.png"),
+                      //               fit: BoxFit.fill,
+                      //             )),
+                      //       ),
+                      //       Container(
+                      //         width: ScreenUtil().setWidth(26),
+                      //         height: ScreenUtil().setHeight(26),
+                      //         decoration: new BoxDecoration(
+                      //             boxShadow: [
+                      //               BoxShadow(
+                      //                   color: Color(0x26454545),
+                      //                   offset: Offset(0, 5),
+                      //                   blurRadius: 6,
+                      //                   spreadRadius: 0)
+                      //             ],
+                      //             image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   "assets/images/google_icon.png"),
+                      //               fit: BoxFit.fill,
+                      //             )),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                     ]),
                   ),
                   Container(
@@ -226,7 +224,7 @@ class OurTeam extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
-                                      fontSize: ScreenUtil().setSp(11),
+                                      fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FontStyle.normal,
                                     )),
@@ -238,7 +236,7 @@ class OurTeam extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
-                                      fontSize: ScreenUtil().setSp(11),
+                                      fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                       fontWeight: FontWeight.w300,
                                       fontStyle: FontStyle.normal,
                                     )),
@@ -262,48 +260,48 @@ class OurTeam extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(12))),
                         ),
                       ),
-                      Positioned(
-                        left: ScreenUtil().setWidth(90),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 4),
-                              width: ScreenUtil().setWidth(26),
-                              height: ScreenUtil().setHeight(26),
-                              decoration: new BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26454545),
-                                        offset: Offset(0, 5),
-                                        blurRadius: 6,
-                                        spreadRadius: 0)
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/facebook_icon.png"),
-                                    fit: BoxFit.fill,
-                                  )),
-                            ),
-                            Container(
-                              width: ScreenUtil().setWidth(26),
-                              height: ScreenUtil().setHeight(26),
-                              decoration: new BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26454545),
-                                        offset: Offset(0, 5),
-                                        blurRadius: 6,
-                                        spreadRadius: 0)
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/google_icon.png"),
-                                    fit: BoxFit.fill,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Positioned(
+                      //   left: ScreenUtil().setWidth(90),
+                      //   child: Row(
+                      //     children: [
+                      //       Container(
+                      //         margin: EdgeInsets.only(right: 4),
+                      //         width: ScreenUtil().setWidth(26),
+                      //         height: ScreenUtil().setHeight(26),
+                      //         decoration: new BoxDecoration(
+                      //             boxShadow: [
+                      //               BoxShadow(
+                      //                   color: Color(0x26454545),
+                      //                   offset: Offset(0, 5),
+                      //                   blurRadius: 6,
+                      //                   spreadRadius: 0)
+                      //             ],
+                      //             image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   "assets/images/facebook_icon.png"),
+                      //               fit: BoxFit.fill,
+                      //             )),
+                      //       ),
+                      //       Container(
+                      //         width: ScreenUtil().setWidth(26),
+                      //         height: ScreenUtil().setHeight(26),
+                      //         decoration: new BoxDecoration(
+                      //             boxShadow: [
+                      //               BoxShadow(
+                      //                   color: Color(0x26454545),
+                      //                   offset: Offset(0, 5),
+                      //                   blurRadius: 6,
+                      //                   spreadRadius: 0)
+                      //             ],
+                      //             image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   "assets/images/google_icon.png"),
+                      //               fit: BoxFit.fill,
+                      //             )),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                     ]),
                   ),
                 ],
@@ -349,7 +347,7 @@ class OurTeam extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
-                                      fontSize: ScreenUtil().setSp(11),
+                                      fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FontStyle.normal,
                                     )),
@@ -361,7 +359,7 @@ class OurTeam extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
-                                      fontSize: ScreenUtil().setSp(11),
+                                      fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                       fontWeight: FontWeight.w300,
                                       fontStyle: FontStyle.normal,
                                     )),
@@ -385,48 +383,48 @@ class OurTeam extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(12))),
                         ),
                       ),
-                      Positioned(
-                        left: ScreenUtil().setWidth(90),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 4),
-                              width: ScreenUtil().setWidth(26),
-                              height: ScreenUtil().setHeight(26),
-                              decoration: new BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26454545),
-                                        offset: Offset(0, 5),
-                                        blurRadius: 6,
-                                        spreadRadius: 0)
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/facebook_icon.png"),
-                                    fit: BoxFit.fill,
-                                  )),
-                            ),
-                            Container(
-                              width: ScreenUtil().setWidth(26),
-                              height: ScreenUtil().setHeight(26),
-                              decoration: new BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26454545),
-                                        offset: Offset(0, 5),
-                                        blurRadius: 6,
-                                        spreadRadius: 0)
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/google_icon.png"),
-                                    fit: BoxFit.fill,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Positioned(
+                      //   left: ScreenUtil().setWidth(90),
+                      //   child: Row(
+                      //     children: [
+                      //       Container(
+                      //         margin: EdgeInsets.only(right: 4),
+                      //         width: ScreenUtil().setWidth(26),
+                      //         height: ScreenUtil().setHeight(26),
+                      //         decoration: new BoxDecoration(
+                      //             boxShadow: [
+                      //               BoxShadow(
+                      //                   color: Color(0x26454545),
+                      //                   offset: Offset(0, 5),
+                      //                   blurRadius: 6,
+                      //                   spreadRadius: 0)
+                      //             ],
+                      //             image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   "assets/images/facebook_icon.png"),
+                      //               fit: BoxFit.fill,
+                      //             )),
+                      //       ),
+                      //       Container(
+                      //         width: ScreenUtil().setWidth(26),
+                      //         height: ScreenUtil().setHeight(26),
+                      //         decoration: new BoxDecoration(
+                      //             boxShadow: [
+                      //               BoxShadow(
+                      //                   color: Color(0x26454545),
+                      //                   offset: Offset(0, 5),
+                      //                   blurRadius: 6,
+                      //                   spreadRadius: 0)
+                      //             ],
+                      //             image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   "assets/images/google_icon.png"),
+                      //               fit: BoxFit.fill,
+                      //             )),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                     ]),
                   ),
                   Container(
@@ -462,7 +460,7 @@ class OurTeam extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
-                                      fontSize: ScreenUtil().setSp(11),
+                                      fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FontStyle.normal,
                                     )),
@@ -474,7 +472,7 @@ class OurTeam extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff000000),
-                                      fontSize: ScreenUtil().setSp(11),
+                                      fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                       fontWeight: FontWeight.w300,
                                       fontStyle: FontStyle.normal,
                                     )),
@@ -498,48 +496,48 @@ class OurTeam extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(12))),
                         ),
                       ),
-                      Positioned(
-                        left: ScreenUtil().setWidth(90),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 4),
-                              width: ScreenUtil().setWidth(26),
-                              height: ScreenUtil().setHeight(26),
-                              decoration: new BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26454545),
-                                        offset: Offset(0, 5),
-                                        blurRadius: 6,
-                                        spreadRadius: 0)
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/facebook_icon.png"),
-                                    fit: BoxFit.fill,
-                                  )),
-                            ),
-                            Container(
-                              width: ScreenUtil().setWidth(26),
-                              height: ScreenUtil().setHeight(26),
-                              decoration: new BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26454545),
-                                        offset: Offset(0, 5),
-                                        blurRadius: 6,
-                                        spreadRadius: 0)
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/google_icon.png"),
-                                    fit: BoxFit.fill,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Positioned(
+                      //   left: ScreenUtil().setWidth(90),
+                      //   child: Row(
+                      //     children: [
+                      //       Container(
+                      //         margin: EdgeInsets.only(right: 4),
+                      //         width: ScreenUtil().setWidth(26),
+                      //         height: ScreenUtil().setHeight(26),
+                      //         decoration: new BoxDecoration(
+                      //             boxShadow: [
+                      //               BoxShadow(
+                      //                   color: Color(0x26454545),
+                      //                   offset: Offset(0, 5),
+                      //                   blurRadius: 6,
+                      //                   spreadRadius: 0)
+                      //             ],
+                      //             image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   "assets/images/facebook_icon.png"),
+                      //               fit: BoxFit.fill,
+                      //             )),
+                      //       ),
+                      //       Container(
+                      //         width: ScreenUtil().setWidth(26),
+                      //         height: ScreenUtil().setHeight(26),
+                      //         decoration: new BoxDecoration(
+                      //             boxShadow: [
+                      //               BoxShadow(
+                      //                   color: Color(0x26454545),
+                      //                   offset: Offset(0, 5),
+                      //                   blurRadius: 6,
+                      //                   spreadRadius: 0)
+                      //             ],
+                      //             image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   "assets/images/google_icon.png"),
+                      //               fit: BoxFit.fill,
+                      //             )),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                     ]),
                   ),
                 ],
@@ -580,7 +578,7 @@ class OurTeam extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff000000),
-                                  fontSize: ScreenUtil().setSp(11),
+                                  fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -592,7 +590,7 @@ class OurTeam extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff000000),
-                                  fontSize: ScreenUtil().setSp(11),
+                                  fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                   fontWeight: FontWeight.w300,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -614,48 +612,48 @@ class OurTeam extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(12))),
                     ),
                   ),
-                  Positioned(
-                    left: ScreenUtil().setWidth(90),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 4),
-                          width: ScreenUtil().setWidth(26),
-                          height: ScreenUtil().setHeight(26),
-                          decoration: new BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0x26454545),
-                                    offset: Offset(0, 5),
-                                    blurRadius: 6,
-                                    spreadRadius: 0)
-                              ],
-                              image: DecorationImage(
-                                image: AssetImage(
-                                    "assets/images/facebook_icon.png"),
-                                fit: BoxFit.fill,
-                              )),
-                        ),
-                        Container(
-                          width: ScreenUtil().setWidth(26),
-                          height: ScreenUtil().setHeight(26),
-                          decoration: new BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0x26454545),
-                                    offset: Offset(0, 5),
-                                    blurRadius: 6,
-                                    spreadRadius: 0)
-                              ],
-                              image: DecorationImage(
-                                image:
-                                    AssetImage("assets/images/google_icon.png"),
-                                fit: BoxFit.fill,
-                              )),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Positioned(
+                  //   left: ScreenUtil().setWidth(90),
+                  //   child: Row(
+                  //     children: [
+                  //       Container(
+                  //         margin: EdgeInsets.only(right: 4),
+                  //         width: ScreenUtil().setWidth(26),
+                  //         height: ScreenUtil().setHeight(26),
+                  //         decoration: new BoxDecoration(
+                  //             boxShadow: [
+                  //               BoxShadow(
+                  //                   color: Color(0x26454545),
+                  //                   offset: Offset(0, 5),
+                  //                   blurRadius: 6,
+                  //                   spreadRadius: 0)
+                  //             ],
+                  //             image: DecorationImage(
+                  //               image: AssetImage(
+                  //                   "assets/images/facebook_icon.png"),
+                  //               fit: BoxFit.fill,
+                  //             )),
+                  //       ),
+                  //       Container(
+                  //         width: ScreenUtil().setWidth(26),
+                  //         height: ScreenUtil().setHeight(26),
+                  //         decoration: new BoxDecoration(
+                  //             boxShadow: [
+                  //               BoxShadow(
+                  //                   color: Color(0x26454545),
+                  //                   offset: Offset(0, 5),
+                  //                   blurRadius: 6,
+                  //                   spreadRadius: 0)
+                  //             ],
+                  //             image: DecorationImage(
+                  //               image:
+                  //                   AssetImage("assets/images/google_icon.png"),
+                  //               fit: BoxFit.fill,
+                  //             )),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ]),
               ),
             ),

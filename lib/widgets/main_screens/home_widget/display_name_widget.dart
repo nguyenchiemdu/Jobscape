@@ -26,6 +26,11 @@ class _DisplayNameState extends State<DisplayName> {
   }
   @override
   Widget build(BuildContext context) {
-    return Text(widget.title+displayName,style: widget.style);
+    return Container(
+      width: ScreenUtil().setWidth(132),
+      child: Text(widget.title+displayName,
+          overflow: TextOverflow.ellipsis,
+          style: widget.style),
+    );
   }
 }

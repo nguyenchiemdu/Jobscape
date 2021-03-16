@@ -91,7 +91,7 @@ class _SubmitState extends State<Submit> {
                 style: TextStyle(
                   fontFamily: 'SFProDisplay',
                   color: Color(0xff000000),
-                  fontSize: ScreenUtil().setSp(16),
+                  fontSize: ScreenUtil().setSp(16,allowFontScalingSelf: false),
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                 )),
@@ -241,7 +241,7 @@ class _SubmitState extends State<Submit> {
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff000000),
-                          fontSize: ScreenUtil().setSp(14),
+                          fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
                         )),
@@ -259,7 +259,7 @@ class _SubmitState extends State<Submit> {
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xff000000),
-                              fontSize: ScreenUtil().setSp(14),
+                              fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.normal,
                             )),
@@ -327,7 +327,7 @@ class _SubmitState extends State<Submit> {
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xffffffff),
-                                        fontSize: ScreenUtil().setSp(15),
+                                        fontSize: ScreenUtil().setSp(15,allowFontScalingSelf: false),
                                         fontWeight: FontWeight.w700,
                                         fontStyle: FontStyle.normal,
                                       )))),
@@ -338,7 +338,7 @@ class _SubmitState extends State<Submit> {
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xffffbf2f),
-                                  fontSize: ScreenUtil().setSp(14),
+                                  fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -353,7 +353,7 @@ class _SubmitState extends State<Submit> {
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff888888),
-                                  fontSize: ScreenUtil().setSp(11),
+                                  fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.italic,
                                 )),
@@ -384,7 +384,7 @@ class _SubmitState extends State<Submit> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Text("Save Profile",
+                      child: Text("Submit",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xffffffff),

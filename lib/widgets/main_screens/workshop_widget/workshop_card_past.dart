@@ -112,14 +112,17 @@ class WorkshopCardPast extends StatelessWidget {
                           height: ScreenUtil().setHeight(69),
                           decoration:
                               new BoxDecoration(color: Color(0xffffefcc)),
-                          child: Text(description,
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xff888888),
-                                fontSize: ScreenUtil().setSp(14),
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                              )),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Text(description,
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xff888888),
+                                  fontSize: ScreenUtil().setSp(14),
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                )),
+                          ),
                         ),
                         Container(
                           margin: EdgeInsets.only(
