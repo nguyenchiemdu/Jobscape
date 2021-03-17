@@ -151,7 +151,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                       image: selectIndex == 3
                           ? AssetImage(
                           "assets/images/chosen_qna.png")
-                          : AssetImage("assets/images/qna.png"),
+                          : AssetImage("assets/images/question.png"),
                       fit: BoxFit.cover,
                     ),
                   ),

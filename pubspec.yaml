@@ -131,6 +131,7 @@ flutter:
     - assets/images/milestone_lock.png
     - assets/images/chosen_qna.png
     - assets/images/qna.png
+    - assets/images/question.png
 
 
   #   - images/a_dot_ham.jpeg
