@@ -132,6 +132,9 @@ flutter:
     - assets/images/chosen_qna.png
     - assets/images/qna.png
     - assets/images/question.png
+    - assets/images/incognito_icon.png
+    - assets/images/next_icon_lock.png
+    - assets/images/skill_lock.png
 
 
   #   - images/a_dot_ham.jpeg

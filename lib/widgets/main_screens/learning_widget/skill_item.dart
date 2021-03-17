@@ -223,7 +223,7 @@ class SkillItem extends StatelessWidget {
             height: ScreenUtil().setHeight(32),
             decoration: new BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/start_learn_icon.png"),
+                image: isUnlocked ? AssetImage("assets/images/start_learn_icon.png"):AssetImage("assets/images/skill_lock.png") ,
                 fit: BoxFit.fill,
               ),
             ),

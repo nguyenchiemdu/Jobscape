@@ -74,7 +74,7 @@ class RoadMapItem extends StatelessWidget {
             decoration: new BoxDecoration(
               image: DecorationImage(
                 image: true? //Hàm check khóa
-                AssetImage("assets/images/next_icon.png") : AssetImage("assets/images/next_icon.png"),
+                AssetImage("assets/images/next_icon.png") : AssetImage("assets/images/next_icon_lock.png"),
                 fit: BoxFit.fill,
                 alignment: Alignment.topCenter,
               ),

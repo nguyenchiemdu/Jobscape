@@ -28,7 +28,7 @@ class _AvatarHomeWidgetState extends State<AvatarHomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 21, right: 12),
+      margin: EdgeInsets.only(left: 21, right: ScreenUtil().setWidth(12)),
       width: ScreenUtil().setWidth(48),
       height: ScreenUtil().setWidth(48),
       decoration: new BoxDecoration(
