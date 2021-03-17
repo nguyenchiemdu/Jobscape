@@ -128,6 +128,9 @@ flutter:
     - assets/images/addimage_card.png
     - assets/res/Onlinecourses.xlsx
     - assets/images/speed_icon.png
+    - assets/images/milestone_lock.png
+    - assets/images/chosen_qna.png
+    - assets/images/qna.png
 
 
   #   - images/a_dot_ham.jpeg

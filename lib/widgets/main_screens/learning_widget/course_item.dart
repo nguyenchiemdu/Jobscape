@@ -98,7 +98,7 @@ class CourseItemWidget extends StatelessWidget {
                     //     Image(image: AssetImage('assets/images/top_image.png')),
                     // CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
-                    fit: BoxFit.fill,
+                    fit: BoxFit.fitWidth,
                     width: ScreenUtil().setWidth(75),
                     height: ScreenUtil().setHeight(75),
                   ),

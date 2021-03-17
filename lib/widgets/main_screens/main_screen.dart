@@ -70,7 +70,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
       [HomeWidget(_selectPage), HomeUsedWidget(_selectPage)],
       MainLearningScreen(),
       WorkshopWidget(),
-      // QuestionWidget(),
+      QuestionWidget(),
       UserProfileWidget()
     ];
     return Scaffold(
@@ -142,8 +142,6 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                   ),
                 ),
                 label: ''),
-            // BottomNavigationBarItem(
-            //     icon: Icon(Icons.help_center_outlined), label: '')
             BottomNavigationBarItem(
                 icon: Container(
                   width: ScreenUtil().setWidth(24),
@@ -151,6 +149,21 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                   decoration: new BoxDecoration(
                     image: DecorationImage(
                       image: selectIndex == 3
+                          ? AssetImage(
+                          "assets/images/chosen_qna.png")
+                          : AssetImage("assets/images/qna.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                label: ""),
+            BottomNavigationBarItem(
+                icon: Container(
+                  width: ScreenUtil().setWidth(24),
+                  height: ScreenUtil().setHeight(24),
+                  decoration: new BoxDecoration(
+                    image: DecorationImage(
+                      image: selectIndex == 4
                           ? AssetImage(
                               "assets/images/chosen_userprofile_icon.png")
                           : AssetImage("assets/images/userprofile_icon.png"),

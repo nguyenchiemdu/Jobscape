@@ -142,7 +142,6 @@ class SkillItem extends StatelessWidget {
                     bottom: ScreenUtil().setHeight(4),
                     left: ScreenUtil().setWidth(9)),
                 child: Text(skillItem['name']
-                +' '+ isUnlocked.toString()
                  ,
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',

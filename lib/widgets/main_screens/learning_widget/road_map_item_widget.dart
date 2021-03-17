@@ -29,7 +29,8 @@ class RoadMapItem extends StatelessWidget {
               height: ScreenUtil().setHeight(116),
               decoration: new BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/mile_stone.png"),
+                  image: true ?  //Thay hàm khóa vào đây nha em
+                  AssetImage("assets/images/mile_stone.png") : AssetImage("assets/images/milestone_lock.png"),
                   fit: BoxFit.fill,
                   alignment: Alignment.topCenter,
                 ),
@@ -72,7 +73,8 @@ class RoadMapItem extends StatelessWidget {
             height: ScreenUtil().setHeight(65),
             decoration: new BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/next_icon.png"),
+                image: true? //Hàm check khóa
+                AssetImage("assets/images/next_icon.png") : AssetImage("assets/images/next_icon.png"),
                 fit: BoxFit.fill,
                 alignment: Alignment.topCenter,
               ),
