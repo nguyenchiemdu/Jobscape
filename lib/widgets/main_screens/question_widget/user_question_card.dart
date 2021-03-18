@@ -1,12 +1,38 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:learning_app/models/question_database.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/avatar_home_widget.dart';
 import 'package:learning_app/widgets/main_screens/question_widget/write_comment_card.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'comment_card.dart';
 
-class QuestionCard extends StatelessWidget {
+class QuestionCard extends StatefulWidget {
+  final Map question;
+  QuestionCard(this.question);
+
+  @override
+  _QuestionCardState createState() => _QuestionCardState();
+}
+
+class _QuestionCardState extends State<QuestionCard> {
+  List listComment = [];
+  List<Widget> listCommentWidget = [];
+  @override
+  void initState() {
+      // TODO: implement initState
+      super.initState();
+      getData();
+    }
+  void getData()async{
+      List res = await QuestionDataBase().getListData(widget.question['path'], 'listComment');
+      if (res != null)
+      setState(() {
+              listComment = res;
+              listCommentWidget = res.map((comment) => CommentCard(comment)).toList();
+            });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +63,7 @@ class QuestionCard extends StatelessWidget {
                   decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                    image: CachedNetworkImageProvider("https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/avatar%2Favatar.png?alt=media&token=a72c897f-1ce3-4e1d-ba00-aaba287b66eb"),
+                    image: CachedNetworkImageProvider(widget.question['avatarURL']),
                     fit: BoxFit.fill,
                   )),
                   ),
@@ -45,7 +71,7 @@ class QuestionCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("ARIN Như Trương",
+                Text(widget.question['user'],
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff000000),
@@ -58,7 +84,7 @@ class QuestionCard extends StatelessWidget {
                   height: ScreenUtil().setHeight(2),
                   width: ScreenUtil().setWidth(100),
                 ), 
-                Text("15 minutes ago",
+                Text(timeago.format(widget.question['date'].toDate()),
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xff888888),
@@ -75,7 +101,7 @@ class QuestionCard extends StatelessWidget {
             width: ScreenUtil().setWidth(100),
             height: ScreenUtil().setHeight(12),
           ),
-          Text("Lorem ipum Lorem ipum Lorem ipum Lorem ipum \nLorem ipum \nLorem ipum Lorem ipum  ",
+          Text(widget.question['text'],
               style: TextStyle(
                 fontFamily: 'SFProDisplay',
                 color: Color(0xff000000),
@@ -157,8 +183,10 @@ class QuestionCard extends StatelessWidget {
             width: ScreenUtil().setWidth(100),
             height: ScreenUtil().setHeight(15),
           ),
-          WriteComment(),
-          CommentCard(),
+          WriteComment(widget.question['path']),
+          Column(
+            children: listCommentWidget,
+          )
         ],
       ),
     );

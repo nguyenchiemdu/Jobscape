@@ -88,7 +88,7 @@ class _WorkshopState extends State<Workshop> {
     }
   }
 
-  uploadImage() async {
+  Future<PickedFile> uploadImage() async {
     final _picker = ImagePicker();
 
     //CHeck permission
@@ -98,11 +98,10 @@ class _WorkshopState extends State<Workshop> {
     if (permissionStatus.isGranted) {
       //Select Image
       PickedFile res = await _picker.getImage(source: ImageSource.gallery);
-      setState(() {
-              image = res;
-            });
+      return res;
     } else {
       print('Grand permissions and try again');
+      return null;
     }
   }
 
@@ -115,6 +114,7 @@ class _WorkshopState extends State<Workshop> {
 
   @override
   Widget build(BuildContext context) {
+    print('rebuilt');
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
     // print(widget.upcomingWorkshop);
     Timestamp now = Timestamp.now();
@@ -135,7 +135,9 @@ class _WorkshopState extends State<Workshop> {
               showDialog(
                 context: context,
                 builder: (context) {
-                  return AlertDialog(
+                  PickedFile img ;
+                  return StatefulBuilder(builder: (context,setState){
+                    return AlertDialog(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -173,8 +175,14 @@ class _WorkshopState extends State<Workshop> {
                               child: Column(
                                 children: [
                                   InkWell(
-                                    onTap: () {
-                                      uploadImage();
+                                    onTap: () async {
+                                      PickedFile res =  await uploadImage();
+                                     
+                                      image = res;
+                                        setState(() {
+                                                    img = res;
+                                                    if (res != null) print(image.path);
+                                                                                });
                                     },
                                     child: Container(
                                         margin: EdgeInsets.symmetric(
@@ -183,7 +191,7 @@ class _WorkshopState extends State<Workshop> {
                                                 ScreenUtil().setHeight(8)),
                                         width: ScreenUtil().setWidth(304),
                                         height: ScreenUtil().setHeight(159),
-                                        child: image == null 
+                                        child: img == null 
                                           ?  Image.asset(
                                             "assets/images/addimage_card.png")
                                           : Image.file(File(image.path))),
@@ -503,6 +511,7 @@ class _WorkshopState extends State<Workshop> {
                     ),
                     actions: [],
                   );
+                  });
                 },
               );
             },

@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screen_util.dart';
 import 'package:intl/intl.dart';
+import 'package:learning_app/models/question_database.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/avatar_home_widget.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/display_name_widget.dart';
 import 'package:learning_app/widgets/main_screens/question_widget/user_question_card.dart';
 import 'package:learning_app/widgets/main_screens/question_widget/list_filter_card.dart';
 import 'enter_question_form.dart';
 
-class QuestionWidget extends StatelessWidget {
+class QuestionWidget extends StatefulWidget {
+  @override
+  _QuestionWidgetState createState() => _QuestionWidgetState();
+}
+
+class _QuestionWidgetState extends State<QuestionWidget> {
   dynamic tx = DateTime.now();
+  List listQuestion = [];
+  List<Widget> listQuestionWidget = [];
+  @override
+  void initState() {
+      // TODO: implement initState
+      super.initState();
+      getData();
+    }
+
+  void getData()async {
+    List res = await QuestionDataBase().getListQuestion();
+    setState(() {
+          listQuestion = res;
+          listQuestionWidget = res.map((question) => QuestionCard(question)).toList();
+        });
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -98,13 +120,16 @@ class QuestionWidget extends StatelessWidget {
           Center(
             child: Container(
                 width: ScreenUtil().setWidth(312),
-                child: ListFilter()),
+                child: ListFilter((){})),
           ),
           SizedBox(
             height: ScreenUtil().setHeight(25),
             width: ScreenUtil().setWidth(360),
           ),
-          QuestionCard(),
+          Column(
+            children:listQuestionWidget
+          ),
+          
           SizedBox(
             width: ScreenUtil().setWidth(100),
             height: ScreenUtil().setHeight(15),

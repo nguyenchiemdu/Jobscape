@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screen_util.dart';
 
 class CommentCard extends StatelessWidget {
-
+  final comment;
+  CommentCard(this.comment);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +26,7 @@ class CommentCard extends StatelessWidget {
               decoration: new BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: CachedNetworkImageProvider("https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/avatar%2Favatar.png?alt=media&token=a72c897f-1ce3-4e1d-ba00-aaba287b66eb"),
+                    image: CachedNetworkImageProvider(comment['avatarURL']),
                     fit: BoxFit.fill,
                   )),
             ),
@@ -33,7 +34,7 @@ class CommentCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("ARIN Như Trương",
+                  Text(comment['user'],
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff000000),
@@ -44,7 +45,7 @@ class CommentCard extends StatelessWidget {
                   ),
                   Container(
                     width: ScreenUtil().setWidth(200),
-                      child: Text("Lorem ipum Lorem ipum Lorem Lorem ipum Lorem ipum Lorem Lorem ipum Lorem ipum Lorem \nLorem ipum  ",
+                      child: Text(comment['text'],
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff000000),

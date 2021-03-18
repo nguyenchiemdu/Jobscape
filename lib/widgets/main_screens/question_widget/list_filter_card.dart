@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/widgets/main_screens/question_widget/tag_card.dart';
 
 class ListFilter extends StatelessWidget {
+  final Function changeTag;
+  ListFilter(this.changeTag);
   List<String> listTag = ["Frontend Web Development","Backend Web Development","Data Science","Machine Learning","UI/UX Design","Android Development","iOS Development"];
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class ListFilter extends StatelessWidget {
       child: Row(
         children: [
           for (var i = 0; i< listTag.length; i++)
-            FilterCard(listTag[i])
+            FilterCard(listTag[i],changeTag)
         ],
       ),
     );

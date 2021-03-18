@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IncognitoModeWidget extends StatefulWidget {
   final bool status;
-  IncognitoModeWidget(this.status);
+  final Function changeIncognito;
+  IncognitoModeWidget(this.status,this.changeIncognito);
   @override
   _IncognitoModeWidgetState createState() =>
       _IncognitoModeWidgetState(this.status);
@@ -24,7 +25,7 @@ class _IncognitoModeWidgetState extends State<IncognitoModeWidget> {
             setState(() {
               status = !status;
             });
-            print(status);
+            widget.changeIncognito();
           },
           child: Container(
               width: ScreenUtil().setWidth(87),

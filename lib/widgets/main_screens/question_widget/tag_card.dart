@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 
 class FilterCard extends StatefulWidget {
   String name;
-  FilterCard(this.name);
+  Function changeTag;
+  FilterCard(this.name,this.changeTag);
   @override
   _FilterCardState createState() => _FilterCardState();
 }
@@ -20,7 +21,8 @@ class _FilterCardState extends State<FilterCard> {
           chosen = !chosen;
         });
         if (chosen)
-          print(widget.name.toString());
+          // print(widget.name.toString());
+        widget.changeTag(widget.name.toString());
       },
       child: Container(
         margin: EdgeInsets.only(right: ScreenUtil().setWidth(8)),
