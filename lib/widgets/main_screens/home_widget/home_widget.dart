@@ -47,7 +47,11 @@ class HomeWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    AvatarHomeWidget(),
+                    SizedBox(
+                      width: ScreenUtil().setWidth(21),
+                      height: ScreenUtil().setHeight(40),
+                    ),
+                    AvatarHomeWidget(48),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

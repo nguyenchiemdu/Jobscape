@@ -15,7 +15,7 @@ class AddQuestionWidget extends StatelessWidget {
           Center (
           child: Container(
             width: ScreenUtil().setWidth(312),
-            height: ScreenUtil().setHeight(85),
+            height: ScreenUtil().setHeight(100),
             decoration: new BoxDecoration(
               color: Color(0xffffffff),
               borderRadius: BorderRadius.circular(10),
@@ -28,17 +28,31 @@ class AddQuestionWidget extends StatelessWidget {
               ),
             child: Column(
               children: [
-                TextField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: InputDecoration(hintText: "What's your question?",
-                  contentPadding: EdgeInsets.only(left: ScreenUtil().setWidth(14),top: ScreenUtil().setHeight(17)),
-                  border: InputBorder.none,
-                    suffixIcon: IconButton(icon: Icon(Icons.send_rounded, color: Color(0xffffbf2f)),
-                      onPressed:() {})
-                  )
+                Expanded(
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(hintText: "What's your question?",
+                    contentPadding: EdgeInsets.only(left: ScreenUtil().setWidth(14),top: ScreenUtil().setHeight(17)),
+                    border: InputBorder.none,
+                      suffixIcon: IconButton(icon: Icon(Icons.send_rounded, color: Color(0xffffbf2f)),
+                        onPressed:() {})
+                    )
+                  ),
                 ),
-                ListFilter(),
+                SizedBox(
+                  height: ScreenUtil().setHeight(15),
+                  width: ScreenUtil().setWidth(312),
+                ),
+                Center(
+                  child: Container(
+                      width: ScreenUtil().setWidth(284),
+                      child: ListFilter()),
+                ),
+                SizedBox(
+                  height: ScreenUtil().setHeight(16),
+                  width: ScreenUtil().setWidth(312),
+                )
               ],
             ),
           ),

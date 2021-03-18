@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/screen_util.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/avatar_home_widget.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/display_name_widget.dart';
+import 'package:learning_app/widgets/main_screens/question_widget/user_question_card.dart';
+import 'package:learning_app/widgets/main_screens/question_widget/list_filter_card.dart';
 import 'enter_question_form.dart';
 
 class QuestionWidget extends StatelessWidget {
@@ -14,7 +16,7 @@ class QuestionWidget extends StatelessWidget {
         children: [
           Container(
             height: ScreenUtil().setHeight(330),
-            width: ScreenUtil().setWidth(360),
+            width: ScreenUtil().setWidth(375),
             decoration: new BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/top_background.png"),
@@ -41,7 +43,11 @@ class QuestionWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      AvatarHomeWidget(),
+                      SizedBox(
+                        width: ScreenUtil().setWidth(24),
+                        height: ScreenUtil().setHeight(40),
+                      ),
+                      AvatarHomeWidget(48),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,6 +90,24 @@ class QuestionWidget extends StatelessWidget {
                 AddQuestionWidget(),
               ],
             ),
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(20),
+            width: ScreenUtil().setWidth(360),
+          ),
+          Center(
+            child: Container(
+                width: ScreenUtil().setWidth(312),
+                child: ListFilter()),
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(25),
+            width: ScreenUtil().setWidth(360),
+          ),
+          QuestionCard(),
+          SizedBox(
+            width: ScreenUtil().setWidth(100),
+            height: ScreenUtil().setHeight(15),
           ),
         ],
       ),

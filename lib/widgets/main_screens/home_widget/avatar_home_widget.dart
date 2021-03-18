@@ -5,6 +5,8 @@ import 'package:learning_app/models/users_database.dart';
 
 class AvatarHomeWidget extends StatefulWidget {
   @override
+  int size;
+  AvatarHomeWidget(this.size);
   _AvatarHomeWidgetState createState() => _AvatarHomeWidgetState();
 }
 
@@ -28,9 +30,9 @@ class _AvatarHomeWidgetState extends State<AvatarHomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 21, right: ScreenUtil().setWidth(12)),
-      width: ScreenUtil().setWidth(48),
-      height: ScreenUtil().setWidth(48),
+      margin: EdgeInsets.only(right: ScreenUtil().setWidth(12)),
+      width: ScreenUtil().setWidth(widget.size),
+      height: ScreenUtil().setWidth(widget.size),
       decoration: new BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
