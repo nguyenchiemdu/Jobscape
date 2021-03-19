@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/question_database.dart';
+import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/avatar_home_widget.dart';
 import 'package:learning_app/widgets/main_screens/question_widget/write_comment_card.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -24,6 +25,10 @@ class _QuestionCardState extends State<QuestionCard> {
   bool upvoteState = false;
   String upvoteStatus = 'unlike';
   int upVote = 0;
+  bool isTranslated = false;
+  String questionText ='';
+  String userName = '';
+  String photoUrl;
   @override
   void initState() {
       // TODO: implement initState
@@ -33,8 +38,14 @@ class _QuestionCardState extends State<QuestionCard> {
     }
   void getData()async{
       List res = await QuestionDataBase().getListData(widget.question['path'], 'listComment');
-
+      String name = await UserDatabaseService().getUserDisplayname(uid: widget.question['user']);
+      String url = await UserDatabaseService().getUserphotoURL(uid :widget.question['user']);
+      setState(() {
+              userName = name;
+              photoUrl = url;
+            });
       if (res != null)
+      
       setState(() {
               listComment = res;
               listCommentWidget = res.map((comment) => CommentCard(comment)).toList();
@@ -49,11 +60,11 @@ class _QuestionCardState extends State<QuestionCard> {
     if (state)
       text = 'like';
     else text = 'unlike';
-    print( widget.question['text'] +' '+state.toString());
     setState(() {
           upVote = widget.question['upVote'];
           upvoteStatus = text;
           upvoteState = state;
+          questionText = widget.question['text'];
         });
   }
   void upvote() async{
@@ -78,6 +89,24 @@ class _QuestionCardState extends State<QuestionCard> {
       }
     await QuestionDataBase().addUpvote(widget.question['path']);
   }
+  void translate(){
+    String text;
+    if (isTranslated)
+     text = widget.question['text'];
+    else text = widget.question['translated']['vi'];
+    setState(() {
+          questionText = text;
+          isTranslated = !isTranslated;
+        });    
+  }
+  @override
+  void didUpdateWidget(covariant QuestionCard oldWidget) {
+      // TODO: implement didUpdateWidget
+      super.didUpdateWidget(oldWidget);
+      if (oldWidget.question != widget.question)
+           getData();
+      configUpvote();
+    }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -116,16 +145,17 @@ class _QuestionCardState extends State<QuestionCard> {
                       height: ScreenUtil().setWidth(40),
                       decoration: new BoxDecoration(
                         shape: BoxShape.circle,
-                        image: DecorationImage(
-                        image: CachedNetworkImageProvider(widget.question['avatarURL']),
+                        image:  photoUrl!= null ? DecorationImage(
+                        image:CachedNetworkImageProvider(photoUrl),
                         fit: BoxFit.fill,
-                      )),
+                      ): null
+                      ),
                       ),
                   Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.question['user'],
+                    Text(userName,
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff000000),
@@ -153,14 +183,15 @@ class _QuestionCardState extends State<QuestionCard> {
                 ],
               ),
               IconButton(icon: Icon(Icons.translate_rounded,
-              color:  Color(0xffffbf2f),), onPressed: () {})
+              color: isTranslated ?  Color(0xffffbf2f) :Color(0xff888888),), 
+              onPressed: () {translate();})
             ],
           ),
           SizedBox(
             width: ScreenUtil().setWidth(100),
             height: ScreenUtil().setHeight(12),
           ),
-          Text(widget.question['text'],
+          Text(questionText,
               style: TextStyle(
                 fontFamily: 'SFProDisplay',
                 color: Color(0xff000000),
@@ -218,7 +249,7 @@ class _QuestionCardState extends State<QuestionCard> {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: ScreenUtil().setWidth(4)),
-                  child: Text("15",
+                  child: Text(listComment.length.toString(),
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff888888),

@@ -17,6 +17,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   dynamic tx = DateTime.now();
   List listQuestion = [];
   List<Widget> listQuestionWidget = [];
+  List listFilter = [];
   @override
   void initState() {
       // TODO: implement initState
@@ -28,9 +29,36 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     List res = await QuestionDataBase().getListQuestion();
     setState(() {
           listQuestion = res;
-          listQuestionWidget = res.map((question) => QuestionCard(question)).toList();
+          listQuestionWidget = res.map((question) => new QuestionCard(question)).toList();
         });
   }
+  void updateFilter(String tag)async{
+    if (listFilter.indexOf(tag)==-1)
+      listFilter.add(tag);
+    else listFilter.remove(tag);
+    // print(listFilter);
+    //asdfasfd
+    List res = await QuestionDataBase().getListQuestion();
+    List res2 = new List.from(res);
+    bool ok;
+     if (listFilter.length !=0)
+        res2.forEach((question){
+          ok = false;
+          for (int j =0;j< question['tag'].length;j++){
+            if (listFilter.contains(question['tag'][j]))
+              ok = true;
+          }
+          if (!ok)
+            res.remove(question);
+        });
+    // print(res);
+    List listWidget = res.map((question) => new QuestionCard(question)).toList();
+    setState(() {
+          listQuestion = res2;
+          listQuestionWidget = new List.from(listWidget);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -121,7 +149,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           Center(
             child: Container(
                 width: ScreenUtil().setWidth(312),
-                child: ListFilter((){})),
+                child: ListFilter(updateFilter)),
           ),
           Column(
             children:listQuestionWidget

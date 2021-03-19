@@ -62,7 +62,6 @@ class QuestionDataBase{
           tmp['path'] = 'questions/'+ element.id;
           res.add(tmp);
         });
-        print('get list question successfully!');
       })
       .onError((error, stackTrace){print('failed to get list question: '+ error.toString());});
     return res;

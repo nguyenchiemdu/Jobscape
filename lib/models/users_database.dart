@@ -63,8 +63,8 @@ class UserDatabaseService {
     return res;
   }
 
-  Future<String> getUserDisplayname() async {
-    String uid = FirebaseAuth.instance.currentUser.uid;
+  Future<String> getUserDisplayname({String uid}) async {
+    if (uid == null) uid = FirebaseAuth.instance.currentUser.uid;
     String res;
     await users.doc(uid).get().then((value) {
       res = value.data()['displayName'];
@@ -94,8 +94,8 @@ class UserDatabaseService {
     });
   }
 
-  Future<String> getUserphotoURL() async {
-    String uid = FirebaseAuth.instance.currentUser.uid;
+  Future<String> getUserphotoURL({String uid} ) async {
+    if (uid == null) uid = FirebaseAuth.instance.currentUser.uid;
     String res;
     await users.doc(uid).get().then((value) {
       res = value.data()['photoURL'];

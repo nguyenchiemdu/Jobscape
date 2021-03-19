@@ -116,7 +116,7 @@ class SkillItem extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  changeScreen(context);
+                  if (isUnlocked) changeScreen(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(
@@ -216,7 +216,7 @@ class SkillItem extends StatelessWidget {
         bottom: ScreenUtil().setHeight(12),
         child: InkWell(
           onTap: () {
-            changeScreen(context);
+            if (isUnlocked) changeScreen(context);
           },
           child: Container(
             width: ScreenUtil().setWidth(32),

@@ -11,14 +11,19 @@ import 'incognito_mode_widget.dart';
 class AddQuestionWidget extends StatelessWidget {
   final TextEditingController question = TextEditingController();
   bool incognitoMode = false;
-  String tag ;
+  List tag = [];
   void changeIncognito(){
     incognitoMode = !incognitoMode;
     print(incognitoMode);
   }
   void changeTag(String tag){
-    this.tag = tag;
-    print(this.tag);
+    if (this.tag.indexOf(tag)==-1)
+      this.tag.add(tag);
+    else
+      this.tag.remove(tag);
+
+    // print(this.tag);
+    
   }
   void submitQuestion(BuildContext ctx)async{
     if (question.text == '')
@@ -29,19 +34,14 @@ class AddQuestionWidget extends StatelessWidget {
         ));
       return;
     }
-    String incognitoAvatar = 'https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/avatar%2Favatar.png?alt=media&token=a72c897f-1ce3-4e1d-ba00-aaba287b66eb';
-    String avatar;
     String user ;
     if (incognitoMode) {
-      avatar = incognitoAvatar;
-      user = 'Jobscape User';
+      user = 'bjFzXNSAvuaDPInRCQU1';
       }
     else {
-      avatar = await UserDatabaseService().getUserphotoURL();
-      user = await UserDatabaseService().getUserDisplayname();
+      user = FirebaseAuth.instance.currentUser.uid;
       }
     Map<String,dynamic> data = {
-      'avatarURL' : avatar,
       'date' : Timestamp.now(),
       'listUpvote' : [],
       'text' : question.text,

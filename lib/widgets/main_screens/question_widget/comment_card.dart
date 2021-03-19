@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screen_util.dart';
 import 'package:learning_app/models/question_database.dart';
+import 'package:learning_app/models/users_database.dart';
 
 class CommentCard extends StatefulWidget {
   final comment;
@@ -17,13 +18,23 @@ class _CommentCardState extends State<CommentCard> {
   bool upvoteState = false;
   String upvoteStatus = 'unlike';
   int upVote = 0;
-
+  String userName = '';
+  String photoUrl;
   @override
   void initState() {
       // TODO: implement initState
       super.initState();
+      getData();
       configUpvote();
     }
+  void getData()async{
+    String name = await UserDatabaseService().getUserDisplayname(uid: widget.comment['user']);
+    String url = await UserDatabaseService().getUserphotoURL(uid: widget.comment['user']);
+    setState(() {
+          userName = name;
+          photoUrl = url;
+        });
+  }
    void configUpvote(){
     bool state;
     String text;
@@ -80,16 +91,18 @@ class _CommentCardState extends State<CommentCard> {
               height: ScreenUtil().setWidth(40),
               decoration: new BoxDecoration(
                   shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(widget.comment['avatarURL']),
+                  image: photoUrl != null ? DecorationImage(
+                    image: CachedNetworkImageProvider(photoUrl),
                     fit: BoxFit.fill,
-                  )),
+                  )
+                  : null
+                  ),
             ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.comment['user'],
+                  Text(userName,
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff000000),
