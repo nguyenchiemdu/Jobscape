@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/question_database.dart';
 import 'package:learning_app/widgets/main_screens/home_widget/avatar_home_widget.dart';
@@ -19,19 +21,62 @@ class QuestionCard extends StatefulWidget {
 class _QuestionCardState extends State<QuestionCard> {
   List listComment = [];
   List<Widget> listCommentWidget = [];
+  bool upvoteState = false;
+  String upvoteStatus = 'unlike';
+  int upVote = 0;
   @override
   void initState() {
       // TODO: implement initState
       super.initState();
       getData();
+      configUpvote();
     }
   void getData()async{
       List res = await QuestionDataBase().getListData(widget.question['path'], 'listComment');
+
       if (res != null)
       setState(() {
               listComment = res;
               listCommentWidget = res.map((comment) => CommentCard(comment)).toList();
             });
+  }
+  void configUpvote(){
+    bool state;
+    String text;
+    if (widget.question['listUpvote']== null || widget.question['listUpvote'].indexOf(FirebaseAuth.instance.currentUser.uid) ==-1)
+      state = false;
+    else state = true;
+    if (state)
+      text = 'like';
+    else text = 'unlike';
+    print( widget.question['text'] +' '+state.toString());
+    setState(() {
+          upVote = widget.question['upVote'];
+          upvoteStatus = text;
+          upvoteState = state;
+        });
+  }
+  void upvote() async{
+    if (upvoteState)
+      {
+        int i = upVote-1;
+       setState(() {
+                upVote = i ;
+                upvoteStatus = 'unlike';
+                upvoteState = !upvoteState;
+              });
+
+      }
+    else
+      {
+        int i = upVote+1;
+        setState(() {
+                  upVote = i;
+                  upvoteStatus = 'like';
+                  upvoteState = !upvoteState;
+                });
+      }
+    await QuestionDataBase().addUpvote(widget.question['path']);
   }
   @override
   Widget build(BuildContext context) {
@@ -134,17 +179,20 @@ class _QuestionCardState extends State<QuestionCard> {
             width: ScreenUtil().setWidth(215),
             child: Row(
               children: [
-                Container(
-                  width: ScreenUtil().setWidth(20),
-                  height: ScreenUtil().setHeight(20),
-                  child: Image.asset("assets/images/like_icon.png"),
+                InkWell(
+                  onTap: upvote,
+                  child: Container(
+                    width: ScreenUtil().setWidth(20),
+                    height: ScreenUtil().setHeight(20),
+                    child: Image.asset("assets/images/$upvoteStatus"+"_icon.png"),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: ScreenUtil().setWidth(4)),
-                  child: Text("34",
+                  child: Text(upVote.toString(),
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
-                        color: Color(0xffffbf2f),
+                        color: upVote==0 ? Color(0xff888888) : Color(0xffffbf2f),
                         fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,

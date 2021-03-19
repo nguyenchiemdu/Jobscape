@@ -1,11 +1,66 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screen_util.dart';
+import 'package:learning_app/models/question_database.dart';
 
-class CommentCard extends StatelessWidget {
+class CommentCard extends StatefulWidget {
   final comment;
   CommentCard(this.comment);
+
+  @override
+  _CommentCardState createState() => _CommentCardState();
+}
+
+class _CommentCardState extends State<CommentCard> {
+  bool upvoteState = false;
+  String upvoteStatus = 'unlike';
+  int upVote = 0;
+
+  @override
+  void initState() {
+      // TODO: implement initState
+      super.initState();
+      configUpvote();
+    }
+   void configUpvote(){
+    bool state;
+    String text;
+    if (widget.comment['listUpvote']== null || widget.comment['listUpvote'].indexOf(FirebaseAuth.instance.currentUser.uid) ==-1)
+      state = false;
+    else state = true;
+    if (state)
+      text = 'like';
+    else text = 'unlike';
+    setState(() {
+          upVote = widget.comment['upVote'];
+          upvoteStatus = text;
+          upvoteState = state;
+        });
+  }
+  void upvote() async{
+    if (upvoteState)
+      {
+        int i = upVote-1;
+       setState(() {
+                upVote = i ;
+                upvoteStatus = 'unlike';
+                upvoteState = !upvoteState;
+              });
+
+      }
+    else
+      {
+        int i = upVote+1;
+        setState(() {
+                  upVote = i;
+                  upvoteStatus = 'like';
+                  upvoteState = !upvoteState;
+                });
+      }
+    await QuestionDataBase().addUpvote(widget.comment['path']);
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +81,7 @@ class CommentCard extends StatelessWidget {
               decoration: new BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: CachedNetworkImageProvider(comment['avatarURL']),
+                    image: CachedNetworkImageProvider(widget.comment['avatarURL']),
                     fit: BoxFit.fill,
                   )),
             ),
@@ -34,7 +89,7 @@ class CommentCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(comment['user'],
+                  Text(widget.comment['user'],
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff000000),
@@ -45,7 +100,7 @@ class CommentCard extends StatelessWidget {
                   ),
                   Container(
                     width: ScreenUtil().setWidth(200),
-                      child: Text(comment['text'],
+                      child: Text(widget.comment['text'],
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff000000),
@@ -67,6 +122,7 @@ class CommentCard extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
+                  upvote();
                 },
                 child: Container(
                   margin: EdgeInsets.only(
@@ -78,7 +134,7 @@ class CommentCard extends StatelessWidget {
                   height: ScreenUtil().setHeight(16),
                   decoration: new BoxDecoration(
                     image: DecorationImage(
-                      image: true?
+                      image: upvoteState?
                       AssetImage("assets/images/like_icon.png") : AssetImage("assets/images/unlike_icon.png"),
                       fit: BoxFit.fill,
                       alignment: Alignment.topCenter,
@@ -86,10 +142,10 @@ class CommentCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Text("3",
+              Text(upVote.toString(),
                   style: TextStyle(
                     fontFamily: 'SFProDisplay',
-                    color: true? Color(0xffffbf2f) : Color(0xff303030),
+                    color: upvoteState? Color(0xffffbf2f) : Color(0xff303030),
                     fontSize: ScreenUtil().setSp(11),
                     fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.normal,
