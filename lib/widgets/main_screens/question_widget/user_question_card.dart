@@ -102,50 +102,58 @@ class _QuestionCardState extends State<QuestionCard> {
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                height: ScreenUtil().setHeight(20),
-                width: ScreenUtil().setWidth(16),
-              ),
-              Container(
-                  margin: EdgeInsets.only(right: ScreenUtil().setWidth(10)),
-                  width: ScreenUtil().setWidth(40),
-                  height: ScreenUtil().setWidth(40),
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                    image: CachedNetworkImageProvider(widget.question['avatarURL']),
-                    fit: BoxFit.fill,
-                  )),
+              Row(
+                children: [
+                  SizedBox(
+                    height: ScreenUtil().setHeight(20),
+                    width: ScreenUtil().setWidth(16),
                   ),
-              Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.question['user'],
-                    style: TextStyle(
-                      fontFamily: 'SFProDisplay',
-                      color: Color(0xff000000),
-                      fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
-                    )
-                ),
-                SizedBox(
-                  height: ScreenUtil().setHeight(2),
-                  width: ScreenUtil().setWidth(100),
-                ), 
-                Text(timeago.format(widget.question['date'].toDate()),
-                    style: TextStyle(
-                      fontFamily: 'SFProDisplay',
-                      color: Color(0xff888888),
-                      fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                    )
-                ),
-              ],
-            )
+                  Container(
+                      margin: EdgeInsets.only(right: ScreenUtil().setWidth(10)),
+                      width: ScreenUtil().setWidth(40),
+                      height: ScreenUtil().setWidth(40),
+                      decoration: new BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                        image: CachedNetworkImageProvider(widget.question['avatarURL']),
+                        fit: BoxFit.fill,
+                      )),
+                      ),
+                  Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.question['user'],
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff000000),
+                          fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                        )
+                    ),
+                    SizedBox(
+                      height: ScreenUtil().setHeight(2),
+                      width: ScreenUtil().setWidth(100),
+                    ),
+                    Text(timeago.format(widget.question['date'].toDate()),
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff888888),
+                          fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                        )
+                    ),
+
+                  ],
+                )
+                ],
+              ),
+              IconButton(icon: Icon(Icons.translate_rounded,
+              color:  Color(0xffffbf2f),), onPressed: () {})
             ],
           ),
           SizedBox(
