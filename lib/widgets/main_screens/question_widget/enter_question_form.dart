@@ -34,7 +34,7 @@ class AddQuestionWidget extends StatelessWidget {
     String user ;
     if (incognitoMode) {
       avatar = incognitoAvatar;
-      user = 'Incognito';
+      user = 'Jobscape User';
       }
     else {
       avatar = await UserDatabaseService().getUserphotoURL();

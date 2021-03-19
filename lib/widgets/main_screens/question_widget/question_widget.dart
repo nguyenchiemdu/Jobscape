@@ -113,6 +113,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               ],
             ),
           ),
+          
           SizedBox(
             height: ScreenUtil().setHeight(20),
             width: ScreenUtil().setWidth(360),
@@ -122,17 +123,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 width: ScreenUtil().setWidth(312),
                 child: ListFilter((){})),
           ),
-          SizedBox(
-            height: ScreenUtil().setHeight(25),
-            width: ScreenUtil().setWidth(360),
-          ),
           Column(
             children:listQuestionWidget
-          ),
-          
-          SizedBox(
-            width: ScreenUtil().setWidth(100),
-            height: ScreenUtil().setHeight(15),
           ),
         ],
       ),

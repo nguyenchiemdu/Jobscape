@@ -35,7 +35,13 @@ class _QuestionCardState extends State<QuestionCard> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Column(
+      children: [
+        SizedBox(
+            height: ScreenUtil().setHeight(25),
+            width: ScreenUtil().setWidth(360),
+          ),
+          Container(
       width: ScreenUtil().setWidth(312),
         padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(15)),
         decoration: new BoxDecoration(
@@ -189,6 +195,15 @@ class _QuestionCardState extends State<QuestionCard> {
           )
         ],
       ),
+    ),
+          
+          SizedBox(
+            width: ScreenUtil().setWidth(100),
+            height: ScreenUtil().setHeight(15),
+          ),
+      ],
     );
+    
+    
   }
 }

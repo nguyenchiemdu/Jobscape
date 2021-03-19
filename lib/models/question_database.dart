@@ -19,6 +19,10 @@ class QuestionDataBase{
                                     .then((value){print('add comment completed!');})
                                     .onError((error, stackTrace){print('failed to add comment :'+error.toString());});
   }
+
+  Future addUpvote(String path)async {
+    
+  }
   Future<List> getListQuestion() async{
     List res = [];
     await questions.get()
