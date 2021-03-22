@@ -80,7 +80,26 @@ class _JourneyCompletedState extends State<JourneyCompleted> {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        child: Text(listJourneyCompleted[index]['name']),
+                        child:
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: ScreenUtil().setWidth(20),
+                              height: ScreenUtil().setHeight(15),
+                            ),
+                            Center(
+                              child: Text(listJourneyCompleted[index]['name'],
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xffffbf2f),
+                                    fontSize: ScreenUtil().setSp(22,allowFontScalingSelf: false),
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                  )
+                              ),
+                            ),
+                          ],
+                        )
                       );
                     },
                   )

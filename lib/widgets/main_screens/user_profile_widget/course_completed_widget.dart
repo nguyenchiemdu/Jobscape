@@ -104,7 +104,26 @@ class _CourseCompletedState extends State<CourseCompleted> {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        child:  Text(learnedSkills[index]['skillName']),
+                        child:
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: ScreenUtil().setWidth(20),
+                              height: ScreenUtil().setHeight(15),
+                            ),
+                            Center(
+                              child: Text(learnedSkills[index]['skillName'],
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xffffbf2f),
+                                    fontSize: ScreenUtil().setSp(22,allowFontScalingSelf: false),
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                  )
+                              ),
+                            ),
+                          ],
+                        )
                       );
                     },
                   )
