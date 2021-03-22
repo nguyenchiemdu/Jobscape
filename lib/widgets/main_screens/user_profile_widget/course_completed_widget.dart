@@ -8,7 +8,8 @@ import 'package:learning_app/widgets/main_screens/learning_widget/learning_widge
 
 class CourseCompleted extends StatefulWidget {
 
-
+  final Function selectPage;
+  CourseCompleted(this.selectPage);
   @override
   _CourseCompletedState createState() => _CourseCompletedState();
 }
@@ -153,6 +154,7 @@ class _CourseCompletedState extends State<CourseCompleted> {
                               text: " Go back and learn now!",
                               recognizer: TapGestureRecognizer()
                               ..onTap = () {
+                                widget.selectPage(2);
                               },
                               style: TextStyle(
                                 fontFamily: 'SFProDisplay',

@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/screen_util.dart';
 import 'package:learning_app/models/users_database.dart';
 
 class JourneyCompleted extends StatefulWidget {
-
+final Function selectPage;
+JourneyCompleted(this.selectPage);
 
   @override
   _JourneyCompletedState createState() => _JourneyCompletedState();
@@ -127,7 +128,7 @@ class _JourneyCompletedState extends State<JourneyCompleted> {
                   text: " Explore our Learning Journey here!",
                   recognizer: TapGestureRecognizer()
                   ..onTap = () {
-
+                    widget.selectPage(2);
                   },
                   style: TextStyle(
                   fontFamily: 'SFProDisplay',

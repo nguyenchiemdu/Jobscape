@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 import 'edit_profile_screen.dart';
 
 class UserProfileWidget extends StatefulWidget {
+  final Function selectPage;
+  UserProfileWidget(this.selectPage);
   @override
   _UserProfileWidgetState createState() => _UserProfileWidgetState();
 }
@@ -264,8 +266,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                   ],
                 ),
               ),
-              CourseCompleted(),
-              JourneyCompleted(),
+              CourseCompleted(widget.selectPage),
+              JourneyCompleted(widget.selectPage),
             ]),
           ),
         ),

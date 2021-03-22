@@ -107,7 +107,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                     child: RichText(
                         text: new TextSpan(children: [
                       new TextSpan(
-                          text: "Job opportunities expected to increase ",
+                          text: "Job opportunities expected to rise ",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff000000),

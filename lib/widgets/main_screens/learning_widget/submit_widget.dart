@@ -13,6 +13,7 @@ import 'package:learning_app/widgets/login_screens/warning.dart';
 import 'package:learning_app/widgets/main_screens/learning_widget/learning_widget.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
 class Submit extends StatefulWidget {
   final List<Map> listSkill;
@@ -31,6 +32,7 @@ class _SubmitState extends State<Submit> {
   _SubmitState(this._locations);
   PickedFile image;
   submit(BuildContext ctx) async{
+      // textRecognition();
       final _storage = FirebaseStorage.instance;
       String uid =FirebaseAuth.instance.currentUser.uid;
       
@@ -106,6 +108,28 @@ class _SubmitState extends State<Submit> {
     } else {
       print('Grand permissions and try again');
     }
+  }
+  void textRecognition()async{
+    final visionImage = FirebaseVisionImage.fromFile(File(image.path));
+    final textRecognizer = FirebaseVision.instance.textRecognizer();
+    final visionText = await  textRecognizer.processImage(visionImage);
+    await textRecognizer.close();
+    final text = extractText(visionText);
+    print(text.toString());
+
+  }
+  static extractText(VisionText visionText){
+    String text = '';
+    for (TextBlock block in visionText.blocks){
+      for (TextLine line in block.lines){
+        for (TextElement word in line.elements){
+          text = text+ word.text+ '';
+        }
+        text = text+'\n';
+      }
+    }
+    return text;
+
   }
 
   @override

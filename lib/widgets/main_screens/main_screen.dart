@@ -71,7 +71,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
       WorkshopWidget(),
       MainLearningScreen(),
       QuestionWidget(),
-      UserProfileWidget()
+      UserProfileWidget(_selectPage)
     ];
     return Scaffold(
       backgroundColor: Colors.white,

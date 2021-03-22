@@ -37,12 +37,12 @@ class _EditUserProfileState extends State<EditUserProfile> {
   Map userInfor;
   PickedFile image;
   PickedFile avatar;
-  void changeScreen(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => UserProfileWidget()),
-    );
-  }
+  // void changeScreen(BuildContext context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => UserProfileWidget()),
+  //   );
+  // }
 
   @override
   void initState() {
