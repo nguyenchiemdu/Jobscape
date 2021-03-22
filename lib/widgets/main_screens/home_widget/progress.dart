@@ -37,10 +37,7 @@ class _ProgressState extends State<Progress> {
 
   void changeScreen(BuildContext context) async {
     String path = await UserDatabaseService().getPathToJoinedJourney();
-    List<String> listSkillName = await DatabaseManager().getAllSkills(path);
-    List<Map<String, dynamic>> listMapSkillName =
-        listSkillName.map((e) => {'name': e}).toList();
-        print(listSkillName.toString());
+    List<Map<String, dynamic>> listMapSkillName = await DatabaseManager().getAllSkills(path);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SubmitProof(listMapSkillName)),

@@ -58,24 +58,27 @@ class DatabaseManager {
     }
   }
 
-  Future getAllSkills(String path) async {
-    List<String> allSkill = [];
+  Future <List<Map<String,dynamic>>> getAllSkills(String path) async {
+    List<Map<String,dynamic>> allSkill = [];
     int i = 10;
     CollectionReference listRoadMap =
         FirebaseFirestore.instance.collection('/$path/listRoadMap');
     allSkill = await listRoadMap.get().then((listResult) async {
-      List<String> res = [];
+      List<Map<String,dynamic>> res = [];
       for (QueryDocumentSnapshot roadMap in listResult.docs) {
         String pathtoSkill = roadMap.reference.path;
         // print(pathtoSkill);
         CollectionReference listSkillCollection =
             FirebaseFirestore.instance.collection('$pathtoSkill/listSkill');
 
-        List<String> res2 = await listSkillCollection.get().then((listSkill) {
-          List<String> res = [];
+        List<Map<String,dynamic>> res2 = await listSkillCollection.get().then((listSkill) {
+          List<Map<String,dynamic>> res = [];
           for (QueryDocumentSnapshot skill in listSkill.docs) {
             // print(skill.data()['name']);
-            res.add(skill.data()['name']);
+            Map<String,dynamic> tmp = {};
+            tmp = skill.data();
+            tmp['path'] = '$pathtoSkill/listSkill/' +skill.id;
+            res.add(tmp);
           }
           // print('res' + res.toString());
           return res;

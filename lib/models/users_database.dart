@@ -168,6 +168,7 @@ class UserDatabaseService {
   }
 
   Future<List> getLearnedSkills(String path) async {
+    String uid = FirebaseAuth.instance.currentUser.uid;
     List res = [];
     await FirebaseFirestore.instance
         // .collection('/users/$uid/listLearnedSkill')
@@ -179,7 +180,30 @@ class UserDatabaseService {
             }));
     return res;
   }
-
+  Future<List> getAllLearnedSkills() async {
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    List res = [];
+    await FirebaseFirestore.instance
+        // .collection('/users/$uid/listLearnedSkill')
+        .collection('/users/$uid/listProof')
+        .get()
+        .then((querySnapshot) => querySnapshot.docs.forEach((element) {
+              res.add(element.data());
+            }));
+    return res;
+  }
+  Future<List> getAllJourneyCompleted()async{
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    List res = [];
+    await FirebaseFirestore.instance
+        // .collection('/users/$uid/listLearnedSkill')
+        .collection('/users/$uid/listJourneyCompleted')
+        .get()
+        .then((querySnapshot) => querySnapshot.docs.forEach((element) {
+              res.add(element.data());
+            }));
+    return res;
+  }
   Future<int> getProofsSubmitted() async {
     String uid = FirebaseAuth.instance.currentUser.uid;
     int res;
@@ -258,7 +282,7 @@ class UserDatabaseService {
   }
 
   Future submitProof(
-      {String skillName, String fullPath, String proofURL}) async {
+      {String skillName, String fullPath, String proofURL,String cate}) async {
     String uid = FirebaseAuth.instance.currentUser.uid;
     CollectionReference listProof =
         FirebaseFirestore.instance.collection('users/$uid/listProof');
@@ -272,7 +296,8 @@ class UserDatabaseService {
           'skillId': skillId,
           'skillName': skillName,
           'pathToSkill': pathToSkill,
-          'proofURL': proofURL
+          'proofURL': proofURL,
+          'cate' : cate,
         })
         .then((value) => print('submitted Proof'))
         .onError((error, stackTrace) {

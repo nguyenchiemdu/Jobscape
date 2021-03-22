@@ -1,10 +1,30 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screen_util.dart';
+import 'package:learning_app/models/users_database.dart';
 
-class JourneyCompleted extends StatelessWidget {
+class JourneyCompleted extends StatefulWidget {
 
 
+  @override
+  _JourneyCompletedState createState() => _JourneyCompletedState();
+}
+
+class _JourneyCompletedState extends State<JourneyCompleted> {
+  List listJourneyCompleted = [];
+  @override
+  void initState() {
+      // TODO: implement initState
+      super.initState();
+      getData();
+    }
+  void getData() async {
+    List res = await UserDatabaseService().getAllJourneyCompleted();
+    setState(() {
+          listJourneyCompleted = res;
+        });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,9 +63,9 @@ class JourneyCompleted extends StatelessWidget {
                   margin: EdgeInsets.only(left: ScreenUtil().setWidth(24)),
                   width: ScreenUtil().setWidth(324),
                   height: ScreenUtil().setHeight(130),
-                  child: ListView.builder(
+                  child: listJourneyCompleted.length != 0 ? ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 5,
+                    itemCount: listJourneyCompleted.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         margin: EdgeInsets.only(right:ScreenUtil().setWidth(18)),
@@ -54,13 +74,16 @@ class JourneyCompleted extends StatelessWidget {
                         decoration: new BoxDecoration(
                           image: DecorationImage(
                             image:
-                            AssetImage("assets/images/getjob.png"),
+                            CachedNetworkImageProvider(listJourneyCompleted[index]['imgSrc']),
                             fit: BoxFit.fill,
                           ),
                         ),
+                        child: Text(listJourneyCompleted[index]['name']),
                       );
                     },
-                  )),
+                  )
+                  : Text("You didn't finish any Journey")
+                ),
             ],
           ),
 

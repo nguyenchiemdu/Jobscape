@@ -51,8 +51,9 @@ class _SubmitState extends State<Submit> {
         if (index ==-1) print('please choose the skill');
         else
         {
+          
           //upload to Firestore
-          await UserDatabaseService().submitProof(fullPath: widget.listSkill[index]['path'],skillName: _selectedLocation,proofURL: downloadURLs );
+          await UserDatabaseService().submitProof(fullPath: widget.listSkill[index]['path'],cate: widget.listSkill[index]['category'],skillName: _selectedLocation,proofURL: downloadURLs );
         }
         
 

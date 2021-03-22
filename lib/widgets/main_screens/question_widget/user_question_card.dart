@@ -231,7 +231,7 @@ class _QuestionCardState extends State<QuestionCard> {
                   child: Text(upVote.toString(),
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
-                        color: upVote==0 ? Color(0xff888888) : Color(0xffffbf2f),
+                        color: !upvoteState ? Color(0xff888888) : Color(0xffffbf2f),
                         fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
