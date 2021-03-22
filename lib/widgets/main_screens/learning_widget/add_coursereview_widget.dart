@@ -16,7 +16,28 @@ class AddReviewFormWidget extends StatelessWidget {
   int rating;
   final reviewText = TextEditingController();
   final courseReviewDataBase = DatabaseManager();
-  void submitReview() async{
+  void submitReview(BuildContext ctx) async{
+    if (rating == null)
+    {
+      Scaffold.of(ctx).showSnackBar(
+        SnackBar(
+          content: Text('Rating must not be null!'),
+          duration: Duration(milliseconds: 500),
+        )
+      );
+      return;
+    }
+    if (reviewText.text == '')
+    {
+      print(rating.toString());
+      Scaffold.of(ctx).showSnackBar(
+        SnackBar(
+          content: Text('Please enter your review !'),
+          duration: Duration(milliseconds: 500),
+        )
+      );
+      return;
+    }
     // FirebaseAuth.instance.currentUser.displayName
     String displayName = await UserDatabaseService().getUserDisplayname();
     Map<String, dynamic> reviews = {
@@ -29,7 +50,10 @@ class AddReviewFormWidget extends StatelessWidget {
     reviews['star'] = rating;
     reviews['reviewText'] = reviewText.text;
         // 'This course is very wonderful for newbies like me. Very well explain, the professor are so helpful. Thank you Jobscape';
-    courseReviewDataBase.addReview(reviews, path);
+    courseReviewDataBase.addReview(reviews, path)
+      .then((_) {
+        reviewText.text = '';
+      });
   }
 
   @override
@@ -96,7 +120,7 @@ class AddReviewFormWidget extends StatelessWidget {
                       hintText:
                           "Tell us about your own personal experience taking this course.",
                       suffixIcon: IconButton(
-                        onPressed: () {submitReview();},
+                        onPressed: () {submitReview(context);},
                         icon: Icon(Icons.send,color: Color(0xffffbf2f))
                       ),
                       hintStyle: TextStyle(

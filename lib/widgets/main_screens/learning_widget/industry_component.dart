@@ -107,7 +107,16 @@ class _IndustryComponentState extends State<IndustryComponent> {
                     child: RichText(
                         text: new TextSpan(children: [
                       new TextSpan(
-                          text: '+' + industryField['jobVacancies'].toString(),
+                          text: "Job opportunities expected to increase ",
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            color: Color(0xff000000),
+                            fontSize: ScreenUtil().setSp(14),
+                            fontWeight: FontWeight.w300,
+                            fontStyle: FontStyle.italic,
+                          )),
+                      new TextSpan(
+                          text: industryField['jobVacancies'].toString()+"%",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xffffbf2f),
@@ -116,7 +125,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                             fontStyle: FontStyle.normal,
                           )),
                       new TextSpan(
-                          text: " Job Vacancies ",
+                          text: " by 2026",
                           style: TextStyle(
                             fontFamily: 'SFProDisplay',
                             color: Color(0xff000000),

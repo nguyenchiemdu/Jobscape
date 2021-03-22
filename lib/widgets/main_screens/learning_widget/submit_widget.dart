@@ -30,7 +30,7 @@ class _SubmitState extends State<Submit> {
   String _selectedLocation;
   _SubmitState(this._locations);
   PickedFile image;
-  submit() async{
+  submit(BuildContext ctx) async{
       final _storage = FirebaseStorage.instance;
       String uid =FirebaseAuth.instance.currentUser.uid;
       
@@ -48,17 +48,45 @@ class _SubmitState extends State<Submit> {
         });
         var downloadURLs = await _snapshot.ref.getDownloadURL();
         int index = _locations.indexOf(_selectedLocation);
-        if (index ==-1) print('please choose the skill');
+        if (index ==-1) {
+          print('please choose the skill!');
+          Scaffold.of(ctx).showSnackBar(SnackBar(content: Text('Please chooose the skill!')));
+        }
         else
         {
           
           //upload to Firestore
-          await UserDatabaseService().submitProof(fullPath: widget.listSkill[index]['path'],cate: widget.listSkill[index]['category'],skillName: _selectedLocation,proofURL: downloadURLs );
+          await UserDatabaseService().submitProof(fullPath: widget.listSkill[index]['path'],cate: widget.listSkill[index]['category'],skillName: _selectedLocation,proofURL: downloadURLs )
+          .then((value){
+            showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AdvanceCustomAlert("Success","Successfully upload your proof.!");
+                            })
+            .then((_){
+               setState(() {
+                          _selectedLocation = null;
+                          image = null;
+                          }
+              );
+            });
+              
+          })
+          .onError((error, stackTrace){
+            showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AdvanceCustomAlert("Failed",error.toString());
+                            });
+          });
         }
+        
         
 
       } else {
-        print('No Path received or No Skill Name received');
+        String infor = 'No path received or no skill name received';
+        print(infor);
+        Scaffold.of(ctx).showSnackBar(SnackBar(content: Text(infor)));
       }
   }
   uploadImage() async {
@@ -374,12 +402,7 @@ class _SubmitState extends State<Submit> {
                   height: ScreenUtil().setHeight(44),
                   child: RaisedButton(
                       onPressed: () {
-                        submit();
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AdvanceCustomAlert("Success","Successfully upload your proof.!");
-                            });
+                        submit(context);
                       },
                       color: Color(0xffffbf2f),
                       shape: RoundedRectangleBorder(
