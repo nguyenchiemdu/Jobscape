@@ -75,7 +75,7 @@ class _CommentCardState extends State<CommentCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil().setWidth(260),
+      width: ScreenUtil().setWidth(245),
       child: Column(
         children: [
           SizedBox(
@@ -87,8 +87,8 @@ class _CommentCardState extends State<CommentCard> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [Container(
               margin: EdgeInsets.only(right: ScreenUtil().setWidth(10)),
-              width: ScreenUtil().setWidth(40),
-              height: ScreenUtil().setWidth(40),
+              width: ScreenUtil().setWidth(30),
+              height: ScreenUtil().setWidth(30),
               decoration: new BoxDecoration(
                   shape: BoxShape.circle,
                   image: photoUrl != null ? DecorationImage(
@@ -130,7 +130,7 @@ class _CommentCardState extends State<CommentCard> {
           Row(
             children: [
               SizedBox(
-                width: ScreenUtil().setWidth(200),
+                width: ScreenUtil().setWidth(220),
                 height: ScreenUtil().setHeight(10),
               ),
               InkWell(
@@ -143,8 +143,8 @@ class _CommentCardState extends State<CommentCard> {
                   // margin: EdgeInsets.only(
                   //     top: ScreenUtil().setHeight(12),
                   //     bottom: ScreenUtil().setHeight(14)),
-                  width: ScreenUtil().setWidth(16),
-                  height: ScreenUtil().setHeight(16),
+                  width: ScreenUtil().setWidth(14),
+                  height: ScreenUtil().setHeight(14),
                   decoration: new BoxDecoration(
                     image: DecorationImage(
                       image: upvoteState?
@@ -159,7 +159,7 @@ class _CommentCardState extends State<CommentCard> {
                   style: TextStyle(
                     fontFamily: 'SFProDisplay',
                     color: upvoteState? Color(0xffffbf2f) : Color(0xff303030),
-                    fontSize: ScreenUtil().setSp(11),
+                    fontSize: ScreenUtil().setSp(10),
                     fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.normal,
                   )),

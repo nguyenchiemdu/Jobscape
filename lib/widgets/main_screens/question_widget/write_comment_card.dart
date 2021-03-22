@@ -33,12 +33,12 @@ class WriteComment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil().setWidth(260),
+      width: ScreenUtil().setWidth(245),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            AvatarHomeWidget(40),
+            AvatarHomeWidget(30),
             // Container(
             //   margin: EdgeInsets.only(right: ScreenUtil().setWidth(10)),
             //   width: ScreenUtil().setWidth(40),
@@ -54,19 +54,30 @@ class WriteComment extends StatelessWidget {
               child: TextField(
                   // keyboardType: TextInputType.multiline,
                   controller: comment,
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xff000000),
+                    fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
+                    fontWeight: FontWeight.w300,
+                    fontStyle: FontStyle.normal,
+                  ),
                   maxLines: null,
                   decoration: InputDecoration(hintText: "Write a comment...",
+                      isDense: true,
+                      contentPadding: EdgeInsets.only(left:ScreenUtil().setWidth(13)),
                       filled: true,
                       fillColor: Colors.grey[200],
                       hintStyle: TextStyle(
                         fontSize: ScreenUtil().setSp(10,allowFontScalingSelf: false),
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff000000),),
-                      contentPadding: EdgeInsets.only(left: ScreenUtil().setWidth(13)),
+                      focusedBorder: new OutlineInputBorder(borderRadius: new BorderRadius.circular(25),
+                        borderSide: new BorderSide(color: Colors.transparent,),),
                       enabledBorder: new OutlineInputBorder(borderRadius: new BorderRadius.circular(25),
-                      borderSide: new BorderSide(color: Colors.transparent)),
-    suffixIcon: IconButton(icon: Icon(Icons.send_rounded, color: Color(0xffffbf2f),size: 20,),
-                          onPressed:() {submitComment(context);})
+                      borderSide: new BorderSide(color: Colors.transparent,),),
+                      suffixIcon: IconButton(icon: Icon(Icons.send_rounded, color: Color(0xffffbf2f),size: 15,),
+                          onPressed:() {submitComment(context);}),
+                    suffixIconConstraints: BoxConstraints(maxWidth: 35 ,maxHeight: 35,minHeight: 15,minWidth: 15)
                   )
               ),
             ),

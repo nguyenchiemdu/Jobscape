@@ -59,6 +59,7 @@ class WorkshopCard extends StatelessWidget {
             ),
           ),
           Container(
+            width: ScreenUtil().setWidth(170),
             margin: EdgeInsets.only(top: 12, left: 12, right: 5, bottom: 8),
             child: Text(title,
                 style: TextStyle(
@@ -79,6 +80,7 @@ class WorkshopCard extends StatelessWidget {
                     margin: EdgeInsets.only(right: 4),
                     child: Image.asset("assets/images/good_for_icon.png")),
                 Container(
+                  width: ScreenUtil().setWidth(165),
                   child: Text(for_whom,
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
@@ -100,14 +102,18 @@ class WorkshopCard extends StatelessWidget {
                     width: ScreenUtil().setWidth(12),
                     height: ScreenUtil().setHeight(12),
                     child: Image.asset("assets/images/speaker_icon.png")),
-                Text(speaker,
-                    style: TextStyle(
-                      fontFamily: 'SFProDisplay',
-                      color: Color(0xff000000),
-                      fontSize: ScreenUtil().setSp(9),
-                      fontWeight: FontWeight.w300,
-                      fontStyle: FontStyle.normal,
-                    )),
+                Container(
+                  width: ScreenUtil().setWidth(165),
+                  child:
+                    Text(speaker,
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff000000),
+                          fontSize: ScreenUtil().setSp(9),
+                          fontWeight: FontWeight.w300,
+                          fontStyle: FontStyle.normal,
+                        )),
+                ),
               ],
             ),
           ),

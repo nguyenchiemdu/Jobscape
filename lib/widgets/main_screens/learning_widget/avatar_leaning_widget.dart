@@ -29,8 +29,8 @@ class _AvatarLearningWidgetState extends State<AvatarLearningWidget> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 24),
-      width: ScreenUtil().setWidth(36),
-      height: ScreenUtil().setHeight(36),
+      width: ScreenUtil().setWidth(48),
+      height: ScreenUtil().setHeight(48),
       decoration: new BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(

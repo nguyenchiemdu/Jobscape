@@ -91,7 +91,7 @@ class WorkshopCardPast extends StatelessWidget {
                         ),
                         Center(
                           child: Container(
-                            width: ScreenUtil().setWidth(293),
+                            width: ScreenUtil().setWidth(285),
                             margin: EdgeInsets.only(
                                 top: ScreenUtil().setHeight(12),
                                 bottom: ScreenUtil().setHeight(12)),

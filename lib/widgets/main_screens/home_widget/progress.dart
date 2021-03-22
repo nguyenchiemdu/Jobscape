@@ -70,7 +70,7 @@ class _ProgressState extends State<Progress> {
                   boxShadow: [
                     BoxShadow(
                         color: Color(0x1a454545),
-                        offset: Offset(0, 10),
+                        offset: Offset(0, 6),
                         blurRadius: 10,
                         spreadRadius: 0)
                   ],
@@ -285,7 +285,7 @@ class _ProgressState extends State<Progress> {
                     boxShadow: [
                       BoxShadow(
                           color: Color(0x1a454545),
-                          offset: Offset(0, 10),
+                          offset: Offset(0, 6),
                           blurRadius: 10,
                           spreadRadius: 0)
                     ],

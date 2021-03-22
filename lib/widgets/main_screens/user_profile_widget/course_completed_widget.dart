@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screen_util.dart';
 import 'package:learning_app/models/users_database.dart';
+import 'package:learning_app/widgets/main_screens/learning_widget/learning_widget.dart';
 
 class CourseCompleted extends StatefulWidget {
 
@@ -51,7 +53,6 @@ class _CourseCompletedState extends State<CourseCompleted> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       margin: EdgeInsets.only(top: ScreenUtil().setHeight(28)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +69,8 @@ class _CourseCompletedState extends State<CourseCompleted> {
                 )
             ),
           ),
-          Stack(
+          if (learnedSkills.length!=0)
+            Stack(
             children: [
               Container(
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(12)),
@@ -86,8 +88,7 @@ class _CourseCompletedState extends State<CourseCompleted> {
                 margin: EdgeInsets.only(left: ScreenUtil().setWidth(24)),
                   width: ScreenUtil().setWidth(324),
                   height: ScreenUtil().setHeight(130),
-                  child: learnedSkills!=0 
-                  ? ListView.builder(
+                  child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: learnedSkills.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -96,6 +97,7 @@ class _CourseCompletedState extends State<CourseCompleted> {
                         width: ScreenUtil().setWidth(130),
                         height: ScreenUtil().setHeight(130),
                         decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
                             image:
                             CachedNetworkImageProvider(imageFind(learnedSkills[index]['cate'])),
@@ -106,10 +108,47 @@ class _CourseCompletedState extends State<CourseCompleted> {
                       );
                     },
                   )
-                  : Text("You didn't finish any courses")
                 ),
             ],
           ),
+          if (learnedSkills.length==0)
+            Center(
+              child: Container(
+                width: ScreenUtil().setWidth(312),
+                child: RichText(
+                    text: new TextSpan(
+                        children: [
+                          new TextSpan(
+                              text: "You have not completed any courses.",
+                              style: TextStyle(
+                                fontFamily: 'SFProDisplay',
+                                color: Color(0xff303030),
+                                fontSize: ScreenUtil().setSp(12,allowFontScalingSelf: false),
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+
+
+                              )
+                          ),
+                          new TextSpan(
+                              text: " Go back and learn now!",
+                              recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                              },
+                              style: TextStyle(
+                                fontFamily: 'SFProDisplay',
+                                color: Color(0xffffbf2f),
+                                fontSize: ScreenUtil().setSp(12,allowFontScalingSelf: false),
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                              )
+                          ),
+                        ]
+                    )
+                ),
+              ),
+            )
+
 
         ],
       ),

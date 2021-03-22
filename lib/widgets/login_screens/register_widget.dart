@@ -175,14 +175,14 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 Icons.email_rounded,
-                                color: Color(0xff303030),
+                                color: Colors.grey,
                               ),
                               hintText: 'Email',
                               contentPadding: EdgeInsets.only(
                                   left: 14, top: 18, bottom: 18),
                               hintStyle: TextStyle(
                                 fontFamily: 'SFProDisplay',
-                                color: Color(0xffbbbbbb),
+                                color: Colors.grey,
                                 fontSize: ScreenUtil().setSp(16),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
@@ -219,14 +219,14 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 Icons.lock,
-                                color: Color(0xff303030),
+                                color: Colors.grey,
                               ),
                               hintText: 'Password',
                               contentPadding: EdgeInsets.only(
                                   left: 14, top: 18, bottom: 18),
                               hintStyle: TextStyle(
                                 fontFamily: 'SFProDisplay',
-                                color: Color(0xffbbbbbb),
+                                color: Colors.grey,
                                 fontSize: ScreenUtil().setSp(16),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
@@ -263,14 +263,14 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 Icons.lock,
-                                color: Color(0xff303030),
+                                color: Colors.grey,
                               ),
                               hintText: 'Repeat Password',
                               contentPadding: EdgeInsets.only(
                                   left: 14, top: 18, bottom: 18),
                               hintStyle: TextStyle(
                                 fontFamily: 'SFProDisplay',
-                                color: Color(0xffbbbbbb),
+                                color: Colors.grey,
                                 fontSize: ScreenUtil().setSp(16),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,

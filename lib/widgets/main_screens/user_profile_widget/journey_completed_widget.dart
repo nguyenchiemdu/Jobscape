@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screen_util.dart';
 import 'package:learning_app/models/users_database.dart';
@@ -45,6 +46,7 @@ class _JourneyCompletedState extends State<JourneyCompleted> {
                 )
             ),
           ),
+    if (listJourneyCompleted.length != 0)
           Stack(
             children: [
               Container(
@@ -63,7 +65,7 @@ class _JourneyCompletedState extends State<JourneyCompleted> {
                   margin: EdgeInsets.only(left: ScreenUtil().setWidth(24)),
                   width: ScreenUtil().setWidth(324),
                   height: ScreenUtil().setHeight(130),
-                  child: listJourneyCompleted.length != 0 ? ListView.builder(
+                  child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: listJourneyCompleted.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -82,12 +84,49 @@ class _JourneyCompletedState extends State<JourneyCompleted> {
                       );
                     },
                   )
-                  : Text("You didn't finish any Journey")
                 ),
             ],
           ),
+    if (listJourneyCompleted.length == 0)
+          Center(
+            child: Container(
+            width: ScreenUtil().setWidth(312),
+            child: RichText(
+            text: new TextSpan(
+            children: [
+                new TextSpan(
+                  text: "You currently have no completed journeys.",
+                  style: TextStyle(
+                  fontFamily: 'SFProDisplay',
+                  color: Color(0xff303030),
+                  fontSize: ScreenUtil().setSp(12,allowFontScalingSelf: false),
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                )
+                ),
+                new TextSpan(
+                  text: " Explore our Learning Journey here!",
+                  recognizer: TapGestureRecognizer()
+                  ..onTap = () {
 
-        ],
+                  },
+                  style: TextStyle(
+                  fontFamily: 'SFProDisplay',
+                  color: Color(0xffffbf2f),
+                  fontSize: ScreenUtil().setSp(12,allowFontScalingSelf: false),
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                )
+                ),
+                ]
+                )
+          ),
+          ),
+          )
+
+
+
+    ],
       ),
     );
   }

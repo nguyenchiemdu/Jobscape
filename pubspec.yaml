@@ -135,6 +135,7 @@ flutter:
     - assets/images/incognito_icon.png
     - assets/images/next_icon_lock.png
     - assets/images/skill_lock.png
+    - assets/images/comment_icon.png
 
 
   #   - images/a_dot_ham.jpeg

@@ -129,6 +129,7 @@ class _QuestionCardState extends State<QuestionCard> {
           ) ],
         ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -191,94 +192,111 @@ class _QuestionCardState extends State<QuestionCard> {
             width: ScreenUtil().setWidth(100),
             height: ScreenUtil().setHeight(12),
           ),
-          Text(questionText,
-              style: TextStyle(
-                fontFamily: 'SFProDisplay',
-                color: Color(0xff000000),
-                fontSize: 14,
-                fontWeight: FontWeight.w300,
-                fontStyle: FontStyle.normal,
-              )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: ScreenUtil().setHeight(20),
+                width: ScreenUtil().setWidth(16),
+              ),
+              Text(questionText,
+                  style: TextStyle(
+                    fontFamily: 'SFProDisplay',
+                    color: Color(0xff000000),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    fontStyle: FontStyle.normal,
+                  )
+              ),
+            ],
           ),
           SizedBox(
             width: ScreenUtil().setWidth(100),
             height: ScreenUtil().setHeight(16),
           ),
-          Container(
-              width: ScreenUtil().setWidth(280),
-              height: 0,
-              decoration: new BoxDecoration(
-                border: Border.all(color: Color(0xffdddddd)),
-              )),
+          Center(
+            child: Container(
+                width: ScreenUtil().setWidth(280),
+                height: 0,
+                decoration: new BoxDecoration(
+                  border: Border.all(color: Color(0xffdddddd)),
+                )),
+          ),
           SizedBox(
             width: ScreenUtil().setWidth(132),
             height: ScreenUtil().setHeight(11),
           ),
-          Container(
-            width: ScreenUtil().setWidth(215),
-            child: Row(
-              children: [
-                InkWell(
-                  onTap: upvote,
-                  child: Container(
+          Center(
+            child: Container(
+              width: ScreenUtil().setWidth(215),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: upvote,
+                    child: Container(
+                      width: ScreenUtil().setWidth(20),
+                      height: ScreenUtil().setHeight(20),
+                      child: Image.asset("assets/images/$upvoteStatus"+"_icon.png"),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(4)),
+                    child: Text(upVote.toString(),
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: !upvoteState ? Color(0xff888888) : Color(0xffffbf2f),
+                          fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                        )
+                    ),
+                  ),
+                  SizedBox(
+                    width: ScreenUtil().setWidth(132),
+                    height: ScreenUtil().setHeight(10),
+                  ),
+                  Container(
                     width: ScreenUtil().setWidth(20),
                     height: ScreenUtil().setHeight(20),
-                    child: Image.asset("assets/images/$upvoteStatus"+"_icon.png"),
+                    child: Image.asset("assets/images/comment_icon.png"),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(4)),
-                  child: Text(upVote.toString(),
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: !upvoteState ? Color(0xff888888) : Color(0xffffbf2f),
-                        fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                      )
-                  ),
-                ),
-                SizedBox(
-                  width: ScreenUtil().setWidth(132),
-                  height: ScreenUtil().setHeight(10),
-                ),
-                Container(
-                  width: ScreenUtil().setWidth(20),
-                  height: ScreenUtil().setHeight(20),
-                  child: Image.asset("assets/images/like_icon.png"),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(4)),
-                  child: Text(listComment.length.toString(),
-                      style: TextStyle(
-                        fontFamily: 'SFProDisplay',
-                        color: Color(0xff888888),
-                        fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                      )
-                  ),
-                )
-              ],
+                  Container(
+                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(4)),
+                    child: Text(listComment.length.toString(),
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          color: Color(0xff888888),
+                          fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                        )
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           SizedBox(
             width: ScreenUtil().setWidth(132),
             height: ScreenUtil().setHeight(11),
           ),
-          Container(
-              width: ScreenUtil().setWidth(280),
-              height: 0,
-              decoration: new BoxDecoration(
-                border: Border.all(color: Color(0xffdddddd)),
-              )),
+          Center(
+            child: Container(
+                width: ScreenUtil().setWidth(280),
+                height: 0,
+                decoration: new BoxDecoration(
+                  border: Border.all(color: Color(0xffdddddd)),
+                )),
+          ),
           SizedBox(
             width: ScreenUtil().setWidth(100),
             height: ScreenUtil().setHeight(15),
           ),
-          WriteComment(widget.question['path']),
-          Column(
-            children: listCommentWidget,
+          Center(child: WriteComment(widget.question['path'])),
+          Center(
+            child: Column(
+              children: listCommentWidget,
+            ),
           )
         ],
       ),
