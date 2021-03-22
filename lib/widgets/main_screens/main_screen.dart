@@ -68,8 +68,8 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
   Widget build(BuildContext context) {
     listWidget = [
       [HomeWidget(_selectPage), HomeUsedWidget(_selectPage)],
-      MainLearningScreen(),
       WorkshopWidget(),
+      MainLearningScreen(),
       QuestionWidget(),
       UserProfileWidget()
     ];
@@ -120,8 +120,9 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                   decoration: new BoxDecoration(
                     image: DecorationImage(
                       image: selectIndex == 1
-                          ? AssetImage("assets/images/chosen_learning_icon.png")
-                          : AssetImage("assets/images/learning_icon.png"),
+                          ? AssetImage(
+                              "assets/images/choosen_workshop_icon.png")
+                          : AssetImage("assets/images/workshop_icon.png"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -134,9 +135,8 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                   decoration: new BoxDecoration(
                     image: DecorationImage(
                       image: selectIndex == 2
-                          ? AssetImage(
-                              "assets/images/choosen_workshop_icon.png")
-                          : AssetImage("assets/images/workshop_icon.png"),
+                          ? AssetImage("assets/images/chosen_learning_icon.png")
+                          : AssetImage("assets/images/learning_icon.png"),
                       fit: BoxFit.cover,
                     ),
                   ),

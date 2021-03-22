@@ -314,9 +314,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                                             builder: (BuildContext context) {
                                               return AdvanceCustomAlert2(
                                                   "Registration Confirmation",
-                                                  "As we only support 1 learning path at a time, therefore, if you start " +
-                                                      roadMapData['name'] +
-                                                      " journey, your current journey will be forced to end. Do you still want to start?",
+                                                  "You can only start 01 journey at a time. Do you want to end your previously registered journey?",
                                                   () {
                                                 startJourney(context);
                                               });

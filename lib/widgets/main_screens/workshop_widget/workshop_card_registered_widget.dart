@@ -384,7 +384,7 @@ class WorkshopCardRegister extends StatelessWidget {
               ),
             ),
             child: Center(
-                child: Text(duration.inDays.toString() + " next\ndays",
+                child: Text("In " + duration.inDays.toString() + "\ndays",
                     style: TextStyle(
                       fontFamily: 'SFProDisplay',
                       color: Color(0xffffffff),
