@@ -182,7 +182,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                   left: 14, top: 18, bottom: 18),
                               hintStyle: TextStyle(
                                 fontFamily: 'SFProDisplay',
-                                color: Color(0xff303030),
+                                color: Color(0xffbbbbbb),
                                 fontSize: ScreenUtil().setSp(16),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
@@ -226,7 +226,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                   left: 14, top: 18, bottom: 18),
                               hintStyle: TextStyle(
                                 fontFamily: 'SFProDisplay',
-                                color: Color(0xff303030),
+                                color: Color(0xffbbbbbb),
                                 fontSize: ScreenUtil().setSp(16),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,
@@ -270,7 +270,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                   left: 14, top: 18, bottom: 18),
                               hintStyle: TextStyle(
                                 fontFamily: 'SFProDisplay',
-                                color: Color(0xff303030),
+                                color: Color(0xffbbbbbb),
                                 fontSize: ScreenUtil().setSp(16),
                                 fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.normal,

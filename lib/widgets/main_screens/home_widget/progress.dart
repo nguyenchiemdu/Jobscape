@@ -263,140 +263,86 @@ class _ProgressState extends State<Progress> {
               )
             ]),
           ),
-          Container(
-            height: ScreenUtil().setHeight(175),
-            child: Stack(children: [
-              Container(
-                width: ScreenUtil().setWidth(147),
-                height: ScreenUtil().setHeight(168),
-                decoration: new BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(40),
-                    topLeft: Radius.circular(12),
-                    bottomLeft: Radius.circular(12),
-                    bottomRight: Radius.circular(12),
+          InkWell(
+            onTap: () {
+              changeScreen(context);
+            },
+            child: Container(
+              height: ScreenUtil().setHeight(175),
+              child: Stack(children: [
+                Container(
+                  width: ScreenUtil().setWidth(147),
+                  height: ScreenUtil().setHeight(168),
+                  decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(40),
+                      topLeft: Radius.circular(12),
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12),
+                    ),
+                    border: Border.all(color: Color(0xffffefcc), width: 1.5),
+                    color: Color(0xffffffff),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0x1a454545),
+                          offset: Offset(0, 10),
+                          blurRadius: 10,
+                          spreadRadius: 0)
+                    ],
                   ),
-                  border: Border.all(color: Color(0xffffefcc), width: 1.5),
-                  color: Color(0xffffffff),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Color(0x1a454545),
-                        offset: Offset(0, 10),
-                        blurRadius: 10,
-                        spreadRadius: 0)
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: FlatButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: FlatButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                              ),
+                              color: Colors.transparent,
+                              onPressed: () {
+                                changeScreen(context);
+                              },
+                              child: null,
                             ),
-                            color: Colors.transparent,
-                            onPressed: () {
-                              changeScreen(context);
-                            },
-                            child: null,
-                          ),
-                          margin: EdgeInsets.only(
-                              top: ScreenUtil().setHeight(20),
-                              left: ScreenUtil().setWidth(14),
-                              right: ScreenUtil().setWidth(17)),
-                          width: ScreenUtil().setWidth(46),
-                          height: ScreenUtil().setHeight(50.4),
-                          decoration: new BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/plus_icon.png"),
-                              fit: BoxFit.fill,
-                              alignment: Alignment.topCenter,
+                            margin: EdgeInsets.only(
+                                top: ScreenUtil().setHeight(20),
+                                left: ScreenUtil().setWidth(14),
+                                right: ScreenUtil().setWidth(17)),
+                            width: ScreenUtil().setWidth(46),
+                            height: ScreenUtil().setHeight(50.4),
+                            decoration: new BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/plus_icon.png"),
+                                fit: BoxFit.fill,
+                                alignment: Alignment.topCenter,
+                              ),
                             ),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      top: ScreenUtil().setHeight(20)),
-                                  width: 2,
-                                  height: ScreenUtil().setHeight(28),
-                                  decoration: new BoxDecoration(
-                                      color: Color(0xffffbf2f)),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: ScreenUtil().setHeight(20),
-                                          bottom: ScreenUtil().setHeight(2),
-                                          left: ScreenUtil().setWidth(5)),
-                                      child: Text("Tested",
-                                          style: TextStyle(
-                                            fontFamily: 'SFProDisplay',
-                                            color: Color(0xff000000),
-                                            fontSize: ScreenUtil().setSp(10),
-                                            fontWeight: FontWeight.w300,
-                                            fontStyle: FontStyle.normal,
-                                          )),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(5)),
-                                      child: RichText(
-                                          text: new TextSpan(children: [
-                                        new TextSpan(
-                                            text: "0",
-                                            style: TextStyle(
-                                              fontFamily: 'SFProDisplay',
-                                              color: Color(0xff000000),
-                                              fontSize: ScreenUtil().setSp(12),
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle: FontStyle.normal,
-                                            )),
-                                        new TextSpan(
-                                            text: " times",
-                                            style: TextStyle(
-                                              fontFamily: 'SFProDisplay',
-                                              color: Color(0xff000000),
-                                              fontSize: ScreenUtil().setSp(10),
-                                              fontWeight: FontWeight.w300,
-                                              fontStyle: FontStyle.normal,
-                                            )),
-                                      ])),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: ScreenUtil().setHeight(7),
-                                  bottom: ScreenUtil().setHeight(10)),
-                              child: Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 children: [
                                   Container(
+                                    margin: EdgeInsets.only(
+                                        top: ScreenUtil().setHeight(20)),
                                     width: 2,
                                     height: ScreenUtil().setHeight(28),
                                     decoration: new BoxDecoration(
                                         color: Color(0xffffbf2f)),
                                   ),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         margin: EdgeInsets.only(
+                                            top: ScreenUtil().setHeight(20),
                                             bottom: ScreenUtil().setHeight(2),
                                             left: ScreenUtil().setWidth(5)),
-                                        child: Text("Submitted",
+                                        child: Text("Tested",
                                             style: TextStyle(
                                               fontFamily: 'SFProDisplay',
                                               color: Color(0xff000000),
@@ -411,12 +357,11 @@ class _ProgressState extends State<Progress> {
                                         child: RichText(
                                             text: new TextSpan(children: [
                                           new TextSpan(
-                                              text: proofsSubmitted.toString(),
+                                              text: "0",
                                               style: TextStyle(
                                                 fontFamily: 'SFProDisplay',
                                                 color: Color(0xff000000),
-                                                fontSize:
-                                                    ScreenUtil().setSp(12),
+                                                fontSize: ScreenUtil().setSp(12),
                                                 fontWeight: FontWeight.w600,
                                                 fontStyle: FontStyle.normal,
                                               )),
@@ -425,8 +370,7 @@ class _ProgressState extends State<Progress> {
                                               style: TextStyle(
                                                 fontFamily: 'SFProDisplay',
                                                 color: Color(0xff000000),
-                                                fontSize:
-                                                    ScreenUtil().setSp(10),
+                                                fontSize: ScreenUtil().setSp(10),
                                                 fontWeight: FontWeight.w300,
                                                 fontStyle: FontStyle.normal,
                                               )),
@@ -436,52 +380,113 @@ class _ProgressState extends State<Progress> {
                                   )
                                 ],
                               ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    Center(
-                      child: new Container(
-                          width: 119,
-                          height: 2,
-                          decoration: new BoxDecoration(
-                            color: Color(0xFFEEEEEE),
-                          )),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: ScreenUtil().setHeight(11),
-                          left: ScreenUtil().setWidth(14)),
-                      child:
-                          Text("Test/ Submit \nproof for your \nnewest skill",
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xff000000),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FontStyle.normal,
-                              )),
-                    )
-                  ],
-                ),
-              ),
-              Positioned(
-                top: ScreenUtil().setHeight(118),
-                left: ScreenUtil().setWidth(100),
-                child: Container(
-                  width: ScreenUtil().setWidth(68),
-                  height: ScreenUtil().setHeight(70),
-                  decoration: new BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/light_icon.png"),
-                      fit: BoxFit.fill,
-                      alignment: Alignment.topCenter,
-                    ),
+                              Container(
+                                margin: EdgeInsets.only(
+                                    top: ScreenUtil().setHeight(7),
+                                    bottom: ScreenUtil().setHeight(10)),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 2,
+                                      height: ScreenUtil().setHeight(28),
+                                      decoration: new BoxDecoration(
+                                          color: Color(0xffffbf2f)),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              bottom: ScreenUtil().setHeight(2),
+                                              left: ScreenUtil().setWidth(5)),
+                                          child: Text("Submitted",
+                                              style: TextStyle(
+                                                fontFamily: 'SFProDisplay',
+                                                color: Color(0xff000000),
+                                                fontSize: ScreenUtil().setSp(10),
+                                                fontWeight: FontWeight.w300,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: ScreenUtil().setWidth(5)),
+                                          child: RichText(
+                                              text: new TextSpan(children: [
+                                            new TextSpan(
+                                                text: proofsSubmitted.toString(),
+                                                style: TextStyle(
+                                                  fontFamily: 'SFProDisplay',
+                                                  color: Color(0xff000000),
+                                                  fontSize:
+                                                      ScreenUtil().setSp(12),
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle: FontStyle.normal,
+                                                )),
+                                            new TextSpan(
+                                                text: " times",
+                                                style: TextStyle(
+                                                  fontFamily: 'SFProDisplay',
+                                                  color: Color(0xff000000),
+                                                  fontSize:
+                                                      ScreenUtil().setSp(10),
+                                                  fontWeight: FontWeight.w300,
+                                                  fontStyle: FontStyle.normal,
+                                                )),
+                                          ])),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      Center(
+                        child: new Container(
+                            width: 119,
+                            height: 2,
+                            decoration: new BoxDecoration(
+                              color: Color(0xFFEEEEEE),
+                            )),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: ScreenUtil().setHeight(11),
+                            left: ScreenUtil().setWidth(14)),
+                        child:
+                            Text("Test/ Submit \nproof for your \nnewest skill",
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xff000000),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.normal,
+                                )),
+                      )
+                    ],
                   ),
                 ),
-              )
-            ]),
+                Positioned(
+                  top: ScreenUtil().setHeight(118),
+                  left: ScreenUtil().setWidth(100),
+                  child: Container(
+                    width: ScreenUtil().setWidth(68),
+                    height: ScreenUtil().setHeight(70),
+                    decoration: new BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/light_icon.png"),
+                        fit: BoxFit.fill,
+                        alignment: Alignment.topCenter,
+                      ),
+                    ),
+                  ),
+                )
+              ]),
+            ),
           ),
         ],
       ),

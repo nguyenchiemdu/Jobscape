@@ -159,9 +159,9 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                         Text(courseCompleted.toString(),
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
-                              color: Color(0xffffbf2f),
+                              color: Color(0xffffd3a3),
                               fontSize: ScreenUtil()
-                                  .setSp(30, allowFontScalingSelf: false),
+                                  .setSp(35, allowFontScalingSelf: false),
                               fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.normal,
                             )),
@@ -192,9 +192,9 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                         Text(journeyCompleted.toString(),
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
-                              color: Color(0xffffbf2f),
+                              color: Color(0xffffd3a3),
                               fontSize: ScreenUtil()
-                                  .setSp(30, allowFontScalingSelf: false),
+                                  .setSp(35, allowFontScalingSelf: false),
                               fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.normal,
                             )),

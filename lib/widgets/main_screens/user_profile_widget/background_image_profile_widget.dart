@@ -34,7 +34,7 @@ class _BackgroundProfileWidgetState extends State<BackgroundProfileWidget> {
       decoration: new BoxDecoration(
           image: DecorationImage(
         image: CachedNetworkImageProvider(url),
-        fit: BoxFit.fill,
+        fit: BoxFit.fitWidth,
       )),
     );
   }

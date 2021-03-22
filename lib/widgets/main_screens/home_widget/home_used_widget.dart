@@ -20,7 +20,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class HomeUsedWidget extends StatelessWidget {
   final Function selectPage;
   void redirectWorkshop() {
-    selectPage(2);
+    selectPage(1);
   }
 
   HomeUsedWidget(this.selectPage);

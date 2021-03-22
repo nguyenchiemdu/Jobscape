@@ -516,19 +516,21 @@ class _WorkshopState extends State<Workshop> {
               );
             },
             child: Container(
-              width: ScreenUtil().setWidth(126),
+              width: ScreenUtil().setWidth(135),
               height: ScreenUtil().setHeight(30),
               decoration: new BoxDecoration(
                   color: Color(0xffffbf2f),
                   borderRadius: BorderRadius.circular(8)),
-              padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(5)),
               margin: EdgeInsets.only(
                   left: ScreenUtil().setWidth(24),
                   top: ScreenUtil().setHeight(20)),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Icon(Icons.add),
-                  Text("Add workshop",
+                  Text("Share a workshop",
                       style: TextStyle(
                         fontFamily: 'SFProDisplay',
                         color: Color(0xff000000),

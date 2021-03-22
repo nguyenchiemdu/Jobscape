@@ -65,6 +65,7 @@ class RoadMapItem extends StatelessWidget {
                   )),
             ),
           ),
+          if (roadMapData['name'].toString().toLowerCase() != "destination")
           Container(
             margin: EdgeInsets.only(
                 top: ScreenUtil().setHeight(12),

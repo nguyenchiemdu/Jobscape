@@ -19,7 +19,7 @@ class HomeWidget extends StatelessWidget {
   dynamic tx = DateTime.now();
 
   void redirectWorkshop() {
-    selectPage(2);
+    selectPage(1);
   }
 
 

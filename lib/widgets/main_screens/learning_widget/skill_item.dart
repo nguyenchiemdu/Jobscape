@@ -49,7 +49,7 @@ class SkillItem extends StatelessWidget {
         return "Although not required, this skill will surely be a special plus point.";
         break;
       case 'must-learn':
-        return "Almost professionals surveyed recommended this skill.";
+        return "Almost professionals surveyed endorsed this skill.";
         break;
       case 'programming language':
         return "Some engineers surveyed use this programming language.";
@@ -138,7 +138,7 @@ class SkillItem extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(
-                    top: ScreenUtil().setHeight(12),
+                    top: ScreenUtil().setHeight(10),
                     bottom: ScreenUtil().setHeight(4),
                     left: ScreenUtil().setWidth(9)),
                 child: Text(skillItem['name']
@@ -157,7 +157,7 @@ class SkillItem extends StatelessWidget {
                 children: [
                   Container(
                     margin: EdgeInsets.only(
-                        left: ScreenUtil().setWidth(10),
+                        left: ScreenUtil().setWidth(9),
                         bottom: ScreenUtil().setHeight(5)),
                     width: ScreenUtil().setWidth(131),
                     child: Text(
@@ -173,7 +173,7 @@ class SkillItem extends StatelessWidget {
                         )),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
+                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(9)),
                     width: ScreenUtil().setWidth(131),
                     height: skillItem['name'].length <= 17
                         ? ScreenUtil().setHeight(57)
@@ -185,7 +185,7 @@ class SkillItem extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff888888),
-                          fontSize: ScreenUtil().setSp(12),
+                          fontSize: ScreenUtil().setSp(11),
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
                         )),
