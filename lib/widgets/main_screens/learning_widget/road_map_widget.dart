@@ -227,11 +227,13 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                       // ],
                     ),
                     //Cái thứ 3 bên trên anh làm thêm vào cho nó giống của design nha
-                    Container(
+                    pathToJoinedJourney != path?
+                    SizedBox(
                       width: ScreenUtil().setWidth(312),
-                      height: ScreenUtil().setHeight(70),
-                      color: Colors.white,
-                    )
+                      height: ScreenUtil().setHeight(150),
+                    ) : SizedBox(
+                      width: ScreenUtil().setWidth(312),
+                      height: ScreenUtil().setHeight(20),                    )
                     //Cho cái Container bên trên là để cho cái bottom Start Journey không che vào
                   ],
                 )),
@@ -256,7 +258,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
                     bottom: 0,
                     child: Container(
                         width: ScreenUtil().setWidth(360),
-                        height: ScreenUtil().setHeight(152),
+                        height: ScreenUtil().setHeight(128),
                         decoration: new BoxDecoration(
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(24),
@@ -339,53 +341,4 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
           ])),
     );
   }
-}
-
-showAlertDialog(BuildContext context, String journey, Function startJourney) {
-  Widget cancelButton = FlatButton(
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-      child: Text("Cancel"));
-  // set up the button
-  Widget okButton = FlatButton(
-      child: Text("Ok"),
-      onPressed: () {
-        Navigator.of(context).pop();
-        startJourney();
-      });
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("Registration Confirmation",
-        style: TextStyle(
-          fontFamily: 'SFProDisplay',
-          color: Color(0xff000000),
-          fontSize: ScreenUtil().setSp(20),
-          fontWeight: FontWeight.w600,
-          fontStyle: FontStyle.normal,
-        )),
-    content: Text(
-        "Would you like to start your journey to become a " +
-            journey +
-            " with us now?",
-        style: TextStyle(
-          fontFamily: 'SFProDisplay',
-          color: Color(0xff000000),
-          fontSize: ScreenUtil().setSp(14),
-          fontWeight: FontWeight.w300,
-          fontStyle: FontStyle.normal,
-        )),
-    actions: [
-      cancelButton,
-      okButton,
-    ],
-  );
-// show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }
