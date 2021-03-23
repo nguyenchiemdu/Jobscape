@@ -127,7 +127,6 @@ flutter:
     - assets/images/logo_fpt.png
     - assets/images/add_icon.png
     - assets/images/addimage_card.png
-    - assets/res/Onlinecourses.xlsx
     - assets/images/speed_icon.png
     - assets/images/milestone_lock.png
     - assets/images/chosen_qna.png

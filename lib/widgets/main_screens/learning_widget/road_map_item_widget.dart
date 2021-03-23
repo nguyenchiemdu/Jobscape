@@ -6,7 +6,8 @@ class RoadMapItem extends StatelessWidget {
   final int index;
   final Map roadMapData;
   final String imgScr;
-  RoadMapItem(this.index, this.roadMapData, this.imgScr);
+  final bool isUnlocked;
+  RoadMapItem(this.index, this.roadMapData, this.imgScr,this.isUnlocked);
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
@@ -22,14 +23,14 @@ class RoadMapItem extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              changeScreen(context);
+              if (isUnlocked) changeScreen(context);
             },
             child: Container(
               width: ScreenUtil().setWidth(230),
               height: ScreenUtil().setHeight(116),
               decoration: new BoxDecoration(
                 image: DecorationImage(
-                  image: true ?  //Thay hàm khóa vào đây nha em
+                  image:isUnlocked ?  //Thay hàm khóa vào đây nha em
                   AssetImage("assets/images/mile_stone.png") : AssetImage("assets/images/milestone_lock.png"),
                   fit: BoxFit.fill,
                   alignment: Alignment.topCenter,
@@ -74,7 +75,7 @@ class RoadMapItem extends StatelessWidget {
             height: ScreenUtil().setHeight(65),
             decoration: new BoxDecoration(
               image: DecorationImage(
-                image: true? //Hàm check khóa
+                image: isUnlocked ? //Hàm check khóa
                 AssetImage("assets/images/next_icon.png") : AssetImage("assets/images/next_icon_lock.png"),
                 fit: BoxFit.fill,
                 alignment: Alignment.topCenter,

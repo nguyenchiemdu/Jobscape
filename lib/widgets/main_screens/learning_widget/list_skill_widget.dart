@@ -114,7 +114,13 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
         int maxUnlock = maxOrderUnlocked(res,listLearnedSkill,numberIndex);
         //------------------
         bool allUnlocked = checkIfallUnlocked(res, maxUnlock);
-        if (allUnlocked) maxUnlock = 999;
+        
+
+        if (allUnlocked) {
+          maxUnlock = 999;
+          // mo khoa road map sau;
+          await UserDatabaseService().updateRoadMapStatus(widget.roadMapItem['path'], widget.roadMapItem['name']);
+        }
 
         
         // print(numberIndex);
@@ -156,7 +162,7 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
     int condition;
     if (widget.roadMapItem['name'] == 'Must-have') condition = 1;
     if (widget.roadMapItem['name'] == 'Fast Track') condition = 2;
-    if (widget.roadMapItem['name'] == 'Advanced') condition = 3;
+    if (widget.roadMapItem['name'] == 'Destination') condition = 3;
 
     for (int i = 1; i < excel.tables[sheetName].rows.length; i++)
       if (intConvert(excel.tables[sheetName].rows[i][1].toString()) ==

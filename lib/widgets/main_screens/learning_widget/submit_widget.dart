@@ -32,7 +32,7 @@ class _SubmitState extends State<Submit> {
   _SubmitState(this._locations);
   PickedFile image;
   submit(BuildContext ctx) async{
-      // textRecognition();
+      textRecognition();
       final _storage = FirebaseStorage.instance;
       String uid =FirebaseAuth.instance.currentUser.uid;
       

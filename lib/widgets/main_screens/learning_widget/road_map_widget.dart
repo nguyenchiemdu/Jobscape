@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,6 +40,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
       'pathToJoinedJourney': roadMapData['path']
     };
     await UserDatabaseService().uploadProfile(data);
+    await UserDatabaseService().addRoadMapStatus(path);
   }
 
   @override
@@ -55,13 +57,20 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
     List temp = await DatabaseManager().getListRoadMap(path);
     bool res = await UserDatabaseService().getTypeOfUser();
     String respath = await UserDatabaseService().getPathToJoinedJourney();
+    Map status = await UserDatabaseService().getRoadMapStatus(path);
+    if (status == null)
+      status = {
+      "Destination":false,
+      "Must-have":true,
+      "Fast Track":false
+      };
     if (respath == null) respath = 'isNull';
     // print(jsonEncode(temp));
     setState(() {
       listRoadMap = temp;
       listRoadMapWidget = listRoadMap
           .map((item) => RoadMapItem(
-              listRoadMap.indexOf(item) + 1, item, roadMapData['imgSrc']))
+              listRoadMap.indexOf(item) + 1, item, roadMapData['imgSrc'],status[item['name']]))
           .toList();
       isNewUser = res;
       pathToJoinedJourney = respath;
@@ -98,7 +107,6 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // print(roadMapData.toString());
     return Scaffold(
       body: Container(
           child: Stack(

@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'workshop_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 
 class DatabaseManager {
   final CollectionReference industry =
@@ -218,6 +218,7 @@ class DatabaseManager {
   Future getListRoadMap(String path) async {
     List result = [];
     Map tmp;
+    List<String> listId = [];
     try {
       await FirebaseFirestore.instance
           .collection(path + '/listRoadMap')
@@ -227,10 +228,44 @@ class DatabaseManager {
         querySnapshot.docs.forEach((element) {
           tmp = element.data();
           tmp['id'] = element.id.toString();
+          listId.add(element.id.toString());
           tmp['path'] = path + '/listRoadMap/' + tmp['id'];
           result.add(tmp);
         });
       });
+      // result = [];
+      // for (String id in listId){
+      //   await FirebaseFirestore.instance
+      //       .collection(path + '/listRoadMap')
+      //       .doc(id)
+      //       .update({
+      //         'isUnlocked' : false,
+      //       })
+      //       .onError((error, stackTrace){print('failed to lock roadmap : ' +error.toString());});
+      // }
+
+      // await FirebaseFirestore.instance
+      //       .collection(path + '/listRoadMap')
+      //       .doc(listId[0])
+      //       .update({
+      //         'isUnlocked' : true,
+      //       })
+      //       .onError((error, stackTrace){print('failed to lock roadmap : ' +error.toString());});
+
+      
+      // await FirebaseFirestore.instance
+      //     .collection(path + '/listRoadMap')
+      //     .orderBy('order')
+      //     .get()
+      //     .then((querySnapshot) {
+      //   querySnapshot.docs.forEach((element) {
+      //     tmp = element.data();
+      //     tmp['id'] = element.id.toString();
+      //     listId.add(element.id.toString());
+      //     tmp['path'] = path + '/listRoadMap/' + tmp['id'];
+      //     result.add(tmp);
+      //   });
+      // });
       return result;
     } catch (e) {
       print(e.toString());

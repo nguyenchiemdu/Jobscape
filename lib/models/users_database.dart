@@ -204,6 +204,93 @@ class UserDatabaseService {
             }));
     return res;
   }
+  Future<Map> getRoadMapStatus(String path)async{
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    Map res;
+    await FirebaseFirestore.instance.collection('/users/$uid/RoadMapStatus')
+    .where('pathToJob',isEqualTo: path)
+    .get()
+    .then((querysnapshot){
+      querysnapshot.docs.forEach((roadmap) {
+        res = roadmap.data();
+       });
+    })
+    .onError((error, stackTrace){
+      print('failed to get road map status :'+error.toString());
+
+    });
+    return res;
+  }
+  Future updateRoadMapStatus(String path, String roadMapName) async{
+    if (roadMapName == 'Advanced') return;
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    List ls = path.split('/');
+    ls.removeLast();
+    ls.removeLast();
+    path = ls.join('/');
+    if (roadMapName == 'Must-have') roadMapName = 'Fast Track';
+    else if (roadMapName == 'Fast Track') roadMapName = 'Destination';
+    print(path);
+    print(roadMapName);
+    await FirebaseFirestore.instance.collection('/users/$uid/RoadMapStatus')
+    .where('pathToJob',isEqualTo: path)
+    .get()
+    .then((querysnapshot) async{
+      if (querysnapshot.docs.length != 0)
+        
+        await FirebaseFirestore.instance.collection('/users/$uid/RoadMapStatus')
+        .doc(querysnapshot.docs[0].id)
+        .update({
+          roadMapName : true
+        })
+        .onError((error,_){
+          print('failed to update roadmap status :' +error.toString());
+          return;
+        });
+
+  });
+  }
+  Future addRoadMapStatus(String path) async{
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    Map<String,dynamic> data = 
+      {
+      "Destination":false,
+      "Must-have":true,
+      "Fast Track":false,
+      "pathToJob" : path,
+      };
+    await FirebaseFirestore.instance.collection('/users/$uid/RoadMapStatus')
+    .where('pathToJob',isEqualTo: path)
+    .get()
+    .then((querysnapshot) async{
+      if (querysnapshot.docs.length == 0)
+        await FirebaseFirestore.instance.collection('/users/$uid/RoadMapStatus')
+        .add(data)
+        .onError((error,_){
+          print('failed to add roadmap status :' +error.toString());
+          return;
+        });
+      // else 
+      //   await FirebaseFirestore.instance.collection('/users/$uid/RoadMapStatus')
+      //   .doc(querysnapshot.docs[0].id)
+      //   .update(data)
+      //   .onError((error,_){
+      //     print('failed to update roadmap status :' +error.toString());
+      //     return;
+      //   });
+    })
+    .onError((error,_){
+      print('failed to add roadmap status :' +error.toString());
+      return;
+    });
+
+    // await FirebaseFirestore.instance.collection('/users/$uid/RoadMapStatus')
+    // .add(data)
+    // .onError((error,_){
+    //   print('failed to add roadmap status :' +error.toString());
+    //   return;
+    // });
+  }
   Future<int> getProofsSubmitted() async {
     String uid = FirebaseAuth.instance.currentUser.uid;
     int res;
