@@ -59,7 +59,7 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
         }
       }
       int maxContinous = 0;
-      for (int i=1;i< maxOrder;i++)
+      for (int i=1;i<= maxOrder;i++)
         if (listOrder.indexOf(i)>=0)
           maxContinous =i;
         else break;
@@ -83,8 +83,9 @@ class _ListSkillWidgetState extends State<ListSkillWidget> {
   }
   bool checkIfallUnlocked(List skills, int maxUnlock){
       Set set = skills.map((e) => e['order']).toSet();
+      set.remove(999);
       List listOrder = set.toList();
-      if (listOrder[listOrder.length-2] == maxUnlock)
+      if (listOrder[listOrder.length-1] == maxUnlock-2)
         return true;
       else return false;
       
