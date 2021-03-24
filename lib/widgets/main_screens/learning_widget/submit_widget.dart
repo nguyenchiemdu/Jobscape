@@ -1,12 +1,15 @@
 import 'dart:io';
 import 'dart:math';
-
+import 'package:image_size_getter/file_input.dart';
+import 'package:learning_app/models/image_processing.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:learning_app/models/users_database.dart';
 import 'package:learning_app/widgets/login_screens/warning.dart';
 // import 'package:learning_app/models/firebase_storage.dart';
@@ -14,7 +17,7 @@ import 'package:learning_app/widgets/main_screens/learning_widget/learning_widge
 import 'package:dotted_border/dotted_border.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-
+import 'package:image_size_getter/image_size_getter.dart';
 class Submit extends StatefulWidget {
   final List<Map> listSkill;
   List<String> listNameSkill;
@@ -114,22 +117,31 @@ class _SubmitState extends State<Submit> {
     final textRecognizer = FirebaseVision.instance.textRecognizer();
     final visionText = await  textRecognizer.processImage(visionImage);
     await textRecognizer.close();
-    final text = extractText(visionText);
-    print(text.toString());
+    // final text = extractText(visionText);
+    dynamic result;
+    String platform = courseDetection(visionText);
+    print('Platform :'+platform);
+    if (platform == 'coursera')
+        result =   CourseraCertificate(visionText,image);
+    if (platform == 'udemy')
+        result = UdemyCertificate(visionText, image);
+    print('Learner :'+result.learner);
+    print('Provider :'+result.provider);
+    print('Skill :'+result.skill);
 
   }
-  static extractText(VisionText visionText){
-    String text = '';
+   String courseDetection(VisionText visionText){
+    List listCourse = [
+      'coursera',
+      'udemy'
+    ];
     for (TextBlock block in visionText.blocks){
-      for (TextLine line in block.lines){
-        for (TextElement word in line.elements){
-          text = text+ word.text+ '';
-        }
-        text = text+'\n';
-      }
+      // print(block.text);
+      for (String course in listCourse)
+        if (block.text.toLowerCase().contains(course))
+        return course;
     }
-    return text;
-
+    return null;
   }
 
   @override
