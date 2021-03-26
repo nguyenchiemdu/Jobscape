@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -5,6 +6,7 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_size_getter/file_input.dart';
 import 'package:image_size_getter/image_size_getter.dart';
+import 'package:strings/strings.dart';
 bool hasDigit(String s){
     for (int i =0;i<s.length;i++){
       if (int.tryParse(s[i])!= null)
@@ -85,11 +87,11 @@ class CourseraCertificate{
     if(hasDigit(provider))
       provider = 'Coursera';
     if (provider =='') provider ='Coursera';
-    
+    provider = capitalize(provider);
     if( hasDigit(res[0]))
       res.remove(res[0]);
-    learner = res[0];
-    skill = res[2];
+    learner = camelize(res[0].toString().toLowerCase());
+    skill = capitalize(res[2]);
 
     // print(res);
   }
@@ -122,12 +124,78 @@ class UdemyCertificate {
       return removeSpace(e);
       }).toList();
     // print(jsonEncode(ls));
-    learner = ls[0];
-    skill = ls[1];
-    provider = ls[2];
+    learner = camelize(ls[0]);
+    skill = capitalize(ls[1]);
+    provider = capitalize(ls[2]);
     if(hasDigit(provider))
       provider = 'Udemy';
   }
 
   
+}
+class InLearningCertificate {
+  VisionText visionText;
+  PickedFile image;
+  String learner;
+  String platform;
+  String provider = '';
+  String skill;
+  InLearningCertificate(this.visionText,this.image){
+    List res = getRightBlock();
+    provider = camelize(res[0]);
+    // print(res[2].toString().split(','));
+    learner = camelize(removeSpace(res[1].toString().split(',')[1]));
+    skill =  capitalize(res[2]);
+  }
+   List getRightBlock(){
+    List res = [];
+    final file = File(image.path);
+    final size = ImageSizeGetter.getSize(FileInput(file));
+    double width = size.width.toDouble();
+    for (TextBlock block in visionText.blocks){
+      double blockWidth = (block.boundingBox.left);
+      if (blockWidth > width/4)
+        {
+          res.add(block.text);
+        }
+    }
+    return res;
+  }
+}
+
+class EdXCertificate {
+  VisionText visionText;
+  PickedFile image;
+  String learner;
+  String platform;
+  String provider = '';
+  String skill;
+  EdXCertificate(this.visionText,this.image){
+    List res = getLeftBlock();
+    List ls = (res[6]+' '+res[7]).toString().split('online learning initiative of');
+    String s = ls[ls.length-1];
+    provider = capitalize(removeSpace(s));
+    // print(res[2].toString().split(','));
+    learner = camelize(removeSpace(res[3]));
+    skill =  capitalize(res[5]);
+  }
+   List getLeftBlock(){
+    List res = [];
+    final file = File(image.path);
+    final size = ImageSizeGetter.getSize(FileInput(file));
+    double width = size.width.toDouble();
+    for (TextBlock block in visionText.blocks){
+      double blockWidth = (block.boundingBox.left);
+      if (blockWidth < width/2)
+        {
+          res.add(block.text);
+          print('left : '+ block.text);
+        }
+      else
+      {
+        // print('right :' +block.text);
+      }
+    }
+    return res;
+  }
 }

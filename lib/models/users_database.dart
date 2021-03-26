@@ -369,7 +369,7 @@ class UserDatabaseService {
   }
 
   Future submitProof(
-      {String skillName, String fullPath, String proofURL,String cate}) async {
+      {String skillName, String fullPath, String proofURL,String cate,Map<String,dynamic> data}) async {
     String uid = FirebaseAuth.instance.currentUser.uid;
     CollectionReference listProof =
         FirebaseFirestore.instance.collection('users/$uid/listProof');
@@ -378,14 +378,17 @@ class UserDatabaseService {
     list.removeLast();
     String pathToSkill = list.join('/');
     int proofsSubmitted = 0;
-    await listProof
-        .add({
+    data.addAll(
+      {
           'skillId': skillId,
           'skillName': skillName,
           'pathToSkill': pathToSkill,
           'proofURL': proofURL,
           'cate' : cate,
-        })
+        }
+    );
+    await listProof
+        .add(data)
         .then((value) => print('submitted Proof'))
         .onError((error, stackTrace) {
           print('Failed to submit Proof : ' + error.toString());

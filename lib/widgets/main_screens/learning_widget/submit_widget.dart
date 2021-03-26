@@ -18,6 +18,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:image_size_getter/image_size_getter.dart';
+import 'package:strings/strings.dart';
 class Submit extends StatefulWidget {
   final List<Map> listSkill;
   List<String> listNameSkill;
@@ -35,7 +36,7 @@ class _SubmitState extends State<Submit> {
   _SubmitState(this._locations);
   PickedFile image;
   submit(BuildContext ctx) async{
-      textRecognition();
+      Map<String,dynamic> data = await textRecognition();
       final _storage = FirebaseStorage.instance;
       String uid =FirebaseAuth.instance.currentUser.uid;
       
@@ -61,7 +62,7 @@ class _SubmitState extends State<Submit> {
         {
           
           //upload to Firestore
-          await UserDatabaseService().submitProof(fullPath: widget.listSkill[index]['path'],cate: widget.listSkill[index]['category'],skillName: _selectedLocation,proofURL: downloadURLs )
+          await UserDatabaseService().submitProof(data : data,fullPath: widget.listSkill[index]['path'],cate: widget.listSkill[index]['category'],skillName: _selectedLocation,proofURL: downloadURLs )
           .then((value){
             showDialog(
                             context: context,
@@ -112,7 +113,7 @@ class _SubmitState extends State<Submit> {
       print('Grand permissions and try again');
     }
   }
-  void textRecognition()async{
+  Future<Map<String,dynamic>> textRecognition()async{
     final visionImage = FirebaseVisionImage.fromFile(File(image.path));
     final textRecognizer = FirebaseVision.instance.textRecognizer();
     final visionText = await  textRecognizer.processImage(visionImage);
@@ -121,27 +122,48 @@ class _SubmitState extends State<Submit> {
     dynamic result;
     String platform = courseDetection(visionText);
     print('Platform :'+platform);
-    if (platform == 'coursera')
+    if (platform == 'Coursera')
         result =   CourseraCertificate(visionText,image);
-    if (platform == 'udemy')
+    if (platform == 'Udemy')
         result = UdemyCertificate(visionText, image);
+    if (platform == 'In learning')
+        result = InLearningCertificate(visionText,image);
+    if (platform == 'edX')
+        result = EdXCertificate(visionText,image);
     print('Learner :'+result.learner);
     print('Provider :'+result.provider);
-    print('Skill :'+result.skill);
-
+    print('Course Name :'+result.skill);
+    return {
+      'courseName' :result.skill,
+      'name' : result.learner,
+      'platform' : platform,
+      'provider' : result.provider,
+    };
   }
    String courseDetection(VisionText visionText){
     List listCourse = [
-      'coursera',
-      'udemy'
+      'Coursera',
+      'Udemy',
+      'In learning',
+      'edX',
     ];
+    String res;
     for (TextBlock block in visionText.blocks){
-      // print(block.text);
+      
+      print('block : '+block.text);
+      String text = block.text.replaceAll(' ', '');
+      text = text.toLowerCase();
       for (String course in listCourse)
-        if (block.text.toLowerCase().contains(course))
-        return course;
+        {
+          String tmp  = course.replaceAll(' ', '').toLowerCase();
+        if (block.text.toLowerCase().contains(tmp))
+           res =  course;
+        if (text.contains(tmp))
+            res=  course;
+        
+        }
     }
-    return null;
+    return res;
   }
 
   @override
