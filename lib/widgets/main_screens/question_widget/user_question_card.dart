@@ -199,14 +199,17 @@ class _QuestionCardState extends State<QuestionCard> {
                 height: ScreenUtil().setHeight(20),
                 width: ScreenUtil().setWidth(16),
               ),
-              Text(questionText,
-                  style: TextStyle(
-                    fontFamily: 'SFProDisplay',
-                    color: Color(0xff000000),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w300,
-                    fontStyle: FontStyle.normal,
-                  )
+              Container(
+                width: ScreenUtil().setWidth(280),
+                child: Text(questionText,
+                    style: TextStyle(
+                      fontFamily: 'SFProDisplay',
+                      color: Color(0xff000000),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                      fontStyle: FontStyle.normal,
+                    )
+                ),
               ),
             ],
           ),

@@ -6,7 +6,7 @@ import 'package:learning_app/widgets/login_screens/confirm_email.dart';
 
 List teamList = [
   {
-    "name": "Phong NH",
+    "name": "Nguyen Hai Phong",
     "position": "R&D",
     "facebook": "https://www.facebook.com/thanhlong.vu2000/",
     "email": "longvu2000.hust@gmai.com",
@@ -14,7 +14,7 @@ List teamList = [
         "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/Team%2FH%E1%BA%A3i%20Phong.jpg?alt=media&token=b6f95b12-0ae2-4f6a-83d1-55022b244f05"
   },
   {
-    "name": "Anh NQ",
+    "name": "Ninh Quynh Anh",
     "position": "R&D",
     "facebook": "https://www.facebook.com/thanhlong.vu2000/",
     "email": "longvu2000.hust@gmai.com",

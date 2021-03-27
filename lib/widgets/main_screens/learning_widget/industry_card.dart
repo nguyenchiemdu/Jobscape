@@ -118,9 +118,9 @@ class IndustryCard extends StatelessWidget {
                                   Image.asset("assets/images/salary_icon.png"),
                             ),
                             Text(
-                                'Salary: ' +
-                                    jobData['salary'].toString() +
-                                    '\$',
+                                'Salary: ' + '\$' +
+                                    jobData['salary'].toString()
+                                    ,
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff000000),

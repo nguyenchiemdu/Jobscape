@@ -196,7 +196,7 @@ final quotes = [
   "Security Is Mostly A Superstition. Life Is Either A Daring Adventure Or Nothing.",
   "The Man Who Has Confidence In Himself Gains The Confidence Of Others.",
   "The Only Limit To Our Realization Of Tomorrow Will Be Our Doubts Of Today.",
-  "What You Lack In Talent Can Be Made Up With Desire, Hustle And Giving 110% All The Time."
+  "What You Lack In Talent Can Be Made Up With Desire, Hustle And Giving 110% All The Time.",
       "Wisdom is not a product of schooling but of the lifelong attempt to acquire it.",
   "Develop a passion for learning. If you do, you will never cease to grow.",
   "You don’t understand anything until you learn it more than one way.",

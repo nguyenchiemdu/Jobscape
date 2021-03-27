@@ -56,7 +56,7 @@ class _SubmitState extends State<Submit> {
         int index = _locations.indexOf(_selectedLocation);
         if (index ==-1) {
           print('please choose the skill!');
-          Scaffold.of(ctx).showSnackBar(SnackBar(content: Text('Please chooose the skill!')));
+          Scaffold.of(ctx).showSnackBar(SnackBar(content: Text('Please choose the skill first!')));
         }
         else
         {
@@ -67,7 +67,7 @@ class _SubmitState extends State<Submit> {
             showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return AdvanceCustomAlert("Success","Successfully upload your proof.!");
+                              return AdvanceCustomAlert("Success","Proof Submission Completed!");
                             })
             .then((_){
                setState(() {
