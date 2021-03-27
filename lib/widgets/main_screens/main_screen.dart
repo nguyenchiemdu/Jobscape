@@ -102,6 +102,12 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
           child: BottomNavigationBar(
             showSelectedLabels: true,
             showUnselectedLabels: false,
+            unselectedLabelStyle: TextStyle(
+              color: Colors.grey,
+              fontFamily: 'SFProDisplay',
+              fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
+              fontWeight: FontWeight.w600,
+            ),
             selectedLabelStyle: TextStyle(
               color: Color(0xffffbf2f),
               fontFamily: 'SFProDisplay',
@@ -112,6 +118,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
             onTap: _selectPage,
             // backgroundColor: Theme.of(context).primaryColor,
             currentIndex: selectIndex,
+            selectedIconTheme: IconThemeData(color: Color(0xffffbf2f)),
             items: [
               BottomNavigationBarItem(
                   // icon: Icon(Icons.home_rounded),
