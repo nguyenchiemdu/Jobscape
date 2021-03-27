@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:file_picker/file_picker.dart';
 import 'package:image_size_getter/file_input.dart';
 import 'package:learning_app/models/image_processing.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,14 +35,14 @@ class _SubmitState extends State<Submit> {
   List<String> _locations;
   String _selectedLocation;
   _SubmitState(this._locations);
-  PickedFile image;
+  FilePickerResult image;
   submit(BuildContext ctx) async{
-      Map<String,dynamic> data = await textRecognition();
       final _storage = FirebaseStorage.instance;
       String uid =FirebaseAuth.instance.currentUser.uid;
       
       if (image != null && _selectedLocation != null) {
-        var file = File(image.path);
+        var file = File(image.files.single.path);
+        Map<String,dynamic> data = await textRecognition();
         //upload to FireBase
         var _snapshot = await _storage
             .ref()
@@ -104,7 +105,9 @@ class _SubmitState extends State<Submit> {
     var permissionStatus = await Permission.photos.status;
     if (permissionStatus.isGranted) {
       //Select Image
-      PickedFile res = await _picker.getImage(source: ImageSource.gallery);
+      FilePickerResult res = await FilePicker.platform.pickFiles();
+      print(res.files.single.path);
+      // PickedFile res = await _picker.getImage(source: ImageSource.gallery);
       setState(() {
               image = res;
             });
@@ -114,14 +117,13 @@ class _SubmitState extends State<Submit> {
     }
   }
   Future<Map<String,dynamic>> textRecognition()async{
-    final visionImage = FirebaseVisionImage.fromFile(File(image.path));
+    final visionImage = FirebaseVisionImage.fromFile(File(image.files.single.path));
     final textRecognizer = FirebaseVision.instance.textRecognizer();
     final visionText = await  textRecognizer.processImage(visionImage);
     await textRecognizer.close();
     // final text = extractText(visionText);
     dynamic result;
     String platform = courseDetection(visionText);
-    print('Platform :'+platform);
     if (platform == 'Coursera')
         result =   CourseraCertificate(visionText,image);
     if (platform == 'Udemy')
@@ -130,6 +132,9 @@ class _SubmitState extends State<Submit> {
         result = InLearningCertificate(visionText,image);
     if (platform == 'edX')
         result = EdXCertificate(visionText,image);
+    if (platform != null)
+    {
+    print('Platform :'+platform);
     print('Learner :'+result.learner);
     print('Provider :'+result.provider);
     print('Course Name :'+result.skill);
@@ -139,6 +144,11 @@ class _SubmitState extends State<Submit> {
       'platform' : platform,
       'provider' : result.provider,
     };
+    }
+    else{
+      print('can not recognize text');
+      return {};
+    }
   }
    String courseDetection(VisionText visionText){
     List listCourse = [
@@ -436,7 +446,7 @@ class _SubmitState extends State<Submit> {
                             child: Text(
                                 image == null 
                                 ? "(Drag and drop files here, or browse your phone)"
-                                : image.path.substring(image.path.length-20, image.path.length),
+                                : image.files.single.path.split('/')[image.files.single.path.split('/').length-1],
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff888888),

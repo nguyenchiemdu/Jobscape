@@ -55,7 +55,9 @@ class QuestionDataBase{
   }
   Future<List> getListQuestion() async{
     List res = [];
-    await questions.get()
+    await questions
+      .orderBy('date',descending: true)
+      .get()
       .then((querysnapshot){
         querysnapshot.docs.forEach((element) {
           Map tmp = element.data();

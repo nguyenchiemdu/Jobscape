@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_size_getter/file_input.dart';
@@ -24,7 +25,7 @@ String removeSpace(String s){
 }
 class CourseraCertificate{
   VisionText visionText;
-  PickedFile image;
+  FilePickerResult image;
   String learner;
   String platform;
   String provider = '';
@@ -59,7 +60,7 @@ class CourseraCertificate{
   }
   List getLeftBlock(){
     List res = [];
-    final file = File(image.path);
+    final file = File(image.files.single.path);
     final size = ImageSizeGetter.getSize(FileInput(file));
     double width = size.width.toDouble();
     for (TextBlock block in visionText.blocks){
@@ -71,7 +72,7 @@ class CourseraCertificate{
   }
   getLeftBlockRemoveTop(){
     List res = [];
-    final file = File(image.path);
+    final file = File(image.files.single.path);
     final size = ImageSizeGetter.getSize(FileInput(file));
     double width = size.width.toDouble();
     double height = size.height.toDouble();
@@ -99,7 +100,7 @@ class CourseraCertificate{
 }
 class UdemyCertificate {
   VisionText visionText;
-  PickedFile image;
+  FilePickerResult image;
   String learner;
   String platform;
   String provider = '';
@@ -117,9 +118,11 @@ class UdemyCertificate {
     text = text.replaceAll('by ', '/');
     text = text.replaceAll('on ', '/');
     List<String> ls = text.split('/');
-    // print(ls);
+    
     ls.remove('');
+    ls.remove("");
     ls.remove(' ');
+    print("list is"+jsonEncode(ls));
     ls = ls.map((e) {
       return removeSpace(e);
       }).toList();
@@ -135,7 +138,7 @@ class UdemyCertificate {
 }
 class InLearningCertificate {
   VisionText visionText;
-  PickedFile image;
+  FilePickerResult image;
   String learner;
   String platform;
   String provider = '';
@@ -149,7 +152,7 @@ class InLearningCertificate {
   }
    List getRightBlock(){
     List res = [];
-    final file = File(image.path);
+    final file = File(image.files.single.path);
     final size = ImageSizeGetter.getSize(FileInput(file));
     double width = size.width.toDouble();
     for (TextBlock block in visionText.blocks){
@@ -165,7 +168,7 @@ class InLearningCertificate {
 
 class EdXCertificate {
   VisionText visionText;
-  PickedFile image;
+  FilePickerResult image;
   String learner;
   String platform;
   String provider = '';
@@ -181,7 +184,7 @@ class EdXCertificate {
   }
    List getLeftBlock(){
     List res = [];
-    final file = File(image.path);
+    final file = File(image.files.single.path);
     final size = ImageSizeGetter.getSize(FileInput(file));
     double width = size.width.toDouble();
     for (TextBlock block in visionText.blocks){

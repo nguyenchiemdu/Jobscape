@@ -50,7 +50,7 @@ dependencies:
   # clipboard: ^0.1.3
   image_size_getter: ^1.0.0
   strings: ^0.2.1
-
+  file_picker: ^2.1.6
 
 
 dev_dependencies:
