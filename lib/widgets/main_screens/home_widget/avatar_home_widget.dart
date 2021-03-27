@@ -37,7 +37,7 @@ class _AvatarHomeWidgetState extends State<AvatarHomeWidget> {
           shape: BoxShape.circle,
           image: DecorationImage(
             image: CachedNetworkImageProvider(url),
-            fit: BoxFit.fill,
+            fit: BoxFit.fitWidth,
           )),
     );
   }

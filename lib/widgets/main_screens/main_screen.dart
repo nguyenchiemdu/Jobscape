@@ -100,14 +100,21 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
               topRight: Radius.circular(24),
             ),
           child: BottomNavigationBar(
-            showSelectedLabels: false,
+            showSelectedLabels: true,
             showUnselectedLabels: false,
+            selectedLabelStyle: TextStyle(
+              color: Color(0xffffbf2f),
+              fontFamily: 'SFProDisplay',
+              fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
+              fontWeight: FontWeight.w600,
+            ),
             type: BottomNavigationBarType.fixed,
             onTap: _selectPage,
             // backgroundColor: Theme.of(context).primaryColor,
             currentIndex: selectIndex,
             items: [
               BottomNavigationBarItem(
+                  // icon: Icon(Icons.home_rounded),
                   icon: Container(
                     width: ScreenUtil().setWidth(24),
                     height: ScreenUtil().setHeight(24),
@@ -120,7 +127,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                       ),
                     ),
                   ),
-                  label: ''),
+                  label: "Home"),
               BottomNavigationBarItem(
                   icon: Container(
                     width: ScreenUtil().setWidth(24),
@@ -135,7 +142,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                       ),
                     ),
                   ),
-                  label: ''),
+                  label: 'Workshop'),
               BottomNavigationBarItem(
                   icon: Container(
                     width: ScreenUtil().setWidth(24),
@@ -149,7 +156,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                       ),
                     ),
                   ),
-                  label: ''),
+                  label: 'Learn'),
               BottomNavigationBarItem(
                   icon: Container(
                     width: ScreenUtil().setWidth(24),
@@ -164,7 +171,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                       ),
                     ),
                   ),
-                  label: ""),
+                  label: "Q&A"),
               BottomNavigationBarItem(
                   icon: Container(
                     width: ScreenUtil().setWidth(24),
@@ -179,7 +186,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
                       ),
                     ),
                   ),
-                  label: "")
+                  label: "Profile")
             ],
           ),
         ),

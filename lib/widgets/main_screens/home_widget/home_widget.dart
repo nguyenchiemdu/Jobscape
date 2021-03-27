@@ -113,17 +113,22 @@ class HomeWidget extends StatelessWidget {
                     // width: MediaQuery.of(context).size.width*0.9,
                     // height: MediaQuery.of(context).size.height*0.353,
                     width: ScreenUtil().setWidth(324),
-                    height: ScreenUtil().setHeight(270),
+                    height: ScreenUtil().setHeight(350),
                     margin: EdgeInsets.only(left: 24, right: 24, top: 30),
                     decoration: new BoxDecoration(
                       color: Color(0xffffffff),
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
-                            color: Color(0x29000000),
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
                             offset: Offset(0, 3),
-                            blurRadius: 6,
-                            spreadRadius: 0)
+                            // color: Color(0x29000000),
+                            // offset: Offset(5, 5),
+                            // blurRadius: 8,
+                            // spreadRadius: 0
+                        )
                       ],
                     ),
                     child: Column(
@@ -131,10 +136,25 @@ class HomeWidget extends StatelessWidget {
                       children: [
                         Container(
                           width: ScreenUtil().setWidth(324),
-                          height: ScreenUtil().setHeight(190),
+                          height: ScreenUtil().setHeight(270),
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(24),
+                              topRight: Radius.circular(24),
+                              bottomRight: Radius.circular(0),
+                              bottomLeft: Radius.circular(0),
+                            ),
+                            // boxShadow: [
+                            //   BoxShadow(
+                            //       color: Color(0x29000000),
+                            //       offset: Offset(0, 6),
+                            //       blurRadius: 6,
+                            //       spreadRadius: 0)
+                            // ],
                             image: DecorationImage(
                               image: AssetImage("assets/images/getjob.png"),
+                              //image: AssetImage("assets/images/image.png"),
+                              //image: AssetImage("assets/images/image.jpg"),
                               fit: BoxFit.cover,
                               // alignment: Alignment.topCenter,
                             ),
@@ -148,23 +168,24 @@ class HomeWidget extends StatelessWidget {
                                     fontFamily: 'SFProDisplay',
                                     color: Color(0xff303030),
                                     fontSize: ScreenUtil()
-                                        .setSp(16, allowFontScalingSelf: true),
+                                        .setSp(24, allowFontScalingSelf: true),
                                     fontWeight: FontWeight.w700,
                                     fontStyle: FontStyle.normal,
                                   )),
                               Container(
                                 width: ScreenUtil().setWidth(151),
-                                height: ScreenUtil().setHeight(130),
-                                margin: EdgeInsets.only(top: 6),
+                                height: ScreenUtil().setHeight(145),
+                                margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
                                 child: Text(
                                     "Explore the essential skill sets to secure a job in Information Technology, Marketing, Finance, and more. Recommended by 300+ professionals.\nAnd totally FREE.",
                                     style: TextStyle(
-                                      height: 1.2,
+                                      letterSpacing: 1,
+                                      height: 1.3,
                                       fontFamily: 'SFProDisplay',
                                       color: Color(0xff303030),
                                       fontSize: ScreenUtil()
                                           .setSp(12, allowFontScalingSelf: true),
-                                      fontWeight: FontWeight.w300,
+                                      fontWeight: FontWeight.w400,
                                       fontStyle: FontStyle.normal,
                                     )),
                               ),
@@ -182,7 +203,7 @@ class HomeWidget extends StatelessWidget {
                             children: [
                               Column(
                                 children: [
-                                  Text("300+",
+                                  Text("100+",
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xffffbf2f),

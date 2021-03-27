@@ -137,6 +137,8 @@ flutter:
     - assets/images/next_icon_lock.png
     - assets/images/skill_lock.png
     - assets/images/comment_icon.png
+    - assets/images/image.png
+    - assets/images/image.jpg
 
 
   #   - images/a_dot_ham.jpeg
