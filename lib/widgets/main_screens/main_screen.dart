@@ -119,6 +119,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget> {
             // backgroundColor: Theme.of(context).primaryColor,
             currentIndex: selectIndex,
             selectedIconTheme: IconThemeData(color: Color(0xffffbf2f)),
+            selectedItemColor: Color(0xffffbf2f) ,
             items: [
               BottomNavigationBarItem(
                   // icon: Icon(Icons.home_rounded),

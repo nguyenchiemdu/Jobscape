@@ -138,16 +138,24 @@ class _SubmitState extends State<Submit> {
     print('Learner :'+result.learner);
     print('Provider :'+result.provider);
     print('Course Name :'+result.skill);
+    bool isAccepted = false;
+    if (result.skill.toString().toLowerCase().contains(_selectedLocation.toLowerCase()))
+    {
+      isAccepted = true;
+    }
     return {
       'courseName' :result.skill,
       'name' : result.learner,
       'platform' : platform,
       'provider' : result.provider,
+      'isAccepted' : isAccepted
     };
     }
     else{
       print('can not recognize text');
-      return {};
+      return {
+        'isAccepted' : false
+      };
     }
   }
    String courseDetection(VisionText visionText){

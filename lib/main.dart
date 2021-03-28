@@ -20,6 +20,21 @@ class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
+MaterialColor yellowConfiged = const MaterialColor(
+  0xffffbf2f,
+  const <int, Color>{
+    50: const Color(0xffffbf2f),
+    100: const Color(0xffffbf2f),
+    200: const Color(0xffffbf2f),
+    300: const Color(0xffffbf2f),
+    400: const Color(0xffffbf2f),
+    500: const Color(0xffffbf2f),
+    600: const Color(0xffffbf2f),
+    700: const Color(0xffffbf2f),
+    800: const Color(0xffffbf2f),
+    900: const Color(0xffffbf2f),
+  },
+);
 
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
@@ -48,7 +63,7 @@ class _MyAppState extends State<MyApp> {
             designSize: Size(360, 760),
             builder: () => MaterialApp(
               theme: ThemeData(
-                primarySwatch: Colors.yellow,
+                primarySwatch:yellowConfiged ,
                 accentColor: Colors.red,
                 fontFamily: 'SFProDisplay',
               ),
@@ -138,9 +153,14 @@ class _RoutePageState extends State<RoutePage> {
 
   Widget buildLoading() => Scaffold(
         body: SafeArea(
-          child: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              // color: Color(0xffffbf2f)
+            ),
             child: Center(
-              child: CircularProgressIndicator(),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ),
         ),

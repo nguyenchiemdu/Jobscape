@@ -186,6 +186,7 @@ class UserDatabaseService {
     await FirebaseFirestore.instance
         // .collection('/users/$uid/listLearnedSkill')
         .collection('/users/$uid/listProof')
+        .where('isAccepted',isEqualTo: true)
         .get()
         .then((querySnapshot) => querySnapshot.docs.forEach((element) {
               res.add(element.data());
