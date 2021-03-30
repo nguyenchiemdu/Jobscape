@@ -8,7 +8,7 @@ Our application can run fine on both Android and iOS mobile devices. Since there
 
 ### Installing: 
 - For Android mobile devices
-     - First of all, you have to download our Jobscape.apk to your device. Folder name - You can find it in our Jobscape -> …
+     - First of all, you have to download our Jobscape.apk to your device. [app](https://github.com/nguyenchiemdu/Jobscape/blob/main/app/Jobscape.apk) - You can find it in our Jobscape -> app -> Jobscape.apk
      - Secondly, please make sure that you allow your phone to install applications outside of Google Play Store. 
      - Lastly, Install the app on your phone and start exploring Jobscape. 
 
