@@ -39,6 +39,9 @@ class SkillItem extends StatelessWidget {
       case 'framework':
         return "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/SkillImg%2Fframework.png?alt=media&token=86c18489-7e34-4e3a-bae3-c999a132f545";
         break;
+      case 'serverless':
+        return "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/SkillImg%2Fserverless.png?alt=media&token=816bfe09-3d61-4426-b9a3-3bb7b8ae353f";
+        break;
     }
   }
 
@@ -61,7 +64,10 @@ class SkillItem extends StatelessWidget {
         return "Make sure to learn the compatible library with your programming language.";
         break;
       case 'framework':
-        return "Make sure to learn the compatible library with your programming language.";
+        return "Make sure to learn the compatible framework with your programming language.";
+        break;
+      case 'serverless':
+        return "Some engineers surveyed use this serverless framework";
         break;
     }
   }
@@ -85,6 +91,9 @@ class SkillItem extends StatelessWidget {
         break;
       case 'framework':
         return "*Framework";
+        break;
+      case 'serverless':
+        return "*serverless";
         break;
     }
   }

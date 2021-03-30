@@ -66,7 +66,9 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
       };
     if (respath == null) respath = 'isNull';
     // print(jsonEncode(temp));
-    setState(() {
+    if (this.mounted)
+    {
+      setState(() {
       listRoadMap = temp;
       listRoadMapWidget = listRoadMap
           .map((item) => RoadMapItem(
@@ -75,6 +77,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
       isNewUser = res;
       pathToJoinedJourney = respath;
     });
+    }
     // print('listRoadMapWidget'+listRoadMapWidget.toString());
     firstRoadMapItem = listRoadMap[0];
   }
