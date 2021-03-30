@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:learning_app/widgets/login_screens/warning.dart';
 import 'road_map_widget.dart';
 
 class IndustryCard extends StatelessWidget {
@@ -28,11 +29,16 @@ class IndustryCard extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: InkWell(
           onTap: () {
-            if (hasRoadMap == false) 
+            if (hasRoadMap == false)
               {
-               
-                // hien thong bao o day
-                  print(' k co roadmap data');
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AdvanceCustomAlert(
+                          "Sorry for this inconvenience",
+                          "We are currently working on this industry position and will launch soon!"
+                      );
+                    });
               }
               else
                 {
