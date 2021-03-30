@@ -70,7 +70,7 @@ class _RoadMapWidgetState extends State<RoadMapWidget> {
       listRoadMap = temp;
       listRoadMapWidget = listRoadMap
           .map((item) => RoadMapItem(
-              listRoadMap.indexOf(item) + 1, item, roadMapData['imgSrc'],status[item['name']]))
+              listRoadMap.indexOf(item) + 1, item, roadMapData['imgSrc'],status[item['name']], respath == path))
           .toList();
       isNewUser = res;
       pathToJoinedJourney = respath;

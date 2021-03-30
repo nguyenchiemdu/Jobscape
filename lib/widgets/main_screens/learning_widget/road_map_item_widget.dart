@@ -3,11 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'list_skill_widget.dart';
 
 class RoadMapItem extends StatelessWidget {
+  final bool isStarted;
   final int index;
   final Map roadMapData;
   final String imgScr;
   final bool isUnlocked;
-  RoadMapItem(this.index, this.roadMapData, this.imgScr,this.isUnlocked);
+  RoadMapItem(this.index, this.roadMapData, this.imgScr,this.isUnlocked,this.isStarted);
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
@@ -23,7 +24,7 @@ class RoadMapItem extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              if (isUnlocked) changeScreen(context);
+              if (isUnlocked && isStarted) changeScreen(context);
             },
             child: Container(
               width: ScreenUtil().setWidth(230),

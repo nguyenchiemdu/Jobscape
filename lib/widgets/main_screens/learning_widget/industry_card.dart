@@ -10,7 +10,8 @@ class IndustryCard extends StatelessWidget {
   // String job_opportunity;
   // String salary;
   final Map jobData;
-  IndustryCard(this.jobData);
+  final bool hasRoadMap;
+  IndustryCard(this.jobData,this.hasRoadMap);
   void changeScreen(BuildContext context) {
     Navigator.push(
       context,
@@ -27,7 +28,16 @@ class IndustryCard extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: InkWell(
           onTap: () {
-            changeScreen(context);
+            if (hasRoadMap == false) 
+              {
+               
+                // hien thong bao o day
+                  print(' k co roadmap data');
+              }
+              else
+                {
+                   changeScreen(context);
+                }
           },
           child: Container(
             width: ScreenUtil().setWidth(217),

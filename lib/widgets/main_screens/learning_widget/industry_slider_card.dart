@@ -6,7 +6,8 @@ import 'industry_card.dart';
 import 'package:learning_app/models/industry_database.dart';
 
 class SliderCard extends StatefulWidget {
-  SliderCard(this.fieldId);
+  final bool hasRoadMap;
+  SliderCard(this.fieldId,this.hasRoadMap);
 //   final List listJobs;
 //   _SliderCardState createState() => _SliderCardState(listJobs);
 // }
@@ -70,6 +71,7 @@ class _SliderCardState extends State<SliderCard> {
                       child: Container(
                         child: IndustryCard(
                           listJobs[index],
+                          widget.hasRoadMap,
                         ),
                       ),
                     ),

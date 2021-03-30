@@ -198,7 +198,7 @@ class _IndustryComponentState extends State<IndustryComponent> {
                 ],
               ),
             ),
-            SliderCard(industryField['id']),
+            SliderCard(industryField['id'],industryField['hasRoadMap']),
             new Container(
                 width: double.infinity,
                 height: 0,

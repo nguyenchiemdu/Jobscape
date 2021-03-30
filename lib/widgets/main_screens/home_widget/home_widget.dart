@@ -107,7 +107,7 @@ class HomeWidget extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  selectPage(1);
+                  selectPage(2);
                 },
                 child: Container(
                     // width: MediaQuery.of(context).size.width*0.9,
