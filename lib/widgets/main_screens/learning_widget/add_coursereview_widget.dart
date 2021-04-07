@@ -45,7 +45,8 @@ class AddReviewFormWidget extends StatelessWidget {
       "reviewText": "Default",
       "upvote": 0,
       "star": 0,
-      "time": DateTime.now()
+      "time": DateTime.now(),
+      "userId" : FirebaseAuth.instance.currentUser.uid,
     };
     reviews['star'] = rating;
     reviews['reviewText'] = reviewText.text;

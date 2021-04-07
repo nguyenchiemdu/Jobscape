@@ -88,6 +88,7 @@ class _QuestionCardState extends State<QuestionCard> {
                 });
       }
     await QuestionDataBase().addUpvote(widget.question['path']);
+    await UserDatabaseService().changeReputaion(widget.question['user'], upvoteState ? 1 : -1);
   }
   void translate(){
     String text;
