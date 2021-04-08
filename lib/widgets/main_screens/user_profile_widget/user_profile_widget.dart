@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/google_sign_in.dart';
@@ -134,19 +135,25 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                             ),
                           ),
                         ),
-                        Container(
-                          margin:
-                              EdgeInsets.only(top: ScreenUtil().setHeight(4)),
-                          child: Text("Scholar\nRanking",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xff000000),
-                                fontSize: ScreenUtil()
-                                    .setSp(14, allowFontScalingSelf: false),
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                              )),
+                        InkWell(
+                          onTap: () async{
+                            int res = await UserDatabaseService().getUserReputation();
+                            print(res);
+                          },
+                          child: Container(
+                            margin:
+                                EdgeInsets.only(top: ScreenUtil().setHeight(4)),
+                            child: Text("Scholar\nRanking",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xff000000),
+                                  fontSize: ScreenUtil()
+                                      .setSp(14, allowFontScalingSelf: false),
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                )),
+                          ),
                         ),
                       ],
                     ),
