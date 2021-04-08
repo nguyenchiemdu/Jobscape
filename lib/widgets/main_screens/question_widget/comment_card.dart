@@ -71,6 +71,7 @@ class _CommentCardState extends State<CommentCard> {
                 });
       }
     await QuestionDataBase().addUpvote(widget.comment['path']);
+    await UserDatabaseService().changeReputaion(widget.comment['user'], upvoteState ? 1 : -1);
   }
   @override
   Widget build(BuildContext context) {

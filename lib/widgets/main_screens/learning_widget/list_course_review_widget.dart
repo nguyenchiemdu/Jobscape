@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learning_app/models/industry_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:learning_app/models/users_database.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ListReviewCourse extends StatefulWidget {
@@ -21,6 +22,7 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
   bool like = false; 
   List<bool> stateUpvote = [];
   final DatabaseManager courseReviewDatabase = DatabaseManager();
+  final UserDatabaseService userDatabaseService = UserDatabaseService();
   @override
   void initState() {
     super.initState();
@@ -61,6 +63,11 @@ class _ListReviewCourseState extends State<ListReviewCourse> {
       // print(listReview[index]['path']);
     });
     courseReviewDatabase.upVote(listReview[index]['path']);
+    Map ls;
+    if (listReview[index].containsKey('userId'))
+          userDatabaseService.changeReputaion(listReview[index]['userId'], stateUpvote[index] ? 1 : -1);
+      else print('this review is in old version and can not up vote reputation');
+
   }
 
   @override

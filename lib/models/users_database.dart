@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:learning_app/main.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -440,5 +441,23 @@ class UserDatabaseService {
       return true;
     } else
       return false;
+  }
+
+  Future changeReputaion(String uid,int amount) async{
+    int reputation;
+    await users
+          .doc(uid)
+          .get()
+          .then((querysnapshot){
+            Map<String,dynamic> res =  querysnapshot.data();
+            reputation  = res['reputation'];
+            reputation +=amount;
+          } );
+    await users
+          .doc(uid)
+          .update({
+            'reputation' : reputation
+          })
+          .onError((error, stackTrace){print('failed to changeReputaion : '+error.toString());});
   }
 }
