@@ -272,7 +272,8 @@ class _SubmitState extends State<Submit> {
                   ),
                   Container(
                     width: ScreenUtil().setWidth(294),
-                    child: new Text("Standard processing time: 72 hours",
+                    child: new Text("Certificates issued by Coursera, Linkedin Learning, and Udemy will be processed and approved immediately.\nWith documents from other sources, the standard processing time is 48 hours"
+                      ,
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff454545),

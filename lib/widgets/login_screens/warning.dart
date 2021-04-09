@@ -128,3 +128,74 @@ class AdvanceCustomAlert2 extends StatelessWidget {
     );
   }
 }
+
+class Membership extends StatelessWidget {
+  String member;
+  String message;
+  int number;
+  Membership(this.member,this.message,this.number);
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4.0)
+        ),
+        child: Stack(
+          overflow: Overflow.visible,
+          alignment: Alignment.topCenter,
+          children: [
+            Container(
+              // constraints: BoxConstraints(
+              //   maxHeight: double.infinity,
+              // ),
+              height: ScreenUtil().setHeight(270),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 70, 10, 10),
+                child: Column(
+                  children: [
+                    Text(member, style: TextStyle(fontWeight: FontWeight.bold, fontSize: ScreenUtil().setSp(25,allowFontScalingSelf: false)),),
+                    SizedBox(height: 15,),
+                    Text(message, style: TextStyle(fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false)),),
+                    SizedBox(height: 20,),
+                    Center(
+                      child: Stack(children: [
+                        Container(
+                            width: ScreenUtil().setWidth(100),
+                            height: ScreenUtil().setHeight(6),
+                            decoration: new BoxDecoration(
+                                color: Color(0xffeaeaea),
+                                borderRadius: BorderRadius.circular(6))),
+                        Container(
+                            width: ScreenUtil().setWidth(100 * number / 100),
+                            height: ScreenUtil().setHeight(6),
+                            decoration: new BoxDecoration(
+                                color: Color(0xffffbf2f),
+                                borderRadius: BorderRadius.circular(6))),
+                      ]),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
+                      child: RaisedButton(onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                        color: Color(0xffffbf2f),
+                        child: Text('OK', style: TextStyle(color: Colors.white),),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+                top: -60,
+                child: CircleAvatar(
+                  backgroundColor: Color(0xffffbf2f),
+                  radius: 50,
+                  child: Icon(Icons.assistant_photo, color: Colors.white, size: 50,),
+                )
+            ),
+          ],
+        )
+    );
+  }
+}

@@ -116,147 +116,80 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                       fontStyle: FontStyle.normal,
                     )),
               ),
-              Container(
-                margin:
-                    EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          width: ScreenUtil().setWidth(40),
-                          height: ScreenUtil().setHeight(40),
-                          decoration: new BoxDecoration(
-                            image: DecorationImage(
-                              image:
-                                  AssetImage("assets/images/scholar_icon.png"),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () async{
-                            int res = await UserDatabaseService().getUserReputation();
-                            print(res);
-                          },
-                          child: Container(
-                            margin:
-                                EdgeInsets.only(top: ScreenUtil().setHeight(4)),
-                            child: Text("Scholar\nRanking",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'SFProDisplay',
-                                  color: Color(0xff000000),
-                                  fontSize: ScreenUtil()
-                                      .setSp(14, allowFontScalingSelf: false),
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                )),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                        width: 0,
-                        height: ScreenUtil().setHeight(68),
-                        decoration: new BoxDecoration(
-                          border: Border.all(color: Color(0xFFEEEEEE)),
-                        )),
-                    Column(
-                      children: [
-                        Text(courseCompleted.toString(),
-                            style: TextStyle(
-                              fontFamily: 'SFProDisplay',
-                              color: Color(0xffffd3a3),
-                              fontSize: ScreenUtil()
-                                  .setSp(35, allowFontScalingSelf: false),
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                            )),
-                        Container(
-                          margin:
-                              EdgeInsets.only(top: ScreenUtil().setHeight(4)),
-                          child: Text("Courses\nCompleted",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xff000000),
-                                fontSize: ScreenUtil()
-                                    .setSp(14, allowFontScalingSelf: false),
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                              )),
-                        ),
-                      ],
-                    ),
-                    Container(
-                        width: 0,
-                        height: ScreenUtil().setHeight(68),
-                        decoration: new BoxDecoration(
-                          border: Border.all(color: Color(0xFFEEEEEE)),
-                        )),
-                    Column(
-                      children: [
-                        Text(journeyCompleted.toString(),
-                            style: TextStyle(
-                              fontFamily: 'SFProDisplay',
-                              color: Color(0xffffd3a3),
-                              fontSize: ScreenUtil()
-                                  .setSp(35, allowFontScalingSelf: false),
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                            )),
-                        Container(
-                          margin:
-                              EdgeInsets.only(top: ScreenUtil().setHeight(4)),
-                          width: ScreenUtil().setWidth(65),
-                          child: Text("Journeys Completed",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'SFProDisplay',
-                                color: Color(0xff000000),
-                                fontSize: ScreenUtil()
-                                    .setSp(14, allowFontScalingSelf: false),
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                              )),
-                        ),
-                      ],
-                    ),
-                    Container(
-                        width: 0,
-                        height: ScreenUtil().setHeight(68),
-                        decoration: new BoxDecoration(
-                          border: Border.all(color: Color(0xFFEEEEEE)),
-                        )),
-                    InkWell(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AdvanceCustomAlert(
-                                  "Sorry for this inconvenience",
-                                  "We are currently working on this feature and will launch soon!");
-                            });
-                      },
-                      child: Column(
+              InkWell(
+                onTap: () async {
+                  int res = await UserDatabaseService().getUserReputation();
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Membership(
+                            "Newbie",
+                            "Try to help each other to get more points.",
+                        res);
+                      });
+                },
+                child: Container(
+                  margin:
+                      EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
                         children: [
                           Container(
                             width: ScreenUtil().setWidth(40),
                             height: ScreenUtil().setHeight(40),
                             decoration: new BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage("assets/images/cv_icon.png"),
+                                image:
+                                    AssetImage("assets/images/scholar_icon.png"),
                                 fit: BoxFit.fill,
                               ),
                             ),
                           ),
+                          InkWell(
+                            onTap: () async{
+                              int res = await UserDatabaseService().getUserReputation();
+                              print(res);
+                            },
+                            child: Container(
+                              margin:
+                                  EdgeInsets.only(top: ScreenUtil().setHeight(4)),
+                              child: Text("Scholar\nRanking",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xff000000),
+                                    fontSize: ScreenUtil()
+                                        .setSp(14, allowFontScalingSelf: false),
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                          width: 0,
+                          height: ScreenUtil().setHeight(68),
+                          decoration: new BoxDecoration(
+                            border: Border.all(color: Color(0xFFEEEEEE)),
+                          )),
+                      Column(
+                        children: [
+                          Text(courseCompleted.toString(),
+                              style: TextStyle(
+                                fontFamily: 'SFProDisplay',
+                                color: Color(0xffffd3a3),
+                                fontSize: ScreenUtil()
+                                    .setSp(35, allowFontScalingSelf: false),
+                                fontWeight: FontWeight.w700,
+                                fontStyle: FontStyle.normal,
+                              )),
                           Container(
                             margin:
                                 EdgeInsets.only(top: ScreenUtil().setHeight(4)),
-                            width: ScreenUtil().setWidth(50),
-                            child: Text("View your CV",
+                            child: Text("Courses\nCompleted",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
@@ -269,8 +202,88 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                      Container(
+                          width: 0,
+                          height: ScreenUtil().setHeight(68),
+                          decoration: new BoxDecoration(
+                            border: Border.all(color: Color(0xFFEEEEEE)),
+                          )),
+                      Column(
+                        children: [
+                          Text(journeyCompleted.toString(),
+                              style: TextStyle(
+                                fontFamily: 'SFProDisplay',
+                                color: Color(0xffffd3a3),
+                                fontSize: ScreenUtil()
+                                    .setSp(35, allowFontScalingSelf: false),
+                                fontWeight: FontWeight.w700,
+                                fontStyle: FontStyle.normal,
+                              )),
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: ScreenUtil().setHeight(4)),
+                            width: ScreenUtil().setWidth(65),
+                            child: Text("Journeys Completed",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'SFProDisplay',
+                                  color: Color(0xff000000),
+                                  fontSize: ScreenUtil()
+                                      .setSp(14, allowFontScalingSelf: false),
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                )),
+                          ),
+                        ],
+                      ),
+                      Container(
+                          width: 0,
+                          height: ScreenUtil().setHeight(68),
+                          decoration: new BoxDecoration(
+                            border: Border.all(color: Color(0xFFEEEEEE)),
+                          )),
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AdvanceCustomAlert(
+                                    "Sorry for this inconvenience",
+                                    "We are currently working on this feature and will launch soon!");
+                              });
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              width: ScreenUtil().setWidth(40),
+                              height: ScreenUtil().setHeight(40),
+                              decoration: new BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/cv_icon.png"),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin:
+                                  EdgeInsets.only(top: ScreenUtil().setHeight(4)),
+                              width: ScreenUtil().setWidth(50),
+                              child: Text("View your CV",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: 'SFProDisplay',
+                                    color: Color(0xff000000),
+                                    fontSize: ScreenUtil()
+                                        .setSp(14, allowFontScalingSelf: false),
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               CourseCompleted(widget.selectPage),
