@@ -301,7 +301,7 @@ class EnrollAlert extends StatelessWidget {
                       height: 15,
                     ),
                     Text(
-                      "You can use the provided link below to study on your laptop/tablet/PC or click the link to start learn right on your phone.\n\nDon't forget to come back and submit your certificate of completion in the Submit Proof section to unlock the new skills and keep discovering and grouwing with us!",
+                      "You can use the provided link below to study on your laptop/tablet/PC or click the link to start learn right on your phone.\n\nDon't forget to come back and submit your certificate of completion in the Submit Proof section to unlock the new skills and keep discovering and growing with us!",
                       style: TextStyle(
                           fontSize: ScreenUtil()
                               .setSp(14, allowFontScalingSelf: false)),
