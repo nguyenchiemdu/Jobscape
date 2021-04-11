@@ -45,8 +45,8 @@ There are 3 sections on this screen (Past workshops, Upcoming Workshops, Reminde
 - Comment on a post: We encourage our users to support one another by enabling them to interact with their fellows. You can like (Upvote) a helpful post or comment on a post to answer other users’ questions. We give you 1 point for every like (Upvote) you get on your comment. To find the category you are interested in, use our filtering tags below the “Write a post” box.
 
 #### User profile 
-- View your profile: You can view all your personal information and your achievements on this screen. If you want to edit your profile, simply click on the edit button (right after your name). 
-      - You can click on "Scholar Ranking" icon to see your current rank at Jobscape.
+- View your profile: You can view all your personal information and your achievements on this screen. If you want to edit your profile, simply click on the edit button (right after your name).
+       - You can click on "Scholar Ranking" icon to see your current rank at Jobscape.
 - Edit your profile: You can change your profile picture, your name, age, etc. We also allow you to upload your CV (pdf and image files are accepted). Remember to save your change by clicking on the “Save profile” button.
 
 #### Learning screens
