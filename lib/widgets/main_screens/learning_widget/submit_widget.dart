@@ -20,12 +20,12 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:image_size_getter/image_size_getter.dart';
 import 'package:strings/strings.dart';
+
 class Submit extends StatefulWidget {
   final List<Map> listSkill;
   List<String> listNameSkill;
-  Submit(this.listSkill){
-listNameSkill =
-        listSkill.map((e) => e['name'].toString()).toList();
+  Submit(this.listSkill) {
+    listNameSkill = listSkill.map((e) => e['name'].toString()).toList();
   }
   @override
   _SubmitState createState() => _SubmitState(listNameSkill);
@@ -36,69 +36,84 @@ class _SubmitState extends State<Submit> {
   String _selectedLocation;
   _SubmitState(this._locations);
   FilePickerResult image;
-  submit(BuildContext ctx) async{
-      final _storage = FirebaseStorage.instance;
-      String uid =FirebaseAuth.instance.currentUser.uid;
-      
-      if (image != null && _selectedLocation != null) {
-        var file = File(image.files.single.path);
-        Map<String,dynamic> data = await textRecognition();
-        //upload to FireBase
-        var _snapshot = await _storage
-            .ref()
-            .child('listProof/$_selectedLocation/$uid')
-            .putFile(file)
-            .whenComplete(() => print('Upload Proof  to Storage complete'))
-            .onError((error, stackTrace) {
-          print('Failed to upload Image:' + error);
-          return null;
-        });
-        var downloadURLs = await _snapshot.ref.getDownloadURL();
-        int index = _locations.indexOf(_selectedLocation);
-        if (index ==-1) {
-          print('please choose the skill!');
-          Scaffold.of(ctx).showSnackBar(SnackBar(content: Text('Please choose the skill first!')));
-        }
-        else
-        {
-          
-          //upload to Firestore
-          await UserDatabaseService().submitProof(data : data,fullPath: widget.listSkill[index]['path'],cate: widget.listSkill[index]['category'],skillName: _selectedLocation,proofURL: downloadURLs )
-          .then((value){
-            showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AdvanceCustomAlert("Success","Proof Submission Completed!");
-                            })
-            .then((_){
-               setState(() {
-                          _selectedLocation = null;
-                          image = null;
-                          }
-              );
-            });
-              
-          })
-          .onError((error, stackTrace){
-            showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AdvanceCustomAlert("Failed",error.toString());
-                            });
-          });
-        }
-        
-        
+  submit(BuildContext ctx) async {
+    final _storage = FirebaseStorage.instance;
+    String uid = FirebaseAuth.instance.currentUser.uid;
 
+    if (image != null && _selectedLocation != null) {
+      var file = File(image.files.single.path);
+      Map<String, dynamic> data = await textRecognition();
+      //upload to FireBase
+      var _snapshot = await _storage
+          .ref()
+          .child('listProof/$_selectedLocation/$uid')
+          .putFile(file)
+          .whenComplete(() => print('Upload Proof  to Storage complete'))
+          .onError((error, stackTrace) {
+        print('Failed to upload Image:' + error);
+        return null;
+      });
+      var downloadURLs = await _snapshot.ref.getDownloadURL();
+      int index = _locations.indexOf(_selectedLocation);
+      if (index == -1) {
+        print('please choose the skill!');
+        Scaffold.of(ctx).showSnackBar(
+            SnackBar(content: Text('Please choose the skill first!')));
       } else {
-        String infor = 'No path received or no skill name received';
-        print(infor);
-        Scaffold.of(ctx).showSnackBar(SnackBar(content: Text(infor)));
+        //upload to Firestore
+        await UserDatabaseService()
+            .submitProof(
+                data: data,
+                fullPath: widget.listSkill[index]['path'],
+                cate: widget.listSkill[index]['category'],
+                skillName: _selectedLocation,
+                proofURL: downloadURLs)
+            .then((value) {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                String status;
+                String infor;
+                status = "Success";
+                infor =
+                    "Congratulations on your achievement! Your proof has been accepted by Jobscape. You can come back and see your new skills now!";
+
+                if (!data['isAccepted']) {
+                  if (data.containsKey('name')) {
+                    status = 'Failed';
+                    infor =
+                        'We regret to inform you that your proof has not been accepted by Jobscape. Please kindly check your proof again and submit the appropriate proof. Thank you!';
+                  } else {
+                    status = 'In progress';
+                    infor =
+                        'Your proof has been successfully submitted to Jobscape. The standard processing time is 48 hours. After your proof is validated by admin, we\'ll let you know. Thank you!';
+                  }
+                }
+                return AdvanceCustomAlert(status, infor);
+              }).then((_) {
+            setState(() {
+              _selectedLocation = null;
+              image = null;
+            });
+          });
+        }).onError((error, stackTrace) {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AdvanceCustomAlert("Failed", error.toString());
+              });
+        });
       }
+    } else {
+      String infor = 'No path received or no skill name received';
+      print(infor);
+      Scaffold.of(ctx).showSnackBar(SnackBar(content: Text(infor)));
+    }
   }
+
   uploadImage() async {
     final _picker = ImagePicker();
-    
+
     //CHeck permission
     // await Permission.photos.request();
     await Permission.photos.request();
@@ -109,56 +124,53 @@ class _SubmitState extends State<Submit> {
       print(res.files.single.path);
       // PickedFile res = await _picker.getImage(source: ImageSource.gallery);
       setState(() {
-              image = res;
-            });
-      
+        image = res;
+      });
     } else {
       print('Grand permissions and try again');
     }
   }
-  Future<Map<String,dynamic>> textRecognition()async{
-    final visionImage = FirebaseVisionImage.fromFile(File(image.files.single.path));
+
+  Future<Map<String, dynamic>> textRecognition() async {
+    final visionImage =
+        FirebaseVisionImage.fromFile(File(image.files.single.path));
     final textRecognizer = FirebaseVision.instance.textRecognizer();
-    final visionText = await  textRecognizer.processImage(visionImage);
+    final visionText = await textRecognizer.processImage(visionImage);
     await textRecognizer.close();
     // final text = extractText(visionText);
     dynamic result;
     String platform = courseDetection(visionText);
-    if (platform == 'Coursera')
-        result =   CourseraCertificate(visionText,image);
-    if (platform == 'Udemy')
-        result = UdemyCertificate(visionText, image);
+    if (platform == 'Coursera') result = CourseraCertificate(visionText, image);
+    if (platform == 'Udemy') result = UdemyCertificate(visionText, image);
     if (platform == 'In learning')
-        result = InLearningCertificate(visionText,image);
-    if (platform == 'edX')
-        result = EdXCertificate(visionText,image);
-    if (platform != null)
-    {
-    print('Platform :'+platform);
-    print('Learner :'+result.learner);
-    print('Provider :'+result.provider);
-    print('Course Name :'+result.skill);
-    bool isAccepted = false;
-    if (result.skill.toString().toLowerCase().contains(_selectedLocation.toLowerCase()))
-    {
-      isAccepted = true;
-    }
-    return {
-      'courseName' :result.skill,
-      'name' : result.learner,
-      'platform' : platform,
-      'provider' : result.provider,
-      'isAccepted' : isAccepted
-    };
-    }
-    else{
-      print('can not recognize text');
+      result = InLearningCertificate(visionText, image);
+    if (platform == 'edX') result = EdXCertificate(visionText, image);
+    if (platform != null) {
+      print('Platform :' + platform);
+      print('Learner :' + result.learner);
+      print('Provider :' + result.provider);
+      print('Course Name :' + result.skill);
+      bool isAccepted = false;
+      if (result.skill
+          .toString()
+          .toLowerCase()
+          .contains(_selectedLocation.toLowerCase())) {
+        isAccepted = true;
+      }
       return {
-        'isAccepted' : false
+        'courseName': result.skill,
+        'name': result.learner,
+        'platform': platform,
+        'provider': result.provider,
+        'isAccepted': isAccepted
       };
+    } else {
+      print('can not recognize text');
+      return {'isAccepted': false};
     }
   }
-   String courseDetection(VisionText visionText){
+
+  String courseDetection(VisionText visionText) {
     List listCourse = [
       'Coursera',
       'Udemy',
@@ -166,20 +178,15 @@ class _SubmitState extends State<Submit> {
       'edX',
     ];
     String res;
-    for (TextBlock block in visionText.blocks){
-      
-      print('block : '+block.text);
+    for (TextBlock block in visionText.blocks) {
+      print('block : ' + block.text);
       String text = block.text.replaceAll(' ', '');
       text = text.toLowerCase();
-      for (String course in listCourse)
-        {
-          String tmp  = course.replaceAll(' ', '').toLowerCase();
-        if (block.text.toLowerCase().contains(tmp))
-           res =  course;
-        if (text.contains(tmp))
-            res=  course;
-        
-        }
+      for (String course in listCourse) {
+        String tmp = course.replaceAll(' ', '').toLowerCase();
+        if (block.text.toLowerCase().contains(tmp)) res = course;
+        if (text.contains(tmp)) res = course;
+      }
     }
     return res;
   }
@@ -196,7 +203,7 @@ class _SubmitState extends State<Submit> {
                 style: TextStyle(
                   fontFamily: 'SFProDisplay',
                   color: Color(0xff000000),
-                  fontSize: ScreenUtil().setSp(16,allowFontScalingSelf: false),
+                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: false),
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                 )),
@@ -206,27 +213,28 @@ class _SubmitState extends State<Submit> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      margin: EdgeInsets.only(right:ScreenUtil().setWidth(7), top: ScreenUtil().setHeight(4)),
+                      margin: EdgeInsets.only(
+                          right: ScreenUtil().setWidth(7),
+                          top: ScreenUtil().setHeight(4)),
                       width: ScreenUtil().setWidth(6),
                       height: ScreenUtil().setHeight(6),
                       decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xffffbf2f)
-                      )
-                  ),
+                          shape: BoxShape.circle, color: Color(0xffffbf2f))),
                   Container(
                     width: ScreenUtil().setWidth(294),
-                    child: new Text("File format: Image or Document (.img, .png, .pdf.)",
+                    child: new Text(
+                        "File format: Image or Document (.img, .png, .pdf.)",
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff454545),
-                          fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                          fontSize: ScreenUtil()
+                              .setSp(13, allowFontScalingSelf: false),
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
-                        )
-                    ),
+                        )),
                   )
-                ],),
+                ],
+              ),
             ),
             Container(
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(14)),
@@ -234,27 +242,27 @@ class _SubmitState extends State<Submit> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      margin: EdgeInsets.only(right:ScreenUtil().setWidth(7), top: ScreenUtil().setHeight(4)),
+                      margin: EdgeInsets.only(
+                          right: ScreenUtil().setWidth(7),
+                          top: ScreenUtil().setHeight(4)),
                       width: ScreenUtil().setWidth(6),
                       height: ScreenUtil().setHeight(6),
                       decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xffffbf2f)
-                      )
-                  ),
+                          shape: BoxShape.circle, color: Color(0xffffbf2f))),
                   Container(
                     width: ScreenUtil().setWidth(294),
                     child: new Text("Size: maximum 2 MB",
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff454545),
-                          fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                          fontSize: ScreenUtil()
+                              .setSp(13, allowFontScalingSelf: false),
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
-                        )
-                    ),
+                        )),
                   )
-                ],),
+                ],
+              ),
             ),
             Container(
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(14)),
@@ -262,27 +270,27 @@ class _SubmitState extends State<Submit> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      margin: EdgeInsets.only(right:ScreenUtil().setWidth(7), top: ScreenUtil().setHeight(4)),
+                      margin: EdgeInsets.only(
+                          right: ScreenUtil().setWidth(7),
+                          top: ScreenUtil().setHeight(4)),
                       width: ScreenUtil().setWidth(6),
                       height: ScreenUtil().setHeight(6),
                       decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xffffbf2f)
-                      )
-                  ),
+                          shape: BoxShape.circle, color: Color(0xffffbf2f))),
                   Container(
                     width: ScreenUtil().setWidth(294),
                     child: new Text("Standard processing time: 72 hours",
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff454545),
-                          fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                          fontSize: ScreenUtil()
+                              .setSp(13, allowFontScalingSelf: false),
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
-                        )
-                    ),
+                        )),
                   )
-                ],),
+                ],
+              ),
             ),
             Container(
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(14)),
@@ -290,27 +298,28 @@ class _SubmitState extends State<Submit> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      margin: EdgeInsets.only(right:ScreenUtil().setWidth(7), top: ScreenUtil().setHeight(4)),
+                      margin: EdgeInsets.only(
+                          right: ScreenUtil().setWidth(7),
+                          top: ScreenUtil().setHeight(4)),
                       width: ScreenUtil().setWidth(6),
                       height: ScreenUtil().setHeight(6),
                       decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xffffbf2f)
-                      )
-                  ),
+                          shape: BoxShape.circle, color: Color(0xffffbf2f))),
                   Container(
                     width: ScreenUtil().setWidth(294),
-                    child: new Text("After your proof is validated by admin, your next skill(s) will be unlocked.",
+                    child: new Text(
+                        "After your proof is validated by admin, your next skill(s) will be unlocked.",
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff454545),
-                          fontSize: ScreenUtil().setSp(13,allowFontScalingSelf: false),
+                          fontSize: ScreenUtil()
+                              .setSp(13, allowFontScalingSelf: false),
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
-                        )
-                    ),
+                        )),
                   )
-                ],),
+                ],
+              ),
             ),
             Center(
               child: Container(
@@ -346,7 +355,8 @@ class _SubmitState extends State<Submit> {
                         style: TextStyle(
                           fontFamily: 'SFProDisplay',
                           color: Color(0xff000000),
-                          fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
+                          fontSize: ScreenUtil()
+                              .setSp(14, allowFontScalingSelf: false),
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
                         )),
@@ -364,7 +374,8 @@ class _SubmitState extends State<Submit> {
                             style: TextStyle(
                               fontFamily: 'SFProDisplay',
                               color: Color(0xff000000),
-                              fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
+                              fontSize: ScreenUtil()
+                                  .setSp(14, allowFontScalingSelf: false),
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.normal,
                             )),
@@ -408,8 +419,8 @@ class _SubmitState extends State<Submit> {
                             height: ScreenUtil().setHeight(48),
                             decoration: new BoxDecoration(
                               image: DecorationImage(
-                                image:
-                                    AssetImage("assets/images/image_upload.png"),
+                                image: AssetImage(
+                                    "assets/images/image_upload.png"),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -432,7 +443,8 @@ class _SubmitState extends State<Submit> {
                                       style: TextStyle(
                                         fontFamily: 'SFProDisplay',
                                         color: Color(0xffffffff),
-                                        fontSize: ScreenUtil().setSp(15,allowFontScalingSelf: false),
+                                        fontSize: ScreenUtil().setSp(15,
+                                            allowFontScalingSelf: false),
                                         fontWeight: FontWeight.w700,
                                         fontStyle: FontStyle.normal,
                                       )))),
@@ -443,7 +455,8 @@ class _SubmitState extends State<Submit> {
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xffffbf2f),
-                                  fontSize: ScreenUtil().setSp(14,allowFontScalingSelf: false),
+                                  fontSize: ScreenUtil()
+                                      .setSp(14, allowFontScalingSelf: false),
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -452,18 +465,22 @@ class _SubmitState extends State<Submit> {
                             margin:
                                 EdgeInsets.only(top: ScreenUtil().setHeight(1)),
                             child: Text(
-                                image == null 
-                                ? "(Drag and drop files here, or browse your phone)"
-                                : image.files.single.path.split('/')[image.files.single.path.split('/').length-1],
+                                image == null
+                                    ? "(Drag and drop files here, or browse your phone)"
+                                    : image.files.single.path.split('/')[image
+                                            .files.single.path
+                                            .split('/')
+                                            .length -
+                                        1],
                                 style: TextStyle(
                                   fontFamily: 'SFProDisplay',
                                   color: Color(0xff888888),
-                                  fontSize: ScreenUtil().setSp(11,allowFontScalingSelf: false),
+                                  fontSize: ScreenUtil()
+                                      .setSp(11, allowFontScalingSelf: false),
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.italic,
                                 )),
                           ),
-
                         ],
                       ),
                     ),
