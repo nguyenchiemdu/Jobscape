@@ -177,7 +177,7 @@ class HomeWidget extends StatelessWidget {
                                 height: ScreenUtil().setHeight(145),
                                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
                                 child: Text(
-                                    "Explore the essential skill sets to secure a job in Information Technology, Marketing, Finance, and more. Recommended by 300+ professionals.\nAnd totally FREE.",
+                                    "Explore the essential skill sets to secure a job in Information Technology, Marketing, Finance, and more. Recommended by 100+ professionals.\nAnd totally FREE.",
                                     style: TextStyle(
                                       letterSpacing: 1,
                                       height: 1.3,

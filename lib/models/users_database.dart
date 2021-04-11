@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learning_app/main.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -117,6 +118,16 @@ class UserDatabaseService {
       print('failed to get user infor : ' + error.toString());
       return {};
     });
+    return res;
+  }
+  Future<int> getUserReputation() async{
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    int res;
+    await users.doc(uid)
+          .get()
+          .then((snapshot){
+            res = snapshot.data()['reputation'];
+    }).onError((error, stackTrace){print('failed to get user reputation :'+ error.toString());});
     return res;
   }
 

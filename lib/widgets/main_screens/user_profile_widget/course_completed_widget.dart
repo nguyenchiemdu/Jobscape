@@ -60,7 +60,7 @@ class _CourseCompletedState extends State<CourseCompleted> {
         children: [
           Container(
             margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(14),left: ScreenUtil().setWidth(24)),
-            child: Text("Your courses completed",
+            child: Text("Your completed courses",
                 style: TextStyle(
                   fontFamily: 'SFProDisplay',
                   color: Color(0xff000000),

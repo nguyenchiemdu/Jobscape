@@ -37,7 +37,7 @@ class _JourneyCompletedState extends State<JourneyCompleted> {
         children: [
           Container(
             margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(14),left: ScreenUtil().setWidth(24)),
-            child: Text("Your journey completed",
+            child: Text("Your completed journey",
                 style: TextStyle(
                   fontFamily: 'SFProDisplay',
                   color: Color(0xff000000),
