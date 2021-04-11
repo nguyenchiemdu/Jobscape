@@ -46,6 +46,7 @@ There are 3 sections on this screen (Past workshops, Upcoming Workshops, Reminde
 
 #### User profile 
 - View your profile: You can view all your personal information and your achievements on this screen. If you want to edit your profile, simply click on the edit button (right after your name). 
+      - You can click on "Scholar Ranking" icon to see your current rank at Jobscape.
 - Edit your profile: You can change your profile picture, your name, age, etc. We also allow you to upload your CV (pdf and image files are accepted). Remember to save your change by clicking on the “Save profile” button.
 
 #### Learning screens
