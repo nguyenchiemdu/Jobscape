@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,8 +28,9 @@ class _WorkshopWidgetState extends State<WorkshopWidget> {
 
   void getdata() async {
     List listWorkshop = await WorkshopDatabase().getAllWorkshop();
-    
-    // print(listWorkshop.toString());
+    // Map tmp = listWorkshop[0];
+    // tmp['date'] = "ahihi";
+    // print(jsonEncode(tmp));
     List past = [];
     List upcoming = [];
     for (Map workshop in listWorkshop) {
@@ -38,13 +40,13 @@ class _WorkshopWidgetState extends State<WorkshopWidget> {
       } else if (timeStamp.toDate().compareTo(DateTime.now()) > 0)
         upcoming.add(workshop);
     }
-    past.sort((a,b){
+    past.sort((a, b) {
       Timestamp timea = a['date'];
       Timestamp timeb = b['date'];
       return timea.compareTo(timeb);
     });
 
-    upcoming.sort((a,b){
+    upcoming.sort((a, b) {
       Timestamp timea = a['date'];
       Timestamp timeb = b['date'];
       return timea.compareTo(timeb);

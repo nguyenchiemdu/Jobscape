@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:path/path.dart';
+import 'package:excel/excel.dart';
+import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_app/models/workshop_database.dart';
+import 'package:learning_app/widgets/main_screens/home_widget/workshop_database.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'carouse_slider_card_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -110,11 +115,71 @@ class _WorkshopState extends State<Workshop> {
   @override
   void initState() {
     super.initState();
+    // readExcel();
+  }
+
+  void readExcel() async {
+    var file = "/Users/dunguyenchiem/workshop.xlsx";
+    var bytes = File(file).readAsBytesSync();
+    var excel = Excel.decodeBytes(bytes);
+    Map<String, dynamic> workshop;
+    // for (var table in excel.tables.keys) {
+    //   print(table); //sheet Name
+    //   print(excel.tables[table].maxCols);
+    //   print(excel.tables[table].maxRows);
+    // for (var row in excel.tables[sheetName].rows) {
+    //   print("$row");
+    // }
+    // }
+    String sheetName = 'Sheet1';
+    print(excel.tables[sheetName].rows[16][1]);
+    for (int i = 16; i < excel.tables[sheetName].rows.length; i++) {
+      workshop = {
+        "date": "ahihi",
+        "speaker": "Intel Developer Zone",
+        "for": "Machine Learning Engineer",
+        "link":
+            "https://www.facebook.com/events/1517194498479958/?acontext=%7B%22event_action_history%22%3A[%7B%22mechanism%22%3A%22search_results%22%2C%22surface%22%3A%22search%22%7D]%7D",
+        "description": "",
+        "title": "Webinar: Edge AI Reference Applications",
+        "image_source":
+            "https://firebasestorage.googleapis.com/v0/b/fir-ce454.appspot.com/o/WorkshopImg%2Fai2_800x450.jpg?alt=media&token=327d5063-7feb-4bd7-b118-c0d243c08e45",
+        "status": true,
+        "organizationContact": "https://www.facebook.com/IntelDeveloperZone/",
+      };
+
+      // workshop['date'] = excel.tables[sheetName].rows[i][0];
+      workshop['date'] = DateTime(1899, 12, 30)
+          .add(Duration(days: excel.tables[sheetName].rows[i][0]));
+      workshop['date'] = Timestamp.fromDate(workshop['date']);
+      workshop['title'] = excel.tables[sheetName].rows[i][1];
+      workshop['description'] = excel.tables[sheetName].rows[i][2];
+      workshop['for'] = excel.tables[sheetName].rows[i][3];
+      workshop['image_source'] = excel.tables[sheetName].rows[i][4];
+      workshop['link'] = excel.tables[sheetName].rows[i][5];
+      workshop['organizationContact'] = excel.tables[sheetName].rows[i][6];
+      workshop['speaker'] = excel.tables[sheetName].rows[i][7];
+      workshop['type'] = 'new';
+      // if (workshop['review'] == null) workshop['review'] == 0;
+      // workshop['level'] =
+      //     excel.tables[sheetName].rows[i][4].toString()[0].toUpperCase() +
+      //         excel.tables[sheetName].rows[i][4].toString().substring(1);
+      // workshop['price'] =
+      //     double.tryParse(excel.tables[sheetName].rows[i][5].toString());
+      // if (workshop['price'] == null) workshop['price'] = 0;
+      // if (excel.tables[sheetName].rows[i][5].toString() == 'subcription' ||
+      //     excel.tables[sheetName].rows[i][5].toString() == 'Subcription')
+      //   workshop['price'] = 'Subcription';
+      // workshop['link'] = excel.tables[sheetName].rows[i][6];
+      // print(DateFormat('MM/dd/yyy').format(workshop['date'].toDate()));
+      print(workshop);
+      await WorkshopDatabase().AddWorkshop(workshop);
+      //await DatabaseManager().addworkshop(workshop, path: widget.skillItem['path']);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    print('rebuilt');
     final curScaleFactor = MediaQuery.of(context).textScaleFactor;
     // print(widget.upcomingWorkshop);
     Timestamp now = Timestamp.now();
@@ -135,385 +200,403 @@ class _WorkshopState extends State<Workshop> {
               showDialog(
                 context: context,
                 builder: (context) {
-                  PickedFile img ;
-                  return StatefulBuilder(builder: (context,setState){
+                  PickedFile img;
+                  return StatefulBuilder(builder: (context, setState) {
                     return AlertDialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    contentPadding: EdgeInsets.all(0),
-                    content: Stack(
-                      overflow: Overflow.visible,
-                      children: [
-                        Positioned(
-                          top: -50,
-                          left: ScreenUtil().setWidth(260),
-                          child: InkResponse(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: CircleAvatar(
-                              child: Icon(Icons.close),
-                              backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      contentPadding: EdgeInsets.all(0),
+                      content: Stack(
+                        overflow: Overflow.visible,
+                        children: [
+                          Positioned(
+                            top: -50,
+                            left: ScreenUtil().setWidth(260),
+                            child: InkResponse(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: CircleAvatar(
+                                child: Icon(Icons.close),
+                                backgroundColor: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                            width: ScreenUtil().setWidth(320),
-                            height: ScreenUtil().setHeight(600),
-                            // decoration: new BoxDecoration(
-                            //     color: Color(0xffffffff),
-                            //     borderRadius: BorderRadius.circular(12),
-                            //     boxShadow: [BoxShadow(
-                            //         color: Color(0x26454545),
-                            //         offset: Offset(0,5),
-                            //         blurRadius: 6,
-                            //         spreadRadius: 0
-                            //     ) ],
-                            //   ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  InkWell(
-                                    onTap: () async {
-                                      PickedFile res =  await uploadImage();
-                                     
-                                      image = res;
+                          Container(
+                              width: ScreenUtil().setWidth(320),
+                              height: ScreenUtil().setHeight(600),
+                              // decoration: new BoxDecoration(
+                              //     color: Color(0xffffffff),
+                              //     borderRadius: BorderRadius.circular(12),
+                              //     boxShadow: [BoxShadow(
+                              //         color: Color(0x26454545),
+                              //         offset: Offset(0,5),
+                              //         blurRadius: 6,
+                              //         spreadRadius: 0
+                              //     ) ],
+                              //   ),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        PickedFile res = await uploadImage();
+
+                                        image = res;
                                         setState(() {
-                                                    img = res;
-                                                    if (res != null) print(image.path);
-                                                                                });
-                                    },
-                                    child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: ScreenUtil().setWidth(8),
-                                            horizontal:
-                                                ScreenUtil().setHeight(8)),
-                                        width: ScreenUtil().setWidth(304),
-                                        height: ScreenUtil().setHeight(159),
-                                        child: img == null 
-                                          ?  Image.asset(
-                                            "assets/images/addimage_card.png")
-                                          : Image.file(File(image.path))),
-                                  ),
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: ScreenUtil().setHeight(10),
-                                          top: ScreenUtil().setHeight(12)),
-                                      width: ScreenUtil().setWidth(293),
-                                      height: ScreenUtil().setHeight(40),
-                                      padding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(18)),
-                                      decoration: new BoxDecoration(
-                                        color: Color(0xffffffff),
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0x1a777777),
-                                              offset: Offset(0, 2),
-                                              blurRadius: 3,
-                                              spreadRadius: 0)
-                                        ],
-                                      ),
-                                      child: TextField(
-                                          controller: workshopName,
-                                          decoration: InputDecoration(
-                                            hintText: 'Workshop\'s name',
-                                            // contentPadding: EdgeInsets.only(
-                                            //     left: 14, top: 18, bottom: 18),
-                                            hintStyle: TextStyle(
-                                              fontFamily: 'SFProDisplay',
-                                              color: Color(0xffbbbbbb),
-                                              fontSize: ScreenUtil().setSp(15),
-                                              fontWeight: FontWeight.w400,
-                                              fontStyle: FontStyle.normal,
-                                            ),
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                          ))),
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: ScreenUtil().setHeight(10)),
-                                      // margin:
-                                      // EdgeInsets.only(left: 24, right: 24, bottom: 15),
-                                      width: ScreenUtil().setWidth(293),
-                                      height: ScreenUtil().setHeight(40),
-                                      padding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(18)),
-                                      decoration: new BoxDecoration(
-                                        color: Color(0xffffffff),
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0x1a777777),
-                                              offset: Offset(0, 2),
-                                              blurRadius: 3,
-                                              spreadRadius: 0)
-                                        ],
-                                      ),
-                                      child: TextField(
-                                          controller: speaker,
-                                          decoration: InputDecoration(
-                                            hintText: 'Speaker',
-                                            // contentPadding: EdgeInsets.only(
-                                            //     left: 14, top: 18, bottom: 18),
-                                            hintStyle: TextStyle(
-                                              fontFamily: 'SFProDisplay',
-                                              color: Color(0xffbbbbbb),
-                                              fontSize: ScreenUtil().setSp(15),
-                                              fontWeight: FontWeight.w400,
-                                              fontStyle: FontStyle.normal,
-                                            ),
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                          ))),
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: ScreenUtil().setHeight(10)),
-                                      // margin:
-                                      // EdgeInsets.only(left: 24, right: 24, bottom: 15),
-                                      width: ScreenUtil().setWidth(293),
-                                      height: ScreenUtil().setHeight(40),
-                                      padding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(18)),
-                                      decoration: new BoxDecoration(
-                                        color: Color(0xffffffff),
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0x1a777777),
-                                              offset: Offset(0, 2),
-                                              blurRadius: 3,
-                                              spreadRadius: 0)
-                                        ],
-                                      ),
-                                      child: TextField(
-                                          controller: description,
-                                          decoration: InputDecoration(
-                                            hintText: 'Brief description',
-                                            // contentPadding: EdgeInsets.only(
-                                            //     left: 14, top: 18, bottom: 18),
-                                            hintStyle: TextStyle(
-                                              fontFamily: 'SFProDisplay',
-                                              color: Color(0xffbbbbbb),
-                                              fontSize: ScreenUtil().setSp(15),
-                                              fontWeight: FontWeight.w400,
-                                              fontStyle: FontStyle.normal,
-                                            ),
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                          ))),
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: ScreenUtil().setHeight(10)),
-                                      // margin:
-                                      // EdgeInsets.only(left: 24, right: 24, bottom: 15),
-                                      width: ScreenUtil().setWidth(293),
-                                      height: ScreenUtil().setHeight(40),
-                                      padding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(18)),
-                                      decoration: new BoxDecoration(
-                                        color: Color(0xffffffff),
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0x1a777777),
-                                              offset: Offset(0, 2),
-                                              blurRadius: 3,
-                                              spreadRadius: 0)
-                                        ],
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () => _selectDate(context),
-                                        child: AbsorbPointer(
-                                          child: TextField(
-                                              controller: date,
-                                              decoration: InputDecoration(
-                                                suffixIcon:
-                                                    Icon(Icons.calendar_today),
-                                                hintText: 'Date',
-                                                // contentPadding: EdgeInsets.only(
-                                                //     left: 14, top: 18, bottom: 18),
-                                                hintStyle: TextStyle(
-                                                  fontFamily: 'SFProDisplay',
-                                                  color: Color(0xffbbbbbb),
-                                                  fontSize:
-                                                      ScreenUtil().setSp(15),
-                                                  fontWeight: FontWeight.w400,
-                                                  fontStyle: FontStyle.normal,
-                                                ),
-                                                border: InputBorder.none,
-                                                focusedBorder: InputBorder.none,
-                                                enabledBorder: InputBorder.none,
-                                                errorBorder: InputBorder.none,
-                                                disabledBorder:
-                                                    InputBorder.none,
-                                              )),
+                                          img = res;
+                                          if (res != null) print(image.path);
+                                        });
+                                      },
+                                      child: Container(
+                                          margin: EdgeInsets.symmetric(
+                                              vertical:
+                                                  ScreenUtil().setWidth(8),
+                                              horizontal:
+                                                  ScreenUtil().setHeight(8)),
+                                          width: ScreenUtil().setWidth(304),
+                                          height: ScreenUtil().setHeight(159),
+                                          child: img == null
+                                              ? Image.asset(
+                                                  "assets/images/addimage_card.png")
+                                              : Image.file(File(image.path))),
+                                    ),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: ScreenUtil().setHeight(10),
+                                            top: ScreenUtil().setHeight(12)),
+                                        width: ScreenUtil().setWidth(293),
+                                        height: ScreenUtil().setHeight(40),
+                                        padding: EdgeInsets.only(
+                                            left: ScreenUtil().setWidth(18)),
+                                        decoration: new BoxDecoration(
+                                          color: Color(0xffffffff),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Color(0x1a777777),
+                                                offset: Offset(0, 2),
+                                                blurRadius: 3,
+                                                spreadRadius: 0)
+                                          ],
                                         ),
-                                      )),
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: ScreenUtil().setHeight(10)),
-                                      // margin:
-                                      // EdgeInsets.only(left: 24, right: 24, bottom: 15),
-                                      width: ScreenUtil().setWidth(293),
-                                      height: ScreenUtil().setHeight(40),
-                                      padding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(18)),
-                                      decoration: new BoxDecoration(
-                                        color: Color(0xffffffff),
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0x1a777777),
-                                              offset: Offset(0, 2),
-                                              blurRadius: 3,
-                                              spreadRadius: 0)
-                                        ],
-                                      ),
-                                      child: TextField(
-                                          controller: participants,
-                                          decoration: InputDecoration(
-                                            hintText: 'Target Participants',
-                                            // contentPadding: EdgeInsets.only(
-                                            //     left: 14, top: 18, bottom: 18),
-                                            hintStyle: TextStyle(
-                                              fontFamily: 'SFProDisplay',
-                                              color: Color(0xffbbbbbb),
-                                              fontSize: ScreenUtil().setSp(15),
-                                              fontWeight: FontWeight.w400,
-                                              fontStyle: FontStyle.normal,
-                                            ),
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                          ))),
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: ScreenUtil().setHeight(10)),
-                                      // margin:
-                                      // EdgeInsets.only(left: 24, right: 24, bottom: 15),
-                                      width: ScreenUtil().setWidth(293),
-                                      height: ScreenUtil().setHeight(40),
-                                      padding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(18)),
-                                      decoration: new BoxDecoration(
-                                        color: Color(0xffffffff),
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0x1a777777),
-                                              offset: Offset(0, 2),
-                                              blurRadius: 3,
-                                              spreadRadius: 0)
-                                        ],
-                                      ),
-                                      child: TextField(
-                                          controller: linkToJoin,
-                                          decoration: InputDecoration(
-                                            hintText:
-                                                'Link to join/register workshop',
-                                            // contentPadding: EdgeInsets.only(
-                                            //     left: 14, top: 18, bottom: 18),
-                                            hintStyle: TextStyle(
-                                              fontFamily: 'SFProDisplay',
-                                              color: Color(0xffbbbbbb),
-                                              fontSize: ScreenUtil().setSp(15),
-                                              fontWeight: FontWeight.w400,
-                                              fontStyle: FontStyle.normal,
-                                            ),
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                          ))),
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: ScreenUtil().setHeight(10)),
-                                      // margin:
-                                      // EdgeInsets.only(left: 24, right: 24, bottom: 15),
-                                      width: ScreenUtil().setWidth(293),
-                                      height: ScreenUtil().setHeight(40),
-                                      padding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(18)),
-                                      decoration: new BoxDecoration(
-                                        color: Color(0xffffffff),
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0x1a777777),
-                                              offset: Offset(0, 2),
-                                              blurRadius: 3,
-                                              spreadRadius: 0)
-                                        ],
-                                      ),
-                                      child: TextField(
-                                          controller: contactInfo,
-                                          decoration: InputDecoration(
-                                            hintText:
-                                                'Organizer\'s Contact (Link)',
-                                            // contentPadding: EdgeInsets.only(
-                                            //     left: 14, top: 18, bottom: 18),
-                                            hintStyle: TextStyle(
-                                              fontFamily: 'SFProDisplay',
-                                              color: Color(0xffbbbbbb),
-                                              fontSize: ScreenUtil().setSp(15),
-                                              fontWeight: FontWeight.w400,
-                                              fontStyle: FontStyle.normal,
-                                            ),
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                          ))),
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                        top: ScreenUtil().setHeight(5),
-                                      ),
-                                      width: ScreenUtil().setWidth(178),
-                                      height: ScreenUtil().setHeight(40),
-                                      child: RaisedButton(
-                                          onPressed: () {
-                                            submit();
-                                          },
-                                          color: Color(0xffffbf2f),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          child: Text("Upload workshop",
-                                              style: TextStyle(
+                                        child: TextField(
+                                            controller: workshopName,
+                                            decoration: InputDecoration(
+                                              hintText: 'Workshop\'s name',
+                                              // contentPadding: EdgeInsets.only(
+                                              //     left: 14, top: 18, bottom: 18),
+                                              hintStyle: TextStyle(
                                                 fontFamily: 'SFProDisplay',
-                                                color: Color(0xffffffff),
-                                                fontSize: ScreenUtil().setSp(18,
-                                                    allowFontScalingSelf:
-                                                        false),
-                                                fontWeight: FontWeight.w700,
+                                                color: Color(0xffbbbbbb),
+                                                fontSize:
+                                                    ScreenUtil().setSp(15),
+                                                fontWeight: FontWeight.w400,
                                                 fontStyle: FontStyle.normal,
-                                              ))))
-                                ],
-                              ),
-                            )),
-                      ],
-                    ),
-                    actions: [],
-                  );
+                                              ),
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                            ))),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: ScreenUtil().setHeight(10)),
+                                        // margin:
+                                        // EdgeInsets.only(left: 24, right: 24, bottom: 15),
+                                        width: ScreenUtil().setWidth(293),
+                                        height: ScreenUtil().setHeight(40),
+                                        padding: EdgeInsets.only(
+                                            left: ScreenUtil().setWidth(18)),
+                                        decoration: new BoxDecoration(
+                                          color: Color(0xffffffff),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Color(0x1a777777),
+                                                offset: Offset(0, 2),
+                                                blurRadius: 3,
+                                                spreadRadius: 0)
+                                          ],
+                                        ),
+                                        child: TextField(
+                                            controller: speaker,
+                                            decoration: InputDecoration(
+                                              hintText: 'Speaker',
+                                              // contentPadding: EdgeInsets.only(
+                                              //     left: 14, top: 18, bottom: 18),
+                                              hintStyle: TextStyle(
+                                                fontFamily: 'SFProDisplay',
+                                                color: Color(0xffbbbbbb),
+                                                fontSize:
+                                                    ScreenUtil().setSp(15),
+                                                fontWeight: FontWeight.w400,
+                                                fontStyle: FontStyle.normal,
+                                              ),
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                            ))),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: ScreenUtil().setHeight(10)),
+                                        // margin:
+                                        // EdgeInsets.only(left: 24, right: 24, bottom: 15),
+                                        width: ScreenUtil().setWidth(293),
+                                        height: ScreenUtil().setHeight(40),
+                                        padding: EdgeInsets.only(
+                                            left: ScreenUtil().setWidth(18)),
+                                        decoration: new BoxDecoration(
+                                          color: Color(0xffffffff),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Color(0x1a777777),
+                                                offset: Offset(0, 2),
+                                                blurRadius: 3,
+                                                spreadRadius: 0)
+                                          ],
+                                        ),
+                                        child: TextField(
+                                            controller: description,
+                                            decoration: InputDecoration(
+                                              hintText: 'Brief description',
+                                              // contentPadding: EdgeInsets.only(
+                                              //     left: 14, top: 18, bottom: 18),
+                                              hintStyle: TextStyle(
+                                                fontFamily: 'SFProDisplay',
+                                                color: Color(0xffbbbbbb),
+                                                fontSize:
+                                                    ScreenUtil().setSp(15),
+                                                fontWeight: FontWeight.w400,
+                                                fontStyle: FontStyle.normal,
+                                              ),
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                            ))),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: ScreenUtil().setHeight(10)),
+                                        // margin:
+                                        // EdgeInsets.only(left: 24, right: 24, bottom: 15),
+                                        width: ScreenUtil().setWidth(293),
+                                        height: ScreenUtil().setHeight(40),
+                                        padding: EdgeInsets.only(
+                                            left: ScreenUtil().setWidth(18)),
+                                        decoration: new BoxDecoration(
+                                          color: Color(0xffffffff),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Color(0x1a777777),
+                                                offset: Offset(0, 2),
+                                                blurRadius: 3,
+                                                spreadRadius: 0)
+                                          ],
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: () => _selectDate(context),
+                                          child: AbsorbPointer(
+                                            child: TextField(
+                                                controller: date,
+                                                decoration: InputDecoration(
+                                                  suffixIcon: Icon(
+                                                      Icons.calendar_today),
+                                                  hintText: 'Date',
+                                                  // contentPadding: EdgeInsets.only(
+                                                  //     left: 14, top: 18, bottom: 18),
+                                                  hintStyle: TextStyle(
+                                                    fontFamily: 'SFProDisplay',
+                                                    color: Color(0xffbbbbbb),
+                                                    fontSize:
+                                                        ScreenUtil().setSp(15),
+                                                    fontWeight: FontWeight.w400,
+                                                    fontStyle: FontStyle.normal,
+                                                  ),
+                                                  border: InputBorder.none,
+                                                  focusedBorder:
+                                                      InputBorder.none,
+                                                  enabledBorder:
+                                                      InputBorder.none,
+                                                  errorBorder: InputBorder.none,
+                                                  disabledBorder:
+                                                      InputBorder.none,
+                                                )),
+                                          ),
+                                        )),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: ScreenUtil().setHeight(10)),
+                                        // margin:
+                                        // EdgeInsets.only(left: 24, right: 24, bottom: 15),
+                                        width: ScreenUtil().setWidth(293),
+                                        height: ScreenUtil().setHeight(40),
+                                        padding: EdgeInsets.only(
+                                            left: ScreenUtil().setWidth(18)),
+                                        decoration: new BoxDecoration(
+                                          color: Color(0xffffffff),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Color(0x1a777777),
+                                                offset: Offset(0, 2),
+                                                blurRadius: 3,
+                                                spreadRadius: 0)
+                                          ],
+                                        ),
+                                        child: TextField(
+                                            controller: participants,
+                                            decoration: InputDecoration(
+                                              hintText: 'Target Participants',
+                                              // contentPadding: EdgeInsets.only(
+                                              //     left: 14, top: 18, bottom: 18),
+                                              hintStyle: TextStyle(
+                                                fontFamily: 'SFProDisplay',
+                                                color: Color(0xffbbbbbb),
+                                                fontSize:
+                                                    ScreenUtil().setSp(15),
+                                                fontWeight: FontWeight.w400,
+                                                fontStyle: FontStyle.normal,
+                                              ),
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                            ))),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: ScreenUtil().setHeight(10)),
+                                        // margin:
+                                        // EdgeInsets.only(left: 24, right: 24, bottom: 15),
+                                        width: ScreenUtil().setWidth(293),
+                                        height: ScreenUtil().setHeight(40),
+                                        padding: EdgeInsets.only(
+                                            left: ScreenUtil().setWidth(18)),
+                                        decoration: new BoxDecoration(
+                                          color: Color(0xffffffff),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Color(0x1a777777),
+                                                offset: Offset(0, 2),
+                                                blurRadius: 3,
+                                                spreadRadius: 0)
+                                          ],
+                                        ),
+                                        child: TextField(
+                                            controller: linkToJoin,
+                                            decoration: InputDecoration(
+                                              hintText:
+                                                  'Link to join/register workshop',
+                                              // contentPadding: EdgeInsets.only(
+                                              //     left: 14, top: 18, bottom: 18),
+                                              hintStyle: TextStyle(
+                                                fontFamily: 'SFProDisplay',
+                                                color: Color(0xffbbbbbb),
+                                                fontSize:
+                                                    ScreenUtil().setSp(15),
+                                                fontWeight: FontWeight.w400,
+                                                fontStyle: FontStyle.normal,
+                                              ),
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                            ))),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: ScreenUtil().setHeight(10)),
+                                        // margin:
+                                        // EdgeInsets.only(left: 24, right: 24, bottom: 15),
+                                        width: ScreenUtil().setWidth(293),
+                                        height: ScreenUtil().setHeight(40),
+                                        padding: EdgeInsets.only(
+                                            left: ScreenUtil().setWidth(18)),
+                                        decoration: new BoxDecoration(
+                                          color: Color(0xffffffff),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Color(0x1a777777),
+                                                offset: Offset(0, 2),
+                                                blurRadius: 3,
+                                                spreadRadius: 0)
+                                          ],
+                                        ),
+                                        child: TextField(
+                                            controller: contactInfo,
+                                            decoration: InputDecoration(
+                                              hintText:
+                                                  'Organizer\'s Contact (Link)',
+                                              // contentPadding: EdgeInsets.only(
+                                              //     left: 14, top: 18, bottom: 18),
+                                              hintStyle: TextStyle(
+                                                fontFamily: 'SFProDisplay',
+                                                color: Color(0xffbbbbbb),
+                                                fontSize:
+                                                    ScreenUtil().setSp(15),
+                                                fontWeight: FontWeight.w400,
+                                                fontStyle: FontStyle.normal,
+                                              ),
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                            ))),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                          top: ScreenUtil().setHeight(5),
+                                        ),
+                                        width: ScreenUtil().setWidth(178),
+                                        height: ScreenUtil().setHeight(40),
+                                        child: RaisedButton(
+                                            onPressed: () {
+                                              submit();
+                                            },
+                                            color: Color(0xffffbf2f),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            child: Text("Upload workshop",
+                                                style: TextStyle(
+                                                  fontFamily: 'SFProDisplay',
+                                                  color: Color(0xffffffff),
+                                                  fontSize: ScreenUtil().setSp(
+                                                      18,
+                                                      allowFontScalingSelf:
+                                                          false),
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.normal,
+                                                ))))
+                                  ],
+                                ),
+                              )),
+                        ],
+                      ),
+                      actions: [],
+                    );
                   });
                 },
               );
+              //print('thuc hien lend doc data o day');
             },
             child: Container(
               width: ScreenUtil().setWidth(135),

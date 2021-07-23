@@ -111,7 +111,9 @@ class _ListCourseWidgetState extends State<ListCourseWidget> {
     listCourse =
         await widget.industryDatabase.getListCourse(widget.skillItem['path']);
     Map mapLogo = await LogoCourseDataBase().getAllCourseLogo();
-    listCourse.forEach((element) { if (element['provider']==null) listCourse.remove(element);});
+    listCourse.forEach((element) {
+      if (element['provider'] == null) listCourse.remove(element);
+    });
     // print(logo.toString());
     setState(() {
       listCourseWidget = listCourse
